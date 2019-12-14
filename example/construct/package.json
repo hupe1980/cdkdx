@@ -1,0 +1,26 @@
+{
+  "name": "construct",
+  "private": true,
+  "version": "0.1.0",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "cdk-build-tools build",
+    "watch": "cdk-build-tools watch",
+    "test": "cdk-build-tools test"
+  },
+  "devDependencies": {
+    "@aws-cdk/assert": "^1.18.0",
+    "@types/node": "10.17.5",
+    "cdk-build-tools": "0.0.1"
+  },
+  "peerDependencies": {
+    "@aws-cdk/core": "^1.18.0"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-sns": "^1.18.0",
+    "@aws-cdk/aws-sns-subscriptions": "^1.18.0",
+    "@aws-cdk/aws-sqs": "^1.18.0",
+    "@aws-cdk/core": "^1.18.0"
+  }
+}

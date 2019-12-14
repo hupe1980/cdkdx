@@ -1,0 +1,17 @@
+{
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "all:outdated": "yarn outdated",
+    "all:upgrade": "yarn upgrade-interactive --latest",
+    "build": "lerna run build",
+    "watch": "lerna run watch"
+  },
+  "workspaces": [
+    "cdk-build-tools",
+    "example/*"
+  ],
+  "devDependencies": {
+    "lerna": "^3.19.0"
+  }
+}
