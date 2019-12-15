@@ -110,11 +110,17 @@ export class Toolkit {
   public async package(): Promise<void> {
     const spinner = ora('Create package...').start();
 
+    if (this.packageInfo.isPrivate()) {
+      spinner.warn('No packaging for private modules');
+      return;
+    }
+
+
     const outdir = 'dist';
 
     if (this.packageInfo.isJsii()) {
       const command = require.resolve('jsii-pacmak/bin/jsii-pacmak');
-      const args = [`-o ${outdir}`]
+      const args = ['-o', outdir];
 
       await execProgram(command, args);
     } else {

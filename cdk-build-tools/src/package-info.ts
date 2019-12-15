@@ -47,6 +47,10 @@ export class PackageInfo {
     return this.pkgJson.jsii !== undefined;
   }
 
+  public isPrivate(): boolean {
+    return !!this.pkgJson.private;
+  }
+
   public getPackager(): Packager {
     if (this.isJsii()) {
       return {
