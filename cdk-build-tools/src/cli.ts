@@ -26,7 +26,8 @@ const main = async (): Promise<void> => {
       })
     )
     .command('watch', ' Start compiler in watch mode')
-    .command('test', ' Start test');
+    .command('test', ' Start test')
+    .command('lint', ' Start linter');
 
   const packageInfo = await PackageInfo.createInstance();
 
@@ -90,6 +91,17 @@ const main = async (): Promise<void> => {
       }
 
       break;
+    }
+
+    case 'lint': {
+      console.log(
+        `Linting ${chalk.bold.green(
+          packageInfo.name
+        )} version ${chalk.bold.green(packageInfo.version)}...`,
+        '\n'
+      );
+
+      await toolkit.lint();
     }
 
     default: {

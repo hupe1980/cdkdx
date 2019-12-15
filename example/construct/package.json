@@ -7,7 +7,8 @@
   "scripts": {
     "build": "cdk-build-tools build",
     "watch": "cdk-build-tools watch",
-    "test": "cdk-build-tools test"
+    "test": "cdk-build-tools test",
+    "lint": "cdk-build-tools lint"
   },
   "devDependencies": {
     "@aws-cdk/assert": "^1.18.0",

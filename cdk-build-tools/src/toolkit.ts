@@ -1,10 +1,12 @@
 import path from 'path';
 import jest from 'jest';
+import { CLIEngine } from 'eslint';
 
 import { PackageInfo } from './package-info';
 import { execProgram } from './exec-program';
 import { packDirectory } from './pack-directory';
 import { createJestConfig } from './create-jest-config';
+import { createEslintConfig } from './create-eslint-config';
 
 export class Toolkit {
   constructor(private readonly packageInfo: PackageInfo) {}
@@ -54,5 +56,23 @@ export class Toolkit {
     );
 
     await jest.run(args);
+  }
+
+  public async lint(): Promise<void> {
+    const eslintConfig = createEslintConfig();
+
+    const cli = new CLIEngine({
+      baseConfig: {
+        ...eslintConfig,
+      }
+    });
+
+    const report = cli.executeOnFiles(['*/**/*.ts']);
+
+    console.log(cli.getFormatter()(report.results));
+
+    if (report.errorCount) {
+      process.exit(1);
+    }
   }
 }
