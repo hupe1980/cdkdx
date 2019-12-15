@@ -1,7 +1,6 @@
 import yargs from 'yargs';
 import chalk from 'chalk';
 import figlet from 'figlet';
-import ora from 'ora';
 
 import { PackageInfo } from './package-info';
 import { Toolkit } from './toolkit';
@@ -27,7 +26,8 @@ const main = async (): Promise<void> => {
     )
     .command('watch', ' Start compiler in watch mode')
     .command('test', ' Start test')
-    .command('lint', ' Start linter');
+    .command('lint', ' Start linter')
+    .command('package', 'Create package');
 
   const packageInfo = await PackageInfo.createInstance();
 
@@ -44,27 +44,19 @@ const main = async (): Promise<void> => {
         '\n'
       );
 
-      const spinner = ora('Bundle lambdas').start();
-
       await toolkit.bundleLambdas();
-
-      spinner.succeed();
 
       if (argv.onlyLambdas) {
         return;
       }
 
-      spinner.start('Compile package');
-
-      await toolkit.compile(false);
-
-      spinner.succeed();
+      await toolkit.compile();
 
       break;
     }
 
     case 'watch': {
-      await toolkit.compile(true);
+      await toolkit.watch();
       break;
     }
 
@@ -76,13 +68,7 @@ const main = async (): Promise<void> => {
         '\n'
       );
 
-      const spinner = ora('Bundle lambdas').start();
-
       await toolkit.bundleLambdas();
-
-      spinner.succeed();
-
-      console.log('\n');
 
       try {
         await toolkit.test();
@@ -104,6 +90,20 @@ const main = async (): Promise<void> => {
       await toolkit.lint();
     }
 
+    case 'package': {
+      console.log(
+        `Create package for ${chalk.bold.green(
+          packageInfo.name
+        )} version ${chalk.bold.green(packageInfo.version)}...`,
+        '\n'
+      );
+
+      await toolkit.package();
+
+      break;
+
+    }
+
     default: {
       throw new Error(`Unknown command: ${command}`);
     }
@@ -111,6 +111,6 @@ const main = async (): Promise<void> => {
 };
 
 main().catch(e => {
-  process.stderr.write(`${e.toString()}\n`);
+  console.error(`${e.toString()}\n`);
   process.exit(1);
 });

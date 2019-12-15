@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs-extra';
 
-export interface Compiler {
+export interface Packager {
   readonly command: string;
   readonly args: ReadonlyArray<string>;
 }
@@ -47,19 +47,17 @@ export class PackageInfo {
     return this.pkgJson.jsii !== undefined;
   }
 
-  public getCompiler({ watchMode }: { watchMode?: boolean }): Compiler {
-    const args = watchMode ? ['-w'] : [];
-
+  public getPackager(): Packager {
     if (this.isJsii()) {
       return {
-        command: require.resolve('jsii/bin/jsii'),
-        args: [...args, '--project-references']
+        command: require.resolve('jsii-pacmak/bin/jsii-pacmak'),
+        args: []
       };
     }
 
     return {
-      command: require.resolve('typescript/bin/tsc'),
-      args: [...args]
+      command: 'npm',
+      args: ['pack']
     };
   }
 

@@ -1,4 +1,6 @@
 import path from 'path';
+import fs from 'fs-extra';
+import ora from 'ora';
 import jest from 'jest';
 import { CLIEngine } from 'eslint';
 
@@ -11,15 +13,43 @@ import { createEslintConfig } from './create-eslint-config';
 export class Toolkit {
   constructor(private readonly packageInfo: PackageInfo) {}
 
-  public async compile(watchMode: boolean): Promise<void> {
-    const compiler = this.packageInfo.getCompiler({ watchMode });
-    await execProgram(compiler.command, compiler.args);
+  public async compile(): Promise<void> {
+    const spinner = ora('Start compiling...').start();
+
+    let command = '';
+    const args = [];
+
+    if(this.packageInfo.isJsii()) {
+      command = require.resolve('jsii/bin/jsii');
+      args.push('--project-references');
+    } else {
+      command = require.resolve('typescript/bin/tsc');
+    }
+
+    await execProgram(command, args);
+    
+    spinner.succeed();
+  }
+
+  public async watch(): Promise<void> {
+    let command = '';
+    const args = ['-w'];
+
+    if (this.packageInfo.isJsii()) {
+      command = require.resolve('jsii/bin/jsii');
+      args.push('--project-references');
+    } else {
+      command = require.resolve('typescript/bin/tsc');
+    }
+
+    await execProgram(command, args);
   }
 
   public async bundleLambdas(): Promise<void> {
     const lambdaDependencies = this.packageInfo.getLambdaDependencies();
 
     if (lambdaDependencies) {
+      const spinner = ora('Bundle lambdas').start();
       await Promise.all(
         Object.keys(lambdaDependencies).map(
           async (lambdaPkg): Promise<void> => {
@@ -38,6 +68,7 @@ export class Toolkit {
           }
         )
       );
+      spinner.succeed();
     }
   }
 
@@ -63,7 +94,7 @@ export class Toolkit {
 
     const cli = new CLIEngine({
       baseConfig: {
-        ...eslintConfig,
+        ...eslintConfig
       }
     });
 
@@ -74,5 +105,31 @@ export class Toolkit {
     if (report.errorCount) {
       process.exit(1);
     }
+  }
+
+  public async package(): Promise<void> {
+    const spinner = ora('Create package...').start();
+
+    const outdir = 'dist';
+
+    if (this.packageInfo.isJsii()) {
+      const command = require.resolve('jsii-pacmak/bin/jsii-pacmak');
+      const args = [`-o ${outdir}`]
+
+      await execProgram(command, args);
+    } else {
+      const command = 'npm';
+      const args = ['pack'];
+
+      const tarball = (await execProgram(command, args)).trim();
+      
+      const target = path.join(outdir, 'js');
+      
+      await fs.remove(target);
+      await fs.mkdirp(target);
+      await fs.move(tarball, path.join(target, path.basename(tarball)));
+    }
+
+    spinner.succeed();
   }
 }

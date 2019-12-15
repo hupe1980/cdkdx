@@ -25,6 +25,7 @@
     "jest": "^24.9.0",
     "jest-watch-typeahead": "^0.4.2",
     "jsii": "^0.20.10",
+    "jsii-pacmak": "^0.20.11",
     "npm-packlist": "^2.0.1",
     "ora": "^4.0.3",
     "prettier": "^1.19.1",
