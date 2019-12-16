@@ -1,17 +1,16 @@
 import yargs from 'yargs';
 import chalk from 'chalk';
-import figlet from 'figlet';
 
 import { PackageInfo } from './package-info';
 import { Toolkit } from './toolkit';
 
 const NAME = 'cdk-build-tools';
 
-// eslint-disable-next-line no-console
-console.log(chalk.blue(figlet.textSync(NAME)), '\n');
-
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { version } = require('../package.json');
+
+// eslint-disable-next-line no-console
+console.log('\n', `${chalk.blue(NAME)} ${version}`, '\n');
 
 const main = async (): Promise<void> => {
   const { argv } = yargs
@@ -68,12 +67,14 @@ const main = async (): Promise<void> => {
         '\n'
       );
 
-      await toolkit.bundleLambdas();
+      const mocks = await toolkit.mockLambdaDependencies();
 
       try {
         await toolkit.test();
       } catch (error) {
         console.error(error);
+      } finally {
+        await toolkit.removeMocks(mocks);
       }
 
       break;

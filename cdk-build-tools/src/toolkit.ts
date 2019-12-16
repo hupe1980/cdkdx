@@ -19,7 +19,7 @@ export class Toolkit {
     let command = '';
     const args = [];
 
-    if(this.packageInfo.isJsii()) {
+    if (this.packageInfo.isJsii()) {
       command = require.resolve('jsii/bin/jsii');
       args.push('--project-references');
     } else {
@@ -27,7 +27,7 @@ export class Toolkit {
     }
 
     await execProgram(command, args);
-    
+
     spinner.succeed();
   }
 
@@ -49,30 +49,74 @@ export class Toolkit {
     const lambdaDependencies = this.packageInfo.getLambdaDependencies();
 
     if (lambdaDependencies) {
-      const spinner = ora('Bundle lambdas').start();
+      const spinner = ora('Bundle lambdas...').start();
+      
+      try {
+        await Promise.all(
+          Object.keys(lambdaDependencies).map(
+            async (lambdaPkg): Promise<void> => {
+              const lambdaSrc = path.join(
+                this.packageInfo.cwd,
+                'node_modules',
+                ...lambdaPkg.split('/')
+              );
+              const lambdaDest = path.join(
+                this.packageInfo.cwd,
+                'lambda',
+                lambdaDependencies[lambdaPkg]
+              );
+
+              await packDirectory(lambdaSrc, lambdaDest);
+            }
+          )
+        );
+        spinner.succeed();
+      } catch (error) {
+        spinner.fail();
+        throw error;
+      }
+    }
+  }
+
+  public async mockLambdaDependencies(): Promise<string[]> {
+    const lambdaDependencies = this.packageInfo.getLambdaDependencies();
+    const mocks: string[] = [];
+
+    if (lambdaDependencies) {
+      const spinner = ora('Mock lambda dependencies...').start();
+
       await Promise.all(
         Object.keys(lambdaDependencies).map(
           async (lambdaPkg): Promise<void> => {
-            const lambdaSrc = path.join(
-              this.packageInfo.cwd,
-              'node_modules',
-              ...lambdaPkg.split('/')
-            );
             const lambdaDest = path.join(
               this.packageInfo.cwd,
               'lambda',
               lambdaDependencies[lambdaPkg]
             );
 
-            await packDirectory(lambdaSrc, lambdaDest);
+            if (!(await fs.pathExists(lambdaDest))) {
+              await fs.createFile(lambdaDest);
+              mocks.push(lambdaDest);
+            }
           }
         )
       );
       spinner.succeed();
     }
+    return mocks;
+  }
+
+  public async removeMocks(mocks: string[]): Promise<void> {
+    await Promise.all(
+      mocks.map(mock => {
+        fs.remove(mock);
+      })
+    );
   }
 
   public async test(): Promise<void> {
+    const spinner = ora('Create test runner...').start();
+
     process.env.NODE_ENV = 'test';
 
     const jestConfig = createJestConfig(this.packageInfo.cwd);
@@ -86,6 +130,8 @@ export class Toolkit {
       })
     );
 
+    spinner.succeed();
+    console.log('\n');
     await jest.run(args);
   }
 
@@ -115,7 +161,6 @@ export class Toolkit {
       return;
     }
 
-
     const outdir = 'dist';
 
     if (this.packageInfo.isJsii()) {
@@ -128,9 +173,9 @@ export class Toolkit {
       const args = ['pack'];
 
       const tarball = (await execProgram(command, args)).trim();
-      
+
       const target = path.join(outdir, 'js');
-      
+
       await fs.remove(target);
       await fs.mkdirp(target);
       await fs.move(tarball, path.join(target, path.basename(tarball)));
