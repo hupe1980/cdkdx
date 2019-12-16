@@ -56,7 +56,7 @@ export default async (props: any) => {
     ? await globPackageInfos()
     : [packageInfo];
 
-  console.log(packageInfos);
+  //console.log(packageInfos);
 
   const mocks = await mockLamdaDependencies(packageInfos);
 
