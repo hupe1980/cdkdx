@@ -10,7 +10,7 @@ const NAME = 'cdk-build-tools';
 const { version } = require('../package.json');
 
 // eslint-disable-next-line no-console
-console.log('\n', `${chalk.blue(NAME)} ${version}`, '\n');
+console.log(`\n${chalk.blue(NAME)} v${version}`, '\n');
 
 const main = async (): Promise<void> => {
   const { argv } = yargs
@@ -67,14 +67,14 @@ const main = async (): Promise<void> => {
         '\n'
       );
 
-      const mocks = await toolkit.mockLambdaDependencies();
+      //const mocks = await toolkit.mockLambdaDependencies();
 
       try {
         await toolkit.test();
       } catch (error) {
         console.error(error);
       } finally {
-        await toolkit.removeMocks(mocks);
+        //await toolkit.removeMocks(mocks);
       }
 
       break;

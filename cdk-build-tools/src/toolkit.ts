@@ -50,7 +50,7 @@ export class Toolkit {
 
     if (lambdaDependencies) {
       const spinner = ora('Bundle lambdas...').start();
-      
+
       try {
         await Promise.all(
           Object.keys(lambdaDependencies).map(
@@ -119,7 +119,10 @@ export class Toolkit {
 
     process.env.NODE_ENV = 'test';
 
-    const jestConfig = createJestConfig(this.packageInfo.cwd);
+    const jestConfig = createJestConfig(
+      this.packageInfo.cwd,
+      this.packageInfo.isMonorepoRoot()
+    );
 
     const args: string[] = [];
 
