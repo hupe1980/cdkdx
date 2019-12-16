@@ -120,8 +120,7 @@ export class Toolkit {
     process.env.NODE_ENV = 'test';
 
     const jestConfig = createJestConfig(
-      this.packageInfo.cwd,
-      this.packageInfo.isMonorepoRoot()
+      this.packageInfo
     );
 
     const args: string[] = [];

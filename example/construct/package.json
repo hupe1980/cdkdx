@@ -11,9 +11,6 @@
     "lint": "cdk-build-tools lint",
     "package": "cdk-build-tools package"
   },
-  "lambdaDependencies": {
-    "@cloudcomponents/cdk-codepipeline-slack-lambda": "bundle.zip"
-  },
   "devDependencies": {
     "@aws-cdk/assert": "^1.18.0",
     "@types/node": "10.17.5",
