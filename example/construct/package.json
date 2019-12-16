@@ -1,7 +1,7 @@
 {
   "name": "construct",
   "private": true,
-  "version": "0.0.5",
+  "version": "0.0.6",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
@@ -17,7 +17,7 @@
   "devDependencies": {
     "@aws-cdk/assert": "^1.18.0",
     "@types/node": "10.17.5",
-    "cdk-build-tools": "^0.0.5"
+    "cdk-build-tools": "^0.0.6"
   },
   "peerDependencies": {
     "@aws-cdk/core": "^1.18.0"
