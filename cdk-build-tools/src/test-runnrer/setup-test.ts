@@ -3,7 +3,7 @@ import fs from 'fs-extra';
 import chalk from 'chalk';
 import glob from 'glob';
 
-import { PackageInfo } from './package-info';
+import { PackageInfo } from '../package-info';
 
 const globPackageInfos = async (): Promise<PackageInfo[]> =>
   new Promise((resolve, reject) => {
@@ -48,7 +48,7 @@ const mockLamdaDependencies = async (packageInfos: PackageInfo[]) => {
 export default async (props: any) => {
   const { rootDir } = props;
 
-  console.log(chalk.dim('\nSetup test suits...', rootDir, '\n'));
+  console.log(chalk.dim('\nGlobal setup...', '\n'));
 
   const packageInfo = await PackageInfo.createInstance(rootDir);
 
@@ -60,5 +60,5 @@ export default async (props: any) => {
 
   const mocks = await mockLamdaDependencies(packageInfos);
 
-  (global as any).__LAMBDA_DEPENDENCIES_MOCK__ = mocks;
+  (global as any).__LAMBDA_DEPENDENCIES_MOCKS__ = mocks;
 };

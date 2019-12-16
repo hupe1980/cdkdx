@@ -1,0 +1,13 @@
+{
+  "name": "lambda",
+  "private": true,
+  "license": "MIT",
+   "scripts": {
+    "build": "rimraf lib && tsc",
+    "watch": "tsc -w"
+  },
+  "devDependencies": {
+     "typescript": "^3.7.2",
+     "rimraf": "^3.0.0"
+  }
+}

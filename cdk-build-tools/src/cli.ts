@@ -30,85 +30,11 @@ const main = async (): Promise<void> => {
 
   const packageInfo = await PackageInfo.createInstance();
 
-  const toolkit = new Toolkit(packageInfo);
-
   const command = argv._[0];
 
-  switch (command) {
-    case 'build': {
-      console.log(
-        `Building ${chalk.bold.green(
-          packageInfo.name
-        )} version ${chalk.bold.green(packageInfo.version)}...`,
-        '\n'
-      );
+  const toolkit = new Toolkit(packageInfo);
 
-      await toolkit.bundleLambdas();
-
-      if (argv.onlyLambdas) {
-        return;
-      }
-
-      await toolkit.compile();
-
-      break;
-    }
-
-    case 'watch': {
-      await toolkit.watch();
-      break;
-    }
-
-    case 'test': {
-      console.log(
-        `Testing ${chalk.bold.green(
-          packageInfo.name
-        )} version ${chalk.bold.green(packageInfo.version)}...`,
-        '\n'
-      );
-
-      //const mocks = await toolkit.mockLambdaDependencies();
-
-      try {
-        await toolkit.test();
-      } catch (error) {
-        console.error(error);
-      } finally {
-        //await toolkit.removeMocks(mocks);
-      }
-
-      break;
-    }
-
-    case 'lint': {
-      console.log(
-        `Linting ${chalk.bold.green(
-          packageInfo.name
-        )} version ${chalk.bold.green(packageInfo.version)}...`,
-        '\n'
-      );
-
-      await toolkit.lint();
-    }
-
-    case 'package': {
-      console.log(
-        `Create package for ${chalk.bold.green(
-          packageInfo.name
-        )} version ${chalk.bold.green(packageInfo.version)}...`,
-        '\n'
-      );
-
-      await toolkit.package();
-
-      break;
-
-    }
-
-    default: {
-      throw new Error(`Unknown command: ${command}`);
-    }
-  }
+  await toolkit.excuteRunner(command);
 };
 
 main().catch(e => {

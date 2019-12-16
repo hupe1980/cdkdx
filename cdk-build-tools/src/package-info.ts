@@ -25,6 +25,7 @@ export interface PackageJson {
   readonly bundledDependencies?: string[];
 
   // custom
+  readonly eslint?: any;
   readonly workspaces?: any;
   readonly jsii?: any;
   readonly lambdaDependencies?: Record<string, string>;
@@ -42,6 +43,10 @@ export class PackageInfo {
 
   public get version(): string | undefined {
     return this.pkgJson.version;
+  }
+
+  public get eslint(): any {
+    return this.pkgJson.eslint;
   }
 
   public isMonorepoRoot(): boolean {

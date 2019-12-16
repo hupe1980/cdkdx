@@ -2,9 +2,7 @@ import fs from 'fs-extra';
 import chalk from 'chalk';
 
 export default async () => {
-  console.log(chalk.dim('Teardown test suits...'));
-
-  const mocks = (global as any).__LAMBDA_DEPENDENCIES_MOCK__ as string[];
+  const mocks = (global as any).__LAMBDA_DEPENDENCIES_MOCKS__ as string[];
 
   if (mocks?.length > 0) {
     await Promise.all(
