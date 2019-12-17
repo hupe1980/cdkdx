@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs-extra';
 import { EventEmitter } from 'events';
 import packlist from 'npm-packlist';
-//import rollup from 'rollup';
+//import webpack from 'webpack';
 
 import { zipFiles } from '../utils';
 import { Runner } from '../runner';
@@ -15,6 +15,8 @@ export class Bundler extends EventEmitter implements Runner {
 
   public async run() {
     const lambdaDependencies = this.packageInfo.getLambdaDependencies();
+
+    //this.buildLambdas();
 
     if (lambdaDependencies) {
       await Promise.all(
@@ -39,7 +41,32 @@ export class Bundler extends EventEmitter implements Runner {
   }
 
   // private async buildLambdas() {
-  //   const bundle = await rollup.rollup(inputOptions);
+  //   console.log('Start webpack');
+
+  //   const entries: Record<string, string> = {
+  //     handler: path.join(
+  //       this.packageInfo.cwd,
+  //       '..',
+  //       'lambda',
+  //       'src',
+  //       'handler.js'
+  //     )
+  //   };
+
+  //   const compiler = webpack({
+  //     mode: 'production',
+  //     target: 'node',
+  //     entry: entries,
+  //     output: {
+  //       libraryTarget: 'commonjs2',
+  //       path: path.join(this.packageInfo.cwd, '.webpack'),
+  //       filename: '[name].js'
+  //     }
+  //   });
+
+  //   compiler.run((err: any, stats) => {
+  //     console.log(err, stats);
+  //   });
   // }
 
   private async packDirectory(

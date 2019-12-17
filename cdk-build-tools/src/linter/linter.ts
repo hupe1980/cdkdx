@@ -30,7 +30,10 @@ export class Linter implements Runner {
     const config = {
       extends: [
         'plugin:prettier/recommended',
-        'plugin:@typescript-eslint/recommended'
+        'plugin:@typescript-eslint/recommended',
+        'plugin:import/errors',
+        'plugin:import/warnings',
+        'plugin:import/typescript', 
       ],
       rules: {
         camelcase: 'off',

@@ -6,6 +6,12 @@ export interface Packager {
   readonly args: ReadonlyArray<string>;
 }
 
+export interface LambdaDependencies {
+  rootDir: string;
+  entryPoint: string;
+  bundleName: string; 
+}
+
 export interface PackageJson {
   readonly name: string;
   readonly version?: string;
