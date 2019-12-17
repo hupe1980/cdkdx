@@ -3,7 +3,6 @@ import chalk from 'chalk';
 
 import { PackageInfo } from './package-info';
 import { Toolkit } from './toolkit';
-import { Bundler } from './bundler';
 
 const NAME = 'cdk-build-tools';
 
@@ -34,9 +33,6 @@ const main = async (): Promise<void> => {
   const command = argv._[0];
 
   const toolkit = new Toolkit(packageInfo);
-  const bundler = new Bundler(packageInfo);
-
-  await bundler.run();
 
   await toolkit.excuteRunner(command);
 };
