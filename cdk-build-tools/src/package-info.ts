@@ -9,7 +9,7 @@ export interface Packager {
 export interface LambdaDependencies {
   rootDir: string;
   entryPoint: string;
-  bundleName: string; 
+  bundleName: string;
 }
 
 export interface PackageJson {
@@ -91,5 +91,18 @@ export class PackageInfo {
     const pkgJson = await fs.readJSON(path.join(cwd, 'package.json'));
 
     return new PackageInfo(cwd, pkgJson);
+  }
+
+  public async findWorkspaceRoot(): Promise<string | null> {
+    if(this.isMonorepoRoot()) {
+      return this.cwd;
+    }
+
+
+
+
+    
+
+    return null;
   }
 }
