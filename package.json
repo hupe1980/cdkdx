@@ -9,7 +9,6 @@
   },
   "workspaces": [
     "cdk-build-tools",
-    "find-workspace-root",
     "example/*"
   ],
   "devDependencies": {

@@ -25,7 +25,7 @@ export class TestRunner implements Runner {
     await jest.run(args);
   }
 
-  private async globRoots() {
+  private async globWorkspaces() {
     return new Promise((resolve, reject) => {
       glob('./packages/*', (err, files) => {
         if (err) {
@@ -40,7 +40,7 @@ export class TestRunner implements Runner {
 
   private async createJestConfig(packageInfo: PackageInfo) {
     const config = {
-      roots: packageInfo.isMonorepoRoot() ? await this.globRoots() : undefined,
+      roots: packageInfo.isRoot() ? await this.globWorkspaces() : undefined,
       transform: {
         '.(ts|tsx)': require.resolve('ts-jest/dist')
       },

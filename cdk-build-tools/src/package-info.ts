@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs-extra';
+import findWorkspaceRoot from 'find-workspace-root';
 
 export interface Packager {
   readonly command: string;
@@ -40,6 +41,7 @@ export interface PackageJson {
 export class PackageInfo {
   constructor(
     public readonly cwd: string,
+    public readonly rootDir: string | null,
     private readonly pkgJson: PackageJson
   ) {}
 
@@ -55,8 +57,8 @@ export class PackageInfo {
     return this.pkgJson.eslint;
   }
 
-  public isMonorepoRoot(): boolean {
-    return this.pkgJson.workspaces !== undefined;
+  public isRoot(): boolean {
+    return this.cwd === this.rootDir;
   }
 
   public isJsii(): boolean {
@@ -88,21 +90,10 @@ export class PackageInfo {
   public static async createInstance(wd?: string): Promise<PackageInfo> {
     const cwd = wd || process.cwd();
 
+    const rootDir = await findWorkspaceRoot(cwd);
+
     const pkgJson = await fs.readJSON(path.join(cwd, 'package.json'));
 
-    return new PackageInfo(cwd, pkgJson);
-  }
-
-  public async findWorkspaceRoot(): Promise<string | null> {
-    if(this.isMonorepoRoot()) {
-      return this.cwd;
-    }
-
-
-
-
-    
-
-    return null;
+    return new PackageInfo(cwd, rootDir, pkgJson);
   }
 }

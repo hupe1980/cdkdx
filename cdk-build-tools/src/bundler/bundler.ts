@@ -19,11 +19,13 @@ export class Bundler extends EventEmitter implements Runner {
     //this.buildLambdas();
 
     if (lambdaDependencies) {
+      const rootDir = this.packageInfo.rootDir || this.packageInfo.cwd;
+      
       await Promise.all(
         Object.keys(lambdaDependencies).map(
           async (lambdaPkg): Promise<void> => {
             const lambdaSrc = path.join(
-              this.packageInfo.cwd,
+              rootDir,
               'node_modules',
               ...lambdaPkg.split('/')
             );

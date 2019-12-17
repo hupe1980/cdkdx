@@ -52,7 +52,7 @@ export default async (props: any) => {
 
   const packageInfo = await PackageInfo.createInstance(rootDir);
 
-  const packageInfos = packageInfo.isMonorepoRoot()
+  const packageInfos = packageInfo.isRoot()
     ? await globPackageInfos()
     : [packageInfo];
 
