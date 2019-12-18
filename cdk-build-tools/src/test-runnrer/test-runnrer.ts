@@ -51,9 +51,7 @@ export class TestRunner implements Runner {
       watchPlugins: [
         require.resolve('jest-watch-typeahead/filename'),
         require.resolve('jest-watch-typeahead/testname')
-      ],
-      globalSetup: require.resolve('./setup-test'),
-      globalTeardown: require.resolve('./teardown-test')
+      ]
     };
 
     return config;

@@ -1,0 +1,38 @@
+{
+  "name": "cdk-lambda-code",
+  "version": "0.0.1",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "build": "rimraf lib && tsc",
+    "watch": "tsc -w"
+  },
+  "peerDependencies": {
+    "@aws-cdk/aws-lambda": "^1.0.0",
+    "@aws-cdk/aws-s3": "^1.0.0",
+    "@aws-cdk/aws-s3-assets": "^1.0.0"
+  },
+  "devDependencies": {
+    "@aws-cdk/aws-lambda": "^1.19.0",
+    "@aws-cdk/aws-s3": "^1.19.0",
+    "@aws-cdk/aws-s3-assets": "^1.19.0",
+    "@types/fs-extra": "^8.0.1",
+    "@types/jest": "^24.0.21",
+    "@types/node": "^12.12.5",
+    "@typescript-eslint/eslint-plugin": "^2.6.0",
+    "@typescript-eslint/parser": "^2.6.0",
+    "eslint": "^6.6.0",
+    "jest": "^24.9.0",
+    "rimraf": "^3.0.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.7.2"
+  },
+  "dependencies": {
+    "fs-extra": "^8.1.0",
+    "pkg-conf": "^3.1.0"
+  }
+}
