@@ -1,6 +1,6 @@
 {
   "name": "cdk-lambda-code",
-  "version": "0.0.1",
+  "version": "0.0.14",
   "license": "MIT",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

@@ -1,6 +1,6 @@
 {
   "name": "cdk-build-tools",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "license": "MIT",
   "bin": {
     "cdk-build-tools": "bin/cli.js"
