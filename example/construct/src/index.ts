@@ -33,7 +33,7 @@ export class Example extends cdk.Construct {
     this.queueArn = queue.queueArn;
 
     new Function(this, 'CodeBuildResultFunction', {
-      ...LambdaCode.fromManifest({ name: 'test' })
+      ...LambdaCode.fromPackageJson('test', { mockInTestMode: true })
     });
   }
 }

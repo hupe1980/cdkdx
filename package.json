@@ -9,7 +9,6 @@
   },
   "workspaces": [
     "cdk-build-tools",
-    "cdk-lambda-code",
     "example/*"
   ],
   "devDependencies": {
