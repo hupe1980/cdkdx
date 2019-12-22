@@ -29,8 +29,8 @@
   "lambdaDependencies": {
     "test": {
       "runtime": "nodejs10.x",
-      "handler": "lib/test.handler",
-      "artifact": "bundle.zip"
+      "handler": "lambda/src/index.handler",
+      "artifact": "lambdas/bundle.zip"
     }
   }
 }

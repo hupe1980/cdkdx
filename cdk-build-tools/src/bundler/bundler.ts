@@ -1,86 +1,90 @@
 import path from 'path';
-import fs from 'fs-extra';
-import { EventEmitter } from 'events';
-import packlist from 'npm-packlist';
-//import webpack from 'webpack';
+import webpack from 'webpack';
+import nodeExternals from 'webpack-node-externals';
+import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 
-import { zipFiles } from '../utils';
 import { Runner } from '../runner';
-import { PackageInfo } from '../package-info';
+import { PackageInfo, LambdaConfig } from '../package-info';
+import { getWorkspaces } from '../get-workspaces';
+import { getEntryForLambda } from './get-entry-for-lambda';
+import { WebpackZipPlugin } from './webpack-zip-plugin';
 
-export class Bundler extends EventEmitter implements Runner {
-  constructor(private readonly packageInfo: PackageInfo) {
-    super();
-  }
+export class Bundler implements Runner {
+  constructor(private readonly packageInfo: PackageInfo) {}
 
   public async run() {
     const lambdaDependencies = this.packageInfo.getLambdaDependencies();
 
-    //this.buildLambdas();
+    await getWorkspaces({ cwd: this.packageInfo.rootDir || undefined });
 
     if (lambdaDependencies) {
-      const rootDir = this.packageInfo.rootDir || this.packageInfo.cwd;
-      
       await Promise.all(
         Object.keys(lambdaDependencies).map(
-          async (lambdaPkg): Promise<void> => {
-            const lambdaSrc = path.join(
-              rootDir,
-              'node_modules',
-              ...lambdaPkg.split('/')
-            );
-            const lambdaDest = path.join(
-              this.packageInfo.cwd,
-              'lambda',
-              lambdaDependencies[lambdaPkg]
-            );
-
-            await this.packDirectory(lambdaSrc, lambdaDest);
+          async (key): Promise<void> => {
+            const config = lambdaDependencies[key];
+            await this.buildLambdas(config);
           }
         )
       );
     }
   }
 
-  // private async buildLambdas() {
-  //   console.log('Start webpack');
+  private async buildLambdas(config: LambdaConfig) {
+    //const rootDir = this.packageInfo.rootDir || this.packageInfo.cwd;
 
-  //   const entries: Record<string, string> = {
-  //     handler: path.join(
-  //       this.packageInfo.cwd,
-  //       '..',
-  //       'lambda',
-  //       'src',
-  //       'handler.js'
-  //     )
-  //   };
+    return;
 
-  //   const compiler = webpack({
-  //     mode: 'production',
-  //     target: 'node',
-  //     entry: entries,
-  //     output: {
-  //       libraryTarget: 'commonjs2',
-  //       path: path.join(this.packageInfo.cwd, '.webpack'),
-  //       filename: '[name].js'
-  //     }
-  //   });
+    const entries = await getEntryForLambda(config.handler, {
+      cwd: path.join(this.packageInfo.cwd, '..') //TODO
+    });
 
-  //   compiler.run((err: any, stats) => {
-  //     console.log(err, stats);
-  //   });
-  // }
+    const compiler = webpack({
+      mode: 'production',
+      target: 'node',
+      externals: [
+        nodeExternals({
+          modulesFromFile: true
+        })
+      ],
+      entry: entries,
+      output: {
+        libraryTarget: 'commonjs2',
+        path: path.join(this.packageInfo.cwd, '.webpack'),
+        filename: '[name].js'
+      },
+      module: {
+        rules: [
+          {
+            test: /\.(ts|js)x?$/,
+            exclude: /node_modules/,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                presets: ['@babel/preset-env', '@babel/preset-typescript']
+              }
+            }
+          }
+        ]
+      },
+      plugins: [
+        new WebpackZipPlugin({
+          path: path.join(this.packageInfo.cwd),
+          filename: config.artifact
+        }),
+        new FriendlyErrorsWebpackPlugin({
+          compilationSuccessInfo: {
+            messages: [
+              'The bundling of lambdas was successfully completed',
+              'Now start compiling the construct[s]..'
+            ],
+            notes: []
+          }
+        })
+      ]
+    });
 
-  private async packDirectory(
-    sourcePath: string,
-    outputFile: string
-  ): Promise<void> {
-    const files = await packlist({ path: sourcePath });
-
-    if (!(await fs.pathExists(outputFile))) {
-      await fs.createFile(outputFile);
-    }
-
-    return zipFiles(files, sourcePath, outputFile);
+    compiler.run((_err: any, _stats) => {
+      //console.log(err, stats);
+    });
   }
 }

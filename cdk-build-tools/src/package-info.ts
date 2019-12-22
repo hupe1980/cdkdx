@@ -7,11 +7,13 @@ export interface Packager {
   readonly args: ReadonlyArray<string>;
 }
 
-export interface LambdaDependencies {
-  rootDir: string;
-  entryPoint: string;
-  bundleName: string;
+export interface LambdaConfig {
+  runtime: string;
+  handler: string;
+  artifact: string;
 }
+
+export type LambdaDependencies = Record<string, LambdaConfig>;
 
 export interface PackageJson {
   readonly name: string;
@@ -35,7 +37,7 @@ export interface PackageJson {
   readonly eslint?: any;
   readonly workspaces?: any;
   readonly jsii?: any;
-  readonly lambdaDependencies?: Record<string, string>;
+  readonly lambdaDependencies?: LambdaDependencies;
 }
 
 export class PackageInfo {
@@ -69,21 +71,7 @@ export class PackageInfo {
     return !!this.pkgJson.private;
   }
 
-  public getPackager(): Packager {
-    if (this.isJsii()) {
-      return {
-        command: require.resolve('jsii-pacmak/bin/jsii-pacmak'),
-        args: []
-      };
-    }
-
-    return {
-      command: 'npm',
-      args: ['pack']
-    };
-  }
-
-  public getLambdaDependencies(): Record<string, string> | undefined {
+  public getLambdaDependencies(): LambdaDependencies | undefined {
     return this.pkgJson.lambdaDependencies;
   }
 
