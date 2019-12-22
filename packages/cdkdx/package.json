@@ -1,6 +1,6 @@
 {
   "name": "cdkdx",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "license": "MIT",
   "bin": {
     "cdkdx": "bin/cli.js"
@@ -23,7 +23,7 @@
     "clipanion": "^2.1.5",
     "cross-spawn": "^7.0.1",
     "eslint": "^6.7.2",
-    "eslint-config-cdk": "^0.0.15",
+    "eslint-config-cdk": "^0.0.16",
     "find-workspace-root": "^1.0.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "fs-extra": "^8.1.0",
