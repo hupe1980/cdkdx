@@ -1,7 +1,10 @@
-import { Command } from 'clipanion';
+import { Command, BaseContext } from 'clipanion';
 
-import { CommandContext } from './plugin';
+export type CommandContext = BaseContext & {
+  cwd: string;
+};
 
 export abstract class BaseCommand extends Command<CommandContext> {
   abstract execute(): Promise<number | void>;
 }
+

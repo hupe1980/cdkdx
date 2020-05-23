@@ -1,10 +1,10 @@
+import * as path from 'path';
 import sns = require('@aws-cdk/aws-sns');
 import subs = require('@aws-cdk/aws-sns-subscriptions');
 import sqs = require('@aws-cdk/aws-sqs');
 import cdk = require('@aws-cdk/core');
 import { Code, Function, Runtime } from '@aws-cdk/aws-lambda';
 
-import { LambdaCode } from 'cdk-lambda-code';
 
 export interface ExampleProps {
   /**
@@ -32,8 +32,16 @@ export class Example extends cdk.Construct {
 
     this.queueArn = queue.queueArn;
 
-    new Function(this, 'CodeBuildResultFunction', {
-      ...LambdaCode.fromPackageJson('test', { mockInTestMode: true })
+    new Function(this, 'Test1Function', {
+      runtime: Runtime.NODEJS_10_X,
+      handler: 'index.handler',
+      code: Code.fromAsset(path.join(__dirname, 'lambdas', 'test1')),
+    });
+
+    new Function(this, 'Test2Function', {
+      runtime: Runtime.NODEJS_10_X,
+      handler: 'index.handler',
+      code: Code.fromAsset(path.join(__dirname, 'lambdas', 'test2')),
     });
   }
 }

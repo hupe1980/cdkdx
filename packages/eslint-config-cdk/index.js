@@ -2,23 +2,18 @@
 
 module.exports = {
   extends: [
-    'plugin:prettier/recommended',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:import/errors',
-    'plugin:import/warnings',
+    'plugin:jest/recommended',
     'plugin:import/typescript'
   ],
   rules: {
-    'import/no-unresolved': 'off',
-    indent: 'off',
-    '@typescript-eslint/indent': 'off',
-    'prettier/prettier': 'error',
-    camelcase: 'off',
-    '@typescript-eslint/camelcase': ['error', { properties: 'never' }],
-    'no-new': 'off',
-    'no-new-func': 'off',
-    'import/prefer-default-export': 'off',
-    'no-unused-vars': 'off',
+    '@typescript-eslint/interface-name-prefix': 'off',
+    '@typescript-eslint/no-use-before-define': 'off',
+
+    // Require use of the `import { foo } from 'bar';` form instead of `import foo = require('bar');`
+    '@typescript-eslint/no-require-imports': ['error'],
     '@typescript-eslint/no-unused-vars': [
       'error',
       {
@@ -28,12 +23,18 @@ module.exports = {
         argsIgnorePattern: '^_'
       }
     ],
-    semi: 'off',
-    '@typescript-eslint/semi': ['error', 'always'],
-    'no-useless-constructor': 'off',
-    '@typescript-eslint/no-useless-constructor': 'error',
-    '@typescript-eslint/no-parameter-properties': 'off',
-    '@typescript-eslint/explicit-member-accessibility': 'off',
-    '@typescript-eslint/no-non-null-assertion': 'off'
+    // Require all imported dependencies are actually declared in package.json
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          // Only allow importing devDependencies from:
+          "**/test/**", // --> Unit tests
+          "**/lambdas/**", // --> Lambdas
+        ],
+        "optionalDependencies": false, // Disallow importing optional dependencies (those shouldn't be in use in the project)
+        "peerDependencies": false // Disallow importing peer dependencies (that aren't also direct dependencies)
+      }
+    ]
   }
 };

@@ -1,7 +1,7 @@
-const path = require('path');
-const axios = require('axios');
+import * as path from 'path';
+import axios from 'axios';
 
-module.exports.handler = async () => {
+export const handler = async () => {
     console.log(path.join(__dirname));
 
     const response = await axios.get('http://google.com');

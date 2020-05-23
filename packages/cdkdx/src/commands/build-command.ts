@@ -9,6 +9,8 @@ export class BuildCommand extends BaseCommand {
 
     if (bundleExitCode !== 0) return bundleExitCode;
 
+
+
     this.context.stdout.write(`bla`);
     return 0;
   }

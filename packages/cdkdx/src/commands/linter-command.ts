@@ -7,7 +7,7 @@ export class LinterCommand extends BaseCommand {
   @Command.Boolean(`--fix`)
   public fix: boolean = false;
 
-  @Command.Boolean(`report-unused-disable-directives`)
+  @Command.Boolean(`--report-unused-disable-directives`)
   public reportUnusedDisableDirectives: boolean = false;
 
   @Command.Path(`lint`)

@@ -1,5 +1,5 @@
 import { Command } from 'clipanion';
-import jest from 'jest';
+import * as jest from 'jest';
 
 import { BaseCommand } from './base-command';
 

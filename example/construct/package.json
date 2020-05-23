@@ -5,32 +5,38 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "build": "cdk-build-tools build",
-    "watch": "cdk-build-tools watch",
-    "test": "cdk-build-tools test",
-    "lint": "cdk-build-tools lint",
-    "package": "cdk-build-tools package"
+    "build": "cdkdx build",
+    "watch": "cdkdx watch",
+    "test": "cdkdx test",
+    "lint": "cdkdx lint",
+    "bundle": "cdkdx bundle"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.19.0",
-    "@types/node": "10.17.5",
-    "cdk-build-tools": "^0.0.16"
+    "@aws-cdk/assert": "^1.41.0",
+    "@types/node": "13.9.0",
+    "axios": "^0.19.2",
+    "cdkdx": "^0.0.16"
   },
   "peerDependencies": {
     "@aws-cdk/core": "^1.18.0"
   },
   "dependencies": {
-    "@aws-cdk/aws-sns": "^1.19.0",
-    "@aws-cdk/aws-sns-subscriptions": "^1.19.0",
-    "@aws-cdk/aws-sqs": "^1.19.0",
-    "@aws-cdk/core": "^1.19.0",
-    "cdk-lambda-code": "^0.1.2"
+    "@aws-cdk/aws-sns": "^1.41.0",
+    "@aws-cdk/aws-sns-subscriptions": "^1.41.0",
+    "@aws-cdk/aws-sqs": "^1.41.0",
+    "@aws-cdk/core": "^1.41.0",
+    "cdk-lambda-code": "^0.2.0"
   },
   "lambdaDependencies": {
     "test": {
       "runtime": "nodejs10.x",
-      "handler": "lambda/src/index.handler",
-      "artifact": "lambdas/bundle.zip"
+      "entry": "../lambda/src/index.js",
+      "handler": "handler",
+      "lambdaDir": "lambdas"
+    },
+    "test2": {
+      "runtime": "nodejs10.x",
+      "entry": "../lambda/src/index.js"
     }
   }
 }
