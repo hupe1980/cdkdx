@@ -24,19 +24,6 @@
     "@aws-cdk/aws-sns": "^1.41.0",
     "@aws-cdk/aws-sns-subscriptions": "^1.41.0",
     "@aws-cdk/aws-sqs": "^1.41.0",
-    "@aws-cdk/core": "^1.41.0",
-    "cdk-lambda-code": "^0.2.0"
-  },
-  "lambdaDependencies": {
-    "test": {
-      "runtime": "nodejs10.x",
-      "entry": "../lambda/src/index.js",
-      "handler": "handler",
-      "lambdaDir": "lambdas"
-    },
-    "test2": {
-      "runtime": "nodejs10.x",
-      "entry": "../lambda/src/index.js"
-    }
+    "@aws-cdk/core": "^1.41.0"
   }
 }

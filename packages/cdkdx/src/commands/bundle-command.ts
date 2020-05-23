@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs-extra';
 import { Command } from 'clipanion';
-import webpack, { Configuration } from 'webpack';
+import Bundler from 'parcel-bundler';
 
 import { BaseCommand } from './base-command';
 
@@ -10,46 +10,27 @@ export class BundleCommand extends BaseCommand {
   async execute() {
     const lambdaPath = path.join(this.context.cwd, 'src', 'lambdas');
 
-    const entries:Record<string, string> = {};
+    const entryFiles = new Array<string>();
 
     if (fs.existsSync(lambdaPath)) {
       fs.readdirSync(lambdaPath).forEach(name => {
         const entry = path.join(lambdaPath, name, 'index.ts'); 
         if (fs.existsSync(entry)) {
-          entries[name] = entry;
+          entryFiles.push(entry);
         }
       });
     }
 
-    const configs: Configuration[] = Object.keys(entries).map(key => {
-      return {
-        mode: 'production',
-        target: 'node',
-        entry: entries[key], 
-        output: {
-          libraryTarget: 'commonjs2',
-          path: path.join(this.context.cwd, 'lambdas', key),
-          filename: 'index.js'
-        },
-        module: {
-          rules: [
-            {
-              test: /\.(ts|js)x?$/,
-              exclude: /node_modules/,
-              use: {
-                loader: 'babel-loader',
-                options: {
-                  presets: ['@babel/preset-env', '@babel/preset-typescript']
-                }
-              }
-            }
-          ]
-        },
-      };
-    });
+    const options: Bundler.ParcelOptions = {
+      outDir: path.join(this.context.cwd, 'lambdas'), // The out directory to put the build files in, defaults to dist
+      outFile: 'index.js', // The name of the outputFile
+      target: 'node',
+      watch: false,
+      detailedReport: false,
+    };
 
-    webpack(configs, (_err: any, _stats) => {
-      //console.log(err, stats);
-    });
+    const bundler = new Bundler(entryFiles, options);
+
+    await bundler.bundle();
   }
 }

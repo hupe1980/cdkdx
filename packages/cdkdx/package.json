@@ -29,15 +29,15 @@
     "jest-watch-typeahead": "^0.6.0",
     "jsii": "^1.5.0",
     "jsii-pacmak": "^1.5.0",
+    "parcel-bundler": "^1.12.4",
     "ts-jest": "^26.0.0",
-    "typescript": "^3.9.3",
-    "webpack": "^4.43.0"
+    "typescript": "^3.9.3"
   },
   "devDependencies": {
     "@types/eslint": "^6.8.1",
     "@types/fs-extra": "^9.0.1",
     "@types/jest": "^25.2.3",
-    "@types/webpack": "^4.41.13",
+    "@types/parcel-bundler": "^1.12.1",
     "rimraf": "^3.0.2"
   }
 }
