@@ -21,6 +21,7 @@ const constructInfo = (cwd: string) => {
   return {
     isJsii: pkgJson.jsii !== undefined,
     construct: pkgJson.name,
+    private: pkgJson.private,
   };
 };
 

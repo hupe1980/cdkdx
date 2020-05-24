@@ -8,6 +8,12 @@ import { shell } from '../shell';
 export class PackageCommand extends Command<Context> {
   @Command.Path(`package`)
   async execute() {
+
+    if (this.context.private) {
+      this.context.stdout.write('❎ No packaging for private modules.\n\n');
+      return;
+    }
+
     const outdir = 'dist';
 
     if (this.context.isJsii) {
