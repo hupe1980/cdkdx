@@ -5,6 +5,8 @@ import Bundler from 'parcel-bundler';
 
 import { Context } from '../context';
 
+const SHARED_FOLDER = 'shared';
+
 export class BundleCommand extends Command<Context> {
   @Command.Boolean(`--minify`)
   public fix: boolean = false;
@@ -17,7 +19,10 @@ export class BundleCommand extends Command<Context> {
 
     if (fs.existsSync(lambdaPath)) {
       fs.readdirSync(lambdaPath).forEach((name) => {
-        const entry = path.join(lambdaPath, name, 'index.ts');
+        if(name === SHARED_FOLDER) 
+          return;
+        
+          const entry = path.join(lambdaPath, name, 'index.ts');
         if (fs.existsSync(entry)) {
           entries[name] = entry;
         }
