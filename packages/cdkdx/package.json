@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "rimraf lib && tsc",
-    "watch": "tsc -w"
+    "watch": "rimraf lib && tsc -w"
   },
   "dependencies": {
     "@babel/core": "^7.9.6",
