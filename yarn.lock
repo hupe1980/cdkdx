@@ -8473,6 +8473,11 @@ parcel-bundler@^1.12.4:
     v8-compile-cache "^2.0.0"
     ws "^5.1.1"
 
+parcel-plugin-externals@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/parcel-plugin-externals/-/parcel-plugin-externals-0.4.0.tgz#2d16d847b132ed2b53b1cc89cb71e8a4c649bef0"
+  integrity sha512-Qr1JK+9HxTFayIhT0M7NmTWzjkVlzLW32rFg/9YfIJe0rSAc3+wiE6YS2cuoqH0UPoTVEiC0oEJ3bTcW/awi+Q==
+
 parent-module@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/parent-module/-/parent-module-1.0.1.tgz#691d2709e78c79fae3a156622452d00762caaaa2"
