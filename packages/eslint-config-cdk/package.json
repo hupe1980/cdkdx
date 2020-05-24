@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-cdk",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "license": "MIT",
   "files": [
     "index.js"
