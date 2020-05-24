@@ -1,9 +1,9 @@
 import { Command } from 'clipanion';
 import { CLIEngine } from 'eslint';
 
-import { BaseCommand } from './base-command';
+import { Context } from '../context';
 
-export class LinterCommand extends BaseCommand {
+export class LinterCommand extends Command<Context> {
   @Command.Boolean(`--fix`)
   public fix: boolean = false;
 

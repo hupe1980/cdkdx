@@ -1,0 +1,59 @@
+{
+  "name": "jsii-construct",
+  "private": true,
+  "license": "MIT",
+  "author": {
+    "name": "hupe1980"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hupe1980/cdk-build-tools",
+    "directory": "example/jsii-construct"
+  },
+  "version": "0.0.19",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "build": "cdkdx build",
+    "watch": "cdkdx watch",
+    "test": "cdkdx test",
+    "lint": "cdkdx lint",
+    "bundle": "cdkdx bundle",
+    "package": "cdkdx package"
+  },
+  "jsii": {
+    "outdir": "dist",
+    "tsc": {
+      "outDir": "./lib"
+    },
+    "excludeTypescript": [
+      "src/lambdas",
+      "test"
+    ],
+    "targets": {
+      "python": {
+        "distName": "cdkdx.jsii-construct",
+        "module": "cdkdx.jsii_construct"
+      }
+    }
+  },
+  "devDependencies": {
+    "@aws-cdk/assert": "^1.41.0",
+    "@types/node": "13.9.0",
+    "axios": "^0.19.2",
+    "cdkdx": "^0.0.19"
+  },
+  "peerDependencies": {
+    "@aws-cdk/core": "^1.41.0",
+    "@aws-cdk/aws-sns": "^1.41.0",
+    "@aws-cdk/aws-sns-subscriptions": "^1.41.0",
+    "@aws-cdk/aws-sqs": "^1.41.0",
+    "constructs": "^3.0.2"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-sns": "^1.41.0",
+    "@aws-cdk/aws-sns-subscriptions": "^1.41.0",
+    "@aws-cdk/aws-sqs": "^1.41.0",
+    "@aws-cdk/core": "^1.41.0"
+  }
+}

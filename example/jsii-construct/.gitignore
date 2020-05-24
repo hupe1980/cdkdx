@@ -9,3 +9,5 @@ node_modules
 cdk.out
 lambdas
 .cdkdx
+tsconfig.json
+.jsii

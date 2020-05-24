@@ -1,9 +1,9 @@
 import { Command } from 'clipanion';
 import * as jest from 'jest';
 
-import { BaseCommand } from './base-command';
+import { Context } from '../context';
 
-export class TestCommand extends BaseCommand {
+export class TestCommand extends Command<Context> {
   @Command.Proxy()
   public jestArgv!: string[];
   

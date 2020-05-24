@@ -1,8 +1,8 @@
 import { Command } from 'clipanion';
 
-import { BaseCommand } from './base-command';
+import { Context } from '../context';
 
-export class HelpCommand extends BaseCommand {
+export class HelpCommand extends Command<Context> {
   @Command.Path(`--help`)
   @Command.Path(`-h`)
   async execute() {

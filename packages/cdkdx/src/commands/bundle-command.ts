@@ -3,10 +3,10 @@ import fs from 'fs-extra';
 import { Command } from 'clipanion';
 import Bundler from 'parcel-bundler';
 
-import { BaseCommand } from './base-command';
+import { Context } from '../context';
 
-export class BundleCommand extends BaseCommand {
-  @Command.Boolean(`--minfy`)
+export class BundleCommand extends Command<Context> {
+  @Command.Boolean(`--minify`)
   public fix: boolean = false;
 
   @Command.Path(`bundle`)
@@ -27,16 +27,21 @@ export class BundleCommand extends BaseCommand {
     await Promise.all(
       Object.keys(entries).map(async (key) => {
         const options: Bundler.ParcelOptions = {
-          outDir: path.join(this.context.cwd, 'lambdas', key), // The out directory to put the build files in, defaults to dist
+          outDir: path.join(this.context.cwd, 'lib', 'lambdas', key), // The out directory to put the build files in, defaults to dist
           outFile: 'index.js', // The name of the outputFile
+          cacheDir: path.join(this.context.cwd, '.cdkdx'),
           target: 'node',
           watch: false,
           detailedReport: false,
           bundleNodeModules: true,
-          logLevel: 2,
+          logLevel: 3,
         };
 
         const bundler = new Bundler(entries[key], options);
+
+        bundler.on('buildEnd', () => {
+          this.context.stdout.write(`\n✅ Lambda ${key} bundled.\n\n`);
+        });
 
         return bundler.bundle();
       })

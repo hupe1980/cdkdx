@@ -9,7 +9,8 @@
     "watch": "cdkdx watch",
     "test": "cdkdx test",
     "lint": "cdkdx lint",
-    "bundle": "cdkdx bundle"
+    "bundle": "cdkdx bundle",
+    "package": "cdkdx package"
   },
   "devDependencies": {
     "@aws-cdk/assert": "^1.41.0",
