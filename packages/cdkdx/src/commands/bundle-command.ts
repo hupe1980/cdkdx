@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs-extra';
 import { Command } from 'clipanion';
 import Bundler from 'parcel-bundler';
+import setupExternalsPlugin from 'parcel-plugin-externals';
 
 import { Context } from '../context';
 
@@ -43,7 +44,9 @@ export class BundleCommand extends Command<Context> {
         };
 
         const bundler = new Bundler(entries[key], options);
-
+        
+        setupExternalsPlugin(bundler);
+        
         bundler.on('buildEnd', () => {
           this.context.stdout.write(`\n✅ Lambda ${key} bundled.\n\n`);
         });
