@@ -9,6 +9,7 @@ import { TestCommand } from './commands/test-command';
 import { LinterCommand } from './commands/linter-command';
 import { BundleCommand } from './commands/bundle-command';
 import { PackageCommand } from './commands/package-command';
+import { ReleaseCommand } from './commands/release-command';
 
 const cwd = process.cwd();
 
@@ -35,6 +36,7 @@ cli.register(TestCommand);
 cli.register(LinterCommand);
 cli.register(BundleCommand);
 cli.register(PackageCommand);
+cli.register(ReleaseCommand);
 
 cli.runExit(process.argv.slice(2), {
   ...Cli.defaultContext,

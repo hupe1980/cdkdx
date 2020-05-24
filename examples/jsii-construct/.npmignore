@@ -4,6 +4,7 @@
 # CDK asset staging directory
 .cdk.staging
 cdk.out
+.cdkdx
 
 
 # Exclude jsii outdir
