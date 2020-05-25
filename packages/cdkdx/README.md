@@ -16,18 +16,18 @@ construct
 ├── node_modules
 ├── package.json
 ├── .gitignore
-├── src
-│   ├── __tests__
-│   ├── lambdas
-│   │   ├── lambda1
-│   │   │   ├── __tests__
-│   │   │   └── index.ts
-│   │   ├── lambda2
-│   │   │   └── index.ts    
-│   │   └── shared
-│   ├── index.ts
-│   └── construct.ts
-└── test
+└── src
+    ├── __tests__
+    ├── lambdas
+    │   ├── lambda1
+    │   │   ├── __tests__
+    │   │   └── index.ts
+    │   ├── lambda2
+    │   │   └── index.ts    
+    │   └── shared
+    ├── index.ts
+    └── construct.ts
+
 ```
 
 ## Example
