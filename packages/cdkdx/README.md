@@ -28,6 +28,10 @@ construct
 └── test
 ```
 
+## Example
+
+See a more complete [example](../examples).
+
 ## License
 
 [MIT](LICENSE)
