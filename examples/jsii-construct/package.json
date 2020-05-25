@@ -28,7 +28,7 @@
     },
     "excludeTypescript": [
       "src/lambdas",
-      "test"
+      "src/**/__tests__"
     ],
     "targets": {
       "python": {

@@ -22,12 +22,12 @@ export class PackageCommand extends Command<Context> {
       const command = [require.resolve('jsii-pacmak/bin/jsii-pacmak')];
       await shell(command);
     } else {
-       const command = ['npm', 'pack'];
-       const tarball = (await shell(command)).trim();
-       const target = path.join(outdir, 'js');
-       await fs.remove(target);
-       await fs.mkdirp(target);
-       await fs.move(tarball, path.join(target, path.basename(tarball)));
+      const command = ['npm', 'pack'];
+      const tarball = (await shell(command)).trim();
+      const target = path.join(outdir, 'js');
+      await fs.remove(target);
+      await fs.mkdirp(target);
+      await fs.move(tarball, path.join(target, path.basename(tarball)));
     }
 
     this.context.stdout.write(

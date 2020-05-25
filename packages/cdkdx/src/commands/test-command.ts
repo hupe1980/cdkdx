@@ -34,7 +34,7 @@ export class TestCommand extends Command<Context> {
       transform: {
         '.(ts|tsx)': require.resolve('ts-jest/dist'),
       },
-      moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+      moduleFileExtensions: ['ts', 'js'],
       collectCoverageFrom: ['src/**/*.{ts,tsx}'],
       testMatch: ['<rootDir>/**/*.(spec|test).{ts,tsx}'],
       rootDir: this.context.cwd,

@@ -17,8 +17,10 @@ construct
 ├── package.json
 ├── .gitignore
 ├── src
+│   ├── __tests__
 │   ├── lambdas
 │   │   ├── lambda1
+│   │   │   ├── __tests__
 │   │   │   └── index.ts
 │   │   ├── lambda2
 │   │   │   └── index.ts    
