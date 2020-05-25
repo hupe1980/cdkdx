@@ -6,7 +6,7 @@
 ## Install
 
 ```sh
-yarn add cdkdx
+yarn add -D cdkdx
 ```
 
 ## Folder structure
