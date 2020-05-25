@@ -1,4 +1,5 @@
 # eslint-config-cdk
+> ESLint configuration used by cdkdx
 
 :warning: This is experimental and subject to breaking changes.
 
