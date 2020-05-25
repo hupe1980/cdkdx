@@ -6,12 +6,14 @@ import { Context } from '../context';
 import { shell } from '../shell';
 
 export class PackageCommand extends Command<Context> {
-  @Command.Path(`package`)
-  async execute() {
+  @Command.Path('package')
+  async execute(): Promise<number> {
 
     if (this.context.private) {
-      this.context.stdout.write('❎ No packaging for private modules.\n\n');
-      return;
+      this.context.stdout.write(
+        '⚠ No packaging for private modules.\n\n'
+      );
+      return 0;
     }
 
     const outdir = 'dist';
@@ -29,7 +31,7 @@ export class PackageCommand extends Command<Context> {
     }
 
     this.context.stdout.write(
-      `✅ Construct ${this.context.construct} packed.\n\n`
+      `✅ Construct ${this.context.name} packed.\n\n`
     );
 
     return 0;

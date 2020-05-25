@@ -1,7 +1,13 @@
 {
   "name": "cdkdx",
+  "description": "Zero-config CLI for aws cdk construct development",
   "version": "0.0.25",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hupe1980/cdk-build-tools",
+    "directory": "packages/cdkdx"
+  },
   "bin": {
     "cdkdx": "bin/cdkdx.js"
   },
@@ -16,8 +22,8 @@
     "@babel/core": "^7.9.6",
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-typescript": "^7.9.0",
-    "@typescript-eslint/eslint-plugin": "^2.12.0",
-    "@typescript-eslint/parser": "^2.12.0",
+    "@typescript-eslint/eslint-plugin": "^3.0.0",
+    "@typescript-eslint/parser": "^3.0.0",
     "babel-loader": "^8.1.0",
     "clipanion": "^2.3.1",
     "cross-spawn": "^7.0.2",

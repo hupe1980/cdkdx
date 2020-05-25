@@ -1,22 +1,21 @@
 import spawn from 'cross-spawn';
 
-export async function shell(
-  command: string[]
-): Promise<string> {
+export async function shell(command: string[]): Promise<string> {
   const child = spawn(command[0], command.slice(1), {
-    // Need this for Windows where we want .cmd and .bat to be found as well.
     shell: true,
     stdio: ['ignore', 'pipe', 'pipe'],
   });
 
   return new Promise<string>((resolve, reject) => {
-    const stdout = new Array<any>();
+    const stdout = new Array<Uint8Array>();
 
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     child.stdout!.on('data', (chunk) => {
       process.stdout.write(chunk);
       stdout.push(chunk);
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     child.stderr!.on('data', (chunk) => {
       process.stderr.write(chunk.toString());
     });
@@ -27,11 +26,7 @@ export async function shell(
       if (code === 0) {
         resolve(Buffer.concat(stdout).toString('utf-8'));
       } else {
-        reject(
-          new Error(
-            `${command} exited with error code ${code}`
-          )
-        );
+        reject(new Error(`${command} exited with error code ${code}`));
       }
     });
   });

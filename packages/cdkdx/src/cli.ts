@@ -20,13 +20,13 @@ const constructInfo = (cwd: string) => {
 
   return {
     isJsii: pkgJson.jsii !== undefined,
-    construct: pkgJson.name,
+    name: pkgJson.name,
     private: pkgJson.private,
   };
 };
 
 const cli = new Cli<Context>({
-  binaryLabel: `CDKDX`,
+  binaryLabel: 'CDKDX',
   binaryName: name,
   binaryVersion: version,
 });

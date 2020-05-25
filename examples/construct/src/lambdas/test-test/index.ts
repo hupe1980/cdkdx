@@ -5,9 +5,9 @@ import { foo } from './ex';
 import { shared } from '../shared';
 
 export const handler = async () => {
-    console.log(path.join(__dirname));
+  console.log(path.join(__dirname));
 
-    console.log(foo, shared);
+  console.log(foo, shared);
 
-    const response = await axios.get('http://google.com');
+  const response = await axios.get('http://google.com');
 }

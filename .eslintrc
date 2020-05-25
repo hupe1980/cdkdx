@@ -1,0 +1,29 @@
+{
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+        "@typescript-eslint/no-unused-vars": [
+            "error",
+            {
+                "vars": "all",
+                "args": "after-used",
+                "ignoreRestSiblings": false,
+                "argsIgnorePattern": "^_"
+            }
+        ],
+        // Style
+        "quotes": [ "error", "single", { "avoidEscape": true } ],
+        "comma-dangle": [ "error", "always-multiline"], // ensures clean diffs, see https://medium.com/@nikgraf/why-you-should-enforce-dangling-commas-for-multiline-statements-d034c98e36f8
+        "@typescript-eslint/indent": [ "error", 2],
+        
+        "@typescript-eslint/interface-name-prefix": "off",
+        "@typescript-eslint/no-use-before-define": "off",
+        // Require use of the `import { foo } from 'bar';` form instead of `import foo = require("bar");`
+        "@typescript-eslint/no-require-imports": [
+            "error"
+        ]
+    }
+}

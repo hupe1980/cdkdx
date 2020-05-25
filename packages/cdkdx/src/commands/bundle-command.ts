@@ -9,21 +9,21 @@ import { Context } from '../context';
 const SHARED_FOLDER = 'shared';
 
 export class BundleCommand extends Command<Context> {
-  @Command.Boolean(`--minify`)
-  public fix: boolean = false;
+  @Command.Boolean('--minify')
+  public minify = false;
 
-  @Command.Path(`bundle`)
-  async execute() {
+  @Command.Path('bundle')
+  async execute(): Promise<number> {
     const lambdaPath = path.join(this.context.cwd, 'src', 'lambdas');
 
     const entries: Record<string, string> = {};
 
     if (fs.existsSync(lambdaPath)) {
       fs.readdirSync(lambdaPath).forEach((name) => {
-        if(name === SHARED_FOLDER) 
-          return;
-        
-          const entry = path.join(lambdaPath, name, 'index.ts');
+        if (name === SHARED_FOLDER) return;
+
+        const entry = path.join(lambdaPath, name, 'index.ts');
+
         if (fs.existsSync(entry)) {
           entries[name] = entry;
         }
@@ -41,18 +41,21 @@ export class BundleCommand extends Command<Context> {
           detailedReport: false,
           bundleNodeModules: true,
           logLevel: 3,
+          minify: this.minify,
         };
 
         const bundler = new Bundler(entries[key], options);
-        
+
         setupExternalsPlugin(bundler);
-        
-        bundler.on('buildEnd', () => {
+
+        bundler.on('bundled', () => {
           this.context.stdout.write(`\n✅ Lambda ${key} bundled.\n\n`);
         });
 
         return bundler.bundle();
       })
     );
+
+    return 0;
   }
 }

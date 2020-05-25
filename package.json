@@ -6,13 +6,18 @@
     "upgrade:all": "yarn upgrade-interactive --latest",
     "prepare": "yarn build",
     "build": "lerna run build",
-    "watch": "lerna run watch"
+    "watch": "lerna run watch",
+    "lint": "eslint '*/**/*.ts' --report-unused-disable-directives",
+    "lint:fix": "eslint '*/**/*.ts' --fix"
   },
   "workspaces": [
     "packages/*",
     "examples/*"
   ],
   "devDependencies": {
-    "lerna": "^3.21.0"
+    "@typescript-eslint/eslint-plugin": "^3.0.0",
+    "@typescript-eslint/parser": "^3.0.0",
+    "eslint": "^7.1.0",
+    "lerna": "^3.22.0"
   }
 }

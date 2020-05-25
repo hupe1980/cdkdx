@@ -23,7 +23,7 @@ export class Example extends cdk.Construct {
     super(scope, id);
 
     const queue = new sqs.Queue(this, 'ExampleQueue', {
-      visibilityTimeout: props.visibilityTimeout || cdk.Duration.seconds(300)
+      visibilityTimeout: props.visibilityTimeout || cdk.Duration.seconds(300),
     });
 
     const topic = new sns.Topic(this, 'ExampleTopic');

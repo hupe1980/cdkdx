@@ -9,16 +9,16 @@ export interface CompilerOverrides {
 }
 
 export class BuildCommand extends Command<Context> {
-  @Command.Path(`build`)
-  async execute() {
-    const bundleExitCode = await this.cli.run([`bundle`]);
+  @Command.Path('build')
+  async execute(): Promise<number> {
+    const bundleExitCode = await this.cli.run(['bundle']);
 
     if (bundleExitCode !== 0) return bundleExitCode;
 
     await shell(this.packageCompiler({}));
 
     this.context.stdout.write(
-      `✅ Construct ${this.context.construct} compiled.\n\n`
+      `✅ Construct ${this.context.name} compiled.\n\n`
     );
 
     return 0;

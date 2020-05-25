@@ -2,6 +2,11 @@
   "name": "eslint-config-cdk",
   "version": "0.0.25",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hupe1980/cdk-build-tools",
+    "directory": "packages/eslint-config-cdk"
+  },
   "files": [
     "index.js"
   ],

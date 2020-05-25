@@ -1,6 +1,6 @@
 # cdk-build-tools
 :warning: This is experimental and subject to breaking changes.
 
-## Documentation
+## License
 
-[Read the documentation](/cdk-build-tools/README.md).
+[MIT](LICENSE)

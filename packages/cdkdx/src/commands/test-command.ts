@@ -7,8 +7,8 @@ export class TestCommand extends Command<Context> {
   @Command.Proxy()
   public jestArgv!: string[];
   
-  @Command.Path(`test`)
-  async execute() {
+  @Command.Path('test')
+  async execute(): Promise<number> {
     process.env.NODE_ENV = 'test';
 
     const jestConfig = this.createJestConfig();
@@ -18,19 +18,21 @@ export class TestCommand extends Command<Context> {
     argv.push(
       '--config',
       JSON.stringify({
-        ...jestConfig
+        ...jestConfig,
       })
     );
 
     argv.push(...this.jestArgv);
 
     await jest.run(argv);
+
+    return 0;
   }
 
   private createJestConfig() {
     const config = {
       transform: {
-        '.(ts|tsx)': require.resolve('ts-jest/dist')
+        '.(ts|tsx)': require.resolve('ts-jest/dist'),
       },
       moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
       collectCoverageFrom: ['src/**/*.{ts,tsx}'],
@@ -38,8 +40,8 @@ export class TestCommand extends Command<Context> {
       rootDir: this.context.cwd,
       watchPlugins: [
         require.resolve('jest-watch-typeahead/filename'),
-        require.resolve('jest-watch-typeahead/testname')
-      ]
+        require.resolve('jest-watch-typeahead/testname'),
+      ],
     };
 
     return config;
