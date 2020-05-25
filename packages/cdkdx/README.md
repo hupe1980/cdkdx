@@ -30,7 +30,7 @@ construct
 
 ## Example
 
-See a more complete [example](../examples).
+See a more complete [example](../../examples).
 
 ## License
 
