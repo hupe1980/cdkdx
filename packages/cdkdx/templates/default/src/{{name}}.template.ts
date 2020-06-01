@@ -2,8 +2,8 @@ import * as path from 'path';
 import { Construct } from '@aws-cdk/core';
 import { Code, Function, Runtime } from '@aws-cdk/aws-lambda';
 
-export interface {{pascalCase name}} {
-    environment?: Record<string, string>;
+export interface {{pascalCase name}}Props {
+    readonly environment?: Record<string, string>;
 }
 
 export class {{pascalCase name}} extends Construct {
