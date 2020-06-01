@@ -4,12 +4,13 @@ import { Cli } from 'clipanion';
 
 import { Context } from './context';
 import { BuildCommand } from './commands/build-command';
-import { HelpCommand } from './commands/help-command';
 import { TestCommand } from './commands/test-command';
 import { LinterCommand } from './commands/linter-command';
 import { BundleCommand } from './commands/bundle-command';
 import { PackageCommand } from './commands/package-command';
 import { ReleaseCommand } from './commands/release-command';
+import { HelpCommand } from './commands/help-command';
+import { CreateCommand } from './commands/create-command';
 
 const cwd = process.cwd();
 
@@ -19,6 +20,7 @@ const constructInfo = (cwd: string) => {
   const pkgJson = fs.readJsonSync(path.join(cwd, 'package.json'));
 
   return {
+    cdkdxVersion: version,
     isJsii: pkgJson.jsii !== undefined,
     name: pkgJson.name,
     private: pkgJson.private,
@@ -31,8 +33,9 @@ const cli = new Cli<Context>({
   binaryVersion: version,
 });
 
-cli.register(BuildCommand);
 cli.register(HelpCommand);
+cli.register(CreateCommand);
+cli.register(BuildCommand);
 cli.register(TestCommand);
 cli.register(LinterCommand);
 cli.register(BundleCommand);

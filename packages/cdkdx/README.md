@@ -1,15 +1,18 @@
 # cdkdx
+
 > Zero-config CLI for [cdk construct](https://github.com/awslabs/aws-cdk) development
 
 :warning: This is experimental and subject to breaking changes.
 
-## Install
+## Quick Start
 
 ```sh
-yarn add -D cdkdx
+npx cdkdx create construct
+cd construct
 ```
 
 ## Folder structure
+
 ```
 construct
 ├── README.md
@@ -23,16 +26,49 @@ construct
     │   │   ├── __tests__
     │   │   └── index.ts
     │   ├── lambda2
-    │   │   └── index.ts    
+    │   │   └── index.ts
     │   └── shared
     ├── index.ts
     └── construct.ts
 
 ```
 
+## Lambda development
+
+- Create a separate folder for each lambda
+- The file `index.ts` must export the handler function
+- LambdaDependencies should be added as devDependencies
+- To exclude dependencies when bundling the lambda, an `externals` section can be added in the package.json
+
+```json
+// package.json
+
+{
+    "name": "construct",
+    ...
+    "externals": [
+        "aws.sdk"
+    ]
+}
+```
+
+```typescript
+// construct.ts
+
+import { Code, Function, Runtime } from '@aws-cdk/aws-lambda';
+
+// ...
+
+new Function(this, 'Lambda1', {
+  runtime: Runtime.NODEJS_12_X,
+  handler: 'index.handler',
+  code: Code.fromAsset(path.join(__dirname, 'lambdas', 'lambda1')),
+});
+```
+
 ## Example
 
-See a more complete [example](../../examples).
+See a more complete [examples](../../examples).
 
 ## License
 

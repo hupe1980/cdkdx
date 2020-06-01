@@ -1,9 +1,9 @@
 import * as path from 'path';
 import * as fs from 'fs-extra';
 import { Command } from 'clipanion';
+import execa from 'execa';
 
 import { Context } from '../context';
-import { shell } from '../shell';
 
 export class PackageCommand extends Command<Context> {
   @Command.Path('package')
@@ -19,11 +19,11 @@ export class PackageCommand extends Command<Context> {
     const outdir = 'dist';
 
     if (this.context.isJsii) {
-      const command = [require.resolve('jsii-pacmak/bin/jsii-pacmak')];
-      await shell(command);
+      const command = require.resolve('jsii-pacmak/bin/jsii-pacmak');
+      await execa(command);
     } else {
-      const command = ['npm', 'pack'];
-      const tarball = (await shell(command)).trim();
+      const { stdout } = await execa('npm', ['pack']);
+      const tarball = stdout.trim();
       const target = path.join(outdir, 'js');
       await fs.remove(target);
       await fs.mkdirp(target);
