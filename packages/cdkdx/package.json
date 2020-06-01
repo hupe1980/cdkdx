@@ -1,7 +1,7 @@
 {
   "name": "cdkdx",
   "description": "Zero-config CLI for aws cdk construct development",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -31,7 +31,7 @@
     "clipanion": "^2.4.0",
     "enquirer": "^2.3.5",
     "eslint": "^7.1.0",
-    "eslint-config-cdk": "^0.0.31",
+    "eslint-config-cdk": "^0.0.32",
     "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-jest": "~23.13.1",
     "execa": "^4.0.2",
