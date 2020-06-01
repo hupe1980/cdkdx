@@ -32,7 +32,7 @@ export class CreateCommand extends Command<Context> {
     const author = await getAuthor();
 
     const template = new Template({
-      cdkdxVersion: this.context.cdkdxVersion,
+      cdkdxVersion: this.context.version,
       cdkVersion,
       name: this.name,
       author,

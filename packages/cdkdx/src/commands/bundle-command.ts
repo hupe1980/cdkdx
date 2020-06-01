@@ -4,11 +4,11 @@ import { Command } from 'clipanion';
 import Bundler from 'parcel-bundler';
 import setupExternalsPlugin from 'parcel-plugin-externals';
 
-import { Context } from '../context';
+import { ConstructCommand } from './construct-command';
 
 const SHARED_FOLDER = 'shared';
 
-export class BundleCommand extends Command<Context> {
+export class BundleCommand extends ConstructCommand {
   @Command.Boolean('--minify')
   public minify = false;
 

@@ -1,14 +1,14 @@
 import { Command } from 'clipanion';
 import execa from 'execa';
 
-import { Context } from '../context';
+import  { ConstructCommand } from './construct-command';
 
 export interface CompilerOverrides {
   jsii?: string;
   tsc?: string;
 }
 
-export class BuildCommand extends Command<Context> {
+export class BuildCommand extends ConstructCommand {
   @Command.Path('build')
   async execute(): Promise<number> {
     const bundleExitCode = await this.cli.run(['bundle']);
@@ -19,9 +19,7 @@ export class BuildCommand extends Command<Context> {
 
     await execa(command, args);
 
-    this.context.stdout.write(
-      `✅ Construct ${this.context.name} compiled.\n\n`
-    );
+    this.context.stdout.write(`✅ Construct ${this.constructInfo.name} compiled.\n\n`);
 
     return 0;
   }
@@ -29,7 +27,7 @@ export class BuildCommand extends Command<Context> {
   private packageCompiler(
     compilers: CompilerOverrides
   ): { command: string; args: string[] } {
-    if (this.context.isJsii) {
+    if (this.constructInfo.isJsii) {
       return {
         command: compilers.jsii || require.resolve('jsii/bin/jsii'),
         args: ['--project-references', '--silence-warnings=reserved-word'],

@@ -1,12 +1,12 @@
 import { Command } from 'clipanion';
 import * as jest from 'jest';
 
-import { Context } from '../context';
+import { ConstructCommand } from './construct-command';
 
-export class TestCommand extends Command<Context> {
+export class TestCommand extends ConstructCommand {
   @Command.Proxy()
   public jestArgv!: string[];
-  
+
   @Command.Path('test')
   async execute(): Promise<number> {
     process.env.NODE_ENV = 'test';

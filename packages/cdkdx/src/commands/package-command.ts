@@ -3,13 +3,12 @@ import * as fs from 'fs-extra';
 import { Command } from 'clipanion';
 import execa from 'execa';
 
-import { Context } from '../context';
+import { ConstructCommand } from './construct-command';
 
-export class PackageCommand extends Command<Context> {
+export class PackageCommand extends ConstructCommand {
   @Command.Path('package')
   async execute(): Promise<number> {
-
-    if (this.context.private) {
+    if (this.constructInfo.private) {
       this.context.stdout.write(
         '⚠ No packaging for private modules.\n\n'
       );
@@ -18,7 +17,7 @@ export class PackageCommand extends Command<Context> {
 
     const outdir = 'dist';
 
-    if (this.context.isJsii) {
+    if (this.constructInfo.isJsii) {
       const command = require.resolve('jsii-pacmak/bin/jsii-pacmak');
       await execa(command);
     } else {
@@ -31,7 +30,7 @@ export class PackageCommand extends Command<Context> {
     }
 
     this.context.stdout.write(
-      `✅ Construct ${this.context.name} packed.\n\n`
+      `✅ Construct ${this.constructInfo.name} packed.\n\n`
     );
 
     return 0;
