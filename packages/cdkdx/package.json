@@ -11,6 +11,11 @@
   "bin": {
     "cdkdx": "bin/cdkdx.js"
   },
+  "files": [
+    "bin",
+    "lib",
+    "templates"
+  ],
   "engines": {
     "node": ">=10"
   },
