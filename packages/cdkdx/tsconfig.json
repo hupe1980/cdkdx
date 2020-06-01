@@ -8,7 +8,7 @@
             "es2017.string",
             "esnext.asynciterable"
         ],
-        "declaration": true,
+        "declaration": false,
         "strict": true,
         "noImplicitAny": true,
         "strictNullChecks": true,
