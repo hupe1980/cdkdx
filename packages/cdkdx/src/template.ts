@@ -32,11 +32,11 @@ export class Template {
       str.replace('-', '_')
     );
 
-    this.engine.registerTag('jsii', {
+    this.engine.registerTag('ifjsii', {
       parse: function (token: TagToken, remainTokens: TopLevelToken[]) {
         this.tpls = [] as LiquidTemplate[]
         const stream: ParseStream = this.liquid.parser.parseStream(remainTokens)
-          .on('tag:endjsii', () => stream.stop())
+          .on('tag:endifjsii', () => stream.stop())
           .on('template', (tpl: LiquidTemplate) => this.tpls.push(tpl))
           .on('end', () => {
             throw new Error(`tag ${token.getText()} not closed`)

@@ -9,7 +9,7 @@
   },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  {% jsii %}"jsii": {
+  {% ifjsii %}"jsii": {
     "outdir": "dist",
     "tsc": {
       "outDir": "./lib"
@@ -24,7 +24,7 @@
         "module": "{{name | underscore}}"
       }
     }
-  },{% endjsii %}
+  },{% endifjsii %}
   "engines": {
     "node": ">=10"
   },
@@ -44,6 +44,7 @@
   "devDependencies": {
     "@aws-cdk/assert": "^{{cdkVersion}}",
     "@types/aws-lambda": "^8.10.51",
+    "@types/jest": "^25.2.3",
     "@types/node": "13.9.0",
     "cdkdx": "^{{cdkdxVersion}}"
   }

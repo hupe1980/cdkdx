@@ -38,15 +38,12 @@ module.exports = {
       {
         devDependencies: [
           // Only allow importing devDependencies from:
-          '**/test/**', // --> Unit tests
+          '**/__tests__/**', // --> Unit tests
           '**/lambdas/**', // --> Lambdas
         ],
         optionalDependencies: false, // Disallow importing optional dependencies (those shouldn't be in use in the project)
         peerDependencies: false, // Disallow importing peer dependencies (that aren't also direct dependencies)
       },
     ],
-
-    // Require all imported libraries actually resolve (!!required for import/no-extraneous-dependencies to work!!)
-    'import/no-unresolved': ['error'],
   },
 };
