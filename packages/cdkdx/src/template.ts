@@ -44,7 +44,7 @@ export class Template {
         stream.start()
       },
       render: function * (ctx:  LiquidContext, emitter: Emitter) {
-        if(context.compiler === 'tsc') {
+        if(context.compiler === 'jsii') {
           const r = this.liquid.renderer
           const jsii = yield r.renderTemplates(this.tpls, ctx)
 
