@@ -6,10 +6,8 @@ module.exports = {
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:jest/recommended',
-    'plugin:import/errors',
-    'plugin:import/warnings',
-    'plugin:import/typescript',
   ],
+  plugins: ['import'],
   ignorePatterns: ['*.js', '*.d.ts', 'node_modules/'],
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
@@ -26,7 +24,7 @@ module.exports = {
         argsIgnorePattern: '^_',
       },
     ],
-    
+
     //Style
     '@typescript-eslint/indent': ['error', 2],
     quotes: ['error', 'single', { avoidEscape: true }],
@@ -38,11 +36,17 @@ module.exports = {
       {
         devDependencies: [
           // Only allow importing devDependencies from:
-          '**/__tests__/**', // --> Unit tests
-          '**/lambdas/**', // --> Lambdas
+          '**/__tests__/**/**', // --> Unit tests
+          '**/lambdas/**/**', // --> Lambdas
         ],
         optionalDependencies: false, // Disallow importing optional dependencies (those shouldn't be in use in the project)
         peerDependencies: false, // Disallow importing peer dependencies (that aren't also direct dependencies)
+      },
+    ],
+    'jest/expect-expect': [
+      'warn',
+      {
+        assertFunctionNames: ['expect', 'expectCDK'],
       },
     ],
   },
