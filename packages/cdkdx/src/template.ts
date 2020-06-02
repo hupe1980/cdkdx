@@ -1,36 +1,63 @@
 import * as path from 'path';
 import * as fs from 'fs-extra';
 import camelCase from 'camelcase';
-import Handlebars from 'handlebars';
+import { Liquid, TagToken, TopLevelToken, ParseStream, Template as LiquidTemplate, Context as LiquidContext, Emitter } from 'liquidjs';
 
-export type Compiler = 'tsc' | 'jsii';
+const TEMPLATES_PATH = path.join(__dirname, '..', 'templates');
 
-export interface TemplateProps {
+export interface TemplateContext {
   cdkdxVersion: string;
   cdkVersion: string;
   name: string;
   author: string;
-  compiler: Compiler;
-  templatePath: string;
+  compiler: 'tsc' | 'jsii';
 }
 
 export class Template {
-  constructor(private props: TemplateProps) {
-    Handlebars.registerHelper('camelCase', (str: string) => camelCase(str));
+  private templatePath: string;
+  private engine: Liquid;
+
+  constructor(name: string, private context: TemplateContext) {
+    this.templatePath = path.join(TEMPLATES_PATH, name);
     
-    Handlebars.registerHelper('pascalCase', (str: string) =>
+    this.engine = new Liquid();
+
+    this.engine.registerFilter('camelCase', (str: string) => camelCase(str));
+
+    this.engine.registerFilter('pascalCase', (str: string) =>
       camelCase(str, { pascalCase: true })
     );
-    
-    Handlebars.registerHelper('underscore', (str: string) => str.replace('-', '_'));
-    
-    Handlebars.registerHelper('isJsiiCompiler', (options) =>
-      props.compiler === 'jsii' ? options.fn(props) : undefined
+
+    this.engine.registerFilter('underscore', (str: string) =>
+      str.replace('-', '_')
     );
+
+    this.engine.registerTag('jsii', {
+      parse: function (token: TagToken, remainTokens: TopLevelToken[]) {
+        this.tpls = [] as LiquidTemplate[]
+        const stream: ParseStream = this.liquid.parser.parseStream(remainTokens)
+          .on('tag:endjsii', () => stream.stop())
+          .on('template', (tpl: LiquidTemplate) => this.tpls.push(tpl))
+          .on('end', () => {
+            throw new Error(`tag ${token.getText()} not closed`)
+          })
+        stream.start()
+      },
+      render: function * (ctx:  LiquidContext, emitter: Emitter) {
+        if(context.compiler === 'tsc') {
+          const r = this.liquid.renderer
+          const jsii = yield r.renderTemplates(this.tpls, ctx)
+
+          emitter.write(jsii)
+          return;
+        }
+        emitter.write('');
+      },
+    });
   }
 
   public async install(targetPath: string): Promise<void> {
-    await this.installFiles(this.props.templatePath, targetPath);
+    await this.installFiles(this.templatePath, targetPath);
   }
 
   private async installFiles(source: string, target: string): Promise<void> {
@@ -44,7 +71,9 @@ export class Template {
       
       if (stats.isDirectory()) {
         await fs.mkdir(targetFile);
+        
         await this.installFiles(sourceFile, this.renderTemplate(targetFile));
+      
       } else if (file.match(/^.*\.template\.[^.]+$/)) {
         const template = await fs.readFile(sourceFile, { encoding: 'utf-8' });
         
@@ -52,6 +81,7 @@ export class Template {
           targetFile.replace(/\.template(\.[^.]+)$/, '$1'),
           this.renderTemplate(template)
         );
+      
       } else {
         await fs.copy(sourceFile, targetFile);
       }
@@ -59,8 +89,8 @@ export class Template {
   }
 
   private renderTemplate(template: string): string {
-    return Handlebars.compile(template)({ 
-      ...this.props,
+    return this.engine.parseAndRenderSync(template, {
+      ...this.context,
     });
   }
 }

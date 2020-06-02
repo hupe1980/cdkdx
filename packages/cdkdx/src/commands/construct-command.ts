@@ -15,13 +15,10 @@ export abstract class ConstructCommand extends Command<Context> {
 
   constructor() {
     super();
-    this.constructInfo = this.getConstructInfo();
-  }
-
-  private getConstructInfo() {
+    
     const pkgJson = fs.readJsonSync(path.join(process.cwd(), 'package.json'));
-
-    return {
+    
+    this.constructInfo = {
       isJsii: pkgJson.jsii !== undefined,
       name: pkgJson.name,
       private: pkgJson.private,

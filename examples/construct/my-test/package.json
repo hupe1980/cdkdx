@@ -1,15 +1,15 @@
 {
-  "name": "{{name}}",
+  "name": "my-test",
   "version": "0.1.0",
   "license": "MIT",
-  "author": "{{author}}",
+  "author": "hupe1980",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/{{author}}/{{name}}.git"
+    "url": "git+https://github.com/hupe1980/my-test.git"
   },
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
-  {% jsii %}"jsii": {
+  "jsii": {
     "outdir": "dist",
     "tsc": {
       "outDir": "./lib"
@@ -20,11 +20,11 @@
     ],
     "targets": {
       "python": {
-        "distName": "{{name}}",
-        "module": "{{name | underscore}}"
+        "distName": "my-test",
+        "module": "my_test"
       }
     }
-  },{% endjsii %}
+  },
   "engines": {
     "node": ">=10"
   },
@@ -35,16 +35,16 @@
     "lint": "cdkdx lint"
   },
   "peerDependencies": {
-    "@aws-cdk/core": "^{{cdkVersion}}"
+    "@aws-cdk/core": "^1.42.1"
   },
   "dependencies": {
-    "@aws-cdk/aws-lambda": "^{{cdkVersion}}",
-    "@aws-cdk/core": "^{{cdkVersion}}"
+    "@aws-cdk/aws-lambda": "^1.42.1",
+    "@aws-cdk/core": "^1.42.1"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^{{cdkVersion}}",
+    "@aws-cdk/assert": "^1.42.1",
     "@types/aws-lambda": "^8.10.51",
     "@types/node": "13.9.0",
-    "cdkdx": "^{{cdkdxVersion}}"
+    "cdkdx": "^0.0.32"
   }
 }

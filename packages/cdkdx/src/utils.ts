@@ -33,17 +33,9 @@ export const isInGitRepository = async (dir: string): Promise<boolean> => {
 };
 
 export const getAuthor = async (): Promise<string> => {
-  let author: string;
-  
-  const { stdout: npmConfigStdout } = await execa('npm', ['config','get','init-author-name']);
-  author = npmConfigStdout.trim();
-  
-  if(author) return author;
-
-  const { stdout: gitConfigStdout } = await execa('git', [
+  const { stdout } = await execa('git', [
     'config', '--global', 'user.name',
   ]);
-  author = gitConfigStdout.trim();
 
-  return author;
+  return stdout.trim() || 'TODO_ADD_AUTHOR';
 }

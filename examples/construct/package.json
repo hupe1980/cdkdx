@@ -10,7 +10,8 @@
     "test": "cdkdx test",
     "lint": "cdkdx lint",
     "bundle": "cdkdx bundle",
-    "package": "cdkdx package"
+    "package": "cdkdx package",
+    "create": "cdkdx create my-test"
   },
   "devDependencies": {
     "@aws-cdk/assert": "^1.41.0",

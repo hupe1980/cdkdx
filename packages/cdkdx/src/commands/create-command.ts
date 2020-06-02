@@ -6,10 +6,8 @@ import { Input } from 'enquirer';
 import latestVersion from 'latest-version';
 
 import { Context } from '../context';
-import { Template, Compiler } from '../template';
+import { Template, TemplateContext } from '../template';
 import { getInstallCommand, getAuthor } from '../utils';
-
-const TEMPLATES_PATH = path.join(__dirname, '..', '..', 'templates');
 
 export class CreateCommand extends Command<Context> {
   @Command.String({ required: true })
@@ -31,13 +29,12 @@ export class CreateCommand extends Command<Context> {
 
     const author = await getAuthor();
 
-    const template = new Template({
+    const template = new Template(this.template, {
       cdkdxVersion: this.context.version,
       cdkVersion,
       name: this.name,
       author,
-      compiler: this.compiler as Compiler,
-      templatePath: path.join(TEMPLATES_PATH, this.template),
+      compiler: this.compiler as TemplateContext['compiler'],
     });
 
     await template.install(targetPath);
