@@ -12,5 +12,5 @@ test('default setup', () => {
   new {{name | pascalCase}}(stack, '{{name | pascalCase}}');
   
   // THEN
-  expectCDK(stack).to(haveResource('AWS::LAMBDA::Function'));
+  expectCDK(stack).to(haveResource('AWS::Lambda::Function'));
 });
