@@ -18,7 +18,7 @@ export interface TemplateContext {
   cdkVersion: string;
   name: string;
   type: 'lib' | 'app';
-  template: string;
+  templateName: string;
   author: string;
   compiler: 'tsc' | 'jsii';
 }
@@ -33,7 +33,7 @@ export class Template {
     this.templatePath = path.join(
       TEMPLATES_PATH,
       this.context.type,
-      this.context.template
+      this.context.templateName
     );
 
     this.engine = new Liquid();

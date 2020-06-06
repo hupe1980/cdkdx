@@ -8,7 +8,7 @@
 
 ```sh
 npx cdkdx create lib my-construct
-cd construct
+cd my-construct
 ```
 
 ## Folder structure

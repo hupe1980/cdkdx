@@ -28,6 +28,7 @@
     "@typescript-eslint/parser": "^3.0.0",
     "babel-loader": "^8.1.0",
     "camelcase": "^6.0.0",
+    "chalk": "^4.0.0",
     "clipanion": "^2.4.0",
     "enquirer": "^2.3.5",
     "eslint": "^7.1.0",
