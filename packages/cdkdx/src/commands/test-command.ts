@@ -42,6 +42,7 @@ export class TestCommand extends ConstructCommand {
         require.resolve('jest-watch-typeahead/filename'),
         require.resolve('jest-watch-typeahead/testname'),
       ],
+      testEnvironment: 'node',
     };
 
     return config;

@@ -4,6 +4,7 @@ import { Command } from 'clipanion';
 import execa from 'execa';
 import { Input } from 'enquirer';
 import latestVersion from 'latest-version';
+import ora from 'ora';
 
 import { Context } from '../context';
 import { Template, TemplateContext } from '../template';
@@ -11,7 +12,10 @@ import { getInstallCommand, getAuthor } from '../utils';
 
 export class CreateCommand extends Command<Context> {
   @Command.String({ required: true })
-  public name: string;
+  public type!: 'lib' | 'app';
+         
+  @Command.String({ required: true })
+  public name!: string;
 
   @Command.String('--compiler')
   public compiler = 'tsc';
@@ -29,9 +33,11 @@ export class CreateCommand extends Command<Context> {
 
     const author = await getAuthor();
 
-    const template = new Template(this.template, {
+    const template = new Template({
       cdkdxVersion: this.context.version,
       cdkVersion,
+      type: this.type,
+      template: this.template,
       name: this.name,
       author,
       compiler: this.compiler as TemplateContext['compiler'],
@@ -39,9 +45,21 @@ export class CreateCommand extends Command<Context> {
 
     await template.install(targetPath);
 
-    await this.installDependencies(targetPath);
+    const spinner = ora(
+      `Installing npm modules:
+     ${template.dependencyNames.sort().join('\n')}
+     `
+    ).start();
 
-    return 0;
+    try {
+      await this.installDependencies(targetPath);
+      spinner.succeed('Installed dependencies');
+      this.context.stdout.write(`cd ${this.name}\n\n`);
+      return 0;
+    } catch (error) {
+      spinner.fail('Failed to install dependencies');
+      return 1;
+    }
   }
 
   private async getTargetPath(targetPath: string): Promise<string> {

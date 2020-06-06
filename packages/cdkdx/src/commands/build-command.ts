@@ -1,12 +1,7 @@
 import { Command } from 'clipanion';
-import execa from 'execa';
 
 import  { ConstructCommand } from './construct-command';
-
-export interface CompilerOverrides {
-  jsii?: string;
-  tsc?: string;
-}
+import { Compiler, JsiiCompiler, TscCompiler } from '../compiler';
 
 export class BuildCommand extends ConstructCommand {
   @Command.Path('build')
@@ -15,28 +10,21 @@ export class BuildCommand extends ConstructCommand {
 
     if (bundleExitCode !== 0) return bundleExitCode;
 
-    const { command, args } = this.packageCompiler({});
+    const compiler = this.getCompiler()
 
-    await execa(command, args);
+    await compiler.compile();
 
     this.context.stdout.write(`✅ Construct ${this.constructInfo.name} compiled.\n\n`);
 
     return 0;
   }
 
-  private packageCompiler(
-    compilers: CompilerOverrides
-  ): { command: string; args: string[] } {
+  private getCompiler(): Compiler {
     if (this.constructInfo.isJsii) {
-      return {
-        command: compilers.jsii || require.resolve('jsii/bin/jsii'),
-        args: ['--project-references', '--silence-warnings=reserved-word'],
-      };
-    } else {
-      return {
-        command: compilers.tsc || require.resolve('typescript/bin/tsc'),
-        args: ['--build'],
-      };
-    }
+      return new JsiiCompiler();
+    } 
+    return new TscCompiler({
+      cwd: this.context.cwd,
+    })
   }
 }

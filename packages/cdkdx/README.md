@@ -7,14 +7,14 @@
 ## Quick Start
 
 ```sh
-npx cdkdx create construct
+npx cdkdx create lib my-construct
 cd construct
 ```
 
 ## Folder structure
 
 ```
-construct
+my-construct
 ├── README.md
 ├── node_modules
 ├── package.json
@@ -29,7 +29,7 @@ construct
     │   │   └── index.ts
     │   └── shared
     ├── index.ts
-    └── construct.ts
+    └── my-construct.ts
 
 ```
 
@@ -47,7 +47,7 @@ construct
     "name": "construct",
     ...
     "externals": [
-        "aws.sdk"
+        "aws-sdk"
     ]
 }
 ```
