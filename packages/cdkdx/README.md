@@ -7,6 +7,11 @@
 ## Quick Start
 
 ```sh
+npx cdkdx create app my-app
+cd my-app
+```
+
+```sh
 npx cdkdx create lib my-construct
 cd my-construct
 ```
