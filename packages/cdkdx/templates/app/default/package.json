@@ -1,0 +1,25 @@
+{
+  "name": "{{name}}",
+  "version": "0.1.0",
+  "license": "MIT",
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "build": "cdkdx build",
+    "test": "cdkdx test",
+    "lint": "cdkdx lint",
+    "cdk": "cdk"
+  },
+  "dependencies": {
+    "@aws-cdk/core": "^{{cdkVersion}}"
+  },
+  "devDependencies": {
+    "@aws-cdk/assert": "^{{cdkVersion}}",
+    "@types/aws-lambda": "^8.10.51",
+    "@types/jest": "^25.2.3",
+    "@types/node": "13.9.0",
+    "aws-cdk": "^{{cdkVersion}}",
+    "cdkdx": "^{{cdkdxVersion}}"
+  }
+}

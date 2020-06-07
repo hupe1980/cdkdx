@@ -7,6 +7,7 @@ import {
   BuildCommand,
   TestCommand,
   LinterCommand,
+  NodeCommand,
   BundleCommand,
   PackageCommand,
   ReleaseCommand,
@@ -29,6 +30,7 @@ cli.register(CreateCommand);
 cli.register(BuildCommand);
 cli.register(TestCommand);
 cli.register(LinterCommand);
+cli.register(NodeCommand);
 cli.register(BundleCommand);
 cli.register(PackageCommand);
 cli.register(ReleaseCommand);

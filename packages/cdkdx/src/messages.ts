@@ -10,7 +10,6 @@ ${pkgText}
 `;
 };
 
-
 export const creationComplete = (name: string): string => {
   return `
   ${chalk.green('Awesome!')} You can now start coding. 

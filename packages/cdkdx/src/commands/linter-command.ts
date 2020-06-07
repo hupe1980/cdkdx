@@ -30,11 +30,7 @@ export class LinterCommand extends ConstructCommand {
 
     this.context.stdout.write(cli.getFormatter()(report.results));
 
-    if (report.errorCount) {
-      return 1;
-    }
-
-    return 0;
+    return report.errorCount ? 1 : 0;
   }
 
   private createEslintConfig(): CLIEngine.Options['baseConfig'] {

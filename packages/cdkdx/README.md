@@ -68,7 +68,7 @@ new Function(this, 'Lambda1', {
 
 ## Example
 
-See a more complete [examples](../../examples).
+See more complete [examples](../../examples).
 
 ## License
 
