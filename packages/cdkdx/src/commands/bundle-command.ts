@@ -48,11 +48,15 @@ export class BundleCommand extends ConstructCommand {
 
         setupExternalsPlugin(bundler);
 
-        bundler.on('bundled', () => {
-          this.context.stdout.write(`\n✅ Lambda ${key} bundled.\n\n`);
-        });
+        // https://github.com/parcel-bundler/parcel/issues/2838
+        return new Promise((resolve) => {
+          bundler.on('bundled', () => {
+            this.context.stdout.write(`\n✅ Lambda ${key} bundled.\n\n`);
+            resolve();
+          });
 
-        return bundler.bundle();
+          bundler.bundle();
+        }); 
       })
     );
 
