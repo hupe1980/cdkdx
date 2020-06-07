@@ -13,6 +13,8 @@ import {
 
 const TEMPLATES_PATH = path.join(__dirname, '..', 'templates');
 
+const IGNORE_FILES = ['.DS_Store'];
+
 export interface TemplateContext {
   cdkdxVersion: string;
   cdkVersion: string;
@@ -81,6 +83,10 @@ export class Template {
     const files = await fs.readdir(source);
 
     for (const file of files) {
+      if (IGNORE_FILES.includes(file)) {
+        continue;
+      }
+      
       const sourceFile = path.join(source, file);
 
       const renderedFileName = await this.renderTemplate(file);

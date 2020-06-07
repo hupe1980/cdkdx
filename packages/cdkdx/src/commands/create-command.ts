@@ -92,7 +92,7 @@ export class CreateCommand extends Command<Context> {
 
   private async installDependencies(dependencyNames: string[]): Promise<void> {
     const spinner = ora({
-      text: Messages.installingDependencies(dependencyNames.sort()),
+      text: Messages.installDependencies(dependencyNames.sort()),
       stream: this.context.stdout,
     }).start();
 
