@@ -12,7 +12,8 @@
     "cdk": "cdk"
   },
   "dependencies": {
-    "@aws-cdk/core": "^{{cdkVersion}}"
+    "@aws-cdk/core": "^{{cdkVersion}}",
+    "source-map-support": "^0.5.16"
   },
   "devDependencies": {
     "@aws-cdk/assert": "^{{cdkVersion}}",
