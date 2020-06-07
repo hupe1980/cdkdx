@@ -1,6 +1,6 @@
 {
   "name": "cdkdx",
-  "description": "Zero-config CLI for aws cdk construct development",
+  "description": "Zero-config CLI for aws cdk development",
   "version": "0.0.40",
   "license": "MIT",
   "repository": {
