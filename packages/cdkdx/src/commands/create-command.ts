@@ -46,10 +46,10 @@ export class CreateCommand extends Command<Context> {
 
     try {
       await this.initializeProject(targetPath, template);
-      
-      process.chdir(targetPath);
-      
-      await this.installDependencies(template.dependencyNames);
+      await this.installDependencies(
+        targetPath,
+        template.dependencyNames
+      );
     } catch (error) {
       return 1;
     }
@@ -75,7 +75,10 @@ export class CreateCommand extends Command<Context> {
     return this.getTargetPath(path.join(this.context.cwd, this.name));
   }
 
-  private async initializeProject(targetPath: string, template: Template): Promise<void> {
+  private async initializeProject(
+    targetPath: string,
+    template: Template
+  ): Promise<void> {
     const templateSpinner = ora({
       text: `Initializing project ${this.name} with template ${this.templateName}`,
       stream: this.context.stdout,
@@ -90,7 +93,10 @@ export class CreateCommand extends Command<Context> {
     }
   }
 
-  private async installDependencies(dependencyNames: string[]): Promise<void> {
+  private async installDependencies(
+    targetPath: string,
+    dependencyNames: string[]
+  ): Promise<void> {
     const spinner = ora({
       text: Messages.installDependencies(dependencyNames.sort()),
       stream: this.context.stdout,
@@ -98,11 +104,13 @@ export class CreateCommand extends Command<Context> {
 
     try {
       const { command, args } = await getInstallCommand();
-      await execa(command, args);
+      await execa(command, args, {
+        cwd: targetPath,
+      });
       spinner.succeed('Dependencies installed');
     } catch (error) {
       spinner.fail('Failed to install dependencies');
       throw error;
-    } 
+    }
   }
 }
