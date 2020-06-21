@@ -35,6 +35,7 @@ export class CreateCommand extends Command<Context> {
 
     const cdkVersion = await latestVersion('@aws-cdk/core');
     const typesAwsLambdaVersion = await latestVersion('@types/aws-lambda');
+    const sourceMapSupportVersion = await latestVersion('source-map-support');
 
     const author = await getAuthor();
 
@@ -48,6 +49,7 @@ export class CreateCommand extends Command<Context> {
         cdkdx: Semver.caret(this.context.version),
         '@aws-cdk/core': Semver.caret(cdkVersion),
         '@types/aws-lambda': Semver.caret(typesAwsLambdaVersion),
+        'source-map-support': Semver.caret(sourceMapSupportVersion),
       },
       targetPath,
     });

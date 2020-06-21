@@ -14,14 +14,15 @@ export class AppProject extends Project {
     });
 
     this.addDependencies({
-      '@aws-cdk/aws-lambda': options.dependencyVersions['@aws-cdk/core'],
       '@aws-cdk/core': options.dependencyVersions['@aws-cdk/core'],
+      'source-map-support': options.dependencyVersions['source-map-support'],
     });
 
     this.addDevDependencies({
       '@aws-cdk/assert': options.dependencyVersions['@aws-cdk/core'],
       '@types/aws-lambda': options.dependencyVersions['@types/aws-lambda'],
       '@types/node': Semver.caret(this.minNodeVersion),
+      'aws-cdk': options.dependencyVersions['@aws-cdk/core'], 
       cdkdx: options.dependencyVersions['cdkdx'],
     });
 
