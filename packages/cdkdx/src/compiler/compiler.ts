@@ -1,3 +1,7 @@
+export interface CompilerProps {
+  watch?: boolean;
+}
+
 export interface Compiler {
-  compile: () => Promise<void>
+  compile: (props?: CompilerProps) => Promise<void>
 }

@@ -1,7 +1,7 @@
 import { Construct, Stack, StackProps } from '@aws-cdk/core';
 
 
-export class {{name | pascalCase}}Stack extends Stack {
+export class ${pascalCase(name)}Stack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 

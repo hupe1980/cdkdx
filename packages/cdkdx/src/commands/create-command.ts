@@ -7,9 +7,15 @@ import latestVersion from 'latest-version';
 import ora from 'ora';
 
 import { Context } from '../context';
-import { Template, TemplateContext } from '../template';
 import * as Messages from '../messages';
 import { getInstallCommand, getAuthor } from '../utils';
+import {
+  Project,
+  ProjectOptions,
+  AppProject,
+  LibProject,
+  Semver,
+} from '../templates';
 
 export class CreateCommand extends Command<Context> {
   @Command.String({ required: true })
@@ -21,9 +27,6 @@ export class CreateCommand extends Command<Context> {
   @Command.String('--compiler')
   public compiler = 'tsc';
 
-  @Command.String('--template')
-  public templateName = 'default';
-
   @Command.Path('create')
   async execute(): Promise<number> {
     const targetPath = await this.getTargetPath(
@@ -31,30 +34,30 @@ export class CreateCommand extends Command<Context> {
     );
 
     const cdkVersion = await latestVersion('@aws-cdk/core');
+    const typesAwsLambdaVersion = await latestVersion('@types/aws-lambda');
 
     const author = await getAuthor();
 
-    const template = new Template({
-      cdkdxVersion: this.context.version,
-      cdkVersion,
-      type: this.type,
-      templateName: this.templateName,
+    const project = ((options: ProjectOptions): Project =>
+      this.type === 'lib' ? new LibProject(options) : new AppProject(options))({
       name: this.name,
+      template: 'default',
       author,
-      compiler: this.compiler as TemplateContext['compiler'],
+      isJsii: this.compiler === 'jsii',
+      dependencyVersions: {
+        cdkdx: Semver.caret(this.context.version),
+        '@aws-cdk/core': Semver.caret(cdkVersion),
+        '@types/aws-lambda': Semver.caret(typesAwsLambdaVersion),
+      },
+      targetPath,
     });
 
-    try {
-      await this.initializeProject(targetPath, template);
-      await this.installDependencies(
-        targetPath,
-        template.dependencyNames
-      );
-    } catch (error) {
-      return 1;
-    }
+    project.synth();
+
+    await this.installDependencies(targetPath, project.getDependencyNames());
 
     this.context.stdout.write(Messages.creationComplete(this.name));
+
     return 0;
   }
 
@@ -73,24 +76,6 @@ export class CreateCommand extends Command<Context> {
     this.name = await prompt.run();
 
     return this.getTargetPath(path.join(this.context.cwd, this.name));
-  }
-
-  private async initializeProject(
-    targetPath: string,
-    template: Template
-  ): Promise<void> {
-    const templateSpinner = ora({
-      text: `Initializing project ${this.name} with template ${this.templateName}`,
-      stream: this.context.stdout,
-    }).start();
-
-    try {
-      await template.install(targetPath);
-      templateSpinner.succeed('Project initialized');
-    } catch (error) {
-      templateSpinner.fail('Failed to initialize project');
-      throw error;
-    }
   }
 
   private async installDependencies(

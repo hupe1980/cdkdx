@@ -2,7 +2,7 @@ import chalk from 'chalk';
 
 export const installDependencies = (packages: string[]): string => {
   const pkgText = packages
-    .map((pkg) => `    ${chalk.cyan(chalk.bold(pkg))}`)
+    .map((pkg) => `    ${chalk.bold.cyan(pkg)}`)
     .join('\n');
 
   return `Installing template dependencies:
@@ -15,7 +15,7 @@ export const creationComplete = (name: string): string => {
   ${chalk.green('Awesome!')} You can now start coding. 
    
   You just have to change the directory:
-    ${chalk.bold(chalk.cyan(`cd ${name}`))}
+    ${chalk.bold.cyan(`cd ${name}`)}
     
   Happy hacking!
 

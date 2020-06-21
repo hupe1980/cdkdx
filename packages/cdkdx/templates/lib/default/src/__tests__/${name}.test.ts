@@ -1,6 +1,6 @@
 import { expect as expectCDK, haveResource } from '@aws-cdk/assert';
 import { App, Stack } from '@aws-cdk/core';
-import { {{name | pascalCase}} } from '../{{name}}';
+import { ${pascalCase(name)} } from '../${name}';
 
 test('default setup', () => {
   // GIVEN
@@ -9,7 +9,7 @@ test('default setup', () => {
   const stack = new Stack(app, 'TestStack');
   
   // WHEN
-  new {{name | pascalCase}}(stack, '{{name | pascalCase}}');
+  new ${pascalCase(name)}(stack, '${pascalCase(name)}');
   
   // THEN
   expectCDK(stack).to(haveResource('AWS::Lambda::Function'));

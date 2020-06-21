@@ -4,6 +4,7 @@ import { Cli } from 'clipanion';
 
 import { Context } from './context';
 import {
+  AwslintCommand,
   BuildCommand,
   TestCommand,
   LinterCommand,
@@ -25,6 +26,7 @@ const cli = new Cli<Context>({
   binaryVersion: version,
 });
 
+cli.register(AwslintCommand);
 cli.register(HelpCommand);
 cli.register(CreateCommand);
 cli.register(BuildCommand);

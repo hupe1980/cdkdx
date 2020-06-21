@@ -3,7 +3,7 @@ import * as fs from 'fs-extra';
 import execa from 'execa';
 import ts from 'typescript';
 
-import { Compiler } from './compiler';
+import { Compiler, CompilerProps } from './compiler';
 
 const BASE_COMPILER_OPTIONS: ts.CompilerOptions = {
   alwaysStrict: true,
@@ -40,13 +40,19 @@ export class TscCompiler implements Compiler {
     this.configPath = path.join(props.cwd, 'tsconfig.json');
   }
 
-  public async compile(): Promise<void> {
+  public async compile(props?: CompilerProps): Promise<void> {
     this.writeTypeScriptConfig();
 
     const command = require.resolve('typescript/bin/tsc');
     const args = ['--build'];
 
-    await execa(command, args);
+    if(props?.watch) {
+      args.push('-w');
+    }
+
+    await execa(command, args, {
+      stdio: ['ignore', 'inherit', 'inherit'],
+    });
   }
 
   private async writeTypeScriptConfig(): Promise<void> {
@@ -59,11 +65,11 @@ export class TscCompiler implements Compiler {
       compilerOptions: {
         ...BASE_COMPILER_OPTIONS,
         module:
-          BASE_COMPILER_OPTIONS.module &&
-          ts.ModuleKind[BASE_COMPILER_OPTIONS.module],
+                 BASE_COMPILER_OPTIONS.module &&
+                 ts.ModuleKind[BASE_COMPILER_OPTIONS.module],
         target:
-          BASE_COMPILER_OPTIONS.target &&
-          ts.ScriptTarget[BASE_COMPILER_OPTIONS.target],
+                 BASE_COMPILER_OPTIONS.target &&
+                 ts.ScriptTarget[BASE_COMPILER_OPTIONS.target],
         outDir: './lib',
       },
       include: ['src'],
