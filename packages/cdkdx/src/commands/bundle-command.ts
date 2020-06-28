@@ -4,11 +4,11 @@ import { Command } from 'clipanion';
 import Bundler from 'parcel-bundler';
 import setupExternalsPlugin from 'parcel-plugin-externals';
 
-import { ConstructCommand } from './construct-command';
+import { ProjectCommand } from './project-command';
 
 const SHARED_FOLDER = 'shared';
 
-export class BundleCommand extends ConstructCommand {
+export class BundleCommand extends ProjectCommand {
   @Command.Boolean('--watch')
   @Command.Boolean('-w')
   public watch = false;

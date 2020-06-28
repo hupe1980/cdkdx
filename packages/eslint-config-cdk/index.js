@@ -26,6 +26,8 @@ module.exports = {
     ],
 
     //Style
+    semi: 'off', // note you must disable the base rule as it can report incorrect errors
+    '@typescript-eslint/semi': ['error'],
     '@typescript-eslint/indent': ['error', 2],
     quotes: ['error', 'single', { avoidEscape: true }],
     'comma-dangle': ['error', 'always-multiline'], // ensures clean diffs, see https://medium.com/@nikgraf/why-you-should-enforce-dangling-commas-for-multiline-statements-d034c98e36f8

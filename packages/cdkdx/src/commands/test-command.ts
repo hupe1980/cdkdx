@@ -1,9 +1,9 @@
 import { Command } from 'clipanion';
 import * as jest from 'jest';
 
-import { ConstructCommand } from './construct-command';
+import { ProjectCommand } from './project-command';
 
-export class TestCommand extends ConstructCommand {
+export class TestCommand extends ProjectCommand {
   @Command.Proxy()
   public jestArgv!: string[];
 
@@ -32,11 +32,11 @@ export class TestCommand extends ConstructCommand {
   private createJestConfig() {
     const config = {
       transform: {
-        '.(ts|tsx)': require.resolve('ts-jest/dist'),
+        '.ts': require.resolve('ts-jest/dist'),
       },
       moduleFileExtensions: ['ts', 'js'],
-      collectCoverageFrom: ['src/**/*.{ts,tsx}'],
-      testMatch: ['<rootDir>/**/*.(spec|test).{ts,tsx}'],
+      collectCoverageFrom: ['src/**/*.ts'],
+      testMatch: ['<rootDir>/**/*.(spec|test).ts'],
       rootDir: this.context.cwd,
       watchPlugins: [
         require.resolve('jest-watch-typeahead/filename'),

@@ -11,9 +11,10 @@ import {
   NodeCommand,
   BundleCommand,
   PackageCommand,
-  ReleaseCommand,
+  BumpCommand,
   HelpCommand,
   CreateCommand,
+  PublishCommand,
 } from './commands';
 
 const cwd = process.cwd();
@@ -35,7 +36,8 @@ cli.register(LinterCommand);
 cli.register(NodeCommand);
 cli.register(BundleCommand);
 cli.register(PackageCommand);
-cli.register(ReleaseCommand);
+cli.register(BumpCommand);
+cli.register(PublishCommand);
 
 cli.runExit(process.argv.slice(2), {
   ...Cli.defaultContext,

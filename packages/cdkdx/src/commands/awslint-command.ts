@@ -1,9 +1,9 @@
 import { Command } from 'clipanion';
 import execa from 'execa';
 
-import { ConstructCommand } from './construct-command';
+import { ProjectCommand } from './project-command';
 
-export class AwslintCommand extends ConstructCommand {
+export class AwslintCommand extends ProjectCommand {
   @Command.Proxy()
   public awslintArgv: string[];
 

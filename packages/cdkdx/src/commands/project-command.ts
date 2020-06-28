@@ -4,21 +4,21 @@ import { Command } from 'clipanion';
 
 import { Context } from '../context';
 
-export interface ConstructInfo {
+export interface ProjectInfo {
   name: string;
   isJsii: boolean;
   private: boolean;
 }
 
-export abstract class ConstructCommand extends Command<Context> {
-  protected constructInfo: ConstructInfo;
+export abstract class ProjectCommand extends Command<Context> {
+  protected projectInfo: ProjectInfo;
 
   constructor() {
     super();
     
     const pkgJson = fs.readJsonSync(path.join(process.cwd(), 'package.json'));
     
-    this.constructInfo = {
+    this.projectInfo = {
       isJsii: pkgJson.jsii !== undefined,
       name: pkgJson.name,
       private: pkgJson.private,

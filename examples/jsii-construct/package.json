@@ -18,8 +18,8 @@
     "watch": "cdkdx watch",
     "test": "cdkdx test",
     "lint": "cdkdx lint",
-    "bundle": "cdkdx bundle",
-    "package": "cdkdx package"
+    "package": "cdkdx package",
+    "cdkdx": "cdkdx"
   },
   "jsii": {
     "outdir": "dist",

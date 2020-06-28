@@ -18,6 +18,21 @@ import {
 } from '../templates';
 
 export class CreateCommand extends Command<Context> {
+  static usage = Command.Usage({
+    description: 'Create a new, empty CDK project from a template',
+    details: `
+            This command will create a new, empty CDK project from a template.
+        `,
+    examples: [
+      ['Create a cdk app', 'npx cdkdx create app my-app'],
+      ['Create a cdk lib', 'npx cdkdx create lib my-lib'],
+      [
+        'Create a cdk jsii lib',
+        'npx cdkdx create --compiler jsii lib my-lib',
+      ],
+    ],
+  });
+
   @Command.String({ required: true })
   public type!: 'lib' | 'app';
 
@@ -25,7 +40,7 @@ export class CreateCommand extends Command<Context> {
   public name!: string;
 
   @Command.String('--compiler')
-  public compiler = 'tsc';
+  public compiler: 'tsc' | 'jsii' = 'tsc';
 
   @Command.Path('create')
   async execute(): Promise<number> {
@@ -34,13 +49,19 @@ export class CreateCommand extends Command<Context> {
     );
 
     const cdkVersion = await latestVersion('@aws-cdk/core');
-    const typesAwsLambdaVersion = await latestVersion('@types/aws-lambda');
-    const sourceMapSupportVersion = await latestVersion('source-map-support');
+    const typesAwsLambdaVersion = await latestVersion(
+      '@types/aws-lambda'
+    );
+    const sourceMapSupportVersion = await latestVersion(
+      'source-map-support'
+    );
 
     const author = await getAuthor();
 
     const project = ((options: ProjectOptions): Project =>
-      this.type === 'lib' ? new LibProject(options) : new AppProject(options))({
+      this.type === 'lib'
+        ? new LibProject(options)
+        : new AppProject(options))({
       name: this.name,
       template: 'default',
       author,
@@ -56,7 +77,10 @@ export class CreateCommand extends Command<Context> {
 
     project.synth();
 
-    await this.installDependencies(targetPath, project.getDependencyNames());
+    await this.installDependencies(
+      targetPath,
+      project.getDependencyNames()
+    );
 
     this.context.stdout.write(Messages.creationComplete(this.name));
 

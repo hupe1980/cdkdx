@@ -1,6 +1,6 @@
 {
   "name": "construct",
-  "private": true,
+  "private": false,
   "version": "0.0.47",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -10,7 +10,8 @@
     "test": "cdkdx test",
     "lint": "cdkdx lint",
     "bundle": "cdkdx bundle",
-    "package": "cdkdx package"
+    "package": "cdkdx package",
+    "cdkdx": "cdkdx"
   },
   "devDependencies": {
     "@aws-cdk/assert": "^1.46.0",

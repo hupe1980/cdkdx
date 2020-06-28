@@ -1,9 +1,9 @@
 import { Command } from 'clipanion';
 import { CLIEngine } from 'eslint';
 
-import { ConstructCommand } from './construct-command';
+import { ProjectCommand } from './project-command';
 
-export class LinterCommand extends ConstructCommand {
+export class LinterCommand extends ProjectCommand {
   @Command.Boolean('--fix')
   public fix = false;
 

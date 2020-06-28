@@ -2,9 +2,9 @@ import { Command } from 'clipanion';
 import { config } from 'dotenv';
 import execa from 'execa';
 
-import { ConstructCommand } from './construct-command';
+import { ProjectCommand } from './project-command';
 
-export class NodeCommand extends ConstructCommand {
+export class NodeCommand extends ProjectCommand {
   @Command.String({ required: true })
   public script!: string;
 
