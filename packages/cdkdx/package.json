@@ -59,5 +59,6 @@
     "@types/fs-extra": "^9.0.1",
     "@types/parcel-bundler": "^1.12.1",
     "rimraf": "^3.0.2"
-  }
+  },
+  "gitHead": "c9a66a2cd9732cacf54f79f0c5052693d157704d"
 }
