@@ -7,16 +7,11 @@ export class LinterCommand extends ProjectCommand {
   @Command.Boolean('--fix')
   public fix = false;
 
-  @Command.Boolean('--disable-awslint')
-  public disableAwslint = false;
-
   @Command.Boolean('--report-unused-disable-directives')
   public reportUnusedDisableDirectives = false;
 
   @Command.Path('lint')
   async execute(): Promise<number> {
-    const awslintErrorCode = this.disableAwslint ? 0 : await this.cli.run(['awslint']);
-
     const eslintConfig = this.createEslintConfig();
 
     const cli = new CLIEngine({
@@ -35,7 +30,7 @@ export class LinterCommand extends ProjectCommand {
 
     this.context.stdout.write(cli.getFormatter()(report.results));
 
-    return report.errorCount !== 0 || awslintErrorCode !== 0 ? 1 : 0;
+    return report.errorCount === 0 ? 0 : 1;
   }
 
   private createEslintConfig(): CLIEngine.Options['baseConfig'] {

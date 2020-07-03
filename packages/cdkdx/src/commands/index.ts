@@ -1,4 +1,3 @@
-export * from './awslint-command';
 export * from './build-command';
 export * from './bump-command';
 export * from './bundle-command';
