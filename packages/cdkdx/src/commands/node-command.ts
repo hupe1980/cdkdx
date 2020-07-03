@@ -1,7 +1,9 @@
+import * as path from 'path';
 import { Command } from 'clipanion';
 import { config } from 'dotenv';
 import execa from 'execa';
 
+import { TsConfig } from '../ts-config';
 import { ProjectCommand } from './project-command';
 
 export class NodeCommand extends ProjectCommand {
@@ -10,7 +12,13 @@ export class NodeCommand extends ProjectCommand {
 
   @Command.Path('node')
   async execute(): Promise<number> {
-    config();
+    const tsConfig = new TsConfig({
+      outDir: './lib',
+      include: ['src'],
+      exclude: ['src/lambdas', 'src/**/__tests__'],
+    });
+
+    await tsConfig.writeJson(path.join(this.context.cwd, 'tsconfig.json'), { overwriteExisting: false });
 
     const bundleExitCode = await this.cli.run(['bundle']);
 
@@ -18,6 +26,8 @@ export class NodeCommand extends ProjectCommand {
 
     const command = require.resolve('ts-node/dist/bin');
     const args = [this.script];
+
+    config();
 
     await execa(command, args, {
       stdio: ['ignore', 'inherit', 'inherit'],

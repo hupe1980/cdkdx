@@ -2,7 +2,7 @@
 import { Command } from 'clipanion';
 import { CLIEngine } from 'eslint';
 
-import { TsConfigBuilder } from '../ts-config-builder';
+//import { TsConfig } from '../ts-config';
 import { ProjectCommand } from './project-command';
 
 export class LinterCommand extends ProjectCommand {
@@ -16,9 +16,9 @@ export class LinterCommand extends ProjectCommand {
   async execute(): Promise<number> {
     //const eslintTypeScriptConfigPath = path.join(this.context.cwd, 'tsconfig.eslint.json');
 
-    const tsConfigBuilder = new TsConfigBuilder();
-
-    tsConfigBuilder.addIncludes('src');
+    // const tsConfig = new TsConfig({
+    //   include: ['src'],
+    // });
     
     //await tsConfigBuilder.writeJson(eslintTypeScriptConfigPath);
 

@@ -30,6 +30,7 @@ export class BuildCommand extends ProjectCommand {
     const compiler = this.getCompiler();
 
     await compiler.compile({
+      cwd: this.context.cwd,
       watch: this.watch,
     });
 
@@ -44,8 +45,6 @@ export class BuildCommand extends ProjectCommand {
     if (this.projectInfo.isJsii) {
       return new JsiiCompiler();
     }
-    return new TscCompiler({
-      cwd: this.context.cwd,
-    });
+    return new TscCompiler();
   }
 }

@@ -1,12 +1,6 @@
 import * as fs from 'fs-extra';
 import ts from 'typescript';
 
-export interface TsConfig {
-  compilerOptions: Record<string, unknown>;
-  exclude?: string[];
-  include?: string[];
-}
-
 const BASE_COMPILER_OPTIONS: ts.CompilerOptions = {
   alwaysStrict: true,
   charset: 'utf8',
@@ -31,10 +25,22 @@ const BASE_COMPILER_OPTIONS: ts.CompilerOptions = {
   target: ts.ScriptTarget.ES2018,
 };
 
-export class TsConfigBuilder {
-  private tsConfig: TsConfig;
+export interface TsConfigStructure {
+  compilerOptions: Record<string, unknown>;
+  exclude?: string[];
+  include?: string[];
+}
 
-  constructor() {
+export interface TsConfigProps {
+  outDir?: string;
+  exclude?: string[];
+  include?: string[];
+}
+
+export class TsConfig {
+  private tsConfig: TsConfigStructure;
+
+  constructor(props?: TsConfigProps) {
     this.tsConfig = {
       compilerOptions: {
         ...BASE_COMPILER_OPTIONS,
@@ -44,27 +50,25 @@ export class TsConfigBuilder {
         target:
           BASE_COMPILER_OPTIONS.target &&
           ts.ScriptTarget[BASE_COMPILER_OPTIONS.target],
+        outDir: props?.outDir,
       },
+      exclude: props?.exclude,
+      include: props?.include,
     }
   }
 
-  public getCompilerOptions(): TsConfig['compilerOptions'] {
+  public getCompilerOptions(): TsConfigStructure['compilerOptions'] {
     return this.tsConfig.compilerOptions;
   }
 
-  public addIncludes(...includes: string[]): void {
-    this.tsConfig.include = includes;
-  }
+  public async writeJson(filePath: string, options: { overwriteExisting?: boolean } = {}): Promise<void> {
+    if (!options.overwriteExisting) {
+      const exists = await fs.pathExists(filePath);
+      if (exists) {
+        return;
+      }
+    }
 
-  public addExcludes(...excludes: string[]): void {
-    this.tsConfig.exclude = excludes;
-  }
-
-  public setOutDir(outDir: string): void {
-    this.tsConfig.compilerOptions.outDir = outDir;
-  }
-
-  public async writeJson(filePath: string): Promise<void> {
     await fs.writeJson(filePath, this.tsConfig, {
       encoding: 'utf8',
       spaces: 2,
