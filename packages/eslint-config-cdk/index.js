@@ -3,11 +3,9 @@
 module.exports = {
   extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:jest/recommended',
   ],
-  plugins: ['import'],
+  plugins: ['jest', 'import'],
   ignorePatterns: ['*.js', '*.d.ts', 'node_modules/'],
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
@@ -28,7 +26,10 @@ module.exports = {
     //Style
     semi: 'off', // note you must disable the base rule as it can report incorrect errors
     '@typescript-eslint/semi': ['error'],
+    
+    indent: 'off', // note you must disable the base rule as it can report incorrect errors
     '@typescript-eslint/indent': ['error', 2],
+    
     quotes: ['error', 'single', { avoidEscape: true }],
     'comma-dangle': ['error', 'always-multiline'], // ensures clean diffs, see https://medium.com/@nikgraf/why-you-should-enforce-dangling-commas-for-multiline-statements-d034c98e36f8
 
@@ -51,5 +52,12 @@ module.exports = {
         assertFunctionNames: ['expect', 'expectCDK'],
       },
     ],
+    'jest/consistent-test-it': [
+      'error',
+      { 
+        fn: 'test' 
+      }
+    ],
+    'jest/no-identical-title': 'error',
   },
 };
