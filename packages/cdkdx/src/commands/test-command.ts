@@ -1,6 +1,7 @@
 import { Command } from 'clipanion';
 import * as jest from 'jest';
 
+import { TsConfigBuilder } from '../ts-config-builder';
 import { ProjectCommand } from './project-command';
 
 export class TestCommand extends ProjectCommand {
@@ -10,6 +11,8 @@ export class TestCommand extends ProjectCommand {
   @Command.Path('test')
   async execute(): Promise<number> {
     process.env.NODE_ENV = 'test';
+
+    const tsConfigBuilder = new TsConfigBuilder();
 
     const jestConfig = {
       transform: {
@@ -24,6 +27,11 @@ export class TestCommand extends ProjectCommand {
         require.resolve('jest-watch-typeahead/testname'),
       ],
       testEnvironment: 'node',
+      globals: {
+        'ts-jest': {
+          tsConfig: tsConfigBuilder.getCompilerOptions(),
+        },
+      },
     };
 
     const argv: string[] = [];

@@ -48,6 +48,10 @@ export class TsConfigBuilder {
     }
   }
 
+  public getCompilerOptions(): TsConfig['compilerOptions'] {
+    return this.tsConfig.compilerOptions;
+  }
+
   public addIncludes(...includes: string[]): void {
     this.tsConfig.include = includes;
   }
