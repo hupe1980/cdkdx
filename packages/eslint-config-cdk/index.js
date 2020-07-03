@@ -4,9 +4,15 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
+    // 'plugin:@typescript-eslint/recommended-requiring-type-checking',
   ],
-  plugins: ['jest', 'import'],
-  ignorePatterns: ['*.js', '*.d.ts', 'node_modules/'],
+  /* parserOptions: {
+    ecmaVersion: '2018',
+    sourceType: 'module',
+    project: 'tsconfig.eslint.json',
+  },*/
+  plugins: ['jest', 'import', '@typescript-eslint'],
+  ignorePatterns: ['*.js', '*.d.ts', 'node_modules'],
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
@@ -32,6 +38,9 @@ module.exports = {
     
     quotes: ['error', 'single', { avoidEscape: true }],
     'comma-dangle': ['error', 'always-multiline'], // ensures clean diffs, see https://medium.com/@nikgraf/why-you-should-enforce-dangling-commas-for-multiline-statements-d034c98e36f8
+
+    // Allow use of Function (@aws-cdk/aws-lambda)
+    '@typescript-eslint/no-implied-eval': 'off',
 
     // Require all imported dependencies are actually declared in package.json
     'import/no-extraneous-dependencies': [

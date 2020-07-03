@@ -1,6 +1,8 @@
+//import * as path from 'path';
 import { Command } from 'clipanion';
 import { CLIEngine } from 'eslint';
 
+import { TsConfigBuilder } from '../ts-config-builder';
 import { ProjectCommand } from './project-command';
 
 export class LinterCommand extends ProjectCommand {
@@ -12,11 +14,22 @@ export class LinterCommand extends ProjectCommand {
 
   @Command.Path('lint')
   async execute(): Promise<number> {
-    const eslintConfig = this.createEslintConfig();
+    //const eslintTypeScriptConfigPath = path.join(this.context.cwd, 'tsconfig.eslint.json');
+
+    const tsConfigBuilder = new TsConfigBuilder();
+
+    tsConfigBuilder.addIncludes('src');
+    
+    //await tsConfigBuilder.writeJson(eslintTypeScriptConfigPath);
 
     const cli = new CLIEngine({
       baseConfig: {
-        ...eslintConfig,
+        extends: 'cdk',
+        // parserOptions: {
+        //   ecmaVersion: '2018',
+        //   sourceType: 'module',
+        //   project: eslintTypeScriptConfigPath,
+        // },
       },
       fix: this.fix,
       reportUnusedDisableDirectives: this.reportUnusedDisableDirectives,
@@ -31,11 +44,5 @@ export class LinterCommand extends ProjectCommand {
     this.context.stdout.write(cli.getFormatter()(report.results));
 
     return report.errorCount === 0 ? 0 : 1;
-  }
-
-  private createEslintConfig(): CLIEngine.Options['baseConfig'] {
-    return {
-      extends: 'cdk',
-    };
   }
 }

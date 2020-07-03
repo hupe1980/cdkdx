@@ -1,33 +1,9 @@
 import * as path from 'path';
 import * as fs from 'fs-extra';
 import execa from 'execa';
-import ts from 'typescript';
 
 import { Compiler, CompilerProps } from './compiler';
-
-const BASE_COMPILER_OPTIONS: ts.CompilerOptions = {
-  alwaysStrict: true,
-  charset: 'utf8',
-  declaration: true,
-  experimentalDecorators: true,
-  inlineSourceMap: true,
-  inlineSources: true,
-  lib: ['es2018'],
-  module: ts.ModuleKind.CommonJS,
-  noEmitOnError: true,
-  noFallthroughCasesInSwitch: true,
-  noImplicitAny: true,
-  noImplicitReturns: true,
-  noImplicitThis: true,
-  noUnusedLocals: true,
-  noUnusedParameters: true,
-  resolveJsonModule: true,
-  strict: true,
-  strictNullChecks: true,
-  strictPropertyInitialization: true,
-  stripInternal: true,
-  target: ts.ScriptTarget.ES2018,
-};
+import { TsConfigBuilder } from '../ts-config-builder';
 
 export interface TscCompilerProps {
   readonly cwd: string;
@@ -41,7 +17,7 @@ export class TscCompiler implements Compiler {
   }
 
   public async compile(props?: CompilerProps): Promise<void> {
-    this.writeTypeScriptConfig();
+    await this.writeTypeScriptConfig();
 
     const command = require.resolve('typescript/bin/tsc');
     const args = ['--build'];
@@ -61,24 +37,12 @@ export class TscCompiler implements Compiler {
       return;
     }
 
-    const outputConfig = {
-      compilerOptions: {
-        ...BASE_COMPILER_OPTIONS,
-        module:
-                 BASE_COMPILER_OPTIONS.module &&
-                 ts.ModuleKind[BASE_COMPILER_OPTIONS.module],
-        target:
-                 BASE_COMPILER_OPTIONS.target &&
-                 ts.ScriptTarget[BASE_COMPILER_OPTIONS.target],
-        outDir: './lib',
-      },
-      include: ['src'],
-      exclude: ['src/lambdas', 'src/**/__tests__'],
-    };
+    const tsConfigBuilder = new TsConfigBuilder();
 
-    await fs.writeJson(this.configPath, outputConfig, {
-      encoding: 'utf8',
-      spaces: 2,
-    });
+    tsConfigBuilder.setOutDir('./lib');
+    tsConfigBuilder.addIncludes('src');
+    tsConfigBuilder.addExcludes('src/lambdas', 'src/**/__tests__');
+
+    await tsConfigBuilder.writeJson(this.configPath);
   }
 }
