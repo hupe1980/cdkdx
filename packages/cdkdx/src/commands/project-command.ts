@@ -8,6 +8,7 @@ export interface ProjectInfo {
   name: string;
   isJsii: boolean;
   private: boolean;
+  workspaces?: string[];
 }
 
 export abstract class ProjectCommand extends Command<Context> {
@@ -22,6 +23,7 @@ export abstract class ProjectCommand extends Command<Context> {
       isJsii: pkgJson.jsii !== undefined,
       name: pkgJson.name,
       private: pkgJson.private,
+      workspaces: pkgJson.workspaces,
     };
   }
 }

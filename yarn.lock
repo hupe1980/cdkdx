@@ -5394,14 +5394,6 @@ find-up@^3.0.0:
   dependencies:
     locate-path "^3.0.0"
 
-find-workspace-root@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/find-workspace-root/-/find-workspace-root-1.0.1.tgz#b6ee5068a560dee5c0fd9f75445108f19ce414b7"
-  integrity sha512-QNIn8vEdwfWMRXaArqsZSICBFYmcvoPJWQrqMJ5GKpyifeNyGNAzb4Vq3VeqmtYOY+McUGWftwdb/Fgx7U2ACg==
-  dependencies:
-    fs-extra "^9.0.1"
-    micromatch "^4.0.2"
-
 flat-cache@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/flat-cache/-/flat-cache-2.0.1.tgz#5d296d6f04bda44a4630a301413bdbc2ec085ec0"

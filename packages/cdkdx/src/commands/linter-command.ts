@@ -1,6 +1,5 @@
 import * as path from 'path';
 import { Command } from 'clipanion';
-import findWorkspaceRoot from 'find-workspace-root';
 import { CLIEngine } from 'eslint';
 
 import { TsConfig } from '../ts-config';
@@ -17,12 +16,10 @@ export class LinterCommand extends ProjectCommand {
   async execute(): Promise<number> {
     const eslintTypeScriptConfigPath = path.join(this.context.cwd, 'tsconfig.eslint.json');
 
-    const rootDir = await findWorkspaceRoot(this.context.cwd);
+    const tsConfig = new TsConfig({
+      include: this.projectInfo.workspaces?.map(ws => `${ws}/src`) ?? ['src'],
+    });
 
-    const tsConfig =  new TsConfig({
-      include: [rootDir === this.context.cwd ? 'packages/*' : '.'],
-    });      
-    
     await tsConfig.writeJson(eslintTypeScriptConfigPath, { overwriteExisting: true });
 
     const cli = new CLIEngine({
