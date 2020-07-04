@@ -23,8 +23,9 @@ export class LibProject extends Project {
           outdir: 'dist',
           tsc: {
             outDir: this.outDir,
+            rootDir: this.srcDir,
           },
-          excludeTypescript: ['src/lambdas', 'src/**/__tests__'],
+          excludeTypescript: [`${this.srcDir}/lambdas`, `${this.srcDir}/**/__tests__`],
           targets: {
             python: {
               distName: options.name,

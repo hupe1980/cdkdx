@@ -1,8 +1,9 @@
-//import * as path from 'path';
+import * as path from 'path';
 import { Command } from 'clipanion';
+import findWorkspaceRoot from 'find-workspace-root';
 import { CLIEngine } from 'eslint';
 
-//import { TsConfig } from '../ts-config';
+import { TsConfig } from '../ts-config';
 import { ProjectCommand } from './project-command';
 
 export class LinterCommand extends ProjectCommand {
@@ -14,22 +15,19 @@ export class LinterCommand extends ProjectCommand {
 
   @Command.Path('lint')
   async execute(): Promise<number> {
-    //const eslintTypeScriptConfigPath = path.join(this.context.cwd, 'tsconfig.eslint.json');
+    const eslintTypeScriptConfigPath = path.join(this.context.cwd, 'tsconfig.eslint.json');
 
-    // const tsConfig = new TsConfig({
-    //   include: ['src'],
-    // });
+    const rootDir = await findWorkspaceRoot(this.context.cwd);
+
+    const tsConfig =  new TsConfig({
+      include: [rootDir === this.context.cwd ? 'packages/*' : '.'],
+    });      
     
-    //await tsConfigBuilder.writeJson(eslintTypeScriptConfigPath);
+    await tsConfig.writeJson(eslintTypeScriptConfigPath, { overwriteExisting: true });
 
     const cli = new CLIEngine({
       baseConfig: {
         extends: 'cdk',
-        // parserOptions: {
-        //   ecmaVersion: '2018',
-        //   sourceType: 'module',
-        //   project: eslintTypeScriptConfigPath,
-        // },
       },
       fix: this.fix,
       reportUnusedDisableDirectives: this.reportUnusedDisableDirectives,

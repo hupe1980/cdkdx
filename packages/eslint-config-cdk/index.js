@@ -4,13 +4,13 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    // 'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
   ],
-  /* parserOptions: {
+  parserOptions: {
     ecmaVersion: '2018',
     sourceType: 'module',
     project: 'tsconfig.eslint.json',
-  },*/
+  },
   plugins: ['jest', 'import', '@typescript-eslint'],
   ignorePatterns: ['*.js', '*.d.ts', 'node_modules'],
   rules: {
