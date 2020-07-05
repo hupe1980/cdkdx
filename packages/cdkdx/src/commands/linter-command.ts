@@ -4,7 +4,6 @@ import { ESLint } from 'eslint';
 
 import { TsConfig } from '../ts-config';
 import { ProjectCommand } from './project-command';
-import { createModuleResolutionCache } from 'typescript';
 
 export class LinterCommand extends ProjectCommand {
   @Command.Boolean('--fix')
