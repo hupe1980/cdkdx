@@ -4,3 +4,4 @@ node_modules
 examples
 templates
 eslint-config-cdk
+jest.config.js

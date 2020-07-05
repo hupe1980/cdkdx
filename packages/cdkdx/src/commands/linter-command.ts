@@ -1,6 +1,6 @@
 import * as path from 'path';
 import { Command } from 'clipanion';
-import { CLIEngine } from 'eslint';
+import { ESLint } from 'eslint';
 
 import { TsConfig } from '../ts-config';
 import { ProjectCommand } from './project-command';
@@ -8,6 +8,9 @@ import { ProjectCommand } from './project-command';
 export class LinterCommand extends ProjectCommand {
   @Command.Boolean('--fix')
   public fix = false;
+
+  @Command.Boolean('--cache')
+  public cache = false;
 
   @Command.Boolean('--report-unused-disable-directives')
   public reportUnusedDisableDirectives = false;
@@ -22,22 +25,28 @@ export class LinterCommand extends ProjectCommand {
 
     await tsConfig.writeJson(eslintTypeScriptConfigPath, { overwriteExisting: true });
 
-    const cli = new CLIEngine({
+    const eslint = new ESLint({
       baseConfig: {
         extends: 'cdk',
       },
+      cwd: this.context.cwd,
       fix: this.fix,
-      reportUnusedDisableDirectives: this.reportUnusedDisableDirectives,
+      cache: this.cache,
+      reportUnusedDisableDirectives: this.reportUnusedDisableDirectives ? 1 : 0,
     });
 
-    const report = cli.executeOnFiles(['*/**/*.ts']);
+    const results = await eslint.lintFiles(['*/**/*.ts']);
 
     if (this.fix) {
-      CLIEngine.outputFixes(report);
+      await ESLint.outputFixes(results);
     }
 
-    this.context.stdout.write(cli.getFormatter()(report.results));
+    const formatter = await eslint.loadFormatter('stylish');
+    
+    const resultText = formatter.format(results);
 
-    return report.errorCount === 0 ? 0 : 1;
+    this.context.stdout.write(resultText);
+
+    return results.length === 0 ? 0 : 1;
   }
 }
