@@ -4,6 +4,7 @@ import { ESLint } from 'eslint';
 
 import { TsConfig } from '../ts-config';
 import { ProjectCommand } from './project-command';
+import { createModuleResolutionCache } from 'typescript';
 
 export class LinterCommand extends ProjectCommand {
   @Command.Boolean('--fix')
@@ -47,6 +48,8 @@ export class LinterCommand extends ProjectCommand {
 
     this.context.stdout.write(resultText);
 
-    return results.length === 0 ? 0 : 1;
+    const errorCount = results.reduce((acc, { errorCount }) => acc + errorCount, 0);
+
+    return errorCount === 0 ? 0 : 1;
   }
 }
