@@ -32,7 +32,7 @@ export class LinterCommand extends ProjectCommand {
       cwd: this.context.cwd,
       fix: this.fix,
       cache: this.cache,
-      reportUnusedDisableDirectives: this.reportUnusedDisableDirectives ? 1 : 0,
+      reportUnusedDisableDirectives: this.reportUnusedDisableDirectives ? 'off' : 'error',
     });
 
     const results = await eslint.lintFiles(['*/**/*.ts']);
