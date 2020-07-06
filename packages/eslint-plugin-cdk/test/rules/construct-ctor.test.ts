@@ -41,5 +41,16 @@ ruleTester.run('construct-ctor', rule, {
       },
       ],
     },
+    {
+      code: `
+      class Test extends Construct {
+          constructor(scope: Construct, idx: string, props: TestProps) {}
+      }
+      `,
+      errors: [{
+        messageId: 'constructCtor',
+      },
+      ],
+    },
   ],
 });

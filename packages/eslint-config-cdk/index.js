@@ -44,6 +44,7 @@ module.exports = {
 
     'cdk/construct-ctor': 'error',
     'cdk/filename-match-regex': 'error',
+    'cdk/public-static-property-all-caps': 'error',
 
     // Require all imported dependencies are actually declared in package.json
     'import/no-extraneous-dependencies': [

@@ -1,5 +1,5 @@
 import {
-  AST_NODE_TYPES, ASTUtils,
+  AST_NODE_TYPES, ASTUtils, TSESTree,
 } from '@typescript-eslint/experimental-utils';
 import { createRule } from '../utils';
 
@@ -10,7 +10,6 @@ export default createRule({
       description: 'Ensure a uniform construct constructors signature',
       category: 'Best Practices',
       recommended: 'error',
-      requiresTypeChecking: false,
     },
     messages: {
       constructCtor: 'Signature of all construct constructors should be "scope, id, props"',
@@ -25,7 +24,7 @@ export default createRule({
     let isConstruct = false;
 
     return {
-      ClassDeclaration(node): void {
+      ClassDeclaration(node: TSESTree.ClassDeclaration): void {
         if (node.superClass?.type === AST_NODE_TYPES.Identifier) {
           if (node.superClass.name === 'Construct') {
             isConstruct = true;
@@ -33,27 +32,22 @@ export default createRule({
           return;
         }
       },
-      MethodDefinition(node): void {
+      MethodDefinition(node: TSESTree.MethodDefinition): void {
         if (!isConstruct || !ASTUtils.isConstructor(node)) {
           return;
         }
-
-        let hasFailure = false;
         
         node.value.params.forEach((param, index) => {          
           if (ASTUtils.isIdentifier(param)) {
             if (param.name !== constructorParamNames[index]) {
-              hasFailure = true;
+              context.report({
+                node: param,
+                messageId: 'constructCtor',
+              });
+              return;
             }
           }
         });
-
-        if(hasFailure) {
-          context.report({
-            node,
-            messageId: 'constructCtor',
-          });
-        }
       },
     }
   },

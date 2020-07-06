@@ -11,7 +11,6 @@ export default createRule<Options, MessageIds>({
       description: 'Enforces all linted files to match a certain pattern',
       category: 'Best Practices',
       recommended: 'error',
-      requiresTypeChecking: false,
     },
     messages: {
       namingConvention: 'Filename {{ name }} does not match the naming convention.',
