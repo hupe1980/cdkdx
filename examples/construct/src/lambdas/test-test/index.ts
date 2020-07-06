@@ -10,4 +10,4 @@ export const handler = async () => {
   console.log(foo, shared);
 
   const response = await axios.get('http://google.com');
-}
+};

@@ -52,5 +52,16 @@ ruleTester.run('construct-ctor', rule, {
       },
       ],
     },
+    {
+      code: `
+      class Test extends Construct {
+          constructor() {}
+      }
+      `,
+      errors: [{
+        messageId: 'constructCtor',
+      },
+      ],
+    },
   ],
 });

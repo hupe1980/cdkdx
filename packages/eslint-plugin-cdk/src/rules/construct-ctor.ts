@@ -3,6 +3,30 @@ import {
 } from '@typescript-eslint/experimental-utils';
 import { createRule } from '../utils';
 
+export interface MethodSignaturParameter {
+  name: string;
+  type?: string;
+}
+
+const isEqual = (expected: MethodSignaturParameter[], actual: MethodSignaturParameter[]): boolean => {
+  if (expected.length !== actual.length) {
+    return false;
+  }
+
+  for(let i = 0; i < expected.length; i++) {
+    if(expected[i].name !== actual[i].name) {
+      return false;
+    }
+    if(expected[i].type) {
+      if (expected[i].type !== actual[i].type) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
 export default createRule({
   name: 'construct-ctor',
   meta: {
@@ -19,8 +43,7 @@ export default createRule({
   },
   defaultOptions: [],
   create(context) {
-    const constructorParamNames = ['scope', 'id', 'props'];
-    
+    const sourceCode = context.getSourceCode();
     let isConstruct = false;
 
     return {
@@ -36,18 +59,53 @@ export default createRule({
         if (!isConstruct || !ASTUtils.isConstructor(node)) {
           return;
         }
-        
-        node.value.params.forEach((param, index) => {          
+
+        if(node.value.params.length === 0) {
+          context.report({
+            node,
+            messageId: 'constructCtor',
+          });
+
+          return;
+        }
+
+        const expected: MethodSignaturParameter[] = [];
+
+        expected.push({ name: 'scope', type: 'Construct' });
+        expected.push({ name: 'id', type: 'string' });
+
+        if(node.value.params.length > 2) {
+          expected.push({ name: 'props' });
+        }
+
+        const actual: MethodSignaturParameter[] = [];
+        let start = node.value.params[0].loc.start;
+        let end = node.value.params[0].loc.end;
+
+        node.value.params.forEach((param, index) => {
+          if (index === 0) {
+            start = param.loc.start;
+          }
+          end = param.loc.end;          
+          
           if (ASTUtils.isIdentifier(param)) {
-            if (param.name !== constructorParamNames[index]) {
-              context.report({
-                node: param,
-                messageId: 'constructCtor',
-              });
-              return;
-            }
+            const type = sourceCode.getLastToken(param)?.value;
+            actual.push({ name: param.name, type });
           }
         });
+
+        if(!isEqual(expected, actual)) {
+          context.report({
+            node,
+            loc: {
+              start,
+              end,
+            },
+            messageId: 'constructCtor',
+          });
+
+          return;
+        }
       },
     }
   },
