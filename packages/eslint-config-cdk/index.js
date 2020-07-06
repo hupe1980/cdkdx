@@ -11,7 +11,7 @@ module.exports = {
     sourceType: 'module',
     project: 'tsconfig.eslint.json',
   },
-  plugins: ['jest', 'import', '@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'cdk', 'import', 'jest'],
   ignorePatterns: ['*.js', '*.d.ts', 'node_modules'],
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
@@ -41,6 +41,9 @@ module.exports = {
 
     // Allow use of Function (@aws-cdk/aws-lambda)
     '@typescript-eslint/no-implied-eval': 'off',
+
+    'cdk/construct-ctor': 'error',
+    'cdk/filename-match-regex': 'error',
 
     // Require all imported dependencies are actually declared in package.json
     'import/no-extraneous-dependencies': [

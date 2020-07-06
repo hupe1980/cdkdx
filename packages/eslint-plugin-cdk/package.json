@@ -1,0 +1,33 @@
+{
+  "name": "eslint-plugin-cdk",
+  "description": "ESLint rules for aws cdk",
+  "version": "0.0.61",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hupe1980/cdkdx",
+    "directory": "packages/eslint-plugin-cdk"
+  },
+  "files": [
+    "lib"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "build": "rimraf lib && tsc",
+    "watch": "rimraf lib && tsc -w",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@typescript-eslint/experimental-utils": "^3.5.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.3",
+    "jest": "^26.1.0",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^26.1.1",
+    "typescript": "^3.9.6"
+  }
+}
