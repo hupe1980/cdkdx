@@ -1,5 +1,5 @@
 import {
-  AST_NODE_TYPES, TSESTree,
+  TSESTree,
 } from '@typescript-eslint/experimental-utils';
 import { createRule } from '../utils';
 
@@ -22,13 +22,8 @@ export default createRule({
     let isConstruct = false;
     
     return {
-      ClassDeclaration(node: TSESTree.ClassDeclaration): void {
-        if (node.superClass?.type === AST_NODE_TYPES.Identifier) {
-          if (node.superClass.name === 'Construct') {
-            isConstruct = true;
-          }
-          return;
-        }
+      'ClassDeclaration[superClass.name = "Construct"]'(): void {
+        isConstruct = true;
       },
       MethodDefinition(node: TSESTree.MethodDefinition): void {
         if(!isConstruct || !node.static || !(node.accessibility === 'public')) {

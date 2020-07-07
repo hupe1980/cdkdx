@@ -3,15 +3,16 @@
 module.exports = {
   extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    //'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:@typescript-eslint/recommended',  
+    'prettier/@typescript-eslint',
+    'prettier'
   ],
   parserOptions: {
     ecmaVersion: '2018',
     sourceType: 'module',
     project: 'tsconfig.eslint.json',
   },
-  plugins: ['@typescript-eslint', 'cdk', 'import', 'jest'],
+  plugins: ['@typescript-eslint', 'cdk', 'import', 'jest', 'prettier'],
   ignorePatterns: ['*.js', '*.d.ts', 'node_modules'],
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
@@ -28,19 +29,6 @@ module.exports = {
         argsIgnorePattern: '^_',
       },
     ],
-
-    //Style
-    semi: 'off', // note you must disable the base rule as it can report incorrect errors
-    '@typescript-eslint/semi': ['error'],
-    
-    indent: 'off', // note you must disable the base rule as it can report incorrect errors
-    '@typescript-eslint/indent': ['error', 2],
-    
-    quotes: ['error', 'single', { avoidEscape: true }],
-    'comma-dangle': ['error', 'always-multiline'], // ensures clean diffs, see https://medium.com/@nikgraf/why-you-should-enforce-dangling-commas-for-multiline-statements-d034c98e36f8
-
-    // Allow use of Function (@aws-cdk/aws-lambda)
-    '@typescript-eslint/no-implied-eval': 'off',
 
     'cdk/construct-ctor': 'error',
     'cdk/filename-match-regex': 'error',
@@ -73,5 +61,13 @@ module.exports = {
       }
     ],
     'jest/no-identical-title': 'error',
+    
+    //Style
+    'prettier/prettier': ['error', { 
+      'tabWidth': 2,
+      'singleQuote': true, 
+      'semi': true,
+      'trailingComma': 'all', // ensures clean diffs, see https://medium.com/@nikgraf/why-you-should-enforce-dangling-commas-for-multiline-statements-d034c98e36f8
+    }]
   },
 };

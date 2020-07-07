@@ -5,6 +5,17 @@ import { TsConfig } from '../ts-config';
 import { ProjectCommand } from './project-command';
 
 export class TestCommand extends ProjectCommand {
+  static usage = Command.Usage({
+    description: 'Run jest test runner',
+    details: `
+            All flags are passed through directly to jest.
+        `,
+    examples: [
+      ['Run jest', 'cdkdx test'],
+      ['Run jest in watch mode', 'cdkdx test -w'],
+    ],
+  });
+
   @Command.Proxy()
   public jestArgv!: string[];
 

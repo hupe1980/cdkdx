@@ -11,6 +11,8 @@ ruleTester.run('construct-ctor', rule, {
       code: `
       class Test extends Construct {
           constructor(scope: Construct, id: string, props: TestProps) {}
+
+          public foo():void {}
       }
       `,
     },
