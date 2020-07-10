@@ -26,10 +26,7 @@ export class CreateCommand extends Command<Context> {
     examples: [
       ['Create a cdk app', 'npx cdkdx create app my-app'],
       ['Create a cdk lib', 'npx cdkdx create lib my-lib'],
-      [
-        'Create a cdk jsii lib',
-        'npx cdkdx create --compiler jsii lib my-lib',
-      ],
+      ['Create a cdk jsii lib', 'npx cdkdx create --compiler jsii lib my-lib'],
     ],
   });
 
@@ -45,23 +42,17 @@ export class CreateCommand extends Command<Context> {
   @Command.Path('create')
   async execute(): Promise<number> {
     const targetPath = await this.getTargetPath(
-      path.join(this.context.cwd, this.name)
+      path.join(this.context.cwd, this.name),
     );
 
     const cdkVersion = await latestVersion('@aws-cdk/core');
-    const typesAwsLambdaVersion = await latestVersion(
-      '@types/aws-lambda'
-    );
-    const sourceMapSupportVersion = await latestVersion(
-      'source-map-support'
-    );
+    const typesAwsLambdaVersion = await latestVersion('@types/aws-lambda');
+    const sourceMapSupportVersion = await latestVersion('source-map-support');
 
     const author = await getAuthor();
 
     const project = ((options: ProjectOptions): Project =>
-      this.type === 'lib'
-        ? new LibProject(options)
-        : new AppProject(options))({
+      this.type === 'lib' ? new LibProject(options) : new AppProject(options))({
       name: this.name,
       template: 'default',
       author,
@@ -77,10 +68,7 @@ export class CreateCommand extends Command<Context> {
 
     project.synth();
 
-    await this.installDependencies(
-      targetPath,
-      project.getDependencyNames()
-    );
+    await this.installDependencies(targetPath, project.getDependencyNames());
 
     this.context.stdout.write(Messages.creationComplete(this.name));
 
@@ -106,7 +94,7 @@ export class CreateCommand extends Command<Context> {
 
   private async installDependencies(
     targetPath: string,
-    dependencyNames: string[]
+    dependencyNames: string[],
   ): Promise<void> {
     const spinner = ora({
       text: Messages.installDependencies(dependencyNames.sort()),

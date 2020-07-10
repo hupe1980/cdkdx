@@ -12,7 +12,7 @@ export class BundleCommand extends ProjectCommand {
   @Command.Boolean('--watch')
   @Command.Boolean('-w')
   public watch = false;
-         
+
   @Command.Boolean('--minify')
   public minify = false;
 

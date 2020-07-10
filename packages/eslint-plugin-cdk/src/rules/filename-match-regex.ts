@@ -1,7 +1,7 @@
 import path from 'path';
 import { createRule } from '../utils';
 
-export type Options = [{ pattern: string }]
+export type Options = [{ pattern: string }];
 export type MessageIds = 'namingConvention';
 
 export default createRule<Options, MessageIds>({
@@ -13,19 +13,24 @@ export default createRule<Options, MessageIds>({
       recommended: 'error',
     },
     messages: {
-      namingConvention: 'Filename {{ name }} does not match the naming convention.',
+      namingConvention:
+        'Filename {{ name }} does not match the naming convention.',
     },
-    schema: [{
-      properties: {
-        pattern: {
-          type: 'string',
+    schema: [
+      {
+        properties: {
+          pattern: {
+            type: 'string',
+          },
         },
+        additionalProperties: false,
       },
-      additionalProperties: false,
-    }],
+    ],
     type: 'problem',
   },
-  defaultOptions: [{ pattern: '^([a-z][a-z0-9]*)(-[a-z0-9]+)*(.spec|.test)?.ts$' }],
+  defaultOptions: [
+    { pattern: '^([a-z][a-z0-9]*)(-[a-z0-9]+)*(.spec|.test)?.ts$' },
+  ],
   create(context, optionsWithDefaults) {
     const filename = context.getFilename();
 
@@ -33,7 +38,7 @@ export default createRule<Options, MessageIds>({
       Program(node): void {
         const { base } = path.parse(filename);
 
-        if(base === 'index.ts') return;
+        if (base === 'index.ts') return;
 
         const regExp = new RegExp(optionsWithDefaults[0].pattern);
 
@@ -45,8 +50,8 @@ export default createRule<Options, MessageIds>({
               name: base,
             },
           });
-        } 
+        }
       },
-    }
+    };
   },
 });

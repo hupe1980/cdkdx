@@ -18,7 +18,9 @@ export class NodeCommand extends ProjectCommand {
       exclude: ['src/lambdas', 'src/**/__tests__'],
     });
 
-    await tsConfig.writeJson(path.join(this.context.cwd, 'tsconfig.json'), { overwriteExisting: false });
+    await tsConfig.writeJson(path.join(this.context.cwd, 'tsconfig.json'), {
+      overwriteExisting: false,
+    });
 
     const bundleExitCode = await this.cli.run(['bundle']);
 
@@ -35,7 +37,7 @@ export class NodeCommand extends ProjectCommand {
         ...process.env,
       },
     });
-   
+
     return 0;
   }
 }

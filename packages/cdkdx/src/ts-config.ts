@@ -54,14 +54,17 @@ export class TsConfig {
       },
       exclude: props?.exclude,
       include: props?.include,
-    }
+    };
   }
 
   public getCompilerOptions(): TsConfigStructure['compilerOptions'] {
     return this.tsConfig.compilerOptions;
   }
 
-  public async writeJson(filePath: string, options: { overwriteExisting?: boolean } = {}): Promise<void> {
+  public async writeJson(
+    filePath: string,
+    options: { overwriteExisting?: boolean } = {},
+  ): Promise<void> {
     if (!options.overwriteExisting) {
       const exists = await fs.pathExists(filePath);
       if (exists) {

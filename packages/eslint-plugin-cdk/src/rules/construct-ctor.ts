@@ -1,23 +1,29 @@
 import {
-  ASTUtils, TSESTree,
+  ASTUtils,
+  TSESTree,
+  AST_NODE_TYPES,
 } from '@typescript-eslint/experimental-utils';
-import { createRule } from '../utils';
+
+import { createRule, hasConstructSuperClass } from '../utils';
 
 export interface MethodSignaturParameter {
   name: string;
   type?: string;
 }
 
-const isEqual = (expected: MethodSignaturParameter[], actual: MethodSignaturParameter[]): boolean => {
+const isEqual = (
+  expected: MethodSignaturParameter[],
+  actual: MethodSignaturParameter[],
+): boolean => {
   if (expected.length !== actual.length) {
     return false;
   }
 
-  for(let i = 0; i < expected.length; i++) {
-    if(expected[i].name !== actual[i].name) {
+  for (let i = 0; i < expected.length; i++) {
+    if (expected[i].name !== actual[i].name) {
       return false;
     }
-    if(expected[i].type) {
+    if (expected[i].type) {
       if (expected[i].type !== actual[i].type) {
         return false;
       }
@@ -25,7 +31,7 @@ const isEqual = (expected: MethodSignaturParameter[], actual: MethodSignaturPara
   }
 
   return true;
-}
+};
 
 export default createRule({
   name: 'construct-ctor',
@@ -36,7 +42,8 @@ export default createRule({
       recommended: 'error',
     },
     messages: {
-      constructCtor: 'Signature of all construct constructors should be "scope, id, props"',
+      constructCtor:
+        'Signature of all construct constructors should be "scope, id, props"',
     },
     schema: [],
     type: 'problem',
@@ -44,18 +51,24 @@ export default createRule({
   defaultOptions: [],
   create(context) {
     const sourceCode = context.getSourceCode();
+
     let isConstruct = false;
 
+    const getIdentifier = (node: TSESTree.Parameter) =>
+      node.type === AST_NODE_TYPES.AssignmentPattern ? node.left : node;
+
     return {
-      'ClassDeclaration[superClass.name = "Construct"]'(): void {
-        isConstruct = true;
+      'ClassDeclaration[superClass]'(node: TSESTree.ClassDeclaration): void {
+        isConstruct = hasConstructSuperClass(node);
       },
-      'MethodDefinition[key.name = "constructor"]'(node: TSESTree.MethodDefinition): void {
+      'MethodDefinition[key.name = "constructor"]'(
+        node: TSESTree.MethodDefinition,
+      ): void {
         if (!isConstruct) {
           return;
         }
 
-        if(node.value.params.length === 0) {
+        if (node.value.params.length === 0) {
           context.report({
             node,
             messageId: 'constructCtor',
@@ -69,7 +82,7 @@ export default createRule({
         expected.push({ name: 'scope', type: 'Construct' });
         expected.push({ name: 'id', type: 'string' });
 
-        if(node.value.params.length > 2) {
+        if (node.value.params.length > 2) {
           expected.push({ name: 'props' });
         }
 
@@ -81,15 +94,17 @@ export default createRule({
           if (index === 0) {
             start = param.loc.start;
           }
-          end = param.loc.end;          
-          
-          if (ASTUtils.isIdentifier(param)) {
-            const type = sourceCode.getLastToken(param)?.value;
-            actual.push({ name: param.name, type });
+          end = param.loc.end;
+
+          const identifier = getIdentifier(param);
+
+          if (ASTUtils.isIdentifier(identifier)) {
+            const type = sourceCode.getLastToken(identifier)?.value;
+            actual.push({ name: identifier.name, type });
           }
         });
 
-        if(!isEqual(expected, actual)) {
+        if (!isEqual(expected, actual)) {
           context.report({
             node,
             loc: {
@@ -102,6 +117,6 @@ export default createRule({
           return;
         }
       },
-    }
+    };
   },
 });

@@ -1,15 +1,16 @@
-import {
-  TSESTree,
-} from '@typescript-eslint/experimental-utils';
+import { TSESTree } from '@typescript-eslint/experimental-utils';
 import { createRule } from '../utils';
 
-const UPPER_SNAKE_CASE_ALLOWED_PATTERN = new RegExp('^[A-Z0-9][A-Z0-9_]*[A-Z0-9]+$');
+const UPPER_SNAKE_CASE_ALLOWED_PATTERN = new RegExp(
+  '^[A-Z0-9][A-Z0-9_]*[A-Z0-9]+$',
+);
 
 export default createRule({
   name: 'public-static-property-all-caps',
   meta: {
     docs: {
-      description: 'Enforces all static properties must be named using ALL_CAPS',
+      description:
+        'Enforces all static properties must be named using ALL_CAPS',
       category: 'Best Practices',
       recommended: 'error',
     },
@@ -23,7 +24,11 @@ export default createRule({
   create(context) {
     return {
       ClassProperty(node: TSESTree.ClassProperty): void {
-        if(!node.static || !node.readonly || !(node.accessibility === 'public')) {
+        if (
+          !node.static ||
+          !node.readonly ||
+          !(node.accessibility === 'public')
+        ) {
           return;
         }
 
@@ -37,6 +42,6 @@ export default createRule({
           });
         }
       },
-    }
+    };
   },
 });

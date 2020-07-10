@@ -1,6 +1,4 @@
-import {
-  TSESTree,
-} from '@typescript-eslint/experimental-utils';
+import { TSESTree } from '@typescript-eslint/experimental-utils';
 import { createRule } from '../utils';
 
 export default createRule({
@@ -12,7 +10,8 @@ export default createRule({
       recommended: 'error',
     },
     messages: {
-      staticImport: 'Static "import" methods are deprecated in favor of "fromAttributes"',
+      staticImport:
+        'Static "import" methods are deprecated in favor of "fromAttributes"',
     },
     schema: [],
     type: 'problem',
@@ -20,26 +19,30 @@ export default createRule({
   defaultOptions: [],
   create(context) {
     let isConstruct = false;
-    
+
     return {
       'ClassDeclaration[superClass.name = "Construct"]'(): void {
         isConstruct = true;
       },
       MethodDefinition(node: TSESTree.MethodDefinition): void {
-        if(!isConstruct || !node.static || !(node.accessibility === 'public')) {
+        if (
+          !isConstruct ||
+          !node.static ||
+          !(node.accessibility === 'public')
+        ) {
           return;
         }
 
         const sourceCode = context.getSourceCode();
         const name = sourceCode.getText(node.key);
 
-        if(name === 'import') {
+        if (name === 'import') {
           context.report({
             node,
             messageId: 'staticImport',
           });
         }
       },
-    }
+    };
   },
 });

@@ -18,7 +18,9 @@ import {
 
 const cwd = process.cwd();
 
-const { name, version } = fs.readJSONSync(path.join(__dirname, '..', 'package.json'));
+const { name, version } = fs.readJSONSync(
+  path.join(__dirname, '..', 'package.json'),
+);
 
 const cli = new Cli<Context>({
   binaryLabel: name,
@@ -42,4 +44,3 @@ cli.runExit(process.argv.slice(2), {
   cwd,
   version,
 });
-

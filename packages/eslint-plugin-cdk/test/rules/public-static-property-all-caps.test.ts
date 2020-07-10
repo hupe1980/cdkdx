@@ -38,9 +38,10 @@ ruleTester.run('public-static-property-all-caps', rule, {
           public static readonly foo = 'bar';
       }
       `,
-      errors: [{
-        messageId: 'allCaps',
-      },
+      errors: [
+        {
+          messageId: 'allCaps',
+        },
       ],
     },
     {
@@ -49,9 +50,10 @@ ruleTester.run('public-static-property-all-caps', rule, {
           public static readonly fooBar = 'bar';
       }
       `,
-      errors: [{
-        messageId: 'allCaps',
-      },
+      errors: [
+        {
+          messageId: 'allCaps',
+        },
       ],
     },
   ],

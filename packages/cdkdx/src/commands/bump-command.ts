@@ -15,7 +15,7 @@ export class BumpCommand extends ProjectCommand {
       path: this.context.cwd,
     });
 
-    if(!this.dryRun) {
+    if (!this.dryRun) {
       const command = 'git';
       const args = ['push', '--follow-tags', 'origin master'];
 

@@ -4,5 +4,5 @@ export interface CompilerProps {
 }
 
 export interface Compiler {
-  compile: (props: CompilerProps) => Promise<void>
+  compile: (props: CompilerProps) => Promise<void>;
 }

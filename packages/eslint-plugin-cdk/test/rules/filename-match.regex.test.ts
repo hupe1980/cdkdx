@@ -25,26 +25,26 @@ ruleTester.run('filename-match-regex', rule, {
   invalid: [
     {
       code,
-      filename: 'Test.ts'
-      ,
-      errors: [{
-        messageId: 'namingConvention',
-        data: {
-          name: 'Test.ts',
+      filename: 'Test.ts',
+      errors: [
+        {
+          messageId: 'namingConvention',
+          data: {
+            name: 'Test.ts',
+          },
         },
-      },
       ],
     },
     {
       code,
-      filename: 'FooBar.ts'
-      ,
-      errors: [{
-        messageId: 'namingConvention',
-        data: {
-          name: 'FooBar.ts',
+      filename: 'FooBar.ts',
+      errors: [
+        {
+          messageId: 'namingConvention',
+          data: {
+            name: 'FooBar.ts',
+          },
         },
-      },
       ],
     },
   ],

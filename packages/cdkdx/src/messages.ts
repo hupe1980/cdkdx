@@ -19,5 +19,5 @@ export const creationComplete = (name: string): string => {
     
   Happy hacking!
 
-  `
-}
+  `;
+};

@@ -47,10 +47,7 @@ export class TestCommand extends ProjectCommand {
 
     const argv: string[] = [];
 
-    argv.push(
-      '--config',
-      JSON.stringify(jestConfig),
-    );
+    argv.push('--config', JSON.stringify(jestConfig));
 
     argv.push(...this.jestArgv);
 

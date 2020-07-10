@@ -16,9 +16,9 @@ export abstract class ProjectCommand extends Command<Context> {
 
   constructor() {
     super();
-    
+
     const pkgJson = fs.readJsonSync(path.join(process.cwd(), 'package.json'));
-    
+
     this.projectInfo = {
       isJsii: pkgJson.jsii !== undefined,
       name: pkgJson.name,

@@ -21,10 +21,10 @@
     "test": "jest"
   },
   "dependencies": {
-    "@typescript-eslint/experimental-utils": "^3.5.0"
+    "@typescript-eslint/experimental-utils": "^3.6.0"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.3",
+    "@types/jest": "^26.0.4",
     "jest": "^26.1.0",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.1.1",

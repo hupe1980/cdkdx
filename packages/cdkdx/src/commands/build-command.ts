@@ -1,6 +1,6 @@
 import { Command } from 'clipanion';
 
-import  { ProjectCommand } from './project-command';
+import { ProjectCommand } from './project-command';
 import { Compiler, JsiiCompiler, TscCompiler } from '../compiler';
 
 export class BuildCommand extends ProjectCommand {
@@ -35,7 +35,7 @@ export class BuildCommand extends ProjectCommand {
     });
 
     this.context.stdout.write(
-      `✅ Construct ${this.projectInfo.name} compiled.\n\n`
+      `✅ Construct ${this.projectInfo.name} compiled.\n\n`,
     );
 
     return 0;

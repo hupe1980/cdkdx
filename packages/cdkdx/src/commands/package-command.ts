@@ -9,9 +9,7 @@ export class PackageCommand extends ProjectCommand {
   @Command.Path('package')
   async execute(): Promise<number> {
     if (this.projectInfo.private) {
-      this.context.stdout.write(
-        '⚠ No packaging for private modules.\n\n'
-      );
+      this.context.stdout.write('⚠ No packaging for private modules.\n\n');
       return 0;
     }
 
@@ -30,7 +28,7 @@ export class PackageCommand extends ProjectCommand {
     }
 
     this.context.stdout.write(
-      `✅ Construct ${this.projectInfo.name} packed.\n\n`
+      `✅ Construct ${this.projectInfo.name} packed.\n\n`,
     );
 
     return 0;

@@ -36,9 +36,10 @@ ruleTester.run('no-static-import', rule, {
         }
       }
       `,
-      errors: [{
-        messageId: 'staticImport',
-      },
+      errors: [
+        {
+          messageId: 'staticImport',
+        },
       ],
     },
   ],

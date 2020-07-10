@@ -12,12 +12,14 @@ export class TscCompiler implements Compiler {
       exclude: ['src/lambdas', 'src/**/__tests__'],
     });
 
-    await tsConfig.writeJson(path.join(props.cwd, 'tsconfig.json'), { overwriteExisting: false });
+    await tsConfig.writeJson(path.join(props.cwd, 'tsconfig.json'), {
+      overwriteExisting: false,
+    });
 
     const command = require.resolve('typescript/bin/tsc');
     const args = ['--build'];
 
-    if(props?.watch) {
+    if (props?.watch) {
       args.push('-w');
     }
 

@@ -30,6 +30,13 @@ ruleTester.run('construct-ctor', rule, {
       }
       `,
     },
+    {
+      code: `
+      class Test extends Construct {
+          constructor(scope: Construct, id: string, props: TestProps = {}) {}
+      }
+      `,
+    },
   ],
   invalid: [
     {
@@ -38,9 +45,22 @@ ruleTester.run('construct-ctor', rule, {
           constructor(parent: Construct, id: string, props: TestProps) {}
       }
       `,
-      errors: [{
-        messageId: 'constructCtor',
-      },
+      errors: [
+        {
+          messageId: 'constructCtor',
+        },
+      ],
+    },
+    {
+      code: `
+      class Test extends cdk.Construct {
+          constructor(parent: cdk.Construct, id: string, props: TestProps) {}
+      }
+      `,
+      errors: [
+        {
+          messageId: 'constructCtor',
+        },
       ],
     },
     {
@@ -49,9 +69,10 @@ ruleTester.run('construct-ctor', rule, {
           constructor(scope: Construct, idx: string, props: TestProps) {}
       }
       `,
-      errors: [{
-        messageId: 'constructCtor',
-      },
+      errors: [
+        {
+          messageId: 'constructCtor',
+        },
       ],
     },
     {
@@ -60,9 +81,10 @@ ruleTester.run('construct-ctor', rule, {
           constructor() {}
       }
       `,
-      errors: [{
-        messageId: 'constructCtor',
-      },
+      errors: [
+        {
+          messageId: 'constructCtor',
+        },
       ],
     },
   ],

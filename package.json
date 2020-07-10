@@ -15,9 +15,12 @@
     "examples/*"
   ],
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^3.5.0",
-    "@typescript-eslint/parser": "^3.5.0",
+    "@typescript-eslint/eslint-plugin": "^3.6.0",
+    "@typescript-eslint/parser": "^3.6.0",
     "eslint": "^7.4.0",
-    "lerna": "^3.22.1"
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "lerna": "^3.22.1",
+    "prettier": "^2.0.5"
   }
 }
