@@ -4,6 +4,17 @@ import { ProjectCommand } from './project-command';
 import { Compiler, JsiiCompiler, TscCompiler } from '../compiler';
 
 export class BuildCommand extends ProjectCommand {
+  static usage = Command.Usage({
+    description: 'Build the project',
+    details: `
+            This command will build the project.
+        `,
+    examples: [
+      ['Build the project', 'cdkdx build'],
+      ['Rebuilds on any change', 'cdkdx build -w'],
+    ],
+  });
+
   @Command.Boolean('--watch')
   @Command.Boolean('-w')
   public watch = false;

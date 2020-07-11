@@ -1,5 +1,5 @@
 import { TSESTree } from '@typescript-eslint/experimental-utils';
-import { createRule } from '../utils';
+import { createRule, hasConstructSuperClass } from '../utils';
 
 export default createRule({
   name: 'no-static-import',
@@ -21,8 +21,8 @@ export default createRule({
     let isConstruct = false;
 
     return {
-      'ClassDeclaration[superClass.name = "Construct"]'(): void {
-        isConstruct = true;
+      'ClassDeclaration[superClass]'(node: TSESTree.ClassDeclaration): void {
+        isConstruct = hasConstructSuperClass(node);
       },
       MethodDefinition(node: TSESTree.MethodDefinition): void {
         if (

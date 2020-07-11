@@ -30,6 +30,18 @@ module.exports = {
       },
     ],
 
+    'cdk/ban-lambda-runtimes': [
+      'error', 
+      { 
+        bannedRuntimes: [
+          'NODEJS',
+          'NODEJS_4_3',
+          'NODEJS_6_10',
+          'NODEJS_8_10',
+          'NODEJS_10_X'
+        ]
+      }
+    ],
     'cdk/construct-ctor': 'error',
     'cdk/filename-match-regex': 'error',
     'cdk/public-static-property-all-caps': 'error',

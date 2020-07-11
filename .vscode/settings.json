@@ -1,3 +1,11 @@
 {
-    "explorer.autoReveal": false,
+    "eslint.validate": [
+        "javascript",
+        "typescript",
+    ],
+    "eslint.alwaysShowStatus": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "explorer.autoReveal": false
 }

@@ -53,7 +53,6 @@ export class LibProject extends Project {
 
     this.addDevDependencies({
       '@aws-cdk/assert': options.dependencyVersions['@aws-cdk/core'],
-      '@types/aws-lambda': options.dependencyVersions['@types/aws-lambda'],
       '@types/node': Semver.caret(this.minNodeVersion),
       cdkdx: options.dependencyVersions['cdkdx'],
     });

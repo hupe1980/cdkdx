@@ -2,6 +2,11 @@
 
 > Zero-config CLI for [aws cdk](https://github.com/awslabs/aws-cdk) development
 
+- Tsc and jsii compiler support
+- Pre-configured linter with custom cdk eslint rules
+- Jest test runner setup
+- Bundles your lambdas with parcel builder
+
 :warning: This is experimental and subject to breaking changes.
 
 ## Quick Start
@@ -73,7 +78,7 @@ new Function(this, 'Lambda1', {
 
 ## Example
 
-See more complete [examples](../../examples).
+See more complete [examples](https://github.com/cloudcomponents/cdk-constructs).
 
 ## License
 

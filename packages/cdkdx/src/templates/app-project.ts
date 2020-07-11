@@ -20,7 +20,6 @@ export class AppProject extends Project {
 
     this.addDevDependencies({
       '@aws-cdk/assert': options.dependencyVersions['@aws-cdk/core'],
-      '@types/aws-lambda': options.dependencyVersions['@types/aws-lambda'],
       '@types/node': Semver.caret(this.minNodeVersion),
       'aws-cdk': options.dependencyVersions['@aws-cdk/core'], 
       cdkdx: options.dependencyVersions['cdkdx'],

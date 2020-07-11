@@ -4,34 +4,12 @@ import {
   AST_NODE_TYPES,
 } from '@typescript-eslint/experimental-utils';
 
-import { createRule, hasConstructSuperClass } from '../utils';
-
-export interface MethodSignaturParameter {
-  name: string;
-  type?: string;
-}
-
-const isEqual = (
-  expected: MethodSignaturParameter[],
-  actual: MethodSignaturParameter[],
-): boolean => {
-  if (expected.length !== actual.length) {
-    return false;
-  }
-
-  for (let i = 0; i < expected.length; i++) {
-    if (expected[i].name !== actual[i].name) {
-      return false;
-    }
-    if (expected[i].type) {
-      if (expected[i].type !== actual[i].type) {
-        return false;
-      }
-    }
-  }
-
-  return true;
-};
+import {
+  createRule,
+  hasConstructSuperClass,
+  isEqualMethodSignatur,
+  MethodSignaturParameter,
+} from '../utils';
 
 export default createRule({
   name: 'construct-ctor',
@@ -104,7 +82,7 @@ export default createRule({
           }
         });
 
-        if (!isEqual(expected, actual)) {
+        if (!isEqualMethodSignatur(expected, actual)) {
           context.report({
             node,
             loc: {

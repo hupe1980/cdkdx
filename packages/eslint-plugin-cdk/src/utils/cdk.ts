@@ -4,6 +4,8 @@ import {
   AST_NODE_TYPES,
 } from '@typescript-eslint/experimental-utils';
 
+const constructNames = ['Construct', 'Stack', 'Resource'];
+
 export const hasConstructSuperClass = (
   node: TSESTree.ClassDeclaration,
 ): boolean => {
@@ -11,14 +13,14 @@ export const hasConstructSuperClass = (
 
   switch (node.superClass.type) {
     case AST_NODE_TYPES.Identifier:
-      return node.superClass.name === 'Construct';
+      return constructNames.includes(node.superClass.name);
 
     case AST_NODE_TYPES.MemberExpression:
       return (
         ASTUtils.isIdentifier(node.superClass.object) &&
         node.superClass.object.name === 'cdk' &&
         ASTUtils.isIdentifier(node.superClass.property) &&
-        node.superClass.property.name === 'Construct'
+        constructNames.includes(node.superClass.property.name)
       );
 
     default:
