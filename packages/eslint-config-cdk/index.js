@@ -43,10 +43,11 @@ module.exports = {
       }
     ],
     'cdk/construct-ctor': 'error',
+    'cdk/construct-props-struct-name': 'error',
     'cdk/filename-match-regex': 'error',
     'cdk/public-static-property-all-caps': 'error',
     'cdk/no-static-import': 'error',
-    'cdk/props-struct-name': 'error',
+    'cdk/stack-props-struct-name': 'error',
 
     // Require all imported dependencies are actually declared in package.json
     'import/no-extraneous-dependencies': [

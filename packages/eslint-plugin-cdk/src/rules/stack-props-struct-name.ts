@@ -4,30 +4,25 @@ import {
 } from '@typescript-eslint/experimental-utils';
 import { createRule, hasConstructSuperClass } from '../utils';
 
-export interface MethodSignaturParameter {
-  name: string;
-  type?: string;
-}
-
 export default createRule({
-  name: 'props-struct-name',
+  name: 'construct-props-struct-name',
   meta: {
     docs: {
-      description: 'Ensure a uniform construct constructors signature',
+      description: 'Ensure a uniform stack constructors signature',
       category: 'Best Practices',
       recommended: 'error',
     },
     messages: {
-      propsStructNname: 'All constructs must have a props struct',
+      stackPropsStructNname: 'All stack must have a props struct',
     },
     schema: [],
-    type: 'problem',
+    type: 'suggestion',
   },
   defaultOptions: [],
   create(context) {
     const sourceCode = context.getSourceCode();
 
-    let isConstruct = false;
+    let isStack = false;
     let className: string | undefined;
 
     const getIdentifier = (node: TSESTree.Parameter) =>
@@ -35,13 +30,13 @@ export default createRule({
 
     return {
       'ClassDeclaration[superClass]'(node: TSESTree.ClassDeclaration): void {
-        isConstruct = hasConstructSuperClass(node);
+        isStack = hasConstructSuperClass(node, ['Stack']);
         className = node.id?.name;
       },
       'MethodDefinition[key.name = "constructor"]'(
         node: TSESTree.MethodDefinition,
       ): void {
-        if (!isConstruct || node.value.params.length < 3) {
+        if (!isStack || node.value.params.length < 3) {
           return;
         }
 
@@ -49,10 +44,10 @@ export default createRule({
 
         const type = sourceCode.getLastToken(identifier)?.value;
 
-        if (type !== `${className}Props`) {
+        if (type !== `${className}Props` && type !== 'StackProps') {
           context.report({
             node: identifier,
-            messageId: 'propsStructNname',
+            messageId: 'stackPropsStructNname',
           });
         }
       },
