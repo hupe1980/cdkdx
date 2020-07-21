@@ -21,7 +21,36 @@ npx cdkdx create lib my-construct
 cd my-construct
 ```
 
-## Folder structure
+## App folder structure
+
+```
+my-app
+├── README.md
+├── node_modules
+├── package.json
+├── .gitignore
+├── cdk.json
+└── src
+    ├── __tests__
+    ├── lambdas
+    │   ├── lambda1
+    │   │   ├── __tests__
+    │   │   └── index.ts
+    │   ├── lambda2
+    │   │   └── index.ts
+    │   └── shared
+    ├── my-app.ts
+    └── my-stack.ts
+```
+
+```json
+// cdk.json
+{
+  "app": "cdkdx node src/my-app.ts"
+}
+```
+
+## Lib folder structure
 
 ```
 my-construct
@@ -40,7 +69,6 @@ my-construct
     │   └── shared
     ├── index.ts
     └── my-construct.ts
-
 ```
 
 ## Lambda development
@@ -74,6 +102,16 @@ new Function(this, 'Lambda1', {
   handler: 'index.handler',
   code: Code.fromAsset(path.join(__dirname, 'lambdas', 'lambda1')),
 });
+```
+
+## Displaying Lint Output in the Editor
+
+You would need to install an ESLint plugin for your editor first. Then, add a file called `.eslintrc.json` to the project root:
+
+```json
+{
+  "extends": "cdk"
+}
 ```
 
 ## Example

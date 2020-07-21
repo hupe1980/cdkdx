@@ -4,11 +4,9 @@ import {
   AST_NODE_TYPES,
 } from '@typescript-eslint/experimental-utils';
 
-//const constructNames = ['Construct', 'Stack', 'Resource'];
-
 export const hasConstructSuperClass = (
   node: TSESTree.ClassDeclaration,
-  constructNames = ['Construct', 'Stack', 'Resource'],
+  constructNames = ['Construct', 'Stack', 'NestedStack', 'Resource'],
 ): boolean => {
   if (!node.superClass) return false;
 

@@ -19,3 +19,15 @@ export const getAuthor = async (): Promise<string> => {
 
   return stdout.trim() || 'TODO_ADD_AUTHOR';
 };
+
+export const isInGitRepository = async (cwd?: string): Promise<boolean> => {
+  try {
+    await execa('git', ['rev-parse', '--is-inside-work-tree'], {
+      cwd,
+      stdio: 'ignore',
+    });
+    return true;
+  } catch (e) {
+    return false;
+  }
+};

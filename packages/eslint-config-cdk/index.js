@@ -38,7 +38,9 @@ module.exports = {
           'NODEJS_4_3',
           'NODEJS_6_10',
           'NODEJS_8_10',
-          'NODEJS_10_X'
+          'NODEJS_10_X',
+          'DOTNET_CORE_1',
+          'DOTNET_CORE_2',
         ]
       }
     ],
