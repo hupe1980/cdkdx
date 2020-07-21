@@ -13,7 +13,7 @@ import {
   BumpCommand,
   HelpCommand,
   CreateCommand,
-  PublishCommand,
+  ReleaseCommand,
 } from './commands';
 
 const cwd = process.cwd();
@@ -37,7 +37,7 @@ cli.register(NodeCommand);
 cli.register(BundleCommand);
 cli.register(PackageCommand);
 cli.register(BumpCommand);
-cli.register(PublishCommand);
+cli.register(ReleaseCommand);
 
 cli.runExit(process.argv.slice(2), {
   ...Cli.defaultContext,
