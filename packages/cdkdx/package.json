@@ -10,7 +10,9 @@
     "lint",
     "test",
     "bundle",
-    "lambda"
+    "lambda",
+    "typescript",
+    "jsii"
   ],
   "repository": {
     "type": "git",
