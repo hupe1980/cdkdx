@@ -1,4 +1,14 @@
+import * as path from 'path';
+import * as fs from 'fs-extra';
 import execa from 'execa';
+
+export const cwd = fs.realpathSync(process.cwd());
+
+export const resolveProject = (relativePath: string): string =>
+  path.resolve(cwd, relativePath);
+
+export const resolveOwn = (relativePath: string): string =>
+  path.resolve(__dirname, '..', relativePath);
 
 export interface InstallCommand {
   command: 'yarn' | 'npm';

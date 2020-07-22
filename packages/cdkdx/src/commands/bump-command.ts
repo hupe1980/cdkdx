@@ -12,7 +12,7 @@ export class BumpCommand extends ProjectCommand {
   async execute(): Promise<number> {
     await standardVersion({
       dryRun: this.dryRun,
-      path: this.context.cwd,
+      path: this.projectInfo.projectPath,
     });
 
     if (!this.dryRun) {

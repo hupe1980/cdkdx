@@ -1,7 +1,7 @@
 import { Command } from 'clipanion';
 
-import { ProjectCommand } from './project-command';
 import { Compiler, JsiiCompiler, TscCompiler } from '../compiler';
+import { ProjectCommand } from './project-command';
 
 export class BuildCommand extends ProjectCommand {
   static usage = Command.Usage({
@@ -41,7 +41,7 @@ export class BuildCommand extends ProjectCommand {
     const compiler = this.getCompiler();
 
     await compiler.compile({
-      cwd: this.context.cwd,
+      cwd: this.projectInfo.projectPath,
       watch: this.watch,
     });
 

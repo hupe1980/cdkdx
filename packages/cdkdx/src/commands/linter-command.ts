@@ -18,7 +18,7 @@ export class LinterCommand extends ProjectCommand {
   @Command.Path('lint')
   async execute(): Promise<number> {
     const eslintTypeScriptConfigPath = path.join(
-      this.context.cwd,
+      this.projectInfo.projectPath,
       'tsconfig.eslint.json',
     );
 
@@ -34,7 +34,7 @@ export class LinterCommand extends ProjectCommand {
       baseConfig: {
         extends: 'cdk',
       },
-      cwd: this.context.cwd,
+      cwd: this.projectInfo.projectPath,
       fix: this.fix,
       cache: this.cache,
       reportUnusedDisableDirectives: this.reportUnusedDisableDirectives

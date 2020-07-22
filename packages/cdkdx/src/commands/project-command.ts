@@ -2,28 +2,36 @@ import * as path from 'path';
 import * as fs from 'fs-extra';
 import { Command } from 'clipanion';
 
-import { Context } from '../context';
+import { resolveProject } from '../utils';
 
 export interface ProjectInfo {
   name: string;
   isJsii: boolean;
   private: boolean;
   workspaces?: string[];
+  projectPath: string;
+  lambdasSrcPath: string;
+  lambdasOutPath: string;
+  cachePath: string;
 }
 
-export abstract class ProjectCommand extends Command<Context> {
+export abstract class ProjectCommand extends Command {
   protected projectInfo: ProjectInfo;
 
   constructor() {
     super();
 
-    const pkgJson = fs.readJsonSync(path.join(process.cwd(), 'package.json'));
+    const pkgJson = fs.readJsonSync(resolveProject('package.json'));
 
     this.projectInfo = {
       isJsii: pkgJson.jsii !== undefined,
       name: pkgJson.name,
       private: pkgJson.private,
       workspaces: pkgJson.workspaces,
+      projectPath: resolveProject('.'),
+      lambdasSrcPath: resolveProject(path.join('src', 'lambdas')),
+      lambdasOutPath: resolveProject(path.join('lib', 'lambdas')),
+      cachePath: resolveProject('.cdkdx'),
     };
   }
 }

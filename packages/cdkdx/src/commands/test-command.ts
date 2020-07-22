@@ -32,7 +32,7 @@ export class TestCommand extends ProjectCommand {
       moduleFileExtensions: ['ts', 'js'],
       collectCoverageFrom: ['src/**/*.ts', '!src/**/*.(spec|test).ts'],
       testMatch: ['<rootDir>/**/*.(spec|test).ts'],
-      rootDir: this.context.cwd,
+      rootDir: this.projectInfo.projectPath,
       watchPlugins: [
         require.resolve('jest-watch-typeahead/filename'),
         require.resolve('jest-watch-typeahead/testname'),

@@ -6,9 +6,8 @@ import { Input } from 'enquirer';
 import latestVersion from 'latest-version';
 import ora from 'ora';
 
-import { Context } from '../context';
 import * as Messages from '../messages';
-import { getInstallCommand, getAuthor } from '../utils';
+import { getInstallCommand, getAuthor, cwd, resolveOwn } from '../utils';
 import {
   Project,
   ProjectOptions,
@@ -17,7 +16,7 @@ import {
   Semver,
 } from '../templates';
 
-export class CreateCommand extends Command<Context> {
+export class CreateCommand extends Command {
   static usage = Command.Usage({
     description: 'Create a new, empty CDK project from a template',
     details: `
@@ -41,11 +40,14 @@ export class CreateCommand extends Command<Context> {
 
   @Command.Path('create')
   async execute(): Promise<number> {
-    const targetPath = await this.getTargetPath(
-      path.join(this.context.cwd, this.name),
+    const { version: cdkdxVersion } = await fs.readJSON(
+      resolveOwn('package.json'),
     );
 
+    const targetPath = await this.getTargetPath(path.join(cwd, this.name));
+
     const cdkVersion = await latestVersion('@aws-cdk/core');
+
     const sourceMapSupportVersion = await latestVersion('source-map-support');
 
     const author = await getAuthor();
@@ -57,7 +59,7 @@ export class CreateCommand extends Command<Context> {
       author,
       isJsii: this.compiler === 'jsii',
       dependencyVersions: {
-        cdkdx: Semver.caret(this.context.version),
+        cdkdx: Semver.caret(cdkdxVersion),
         '@aws-cdk/core': Semver.caret(cdkVersion),
         'source-map-support': Semver.caret(sourceMapSupportVersion),
       },
@@ -87,7 +89,7 @@ export class CreateCommand extends Command<Context> {
 
     this.name = await prompt.run();
 
-    return this.getTargetPath(path.join(this.context.cwd, this.name));
+    return this.getTargetPath(path.join(cwd, this.name));
   }
 
   private async installDependencies(

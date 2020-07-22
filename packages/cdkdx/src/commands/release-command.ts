@@ -22,17 +22,17 @@ export class ReleaseCommand extends ProjectCommand {
         case 'npm':
           return [
             require.resolve('jsii-release/bin/jsii-release-npm'),
-            [path.join(this.context.cwd, 'dist', 'js')],
+            [path.join(this.projectInfo.projectPath, 'dist', 'js')],
           ];
         case 'pypi':
           return [
             require.resolve('jsii-release/bin/jsii-release-pypi'),
-            [path.join(this.context.cwd, 'dist', 'python')],
+            [path.join(this.projectInfo.projectPath, 'dist', 'python')],
           ];
         case 'all':
           return [
             require.resolve('jsii-release/bin/jsii-release'),
-            [path.join(this.context.cwd, 'dist')],
+            [path.join(this.projectInfo.projectPath, 'dist')],
           ];
         default:
           throw new Error(`Invalid release type: ${this.type}`);

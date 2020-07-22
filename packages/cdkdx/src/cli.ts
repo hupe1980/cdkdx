@@ -1,8 +1,6 @@
-import * as path from 'path';
 import * as fs from 'fs-extra';
-import { Cli } from 'clipanion';
+import { Cli, Command } from 'clipanion';
 
-import { Context } from './context';
 import {
   BuildCommand,
   TestCommand,
@@ -11,25 +9,24 @@ import {
   BundleCommand,
   PackageCommand,
   BumpCommand,
-  HelpCommand,
   CreateCommand,
+  DocgenCommand,
   ReleaseCommand,
 } from './commands';
+import { resolveOwn } from './utils';
 
-const cwd = process.cwd();
+const { name, version } = fs.readJSONSync(resolveOwn('package.json'));
 
-const { name, version } = fs.readJSONSync(
-  path.join(__dirname, '..', 'package.json'),
-);
-
-const cli = new Cli<Context>({
+const cli = new Cli({
   binaryLabel: name,
   binaryName: name,
   binaryVersion: version,
 });
 
-cli.register(HelpCommand);
+cli.register(Command.Entries.Help);
+cli.register(Command.Entries.Version);
 cli.register(CreateCommand);
+cli.register(DocgenCommand);
 cli.register(BuildCommand);
 cli.register(TestCommand);
 cli.register(LinterCommand);
@@ -41,6 +38,4 @@ cli.register(ReleaseCommand);
 
 cli.runExit(process.argv.slice(2), {
   ...Cli.defaultContext,
-  cwd,
-  version,
 });
