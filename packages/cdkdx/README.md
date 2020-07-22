@@ -6,7 +6,7 @@
 - Pre-configured linter with custom cdk eslint rules
 - Jest test runner setup
 - Bundles your lambda functions with parcel builder
-- Monorepo compatible
+- Yarn workspaces compatible
 
 :warning: This is experimental and subject to breaking changes.
 
@@ -78,7 +78,7 @@ my-construct
 - The file `index.ts` must export the handler function
 - LambdaDependencies should be added as devDependencies
 - To exclude dependencies when bundling the lambda, an `externals` section can be added in the package.json
-- Cross lambda code should be stored in the `<root>/src/lambdas/shared` folder
+- Cross lambda code should be placed in the `<root>/src/lambdas/shared` folder
 
 ```json
 // package.json
