@@ -9,6 +9,7 @@ export class LibProject extends Project {
       build: 'cdkdx build',
       test: 'cdkdx test',
       lint: 'cdkdx lint',
+      docgen: 'cdkdx docgen',
       package: 'cdkdx package',
     });
 

@@ -8,7 +8,10 @@ export class DocgenCommand extends ProjectCommand {
   async execute(): Promise<number> {
     const docgen = this.getDocgen();
 
-    await docgen.generate({ projectPath: this.projectInfo.projectPath });
+    await docgen.generate({
+      projectPath: this.projectInfo.projectPath,
+      typescriptExcludes: this.projectInfo.typescriptExcludes,
+    });
 
     return 0;
   }

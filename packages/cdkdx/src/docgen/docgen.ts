@@ -1,7 +1,8 @@
-export interface DocgenProps {
+export interface GenerateOptions {
   projectPath: string;
+  typescriptExcludes?: string[];
 }
 
 export interface Docgen {
-  generate: (props: DocgenProps) => Promise<void>;
+  generate: (options: GenerateOptions) => Promise<void>;
 }

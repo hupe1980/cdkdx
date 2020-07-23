@@ -116,6 +116,24 @@ You would need to install an ESLint plugin for your editor first. Then, add a fi
 }
 ```
 
+## API Reference
+
+### `cdkdx build`
+
+### `cdkdx lint`
+
+### `cdkdx test`
+
+### `cdkdx docgen`
+
+### `cdkdx relase`
+
+### `cdkdx upgrade-cdk`
+
+### `cdkdx node`
+
+### `cdkdx create`
+
 ## Example
 
 See more complete real world [examples](https://github.com/cloudcomponents/cdk-constructs).

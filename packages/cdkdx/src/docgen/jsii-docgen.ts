@@ -1,14 +1,14 @@
 import * as path from 'path';
 import * as fs from 'fs-extra';
 import { renderSinglePageModule } from 'jsii-docgen';
-import { Docgen, DocgenProps } from './docgen';
+import { Docgen, GenerateOptions } from './docgen';
 
 export class JsiiDocgen implements Docgen {
-  public async generate(props: DocgenProps): Promise<void> {
-    if (!fs.existsSync(path.join(props.projectPath, '.jsii'))) {
+  public async generate(options: GenerateOptions): Promise<void> {
+    if (!fs.existsSync(path.join(options.projectPath, '.jsii'))) {
       throw new Error('File .jsii is missing! Please run cdkdx build first.');
     }
 
-    await renderSinglePageModule(props.projectPath, 'API.md');
+    await renderSinglePageModule(options.projectPath, 'API.md');
   }
 }
