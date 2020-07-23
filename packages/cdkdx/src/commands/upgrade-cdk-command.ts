@@ -8,6 +8,11 @@ import { resolveProject } from '../utils';
 import { ProjectCommand } from './project-command';
 
 export class UpgradeCdkCommand extends ProjectCommand {
+  static usage = Command.Usage({
+    description: 'Upgrade aws cdk',
+    details: ``,
+  });
+
   @Command.Boolean('--dry-run')
   public dryRun = false;
 

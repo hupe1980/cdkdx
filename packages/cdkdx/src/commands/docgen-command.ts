@@ -4,6 +4,11 @@ import { Docgen, TscDocgen, JsiiDocgen } from '../docgen';
 import { ProjectCommand } from './project-command';
 
 export class DocgenCommand extends ProjectCommand {
+  static usage = Command.Usage({
+    description: 'Generate docs for the project',
+    details: ``,
+  });
+
   @Command.Path('docgen')
   async execute(): Promise<number> {
     const docgen = this.getDocgen();

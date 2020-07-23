@@ -119,16 +119,85 @@ You would need to install an ESLint plugin for your editor first. Then, add a fi
 ## API Reference
 
 ### `cdkdx build`
+```shell
+Build the project
+
+Usage:
+
+$ cdkdx build [-w] [--watch] [--minify-lambdas]
+
+Details:
+
+This command will bundle the lambdas and build the project.
+
+Examples:
+
+Build the project
+  $ cdkdx build
+
+Rebuilds on any change
+  $ cdkdx build -w
+```
 
 ### `cdkdx lint`
+```shell
+Run eslint with prettier
+
+Usage:
+
+$ cdkdx lint [--fix] [--cache] [--report-unused-disable-directives]
+
+Details:
+
+This command runs eslint with prettier.
+
+Examples:
+
+Run linting
+  $ cdkdx lint
+
+Fix fixable errors and warnings
+  $ cdkdx lint --fix
+```
 
 ### `cdkdx test`
+```shell
+Run jest test runner
+
+Usage:
+
+$ cdkdx test 
+
+Details:
+
+All flags are passed through directly to jest.
+
+Examples:
+
+Run jest test runner
+  $ cdkdx test
+
+Run jest test runner in watch mode
+  $ cdkdx test -w
+```
 
 ### `cdkdx docgen`
+```shell
+Generate docs for the project
 
-### `cdkdx relase`
+$ cdkdx docgen
+```
+
+### `cdkdx bump`
+
+### `cdkdx release`
 
 ### `cdkdx upgrade-cdk`
+```shell
+Upgrade aws cdk
+
+$ cdkdx upgrade-cdk [--dry-run] [--mode #0] [--version #0] [--skip-dependencies] [--skip-dev-dependencies] [--skip-peer-dependencies]
+```
 
 ### `cdkdx node`
 

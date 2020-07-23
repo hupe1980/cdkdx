@@ -6,6 +6,17 @@ import { TsConfig } from '../ts-config';
 import { ProjectCommand } from './project-command';
 
 export class LinterCommand extends ProjectCommand {
+  static usage = Command.Usage({
+    description: 'Run eslint with prettier',
+    details: `
+            This command runs eslint with prettier.
+        `,
+    examples: [
+      ['Run linting', 'cdkdx lint'],
+      ['Fixe fixable errors and warnings ', 'cdkdx lint --fix'],
+    ],
+  });
+
   @Command.Boolean('--fix')
   public fix = false;
 
