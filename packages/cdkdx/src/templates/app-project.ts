@@ -1,5 +1,5 @@
+import { Semver } from '../semver';
 import { Project, ProjectOptions } from './project';
-import { Semver } from './semver';
 import { JsonFile } from './json-file';
 
 export class AppProject extends Project {
@@ -21,7 +21,7 @@ export class AppProject extends Project {
     this.addDevDependencies({
       '@aws-cdk/assert': options.dependencyVersions['@aws-cdk/core'],
       '@types/node': Semver.caret(this.minNodeVersion),
-      'aws-cdk': options.dependencyVersions['@aws-cdk/core'], 
+      'aws-cdk': options.dependencyVersions['@aws-cdk/core'],
       cdkdx: options.dependencyVersions['cdkdx'],
     });
 

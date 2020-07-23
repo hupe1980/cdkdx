@@ -1,5 +1,5 @@
+import { Semver } from '../semver';
 import { Project, ProjectOptions } from './project';
-import { Semver } from './semver';
 
 export class LibProject extends Project {
   constructor(options: ProjectOptions) {
@@ -25,7 +25,10 @@ export class LibProject extends Project {
             outDir: this.outDir,
             rootDir: this.srcDir,
           },
-          excludeTypescript: [`${this.srcDir}/lambdas`, `${this.srcDir}/**/__tests__`],
+          excludeTypescript: [
+            `${this.srcDir}/lambdas`,
+            `${this.srcDir}/**/__tests__`,
+          ],
           targets: {
             python: {
               distName: options.name,
@@ -43,7 +46,7 @@ export class LibProject extends Project {
       },
       {
         pinnedDevDependency: false,
-      }
+      },
     );
 
     this.addDependencies({

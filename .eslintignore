@@ -2,7 +2,7 @@
 lib
 node_modules
 examples
-templates
+packages/cdkdx/templates
 eslint-config-cdk
 jest.config.js
 bin

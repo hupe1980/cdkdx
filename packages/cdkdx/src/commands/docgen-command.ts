@@ -1,24 +1,22 @@
-import * as path from 'path';
-import * as fs from 'fs-extra';
 import { Command } from 'clipanion';
-import { renderSinglePageModule } from 'jsii-docgen';
 
+import { Docgen, TscDocgen, JsiiDocgen } from '../docgen';
 import { ProjectCommand } from './project-command';
 
 export class DocgenCommand extends ProjectCommand {
   @Command.Path('docgen')
   async execute(): Promise<number> {
-    if (!this.projectInfo.isJsii) {
-      this.context.stdout.write('⚠️ No jsii docgen for tsc projects.\n\n');
-      return 0;
-    }
+    const docgen = this.getDocgen();
 
-    if (!fs.existsSync(path.join(this.projectInfo.projectPath, '.jsii'))) {
-      throw new Error('File .jsii is missing! Please run cdkdx build first.');
-    }
-
-    await renderSinglePageModule(this.projectInfo.projectPath, 'API.md');
+    await docgen.generate({ projectPath: this.projectInfo.projectPath });
 
     return 0;
+  }
+
+  private getDocgen(): Docgen {
+    if (this.projectInfo.isJsii) {
+      return new JsiiDocgen();
+    }
+    return new TscDocgen();
   }
 }

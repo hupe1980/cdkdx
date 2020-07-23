@@ -12,7 +12,7 @@ export class TemplateFile extends FileBase {
 
   public static replacePlaceholders(
     template: string,
-    context: Record<string, unknown>
+    context: Record<string, unknown>,
   ): string {
     const keys = Object.keys(context);
     const func = Function(...keys, 'return `' + template + '`;');
@@ -23,7 +23,7 @@ export class TemplateFile extends FileBase {
   constructor(
     project: Project,
     filePath: string,
-    { context, template }: TemplateFileOptions
+    { context, template }: TemplateFileOptions,
   ) {
     super(project, TemplateFile.replacePlaceholders(filePath, context));
 

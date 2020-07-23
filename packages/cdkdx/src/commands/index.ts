@@ -8,3 +8,4 @@ export * from './node-command';
 export * from './package-command';
 export * from './release-command';
 export * from './test-command';
+export * from './upgrade-cdk-command';

@@ -76,7 +76,8 @@
     "@types/eslint": "^7.2.0",
     "@types/fs-extra": "^9.0.1",
     "@types/parcel-bundler": "^1.12.1",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "type-fest": "^0.16.0"
   },
   "gitHead": "ebefdf223a55e2e57ede5e72c9942e89b35b5a24"
 }

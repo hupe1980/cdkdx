@@ -3,10 +3,10 @@ import * as fs from 'fs-extra';
 import camelCase from 'camelcase';
 import { Construct, Node } from 'constructs';
 
+import { Semver } from '../semver';
 import { TemplateFile } from './template-file';
 import { Directory } from './directory';
 import { JsonFile } from './json-file';
-import { Semver } from './semver';
 
 const DEFAULT_JSII_MIN_NODE = '10.17.0';
 const TEMPLATES_PATH = path.join(__dirname, '..', '..', 'templates');
@@ -48,6 +48,7 @@ export class Project extends Construct {
   private readonly templateContext: Record<string, unknown>;
 
   constructor(public readonly type: string, options: ProjectOptions) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     super(undefined as any, 'cdkdx');
 
     this.targetPath = options.targetPath;
@@ -72,8 +73,8 @@ export class Project extends Construct {
       dependencies: this.dependencies,
       devDependencies: this.devDependencies,
       eslintConfig: {
-        extends: ['cdk']
-      }
+        extends: ['cdk'],
+      },
     };
 
     new JsonFile(this, 'package.json', {
@@ -87,7 +88,7 @@ export class Project extends Construct {
     };
   }
 
-  public addFields(fields: { [name: string]: any }): void {
+  public addFields(fields: { [name: string]: unknown }): void {
     for (const [name, value] of Object.entries(fields)) {
       this.manifest[name] = value;
     }
@@ -101,7 +102,7 @@ export class Project extends Construct {
 
   public addPeerDependencies(
     deps: { [module: string]: Semver },
-    options: PeerDependencyOptions = {}
+    options: PeerDependencyOptions = {},
   ): void {
     const pinnedDevDependency = options.pinnedDevDependency ?? true;
 
@@ -127,7 +128,8 @@ export class Project extends Construct {
   }
 
   public addFiles(files: string[], fromPath?: string): void {
-    const templatePath = fromPath ?? path.join(TEMPLATES_PATH, this.type, this.template);
+    const templatePath =
+      fromPath ?? path.join(TEMPLATES_PATH, this.type, this.template);
 
     files.forEach((file) => {
       const sourceFile = path.join(templatePath, file);

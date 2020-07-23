@@ -7,14 +7,9 @@ import latestVersion from 'latest-version';
 import ora from 'ora';
 
 import * as Messages from '../messages';
+import { Semver } from '../semver';
+import { Project, ProjectOptions, AppProject, LibProject } from '../templates';
 import { getInstallCommand, getAuthor, cwd, resolveOwn } from '../utils';
-import {
-  Project,
-  ProjectOptions,
-  AppProject,
-  LibProject,
-  Semver,
-} from '../templates';
 
 export class CreateCommand extends Command {
   static usage = Command.Usage({

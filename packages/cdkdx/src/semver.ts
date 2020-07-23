@@ -5,7 +5,7 @@ export class Semver {
   /**
    * Accept only an exact version
    */
-  public static pinned(version: string) {
+  public static pinned(version: string): Semver {
     return new Semver(version);
   }
 
@@ -15,7 +15,7 @@ export class Semver {
    * >= version
    * < next major version
    */
-  public static caret(version: string) {
+  public static caret(version: string): Semver {
     return new Semver(version, '^');
   }
 
@@ -25,7 +25,7 @@ export class Semver {
    * >= version
    * < next minor version
    */
-  public static tilde(version: string) {
+  public static tilde(version: string): Semver {
     return new Semver(version, '~');
   }
 
@@ -40,7 +40,7 @@ export class Semver {
 
     if (mode && !ALLOWED_MODES.includes(mode)) {
       throw new Error(
-        `Mode "${mode}" not allowed. Allowed modes: ${ALLOWED_MODES.join(',')}`
+        `Mode "${mode}" not allowed. Allowed modes: ${ALLOWED_MODES.join(',')}`,
       );
     }
 

@@ -2,7 +2,7 @@ import { Project } from './project';
 import { FileBase } from './file-base';
 
 export interface JsonFileOptions {
-  readonly obj: any;
+  readonly obj: Record<string, unknown>;
 }
 
 export class JsonFile extends FileBase {
@@ -15,13 +15,12 @@ export class JsonFile extends FileBase {
   }
 
   protected onPrepare(): void {
-     Object.keys(this.obj).forEach(
-       (key) => this.obj[key] === undefined && delete this.obj[key]
-     );
+    Object.keys(this.obj).forEach(
+      (key) => this.obj[key] === undefined && delete this.obj[key],
+    );
   }
 
-  protected get data() {
+  protected get data(): string {
     return JSON.stringify(this.obj, undefined, 2);
   }
-
 }
