@@ -50,28 +50,27 @@ export class UpgradeCdkCommand extends ProjectCommand {
       this.upgradeCdk(pkgJson.peerDependencies, versionSpec);
     }
 
-    await fs.writeJSON(resolveProject('package.json'), pkgJson, {
-      spaces: 2,
-    });
+    if (!this.dryRun) {
+      await fs.writeJSON(resolveProject('package.json'), pkgJson, {
+        spaces: 2,
+      });
+    }
 
     return 0;
   }
 
   private upgradeCdk(
     dependencies: PackageJson.Dependency | undefined,
-    cdkVersion: string,
+    versionSpec: string,
   ): void {
     if (!dependencies) return;
 
     Object.keys(dependencies).forEach((key) => {
       if (key.startsWith('@aws-cdk/')) {
         this.context.stdout.write(
-          `${key}:${dependencies[key]} => ${cdkVersion}\n`,
+          `${key}:${dependencies[key]} => ${versionSpec}\n`,
         );
-
-        if (!this.dryRun) {
-          dependencies[key] = cdkVersion;
-        }
+        dependencies[key] = versionSpec;
       }
     });
   }
