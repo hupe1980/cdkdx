@@ -28,8 +28,9 @@ export class TestCommand extends ProjectCommand {
     const jestConfig = {
       transform: {
         '^.+\\.ts$': require.resolve('ts-jest/dist'),
+        '.+\\.(css|html)$': require.resolve('jest-transform-stub'),
       },
-      moduleFileExtensions: ['ts', 'js'],
+      moduleFileExtensions: ['ts', 'js', 'json', 'html'],
       collectCoverageFrom: ['src/**/*.ts', '!src/**/*.(spec|test).ts'],
       testMatch: ['<rootDir>/**/*.(spec|test).ts'],
       rootDir: this.projectInfo.projectPath,
