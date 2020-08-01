@@ -71,7 +71,7 @@ export class UpgradeCdkCommand extends ProjectCommand {
     if (!dependencies) return;
 
     Object.keys(dependencies).forEach((key) => {
-      if (key.startsWith('@aws-cdk/')) {
+      if (key.startsWith('@aws-cdk/') || key === 'aws-cdk') {
         this.context.stdout.write(
           `${key}:${dependencies[key]} => ${versionSpec}\n`,
         );
