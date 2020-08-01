@@ -15,9 +15,11 @@ export class PackageCommand extends ProjectCommand {
 
     const outdir = 'dist';
 
+    await fs.remove(this.projectInfo.distPath);
+
     if (this.projectInfo.isJsii) {
       const command = require.resolve('jsii-pacmak/bin/jsii-pacmak');
-      await execa(command);
+      await execa(command, ['-o', this.projectInfo.distPath]);
     } else {
       const { stdout } = await execa('npm', ['pack']);
       const tarball = stdout.trim();
