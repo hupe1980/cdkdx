@@ -5,4 +5,6 @@ export const handler = async () => {
   console.log(path.join(__dirname));
 
   const response = await axios.get('http://google.com');
+
+  console.log(response);
 };

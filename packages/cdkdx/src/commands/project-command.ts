@@ -9,6 +9,7 @@ export interface ProjectInfo {
   isJsii: boolean;
   private: boolean;
   workspaces?: string[];
+  externals?: string[];
   projectPath: string;
   lambdasSrcPath: string;
   lambdasOutPath: string;
@@ -30,6 +31,7 @@ export abstract class ProjectCommand extends Command {
       name: pkgJson.name,
       private: pkgJson.private,
       workspaces: pkgJson.workspaces,
+      externals: pkgJson.externals,
       projectPath: resolveProject('.'),
       lambdasSrcPath: resolveProject(path.join('src', 'lambdas')),
       lambdasOutPath: resolveProject(path.join('lib', 'lambdas')),

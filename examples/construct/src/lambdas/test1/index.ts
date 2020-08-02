@@ -6,4 +6,6 @@ export const handler = async () => {
   console.log(shared);
 
   const response = await axios.get('http://google.com');
+
+  console.log(response);
 };
