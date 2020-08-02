@@ -1,8 +1,11 @@
 import path from 'path';
 import fs from 'fs-extra';
 import { Command } from 'clipanion';
-import Bundler from 'parcel-bundler';
-import setupExternalsPlugin from 'parcel-plugin-externals';
+import webpack from 'webpack';
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
+import SizePlugin from 'size-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
 
 import { ProjectCommand } from './project-command';
 
@@ -36,31 +39,103 @@ export class BundleCommand extends ProjectCommand {
       });
     }
 
-    // https://github.com/parcel-bundler/parcel/issues/2838
-    for (const key of Object.keys(entries)) {
-      const options: Bundler.ParcelOptions = {
-        outDir: path.join(this.projectInfo.lambdasOutPath, key), // The out directory to put the build files in, defaults to dist
-        outFile: 'index.js', // The name of the outputFile
-        cacheDir: this.projectInfo.cachePath,
-        target: 'node',
-        watch: this.watch,
-        detailedReport: false,
-        bundleNodeModules: true,
-        logLevel: 3,
-        minify: this.minify,
-      };
+    const config: webpack.Configuration = {
+      target: 'node',
+      mode: 'production',
+      devtool: 'source-map',
+      optimization: {
+        minimize: this.minify,
+        minimizer: [
+          new TerserPlugin({
+            cache: true,
+            parallel: true,
+            extractComments: true,
+          }),
+        ],
+      },
+      entry: {
+        ...entries,
+      },
+      resolve: {
+        extensions: ['.ts', '.js'],
+      },
+      module: {
+        rules: [
+          {
+            test: /\.ts$/,
+            loader: 'ts-loader',
+            exclude: /node_modules/,
+            options: {
+              transpileOnly: true,
+              compilerOptions: {
+                inlineSourceMap: false,
+                sourceMap: true,
+                composite: false,
+                importsNotUsedAsValues: 'preserve',
+                noEmit: false,
+                declaration: false,
+              },
+            },
+          },
+          {
+            test: /\.html$/i,
+            loader: 'html-loader',
+            options: {
+              minimize: true,
+            },
+          },
+        ],
+      },
+      plugins: [
+        new SizePlugin({
+          writeFile: true,
+          publish: false,
+          filename: 'lambda-file-sizes.json',
+        }),
+        new ForkTsCheckerWebpackPlugin({
+          eslint: {
+            files: ['*/**/*.ts'],
+            options: {
+              baseConfig: {
+                extends: 'cdk',
+              },
+            },
+          },
+        }),
+        new FriendlyErrorsWebpackPlugin({
+          clearConsole: false,
+        }),
+      ],
+      output: {
+        path: this.projectInfo.lambdasOutPath,
+        filename: '[name]/index.js',
+        libraryTarget: 'commonjs2',
+      },
+      externals: this.projectInfo.externals,
+    };
 
-      const bundler = new Bundler(entries[key], options);
-
-      setupExternalsPlugin(bundler);
-
-      bundler.on('bundled', () => {
-        this.context.stdout.write(`\n✅ Lambda ${key} bundled.\n\n`);
-      });
-
-      await bundler.bundle();
-    }
+    await this.webpackCompiler(config);
 
     return 0;
+  }
+
+  private async webpackCompiler(config: webpack.Configuration): Promise<void> {
+    return new Promise((resolve, reject) => {
+      webpack(config, (err, stats) => {
+        if (err) {
+          return reject(err);
+        }
+
+        //const info = stats.toJson();
+
+        if (stats.hasErrors()) {
+          return reject(
+            'Bundling could not be performed due to the reasons mentioned above',
+          );
+        }
+
+        resolve();
+      });
+    });
   }
 }

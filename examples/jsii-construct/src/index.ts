@@ -5,7 +5,6 @@ import * as sqs from '@aws-cdk/aws-sqs';
 import * as cdk from '@aws-cdk/core';
 import { Code, Function, Runtime } from '@aws-cdk/aws-lambda';
 
-
 export interface ExampleProps {
   /**
    * The visibility timeout to be configured on the SQS Queue, in seconds.
@@ -23,7 +22,7 @@ export class Example extends cdk.Construct {
     super(scope, id);
 
     const queue = new sqs.Queue(this, 'ExampleQueue', {
-      visibilityTimeout: props.visibilityTimeout || cdk.Duration.seconds(300)
+      visibilityTimeout: props.visibilityTimeout || cdk.Duration.seconds(300),
     });
 
     const topic = new sns.Topic(this, 'ExampleTopic');
@@ -33,13 +32,13 @@ export class Example extends cdk.Construct {
     this.queueArn = queue.queueArn;
 
     new Function(this, 'Test1Function', {
-      runtime: Runtime.NODEJS_10_X,
+      runtime: Runtime.NODEJS_12_X,
       handler: 'index.handler',
       code: Code.fromAsset(path.join(__dirname, 'lambdas', 'test1')),
     });
 
     new Function(this, 'Test2Function', {
-      runtime: Runtime.NODEJS_10_X,
+      runtime: Runtime.NODEJS_12_X,
       handler: 'index.handler',
       code: Code.fromAsset(path.join(__dirname, 'lambdas', 'test2')),
     });

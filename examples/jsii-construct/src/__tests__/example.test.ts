@@ -1,21 +1,21 @@
 import { expect as expectCDK, haveResource } from '@aws-cdk/assert';
-import cdk = require('@aws-cdk/core');
-import Example = require('../index');
+import { App, Stack } from '@aws-cdk/core';
+import { Example } from '../index';
 
 test('SQS Queue Created', () => {
-    const app = new cdk.App();
-    const stack = new cdk.Stack(app, "TestStack");
-    // WHEN
-    new Example.Example(stack, 'MyTestConstruct');
-    // THEN
-    expectCDK(stack).to(haveResource("AWS::SQS::Queue"));
+  const app = new App();
+  const stack = new Stack(app, 'TestStack');
+  // WHEN
+  new Example(stack, 'MyTestConstruct');
+  // THEN
+  expectCDK(stack).to(haveResource('AWS::SQS::Queue'));
 });
 
 test('SNS Topic Created', () => {
-  const app = new cdk.App();
-  const stack = new cdk.Stack(app, "TestStack");
+  const app = new App();
+  const stack = new Stack(app, 'TestStack');
   // WHEN
-  new Example.Example(stack, 'MyTestConstruct');
+  new Example(stack, 'MyTestConstruct');
   // THEN
-  expectCDK(stack).to(haveResource("AWS::SNS::Topic"));
+  expectCDK(stack).to(haveResource('AWS::SNS::Topic'));
 });
