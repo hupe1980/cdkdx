@@ -7,6 +7,7 @@ import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 import SizePlugin from 'size-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 
+import { TsConfig } from '../ts-config';
 import { ProjectCommand } from './project-command';
 
 const SHARED_FOLDER = 'shared';
@@ -41,10 +42,23 @@ export class BundleCommand extends ProjectCommand {
 
     if (Object.keys(entries).length === 0) return 0;
 
+    const eslintTypeScriptConfigPath = path.join(
+      this.projectInfo.projectPath,
+      'tsconfig.eslint.json',
+    );
+
+    const tsConfig = new TsConfig({
+      include: this.projectInfo.workspaces?.map((ws) => `${ws}/src`) ?? ['src'],
+    });
+
+    await tsConfig.writeJson(eslintTypeScriptConfigPath, {
+      overwriteExisting: true,
+    });
+
     const config: webpack.Configuration = {
       target: 'node',
       mode: 'production',
-      devtool: 'source-map',
+      devtool: 'inline-cheap-module-source-map',
       optimization: {
         minimize: this.minify,
         minimizer: [
@@ -64,18 +78,18 @@ export class BundleCommand extends ProjectCommand {
       module: {
         rules: [
           {
-            test: /\.ts$/,
-            loader: 'ts-loader',
+            test: /\.tsx?$/,
             exclude: /node_modules/,
-            options: {
-              transpileOnly: true,
-              compilerOptions: {
-                inlineSourceMap: false,
-                sourceMap: true,
-                composite: false,
-                importsNotUsedAsValues: 'preserve',
-                noEmit: false,
-                declaration: false,
+            use: {
+              loader: 'babel-loader',
+              options: {
+                presets: [
+                  [
+                    '@babel/preset-env',
+                    { useBuiltIns: 'entry', targets: { node: '12' } },
+                  ],
+                  '@babel/preset-typescript',
+                ],
               },
             },
           },
@@ -131,9 +145,7 @@ export class BundleCommand extends ProjectCommand {
         //const info = stats.toJson();
 
         if (stats.hasErrors()) {
-          return reject(
-            'Bundling could not be performed due to the reasons mentioned above',
-          );
+          return reject('Webpack compilation error, see above');
         }
 
         resolve();

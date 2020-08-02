@@ -14,6 +14,17 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'cdk', 'import', 'jest', 'prettier'],
   ignorePatterns: ['*.js', '*.d.ts', 'node_modules'],
+  settings: {
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx']
+    },
+    'import/external-module-folders': ['node_modules', 'node_modules/@types'],
+    'import/resolver': {
+      'typescript': {
+        'project': 'tsconfig.eslint.json'
+      },
+    }
+  },
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
@@ -64,6 +75,8 @@ module.exports = {
         peerDependencies: false, // Disallow importing peer dependencies (that aren't also direct dependencies)
       },
     ],
+    'import/no-unresolved': ['error', { ignore: ['aws-lambda'] }],
+
     'jest/expect-expect': [
       'warn',
       {
