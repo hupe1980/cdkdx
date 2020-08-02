@@ -66,6 +66,7 @@ export class BundleCommand extends ProjectCommand {
             cache: true,
             parallel: true,
             extractComments: true,
+            sourceMap: true,
           }),
         ],
       },
@@ -78,16 +79,13 @@ export class BundleCommand extends ProjectCommand {
       module: {
         rules: [
           {
-            test: /\.tsx?$/,
+            test: /\.ts$/,
             exclude: /node_modules/,
             use: {
               loader: 'babel-loader',
               options: {
                 presets: [
-                  [
-                    '@babel/preset-env',
-                    { useBuiltIns: 'entry', targets: { node: '12' } },
-                  ],
+                  ['@babel/preset-env', { targets: { node: '12' } }],
                   '@babel/preset-typescript',
                 ],
               },
@@ -97,7 +95,7 @@ export class BundleCommand extends ProjectCommand {
             test: /\.html$/i,
             loader: 'html-loader',
             options: {
-              minimize: true,
+              minimize: this.minify,
             },
           },
         ],
