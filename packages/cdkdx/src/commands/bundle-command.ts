@@ -39,6 +39,8 @@ export class BundleCommand extends ProjectCommand {
       });
     }
 
+    if (Object.keys(entries).length === 0) return 0;
+
     const config: webpack.Configuration = {
       target: 'node',
       mode: 'production',
