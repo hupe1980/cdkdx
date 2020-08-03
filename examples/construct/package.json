@@ -6,7 +6,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "cdkdx build",
-    "watch": "cdkdx watch",
+    "watch": "cdkdx build -w",
     "test": "cdkdx test",
     "lint": "cdkdx lint",
     "bundle": "cdkdx bundle",

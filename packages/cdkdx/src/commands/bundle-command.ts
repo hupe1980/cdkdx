@@ -117,14 +117,28 @@ export class BundleCommand extends ProjectCommand {
       externals: this.projectInfo.externals,
     };
 
-    await this.webpackCompiler(config);
+    const compiler = webpack(config);
+
+    this.watch ? this.watchWebpack(compiler) : await this.runWebpack(compiler);
 
     return 0;
   }
 
-  private async webpackCompiler(config: webpack.Configuration): Promise<void> {
+  private watchWebpack(compiler: webpack.Compiler): webpack.Watching {
+    return compiler.watch(
+      {
+        aggregateTimeout: 300,
+        poll: undefined,
+      },
+      (_err, _stats) => {
+        return;
+      },
+    );
+  }
+
+  private async runWebpack(compiler: webpack.Compiler): Promise<void> {
     return new Promise((resolve, reject) => {
-      webpack(config, (err, stats) => {
+      compiler.run((err, stats) => {
         if (err) {
           return reject(err);
         }
