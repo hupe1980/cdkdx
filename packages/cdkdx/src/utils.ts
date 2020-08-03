@@ -1,6 +1,18 @@
 import * as path from 'path';
 import * as fs from 'fs-extra';
 import execa from 'execa';
+import callbackGlob from 'glob';
+
+export const glob = async (pattern: string): Promise<string[]> => {
+  return new Promise((resolve, reject) => {
+    callbackGlob(pattern, (err, files) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve(files);
+    });
+  });
+};
 
 export const cwd = fs.realpathSync(process.cwd());
 

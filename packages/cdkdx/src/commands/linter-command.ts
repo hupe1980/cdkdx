@@ -4,6 +4,7 @@ import { Command } from 'clipanion';
 import { ESLint } from 'eslint';
 
 import { TsConfig } from '../ts-config';
+import { glob } from '../utils';
 import { ProjectCommand } from './project-command';
 
 export class LinterCommand extends ProjectCommand {
@@ -44,10 +45,14 @@ export class LinterCommand extends ProjectCommand {
 
     if (this.projectInfo.workspaces) {
       await Promise.all(
-        this.projectInfo.workspaces.map((ws) => {
-          const lamdasSrcPath = path.join(ws, 'src', 'lambdas');
+        this.projectInfo.workspaces.map(async (ws) => {
+          const projects = await glob(ws);
 
-          return this.createLambdasEslintTsConfig(lamdasSrcPath);
+          return projects.map((project) =>
+            this.createLambdasEslintTsConfig(
+              path.join(project, 'src', 'lambdas'),
+            ),
+          );
         }),
       );
     } else {
