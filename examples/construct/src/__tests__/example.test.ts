@@ -11,7 +11,7 @@ test('SQS Queue Created', () => {
   //expectCDK(stack).to(haveResource('AWS::SQS::Queue'));
 });
 
-test('SNS Topic Created', () => {
+test('SNS Topic Created!', () => {
   const app = new App();
   const stack = new Stack(app, 'TestStack');
   // WHEN

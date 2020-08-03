@@ -60,6 +60,7 @@
     "html-loader": "^1.1.0",
     "jest": "^26.2.2",
     "jest-transform-stub": "^2.0.0",
+    "jest-watch-select-projects": "^2.0.0",
     "jest-watch-typeahead": "^0.6.0",
     "jsii": "^1.9.0",
     "jsii-docgen": "^1.4.8",
