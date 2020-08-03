@@ -23,7 +23,7 @@ export class TestCommand extends ProjectCommand {
   async execute(): Promise<number> {
     process.env.NODE_ENV = 'test';
 
-    const tsConfig = new TsConfig();
+    const tsConfig = TsConfig.fromJsiiTemplate();
 
     const jestConfig = {
       transform: {

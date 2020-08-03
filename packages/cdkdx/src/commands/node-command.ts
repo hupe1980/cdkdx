@@ -12,7 +12,7 @@ export class NodeCommand extends ProjectCommand {
 
   @Command.Path('node')
   async execute(): Promise<number> {
-    const tsConfig = new TsConfig({
+    const tsConfig = TsConfig.fromJsiiTemplate({
       outDir: './lib',
       include: ['src'],
       exclude: ['src/lambdas', 'src/**/__tests__'],

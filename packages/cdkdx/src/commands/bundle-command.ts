@@ -7,6 +7,7 @@ import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 import SizePlugin from 'size-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 
+import { TsConfig } from '../ts-config';
 import { ProjectCommand } from './project-command';
 
 const SHARED_FOLDER = 'shared';
@@ -27,19 +28,32 @@ export class BundleCommand extends ProjectCommand {
       fs.readdirSync(this.projectInfo.lambdasSrcPath).forEach((name) => {
         if (name === SHARED_FOLDER) return;
 
-        const entry = path.join(
-          this.projectInfo.lambdasSrcPath,
-          name,
-          'index.ts',
-        );
+        const lambdaPath = path.join(this.projectInfo.lambdasSrcPath, name);
+        if (!fs.statSync(lambdaPath).isDirectory()) return;
+
+        const entry = path.join(lambdaPath, 'index.ts');
 
         if (fs.existsSync(entry)) {
           entries[name] = entry;
+        } else {
+          this.context.stdout.write(`⚠ No ${entry} found.\n\n`);
         }
       });
     }
 
+    // Return 0 if no lambdas were found
     if (Object.keys(entries).length === 0) return 0;
+
+    const tsConfig = TsConfig.fromLambdaTemplate({
+      exclude: ['**/__tests__/*'],
+    });
+
+    await tsConfig.writeJson(
+      path.join(this.projectInfo.lambdasSrcPath, 'tsconfig.json'),
+      {
+        overwriteExisting: false,
+      },
+    );
 
     const config: webpack.Configuration = {
       target: 'node',
@@ -70,6 +84,10 @@ export class BundleCommand extends ProjectCommand {
             use: {
               loader: 'ts-loader',
               options: {
+                configFile: path.join(
+                  this.projectInfo.lambdasSrcPath,
+                  'tsconfig.json',
+                ),
                 transpileOnly: true,
                 compilerOptions: {
                   importsNotUsedAsValues: 'preserve',

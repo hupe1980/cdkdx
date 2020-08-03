@@ -33,7 +33,7 @@ export class LinterCommand extends ProjectCommand {
       'tsconfig.eslint.json',
     );
 
-    const tsConfig = new TsConfig({
+    const tsConfig = TsConfig.fromJsiiTemplate({
       include: this.projectInfo.workspaces?.map((ws) => `${ws}/src`) ?? ['src'],
     });
 

@@ -6,7 +6,7 @@ import { TsConfig } from '../ts-config';
 
 export class TscCompiler implements Compiler {
   public async compile(props: CompilerProps): Promise<void> {
-    const tsConfig = new TsConfig({
+    const tsConfig = TsConfig.fromJsiiTemplate({
       outDir: './lib',
       include: ['src'],
       exclude: ['src/lambdas', 'src/**/__tests__'],

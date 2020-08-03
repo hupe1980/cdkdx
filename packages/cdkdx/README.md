@@ -1,11 +1,12 @@
 # cdkdx
 
-> Zero-config CLI for [aws cdk](https://github.com/awslabs/aws-cdk) development
+> Zero-config CLI for [aws cdk](https://github.com/awslabs/aws-cdk) development with batteries included
 
 - Tsc and jsii compiler support
 - Pre-configured linter with custom cdk eslint rules
 - Jest test runner setup
-- Bundles your lambda functions with parcel builder
+- Bundles your lambda functions with webpack
+- Typechecking for lambdas and constructs 
 - Yarn workspaces compatible
 
 :warning: This is experimental and subject to breaking changes.
@@ -34,6 +35,7 @@ my-app
 └── src
     ├── __tests__
     ├── lambdas
+    │   ├── tsconfig.json
     │   ├── lambda1
     │   │   ├── __tests__
     │   │   └── index.ts
@@ -62,6 +64,7 @@ my-construct
 └── src
     ├── __tests__
     ├── lambdas
+    │   ├── tsconfig.json
     │   ├── lambda1
     │   │   ├── __tests__
     │   │   └── index.ts
@@ -77,8 +80,12 @@ my-construct
 - Create a separate folder for each lambda
 - The file `index.ts` must export the handler function
 - LambdaDependencies should be added as devDependencies
-- To exclude dependencies when bundling the lambda, an `externals` section can be added in the package.json
-- Cross lambda code should be placed in the `<root>/src/lambdas/shared` folder
+- @types/aws-lambda must be used as type only import:
+
+```typescript
+import type { Handler } from 'aws-lambda';
+```
+- To exclude dependencies when bundling the lambda, an `externals` section can be added in the package.json:
 
 ```json
 // package.json
@@ -91,6 +98,8 @@ my-construct
     ]
 }
 ```
+- Cross lambda code should be placed in the `<root>/src/lambdas/shared` folder
+- The Path must be passed to the aws-lambda construct with a code object:
 
 ```typescript
 // construct.ts
