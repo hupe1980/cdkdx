@@ -7,7 +7,6 @@ import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 import SizePlugin from 'size-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 
-import { TsConfig } from '../ts-config';
 import { ProjectCommand } from './project-command';
 
 const SHARED_FOLDER = 'shared';
@@ -42,23 +41,10 @@ export class BundleCommand extends ProjectCommand {
 
     if (Object.keys(entries).length === 0) return 0;
 
-    const eslintTypeScriptConfigPath = path.join(
-      this.projectInfo.projectPath,
-      'tsconfig.eslint.json',
-    );
-
-    const tsConfig = new TsConfig({
-      include: this.projectInfo.workspaces?.map((ws) => `${ws}/src`) ?? ['src'],
-    });
-
-    await tsConfig.writeJson(eslintTypeScriptConfigPath, {
-      overwriteExisting: true,
-    });
-
     const config: webpack.Configuration = {
       target: 'node',
       mode: 'production',
-      devtool: 'inline-cheap-module-source-map',
+      devtool: 'source-map',
       optimization: {
         minimize: this.minify,
         minimizer: [
@@ -96,19 +82,6 @@ export class BundleCommand extends ProjectCommand {
               },
             },
           },
-          // {
-          //   test: /\.ts$/,
-          //   exclude: /node_modules/,
-          //   use: {
-          //     loader: 'babel-loader',
-          //     options: {
-          //       presets: [
-          //         ['@babel/preset-env', { targets: { node: '12' } }],
-          //         ['@babel/preset-typescript', { onlyRemoveTypeImports: true }],
-          //       ],
-          //     },
-          //   },
-          // },
           {
             test: /\.html$/i,
             loader: 'html-loader',
@@ -125,20 +98,8 @@ export class BundleCommand extends ProjectCommand {
           filename: 'lambda-file-sizes.json',
         }),
         new ForkTsCheckerWebpackPlugin({
-          eslint: {
-            files: ['*/**/*.ts'],
-            options: {
-              baseConfig: {
-                extends: 'cdk',
-              },
-            },
-          },
           typescript: {
             configOverwrite: {
-              // compilerOptions: {
-              //   noUnusedParameters: false,
-              //   noUnusedLocals: false,
-              // },
               include: ['src/lambdas'],
               exclude: ['src/**/__tests__'],
             },

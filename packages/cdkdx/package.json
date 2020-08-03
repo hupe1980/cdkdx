@@ -35,6 +35,7 @@
     "watch": "rimraf lib && tsc -w"
   },
   "dependencies": {
+    "@types/aws-lambda": "^8.10.59",
     "@types/jest": "^26.0.8",
     "@typescript-eslint/eslint-plugin": "^3.7.1",
     "@typescript-eslint/parser": "^3.7.1",

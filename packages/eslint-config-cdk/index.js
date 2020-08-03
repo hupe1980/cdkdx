@@ -3,7 +3,8 @@
 module.exports = {
   extends: [
     'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',  
+    'plugin:@typescript-eslint/recommended', 
+    'plugin:@typescript-eslint/recommended-requiring-type-checking', 
     'prettier/@typescript-eslint',
     'prettier'
   ],
@@ -28,18 +29,21 @@ module.exports = {
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
+    
+    // Allow new (lambda) Function
+    '@typescript-eslint/no-implied-eval': 'off',
 
     // Require use of the `import { foo } from 'bar';` form instead of `import foo = require('bar');`
     '@typescript-eslint/no-require-imports': ['error'],
-    // '@typescript-eslint/no-unused-vars': [
-    //   'error',
-    //   {
-    //     vars: 'all',
-    //     args: 'after-used',
-    //     ignoreRestSiblings: false,
-    //     argsIgnorePattern: '^_',
-    //   },
-    // ],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        vars: 'all',
+        args: 'after-used',
+        ignoreRestSiblings: false,
+        argsIgnorePattern: '^_',
+      },
+    ],
 
     '@typescript-eslint/member-ordering': ['error', {
       default: [
@@ -116,8 +120,9 @@ module.exports = {
     'prettier/prettier': ['error', { 
       'tabWidth': 2,
       'singleQuote': true, 
+      'printWidth': 150,
       'semi': true,
       'trailingComma': 'all', // ensures clean diffs, see https://medium.com/@nikgraf/why-you-should-enforce-dangling-commas-for-multiline-statements-d034c98e36f8
-    }]
+    }],
   },
 };

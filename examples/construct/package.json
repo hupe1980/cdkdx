@@ -15,7 +15,6 @@
   },
   "devDependencies": {
     "@aws-cdk/assert": "^1.56.0",
-    "@types/aws-lambda": "^8.10.59",
     "@types/node": "12.12.50",
     "axios": "^0.19.2",
     "cdkdx": "^0.1.4"
