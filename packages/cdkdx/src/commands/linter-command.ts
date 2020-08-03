@@ -91,7 +91,9 @@ export class LinterCommand extends ProjectCommand {
   ): Promise<void> {
     if (!(await fs.pathExists(lambdasSrcPath))) return;
 
-    const tsLambdaConfig = TsConfig.fromLambdaTemplate();
+    const tsLambdaConfig = TsConfig.fromLambdaTemplate({
+      include: ['**/*.ts'],
+    });
 
     await tsLambdaConfig.writeJson(
       path.join(lambdasSrcPath, 'tsconfig.eslint.json'),

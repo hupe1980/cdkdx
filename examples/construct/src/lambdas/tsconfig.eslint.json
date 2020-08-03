@@ -24,5 +24,8 @@
     "strictPropertyInitialization": true,
     "stripInternal": true,
     "target": "ES2018"
-  }
+  },
+  "include": [
+    "**/*.ts"
+  ]
 }
