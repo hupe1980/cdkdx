@@ -29,6 +29,10 @@ module.exports = {
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/restrict-template-expressions': 'off',
+
     
     // Allow new (lambda) Function
     '@typescript-eslint/no-implied-eval': 'off',

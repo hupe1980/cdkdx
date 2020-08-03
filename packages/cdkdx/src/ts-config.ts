@@ -45,6 +45,7 @@ export class TsConfig {
         charset: 'utf8',
         declaration: false,
         experimentalDecorators: true,
+        esModuleInterop: true,
         sourceMap: true,
         inlineSources: true,
         lib: ['es2018'],

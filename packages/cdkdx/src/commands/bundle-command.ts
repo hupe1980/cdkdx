@@ -117,9 +117,20 @@ export class BundleCommand extends ProjectCommand {
         }),
         new ForkTsCheckerWebpackPlugin({
           typescript: {
+            enabled: true,
+            configFile: path.join(
+              this.projectInfo.lambdasSrcPath,
+              'tsconfig.json',
+            ),
             configOverwrite: {
-              include: ['src/lambdas'],
-              exclude: ['src/**/__tests__'],
+              compilerOptions: {
+                importsNotUsedAsValues: 'preserve',
+                noEmit: false,
+                declaration: false,
+                inlineSourceMap: false,
+                sourceMap: true,
+                composite: false,
+              },
             },
           },
         }),
