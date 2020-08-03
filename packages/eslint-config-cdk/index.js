@@ -31,15 +31,29 @@ module.exports = {
 
     // Require use of the `import { foo } from 'bar';` form instead of `import foo = require('bar');`
     '@typescript-eslint/no-require-imports': ['error'],
-    '@typescript-eslint/no-unused-vars': [
-      'error',
-      {
-        vars: 'all',
-        args: 'after-used',
-        ignoreRestSiblings: false,
-        argsIgnorePattern: '^_',
-      },
-    ],
+    // '@typescript-eslint/no-unused-vars': [
+    //   'error',
+    //   {
+    //     vars: 'all',
+    //     args: 'after-used',
+    //     ignoreRestSiblings: false,
+    //     argsIgnorePattern: '^_',
+    //   },
+    // ],
+
+    '@typescript-eslint/member-ordering': ['error', {
+      default: [
+        "public-static-field",
+        "public-static-method",
+        "protected-static-field",
+        "protected-static-method",
+        "private-static-field",
+        "private-static-method",
+        "field",
+        "constructor", // = ["public-constructor", "protected-constructor", "private-constructor"]
+        "method",
+      ]
+    }],
 
     'cdk/ban-lambda-runtimes': [
       'error', 
@@ -76,6 +90,13 @@ module.exports = {
       },
     ],
     'import/no-unresolved': ['error', { ignore: ['aws-lambda'] }],
+
+    'import/order': ['error', {
+      groups: ['builtin', 'external'],
+      alphabetize: { order: 'asc', caseInsensitive: true },
+    }],
+
+    'no-duplicate-imports': ['error'],
 
     'jest/expect-expect': [
       'warn',

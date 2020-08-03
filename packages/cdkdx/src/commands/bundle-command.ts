@@ -82,15 +82,33 @@ export class BundleCommand extends ProjectCommand {
             test: /\.ts$/,
             exclude: /node_modules/,
             use: {
-              loader: 'babel-loader',
+              loader: 'ts-loader',
               options: {
-                presets: [
-                  ['@babel/preset-env', { targets: { node: '12' } }],
-                  '@babel/preset-typescript',
-                ],
+                transpileOnly: true,
+                compilerOptions: {
+                  importsNotUsedAsValues: 'preserve',
+                  noEmit: false,
+                  declaration: false,
+                  inlineSourceMap: false,
+                  sourceMap: true,
+                  composite: false,
+                },
               },
             },
           },
+          // {
+          //   test: /\.ts$/,
+          //   exclude: /node_modules/,
+          //   use: {
+          //     loader: 'babel-loader',
+          //     options: {
+          //       presets: [
+          //         ['@babel/preset-env', { targets: { node: '12' } }],
+          //         ['@babel/preset-typescript', { onlyRemoveTypeImports: true }],
+          //       ],
+          //     },
+          //   },
+          // },
           {
             test: /\.html$/i,
             loader: 'html-loader',
@@ -113,6 +131,16 @@ export class BundleCommand extends ProjectCommand {
               baseConfig: {
                 extends: 'cdk',
               },
+            },
+          },
+          typescript: {
+            configOverwrite: {
+              // compilerOptions: {
+              //   noUnusedParameters: false,
+              //   noUnusedLocals: false,
+              // },
+              include: ['src/lambdas'],
+              exclude: ['src/**/__tests__'],
             },
           },
         }),
