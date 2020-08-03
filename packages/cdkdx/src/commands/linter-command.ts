@@ -1,4 +1,5 @@
 import * as path from 'path';
+import * as fs from 'fs-extra';
 import { Command } from 'clipanion';
 import { ESLint } from 'eslint';
 
@@ -41,6 +42,18 @@ export class LinterCommand extends ProjectCommand {
       overwriteExisting: true,
     });
 
+    if (this.projectInfo.workspaces) {
+      await Promise.all(
+        this.projectInfo.workspaces.map((ws) => {
+          const lamdasSrcPath = path.join(ws, 'src', 'lambdas');
+
+          return this.createLambdasEslintTsConfig(lamdasSrcPath);
+        }),
+      );
+    } else {
+      await this.createLambdasEslintTsConfig(this.projectInfo.lambdasSrcPath);
+    }
+
     const eslint = new ESLint({
       baseConfig: {
         extends: 'cdk',
@@ -71,5 +84,20 @@ export class LinterCommand extends ProjectCommand {
     );
 
     return errorCount === 0 ? 0 : 1;
+  }
+
+  private async createLambdasEslintTsConfig(
+    lambdasSrcPath: string,
+  ): Promise<void> {
+    if (!(await fs.pathExists(lambdasSrcPath))) return;
+
+    const tsLambdaConfig = TsConfig.fromLambdaTemplate();
+
+    await tsLambdaConfig.writeJson(
+      path.join(lambdasSrcPath, 'tsconfig.eslint.json'),
+      {
+        overwriteExisting: true,
+      },
+    );
   }
 }

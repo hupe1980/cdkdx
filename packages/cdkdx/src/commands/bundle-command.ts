@@ -52,7 +52,7 @@ export class BundleCommand extends ProjectCommand {
     await tsConfig.writeJson(
       path.join(this.projectInfo.lambdasSrcPath, 'tsconfig.json'),
       {
-        overwriteExisting: false,
+        overwriteExisting: true,
       },
     );
 
