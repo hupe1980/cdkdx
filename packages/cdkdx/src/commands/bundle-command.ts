@@ -45,6 +45,7 @@ export class BundleCommand extends ProjectCommand {
     if (Object.keys(entries).length === 0) return 0;
 
     const tsConfig = TsConfig.fromLambdaTemplate({
+      include: ['**/*.ts'],
       exclude: ['**/__tests__/*'],
     });
 

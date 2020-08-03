@@ -1,3 +1,4 @@
+import * as fs from 'fs-extra';
 import { Command } from 'clipanion';
 
 import { Compiler, JsiiCompiler, TscCompiler } from '../compiler';
@@ -33,6 +34,8 @@ export class BuildCommand extends ProjectCommand {
     if (this.minifyLambdas) {
       bundleCommand.push('--minify');
     }
+
+    await fs.remove(this.projectInfo.libPath);
 
     const bundleExitCode = await this.cli.run(bundleCommand);
 

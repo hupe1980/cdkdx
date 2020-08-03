@@ -13,8 +13,8 @@ export interface ProjectInfo {
   projectPath: string;
   lambdasSrcPath: string;
   lambdasOutPath: string;
-  cachePath: string;
   distPath: string;
+  libPath: string;
   typescriptExcludes: string[];
 }
 
@@ -35,7 +35,7 @@ export abstract class ProjectCommand extends Command {
       projectPath: resolveProject('.'),
       lambdasSrcPath: resolveProject(path.join('src', 'lambdas')),
       lambdasOutPath: resolveProject(path.join('lib', 'lambdas')),
-      cachePath: resolveProject('.cdkdx'),
+      libPath: resolveProject('lib'),
       distPath: resolveProject('dist'),
       typescriptExcludes: ['src/lambdas', 'src/**/__tests__'],
     };
