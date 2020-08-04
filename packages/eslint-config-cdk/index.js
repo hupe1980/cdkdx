@@ -26,21 +26,6 @@ module.exports = {
       },
     }
   },
-  overrides: [
-    {
-      files: ['**/src/lambdas/**/*'],
-      parserOptions: {
-        project: '**/src/lambdas/tsconfig.eslint.json',
-      },
-      settings: {
-        'import/resolver': {
-          'typescript': {
-            'project': '**/src/lambdas/tsconfig.eslint.json'
-          },
-        }
-      },
-    },
-  ],
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/no-use-before-define': 'off',

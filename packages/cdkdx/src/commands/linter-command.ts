@@ -1,10 +1,8 @@
 import * as path from 'path';
-import * as fs from 'fs-extra';
 import { Command } from 'clipanion';
 import { ESLint } from 'eslint';
 
 import { TsConfig } from '../ts-config';
-import { glob } from '../utils';
 import { ProjectCommand } from './project-command';
 
 export class LinterCommand extends ProjectCommand {
@@ -36,28 +34,14 @@ export class LinterCommand extends ProjectCommand {
     );
 
     const tsConfig = TsConfig.fromJsiiTemplate({
-      include: this.projectInfo.workspaces?.map((ws) => `${ws}/src`) ?? ['src'],
+      include: this.projectInfo.workspaces?.map(
+        (ws) => `${ws}/src/**/*.ts`,
+      ) ?? ['src/**/*.ts'],
     });
 
     await tsConfig.writeJson(eslintTypeScriptConfigPath, {
       overwriteExisting: true,
     });
-
-    if (this.projectInfo.workspaces) {
-      await Promise.all(
-        this.projectInfo.workspaces.map(async (ws) => {
-          const projects = await glob(ws);
-
-          return projects.map((project) =>
-            this.createLambdasEslintTsConfig(
-              path.join(project, 'src', 'lambdas'),
-            ),
-          );
-        }),
-      );
-    } else {
-      await this.createLambdasEslintTsConfig(this.projectInfo.lambdasSrcPath);
-    }
 
     const eslint = new ESLint({
       baseConfig: {
@@ -89,22 +73,5 @@ export class LinterCommand extends ProjectCommand {
     );
 
     return errorCount === 0 ? 0 : 1;
-  }
-
-  private async createLambdasEslintTsConfig(
-    lambdasSrcPath: string,
-  ): Promise<void> {
-    if (!(await fs.pathExists(lambdasSrcPath))) return;
-
-    const tsLambdaConfig = TsConfig.fromLambdaTemplate({
-      include: ['**/*.ts'],
-    });
-
-    await tsLambdaConfig.writeJson(
-      path.join(lambdasSrcPath, 'tsconfig.eslint.json'),
-      {
-        overwriteExisting: true,
-      },
-    );
   }
 }
