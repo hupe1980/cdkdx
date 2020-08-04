@@ -81,6 +81,7 @@ export class BundleCommand extends ProjectCommand {
         rules: [
           {
             test: /\.ts$/,
+            include: this.projectInfo.lambdasSrcPath,
             exclude: /node_modules/,
             use: {
               loader: 'ts-loader',
@@ -103,6 +104,7 @@ export class BundleCommand extends ProjectCommand {
           },
           {
             test: /\.html$/i,
+            include: this.projectInfo.lambdasSrcPath,
             loader: 'html-loader',
             options: {
               minimize: this.minify,
