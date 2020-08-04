@@ -1,7 +1,7 @@
 {
   "name": "cdkdx",
   "description": "Zero-config CLI for aws cdk development with batteries included",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "license": "MIT",
   "keywords": [
     "aws",
