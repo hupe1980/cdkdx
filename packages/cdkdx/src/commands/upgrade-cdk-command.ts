@@ -1,7 +1,7 @@
+import type { PackageJson } from 'type-fest';
 import * as fs from 'fs-extra';
 import { Command } from 'clipanion';
 import latestVersion from 'latest-version';
-import { PackageJson } from 'type-fest';
 
 import { Semver } from '../semver';
 import { resolveProject } from '../utils';

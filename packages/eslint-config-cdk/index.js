@@ -1,5 +1,7 @@
 'use strict';
 
+const { PYTHON_RESERVED } = require('jsii/lib/reserved-words');
+
 module.exports = {
   extends: [
     'eslint:recommended',
@@ -85,6 +87,14 @@ module.exports = {
     'cdk/public-static-property-all-caps': 'error',
     'cdk/no-static-import': 'error',
     'cdk/stack-props-struct-name': 'error',
+    'cdk/prefer-type-only-imports': 'error',
+    'cdk/ban-reserved-words': [
+      'error', 
+      {
+        wordList: [...PYTHON_RESERVED] || [],
+        jsiiOnly: true,
+      }
+    ],
 
     // Require all imported dependencies are actually declared in package.json
     'import/no-extraneous-dependencies': [
@@ -102,14 +112,14 @@ module.exports = {
     'import/no-unresolved': ['error', { ignore: ['aws-lambda'] }],
 
     'import/order': ['error', {
-      groups: ['builtin', 'external'],
+      groups: ['builtin', 'external', 'parent', 'sibling', 'index'],
       alphabetize: { order: 'asc', caseInsensitive: true },
     }],
 
     'no-duplicate-imports': ['error'],
 
     'jest/expect-expect': [
-      'warn',
+      'error',
       {
         assertFunctionNames: ['expect', 'expectCDK'],
       },
@@ -121,6 +131,15 @@ module.exports = {
       }
     ],
     'jest/no-identical-title': 'error',
+    'jest/valid-expect': 'error',
+    'jest/valid-expect-in-promise': 'error',
+    'jest/no-test-prefixes': 'error',
+
+    //Jest Style
+    'jest/prefer-to-be-null': 'error',
+    'jest/prefer-to-be-undefined': 'error',
+    'jest/prefer-to-contain': 'error',
+    'jest/prefer-to-have-length': 'error',
     
     //Style
     'prettier/prettier': ['error', { 
