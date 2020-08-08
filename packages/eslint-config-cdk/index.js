@@ -9,7 +9,7 @@ function safeRequire(p) {
   }
 }
 
-const { PYTHON_RESERVED } = safeRequire('jsii/lib/reserved-words');
+// const { PYTHON_RESERVED } = safeRequire('jsii/lib/reserved-words');
 
 module.exports = {
   extends: [
@@ -102,13 +102,13 @@ module.exports = {
         moduleNames: ['aws-lambda'],
       }
     ],
-    'cdk/ban-reserved-words': [
-      'error', 
-      {
-        wordList: [...PYTHON_RESERVED] || [],
-        jsiiOnly: true,
-      }
-    ],
+    // 'cdk/ban-reserved-words': [
+    //   'error', 
+    //   {
+    //     wordList: [...PYTHON_RESERVED] || [],
+    //     jsiiOnly: true,
+    //   }
+    // ],
 
     // Require all imported dependencies are actually declared in package.json
     'import/no-extraneous-dependencies': [

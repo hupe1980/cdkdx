@@ -60,6 +60,21 @@ ruleTester.run('ban-reserverd-words', rule, {
       ],
     },
     {
+      filename: jsiiFile,
+      code: `
+        interface Api {
+          foo: string;
+          lambda: string;
+        }
+      `,
+      options: [
+        {
+          wordList: ['lambda'],
+          jsiiOnly: true,
+        },
+      ],
+    },
+    {
       filename: nonJsiiFile,
       code: `
         export interface Api {
@@ -102,7 +117,7 @@ ruleTester.run('ban-reserverd-words', rule, {
     {
       filename: nonJsiiFile,
       code: `
-        export interface Api {
+        export interface ApiXXX {
           foo: string;
           lambda: string;
         }

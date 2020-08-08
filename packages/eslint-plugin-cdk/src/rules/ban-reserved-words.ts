@@ -14,13 +14,13 @@ export default createRule<Options, MessageIds>({
   name: 'ban-reserved-words',
   meta: {
     docs: {
-      description: 'Bans specific lambda runtimes from being used',
+      description: 'Bans specific words from being used',
       category: 'Best Practices',
       recommended: 'error',
     },
     messages: {
       bannedReservedWordMessage:
-        "Don't use `{{word}}`. It's a reserved word in a jsii target language",
+        'Using `{{word}}` may cause problems when generating language bindings. Consider using a different name.',
     },
     schema: [
       {
@@ -50,6 +50,13 @@ export default createRule<Options, MessageIds>({
 
     const reservedWordSet = new Set(wordList);
 
+    let isExportedInterface = false;
+
+    const isExported = (node: TSESTree.TSInterfaceDeclaration): void => {
+      isExportedInterface =
+        node.parent?.type === AST_NODE_TYPES.ExportNamedDeclaration;
+    };
+
     const checkName = (node: TSESTree.Identifier): void => {
       if (reservedWordSet.has(node.name)) {
         context.report({
@@ -65,6 +72,8 @@ export default createRule<Options, MessageIds>({
     const checkNameOfMembers = (
       node: TSESTree.TSInterfaceBody | TSESTree.TSTypeLiteral,
     ): void => {
+      if (!isExportedInterface) return;
+
       const members =
         node.type === AST_NODE_TYPES.TSInterfaceBody ? node.body : node.members;
 
@@ -79,6 +88,7 @@ export default createRule<Options, MessageIds>({
     };
 
     return {
+      TSInterfaceDeclaration: isExported,
       TSInterfaceBody: checkNameOfMembers,
     };
   },
