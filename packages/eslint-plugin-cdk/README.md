@@ -43,7 +43,12 @@ Then configure the rules you want to use under the rules section.
     "cdk/public-static-property-all-caps": "error",
     "cdk/no-static-import": "error",
     "cdk/stack-props-struct-name": "error",
-    "cdk/prefer-type-only-imports": "error",
+    "cdk/prefer-type-only-imports": [
+      "error",
+      {
+        "moduleNames": ["aws-lambda"],
+      }
+    ],
     "cdk/ban-reserved-words": [
       "error", 
       {

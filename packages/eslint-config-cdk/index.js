@@ -1,6 +1,15 @@
 'use strict';
 
-const { PYTHON_RESERVED } = require('jsii/lib/reserved-words');
+function safeRequire(p) {
+  try {
+    return require(p)
+  } catch (err) {
+    if (err.code === 'MODULE_NOT_FOUND' && ~err.message.indexOf(p)) return undefined
+    else throw err
+  }
+}
+
+const { PYTHON_RESERVED } = safeRequire('jsii/lib/reserved-words');
 
 module.exports = {
   extends: [
@@ -87,7 +96,12 @@ module.exports = {
     'cdk/public-static-property-all-caps': 'error',
     'cdk/no-static-import': 'error',
     'cdk/stack-props-struct-name': 'error',
-    'cdk/prefer-type-only-imports': 'error',
+    'cdk/prefer-type-only-imports': [
+      'error',
+      {
+        moduleNames: ['aws-lambda'],
+      }
+    ],
     'cdk/ban-reserved-words': [
       'error', 
       {

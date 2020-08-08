@@ -26,7 +26,6 @@ export const getInstallCommand = async (): Promise<InstallCommand> => {
 
 export const getAuthor = async (): Promise<string> => {
   const { stdout } = await execa('git', ['config', '--global', 'user.name']);
-
   return stdout.trim() || 'TODO_ADD_AUTHOR';
 };
 
