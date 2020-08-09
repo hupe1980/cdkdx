@@ -6,15 +6,18 @@ export interface LoggerProps {
 }
 
 export class Logger {
-  constructor(private readonly props: LoggerProps) {}
+  constructor(private readonly props: LoggerProps) {
+    this.done = this.done.bind(this);
+    this.log = this.log.bind(this);
+  }
 
-  done = (message: string): void => {
+  public done(message: string): void {
     this.props.stdout.write(
       `${chalk.bgGreen.black(' DONE ')} ${chalk.green(message)}\n`,
     );
-  };
+  }
 
-  log = (message: string): void => {
+  public log(message: string): void {
     this.props.stdout.write(`${message}\n`);
-  };
+  }
 }

@@ -114,7 +114,7 @@ export class CreateCommand extends BaseCommand {
     targetPath: string,
     dependencyNames: string[],
   ): Promise<void> {
-    this.context.done(`Installing dependencies: ${dependencyNames.join(',')}`);
+    this.context.log(`Installing dependencies: ${dependencyNames.join(',')}`);
 
     const { command, args } = await this.getInstallCommand();
 
