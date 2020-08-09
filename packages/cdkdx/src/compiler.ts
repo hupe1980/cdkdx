@@ -2,10 +2,12 @@ import * as path from 'path';
 import execa from 'execa';
 
 import { TsConfig } from './ts-config';
+import { ProjectInfo } from './project-info';
 
 export interface CompilerProps {
   cwd: string;
   watch?: boolean;
+  projectInfo: ProjectInfo;
 }
 
 export interface Compiler {
@@ -30,8 +32,8 @@ export class TscCompiler implements Compiler {
   public async compile(props: CompilerProps): Promise<void> {
     const tsConfig = TsConfig.fromJsiiTemplate({
       outDir: './lib',
-      include: ['src'],
-      exclude: ['src/lambdas', 'src/**/__tests__'],
+      include: props.projectInfo.typescriptIncludes,
+      exclude: props.projectInfo.typescriptExcludes,
     });
 
     await tsConfig.writeJson(path.join(props.cwd, 'tsconfig.json'), {

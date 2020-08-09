@@ -46,9 +46,10 @@ export class BuildCommand extends BaseProjectCommand {
     await compiler.compile({
       cwd: this.context.cwd,
       watch: this.watch,
+      projectInfo: this.projectInfo,
     });
 
-    this.context.done(`Contruct ${this.projectInfo.name} created.`);
+    this.context.done(`Contruct ${this.projectInfo.name} created.\n`);
 
     return 0;
   }

@@ -114,18 +114,16 @@ export class CreateCommand extends BaseCommand {
     targetPath: string,
     dependencyNames: string[],
   ): Promise<void> {
-    try {
-      console.log(dependencyNames);
-      const { command, args } = await this.getInstallCommand();
+    this.context.done(`Installing dependencies: ${dependencyNames.join(',')}`);
 
-      await execa(command, args, {
-        cwd: targetPath,
-      });
-      this.context.done(`Dependencies installed.`);
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
+    const { command, args } = await this.getInstallCommand();
+
+    await execa(command, args, {
+      cwd: targetPath,
+      stdio: ['ignore', 'inherit', 'inherit'],
+    });
+
+    this.context.done(`Dependencies installed.\n`);
   }
 
   // private async isInGitRepository(targetPath: string): Promise<boolean> {

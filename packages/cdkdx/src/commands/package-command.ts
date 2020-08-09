@@ -32,7 +32,8 @@ export class PackageCommand extends BaseProjectCommand {
       await fs.move(tarball, path.join(target, path.basename(tarball)));
     }
 
-    this.context.done(`${this.projectInfo.name} packed.`);
+    this.context.log(''); //empty line
+    this.context.done(`${this.projectInfo.name} packed.\n`);
 
     return 0;
   }

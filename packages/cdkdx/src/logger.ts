@@ -10,11 +10,11 @@ export class Logger {
 
   done = (message: string): void => {
     this.props.stdout.write(
-      `${chalk.bgGreen.black(' DONE ')} ${chalk.green(message)}\n\n`,
+      `${chalk.bgGreen.black(' DONE ')} ${chalk.green(message)}\n`,
     );
   };
 
   log = (message: string): void => {
-    this.props.stdout.write(`${message}\n\n`);
+    this.props.stdout.write(`${message}\n`);
   };
 }

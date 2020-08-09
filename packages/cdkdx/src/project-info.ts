@@ -16,6 +16,7 @@ export class ProjectInfo {
   public readonly devDependencies: PackageJson['devDependencies'];
 
   //ts-config
+  public readonly typescriptIncludes: string[];
   public readonly typescriptExcludes: string[];
 
   //paths
@@ -43,6 +44,7 @@ export class ProjectInfo {
     this.dependencies = this.pkgJson.dependencies;
     this.devDependencies = this.pkgJson.devDependencies;
 
+    this.typescriptIncludes = ['src'];
     this.typescriptExcludes = ['src/lambdas', 'src/**/__tests__'];
 
     this.distPath = this.resolve('dist');
