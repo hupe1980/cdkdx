@@ -18,28 +18,6 @@ export class LibProject extends Project {
       types: `${this.outDir}/index.d.ts`,
     });
 
-    if (options.isJsii) {
-      this.addFields({
-        jsii: {
-          outdir: 'dist',
-          tsc: {
-            outDir: this.outDir,
-            rootDir: this.srcDir,
-          },
-          excludeTypescript: [
-            `${this.srcDir}/lambdas`,
-            `${this.srcDir}/**/__tests__`,
-          ],
-          targets: {
-            python: {
-              distName: options.name,
-              module: options.name.replace('-', '_'),
-            },
-          },
-        },
-      });
-    }
-
     this.addPeerDependencies(
       {
         '@aws-cdk/aws-lambda': options.dependencyVersions['@aws-cdk/core'],

@@ -1,8 +1,27 @@
 import * as path from 'path';
+import * as fs from 'fs';
+import { renderSinglePageModule } from 'jsii-docgen';
 import { Application } from 'typedoc';
 import { ScriptTarget, ModuleKind } from 'typescript';
 
-import { Docgen, GenerateOptions } from './docgen';
+export interface GenerateOptions {
+  projectPath: string;
+  typescriptExcludes?: string[];
+}
+
+export interface Docgen {
+  generate: (options: GenerateOptions) => Promise<void>;
+}
+
+export class JsiiDocgen implements Docgen {
+  public async generate(options: GenerateOptions): Promise<void> {
+    if (!fs.existsSync(path.join(options.projectPath, '.jsii'))) {
+      throw new Error('File .jsii is missing! Please run cdkdx build first.');
+    }
+
+    await renderSinglePageModule(options.projectPath, 'API.md');
+  }
+}
 
 export class TscDocgen implements Docgen {
   public async generate(options: GenerateOptions): Promise<void> {

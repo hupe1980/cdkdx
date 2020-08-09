@@ -1,9 +1,9 @@
 import { Command } from 'clipanion';
 
 import { Docgen, TscDocgen, JsiiDocgen } from '../docgen';
-import { ProjectCommand } from './project-command';
+import { BaseProjectCommand } from '../base-command';
 
-export class DocgenCommand extends ProjectCommand {
+export class DocgenCommand extends BaseProjectCommand {
   static usage = Command.Usage({
     description: 'Generate docs for the project',
     details: ``,
@@ -14,7 +14,7 @@ export class DocgenCommand extends ProjectCommand {
     const docgen = this.getDocgen();
 
     await docgen.generate({
-      projectPath: this.projectInfo.projectPath,
+      projectPath: this.context.cwd,
       typescriptExcludes: this.projectInfo.typescriptExcludes,
     });
 
@@ -22,7 +22,7 @@ export class DocgenCommand extends ProjectCommand {
   }
 
   private getDocgen(): Docgen {
-    if (this.projectInfo.isJsii) {
+    if (this.projectInfo.jsii) {
       return new JsiiDocgen();
     }
     return new TscDocgen();

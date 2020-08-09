@@ -3,9 +3,12 @@ import * as fs from 'fs-extra';
 import { Command } from 'clipanion';
 import execa from 'execa';
 
-import { ProjectCommand } from './project-command';
+import { BaseProjectCommand } from '../base-command';
 
-export class PackageCommand extends ProjectCommand {
+export class PackageCommand extends BaseProjectCommand {
+  @Command.String('-o, --outdir')
+  public outDir?: string;
+
   @Command.Path('package')
   async execute(): Promise<number> {
     if (this.projectInfo.private) {
@@ -13,13 +16,13 @@ export class PackageCommand extends ProjectCommand {
       return 0;
     }
 
-    const outdir = 'dist';
+    const outdir = this.outDir ?? this.projectInfo.distPath;
 
-    await fs.remove(this.projectInfo.distPath);
+    await fs.remove(outdir);
 
-    if (this.projectInfo.isJsii) {
+    if (this.projectInfo.jsii) {
       const command = require.resolve('jsii-pacmak/bin/jsii-pacmak');
-      await execa(command, ['-o', this.projectInfo.distPath]);
+      await execa(command, ['--outdir', outdir, '--no-npmignore']);
     } else {
       const { stdout } = await execa('npm', ['pack']);
       const tarball = stdout.trim();
@@ -29,9 +32,7 @@ export class PackageCommand extends ProjectCommand {
       await fs.move(tarball, path.join(target, path.basename(tarball)));
     }
 
-    this.context.stdout.write(
-      `✅ Construct ${this.projectInfo.name} packed.\n\n`,
-    );
+    this.context.done(`${this.projectInfo.name} packed.`);
 
     return 0;
   }

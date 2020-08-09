@@ -3,9 +3,9 @@ import { Command } from 'clipanion';
 import { ESLint } from 'eslint';
 
 import { TsConfig } from '../ts-config';
-import { ProjectCommand } from './project-command';
+import { BaseProjectCommand } from '../base-command';
 
-export class LinterCommand extends ProjectCommand {
+export class LinterCommand extends BaseProjectCommand {
   static usage = Command.Usage({
     description: 'Run eslint with prettier',
     details: `
@@ -29,7 +29,7 @@ export class LinterCommand extends ProjectCommand {
   @Command.Path('lint')
   async execute(): Promise<number> {
     const eslintTypeScriptConfigPath = path.join(
-      this.projectInfo.projectPath,
+      this.context.cwd,
       'tsconfig.eslint.json',
     );
 
@@ -47,7 +47,7 @@ export class LinterCommand extends ProjectCommand {
       baseConfig: {
         extends: 'cdk',
       },
-      cwd: this.projectInfo.projectPath,
+      cwd: this.context.cwd,
       fix: this.fix,
       cache: this.cache,
       reportUnusedDisableDirectives: this.reportUnusedDisableDirectives

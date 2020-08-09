@@ -2,9 +2,9 @@ import { Command } from 'clipanion';
 import execa from 'execa';
 import standardVersion from 'standard-version';
 
-import { ProjectCommand } from './project-command';
+import { BaseProjectCommand } from '../base-command';
 
-export class BumpCommand extends ProjectCommand {
+export class BumpCommand extends BaseProjectCommand {
   @Command.Boolean('--dry-run')
   public dryRun = false;
 
@@ -12,7 +12,7 @@ export class BumpCommand extends ProjectCommand {
   async execute(): Promise<number> {
     await standardVersion({
       dryRun: this.dryRun,
-      path: this.projectInfo.projectPath,
+      path: this.context.cwd,
     });
 
     if (!this.dryRun) {

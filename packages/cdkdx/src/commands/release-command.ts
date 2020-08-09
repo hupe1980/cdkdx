@@ -2,9 +2,9 @@ import * as path from 'path';
 import { Command } from 'clipanion';
 import execa from 'execa';
 
-import { ProjectCommand } from './project-command';
+import { BaseProjectCommand } from '../base-command';
 
-export class ReleaseCommand extends ProjectCommand {
+export class ReleaseCommand extends BaseProjectCommand {
   @Command.String({ required: true })
   public type!: 'all' | 'npm' | 'pypi';
 
@@ -22,17 +22,17 @@ export class ReleaseCommand extends ProjectCommand {
         case 'npm':
           return [
             require.resolve('jsii-release/bin/jsii-release-npm'),
-            [path.join(this.projectInfo.projectPath, 'dist', 'js')],
+            [path.join(this.projectInfo.distPath, 'js')],
           ];
         case 'pypi':
           return [
             require.resolve('jsii-release/bin/jsii-release-pypi'),
-            [path.join(this.projectInfo.projectPath, 'dist', 'python')],
+            [path.join(this.projectInfo.distPath, 'python')],
           ];
         case 'all':
           return [
             require.resolve('jsii-release/bin/jsii-release'),
-            [path.join(this.projectInfo.projectPath, 'dist')],
+            [this.projectInfo.distPath],
           ];
         default:
           throw new Error(`Invalid release type: ${this.type}`);

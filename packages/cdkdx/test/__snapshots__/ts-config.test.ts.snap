@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`default jsii-template 1`] = `
+Object {
+  "alwaysStrict": true,
+  "charset": "utf8",
+  "declaration": true,
+  "experimentalDecorators": true,
+  "inlineSourceMap": true,
+  "inlineSources": true,
+  "lib": Array [
+    "es2018",
+  ],
+  "module": "CommonJS",
+  "noEmitOnError": true,
+  "noFallthroughCasesInSwitch": true,
+  "noImplicitAny": true,
+  "noImplicitReturns": true,
+  "noImplicitThis": true,
+  "noUnusedLocals": true,
+  "noUnusedParameters": true,
+  "outDir": undefined,
+  "resolveJsonModule": true,
+  "strict": true,
+  "strictNullChecks": true,
+  "strictPropertyInitialization": true,
+  "stripInternal": true,
+  "target": "ES2018",
+}
+`;
+
+exports[`default lambda-template 1`] = `
+Object {
+  "alwaysStrict": true,
+  "charset": "utf8",
+  "declaration": false,
+  "esModuleInterop": true,
+  "experimentalDecorators": true,
+  "inlineSources": true,
+  "lib": Array [
+    "es2018",
+  ],
+  "module": "CommonJS",
+  "noEmit": true,
+  "noFallthroughCasesInSwitch": true,
+  "noImplicitAny": true,
+  "noImplicitReturns": true,
+  "noImplicitThis": true,
+  "noUnusedLocals": true,
+  "noUnusedParameters": true,
+  "outDir": undefined,
+  "resolveJsonModule": true,
+  "sourceMap": true,
+  "strict": true,
+  "strictNullChecks": true,
+  "strictPropertyInitialization": true,
+  "stripInternal": true,
+  "target": "ES2018",
+}
+`;

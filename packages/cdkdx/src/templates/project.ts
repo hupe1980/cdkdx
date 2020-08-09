@@ -16,7 +16,6 @@ export interface ProjectOptions {
   readonly name: string;
   readonly template: string;
   readonly author: string;
-  readonly isJsii: boolean;
   readonly dependencyVersions: Record<string, Semver>;
 
   readonly srcDir?: string;

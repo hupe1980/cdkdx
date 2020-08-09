@@ -4,9 +4,9 @@ import { config } from 'dotenv';
 import execa from 'execa';
 
 import { TsConfig } from '../ts-config';
-import { ProjectCommand } from './project-command';
+import { BaseProjectCommand } from '../base-command';
 
-export class NodeCommand extends ProjectCommand {
+export class NodeCommand extends BaseProjectCommand {
   @Command.String({ required: true })
   public script!: string;
 
@@ -18,12 +18,9 @@ export class NodeCommand extends ProjectCommand {
       exclude: ['src/lambdas', 'src/**/__tests__'],
     });
 
-    await tsConfig.writeJson(
-      path.join(this.projectInfo.projectPath, 'tsconfig.json'),
-      {
-        overwriteExisting: false,
-      },
-    );
+    await tsConfig.writeJson(path.join(this.context.cwd, 'tsconfig.json'), {
+      overwriteExisting: false,
+    });
 
     const bundleExitCode = await this.cli.run(['bundle']);
 

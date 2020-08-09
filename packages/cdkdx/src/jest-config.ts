@@ -1,5 +1,4 @@
-import { cwd } from '../utils';
-import { TsConfig } from '../ts-config';
+import { TsConfig } from './ts-config';
 
 export = {
   collectCoverageFrom: ['src/**/*.ts', '!src/**/*.(spec|test).ts'],
@@ -11,7 +10,7 @@ export = {
   projects: [
     {
       displayName: 'cdk',
-      rootDir: cwd,
+      rootDir: process.cwd(),
       transform: {
         '^.+\\.ts$': require.resolve('ts-jest/dist'),
         '.+\\.(css|html)$': require.resolve('jest-transform-stub'),
@@ -29,7 +28,7 @@ export = {
     },
     {
       displayName: 'lambdas',
-      rootDir: cwd,
+      rootDir: process.cwd(),
       transform: {
         '^.+\\.ts$': require.resolve('ts-jest/dist'),
         '.+\\.(css|html)$': require.resolve('jest-transform-stub'),

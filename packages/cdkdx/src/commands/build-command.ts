@@ -2,9 +2,9 @@ import * as fs from 'fs-extra';
 import { Command } from 'clipanion';
 
 import { Compiler, JsiiCompiler, TscCompiler } from '../compiler';
-import { ProjectCommand } from './project-command';
+import { BaseProjectCommand } from '../base-command';
 
-export class BuildCommand extends ProjectCommand {
+export class BuildCommand extends BaseProjectCommand {
   static usage = Command.Usage({
     description: 'Build the project',
     details: `
@@ -44,19 +44,17 @@ export class BuildCommand extends ProjectCommand {
     const compiler = this.getCompiler();
 
     await compiler.compile({
-      cwd: this.projectInfo.projectPath,
+      cwd: this.context.cwd,
       watch: this.watch,
     });
 
-    this.context.stdout.write(
-      `✅ Construct ${this.projectInfo.name} compiled.\n\n`,
-    );
+    this.context.done(`Contruct ${this.projectInfo.name} created.`);
 
     return 0;
   }
 
   private getCompiler(): Compiler {
-    if (this.projectInfo.isJsii) {
+    if (this.projectInfo.jsii) {
       return new JsiiCompiler();
     }
     return new TscCompiler();

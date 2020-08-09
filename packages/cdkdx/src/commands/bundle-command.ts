@@ -1,18 +1,18 @@
 import path from 'path';
-import fs from 'fs-extra';
+import fs from 'fs';
 import { Command } from 'clipanion';
-import webpack from 'webpack';
+import webpack, { IgnorePlugin } from 'webpack';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 import SizePlugin from 'size-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 
 import { TsConfig } from '../ts-config';
-import { ProjectCommand } from './project-command';
+import { BaseProjectCommand } from '../base-command';
 
 const SHARED_FOLDER = 'shared';
 
-export class BundleCommand extends ProjectCommand {
+export class BundleCommand extends BaseProjectCommand {
   @Command.Boolean('--watch')
   @Command.Boolean('-w')
   public watch = false;
@@ -113,6 +113,8 @@ export class BundleCommand extends ProjectCommand {
         ],
       },
       plugins: [
+        // https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
+        new IgnorePlugin(/^\.\/locale$/, /moment$/),
         new SizePlugin({
           writeFile: true,
           publish: false,

@@ -1,6 +1,6 @@
 {
   "name": "cdkdx",
-  "description": "Zero-config CLI for aws cdk development with batteries included",
+  "description": "Zero-config CLI for aws cdk development",
   "version": "0.2.1",
   "license": "MIT",
   "keywords": [
@@ -16,7 +16,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hupe1980/cdkdx",
+    "url": "https://github.com/hupe1980/cdkdx.git",
     "directory": "packages/cdkdx"
   },
   "bin": {
@@ -32,7 +32,8 @@
   },
   "scripts": {
     "build": "rimraf lib && tsc",
-    "watch": "rimraf lib && tsc -w"
+    "watch": "rimraf lib && tsc -w",
+    "test": "jest"
   },
   "dependencies": {
     "@types/aws-lambda": "^8.10.59",
@@ -44,7 +45,6 @@
     "clipanion": "^2.4.4",
     "constructs": "^3.0.4",
     "dotenv": "^8.2.0",
-    "enquirer": "^2.3.6",
     "eslint": "^7.6.0",
     "eslint-config-cdk": "^0.2.1",
     "eslint-config-prettier": "^6.11.0",
@@ -68,7 +68,6 @@
     "jsii-pacmak": "^1.10.0",
     "jsii-release": "^0.1.6",
     "latest-version": "^5.1.0",
-    "ora": "^5.0.0",
     "prettier": "^2.0.5",
     "size-plugin": "^2.0.1",
     "standard-version": "^8.0.2",
@@ -76,7 +75,7 @@
     "ts-jest": "^26.1.4",
     "ts-loader": "^8.0.2",
     "ts-node": "^8.10.2",
-    "typedoc": "^0.17.8",
+    "typedoc": "^0.18.0",
     "typedoc-plugin-markdown": "^2.4.0",
     "typescript": "^3.9.7",
     "webpack": "^4.44.1"

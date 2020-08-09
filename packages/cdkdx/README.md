@@ -1,6 +1,33 @@
 # cdkdx
 
-> Zero-config CLI for [aws cdk](https://github.com/awslabs/aws-cdk) development with batteries included
+> Zero-config CLI for [aws cdk](https://github.com/awslabs/aws-cdk) development
+
+:warning: This is experimental and subject to breaking changes.
+
+- [Features](#features)
+- [Quick Start](#quick-start)
+- [Folder structures](#folder-structures)
+  - [App](#app)
+  - [Lib](#lib)
+- [Lambda development](#lambda-development)
+- [Optimizations](#optimizations)
+  - [Moment.js](#moment.js)
+- [Customization](#customization) 
+  - [Displaying Lint Output in the Editor](#displaying-lint-output-in-the-editor)
+- [API Reference](#api-reference)
+  - [`cdkdx build`](#cdkdx-build)
+  - [`cdkdx lint`](#cdkdx-lint)
+  - [`cdkdx test`](#cdkdx-test)
+  - [`cdkdx docgen`](#cdkdx-docgen)
+  - [`cdkdx bump`](#cdkdx-bump)
+  - [`cdkdx release`](#cdkdx-release)
+  - [`cdkdx upgrade-cdk`](#cdkdx-upgrade-cdk)
+  - [`cdkdx node`](#cdkdx-node)
+  - [`cdkdx create`](#cdkdx-create)
+- [Example](#example)
+- [License](#license)
+
+## Features
 
 - Tsc and jsii compiler support
 - Pre-configured linter with custom cdk eslint rules
@@ -9,7 +36,7 @@
 - Typechecking for lambdas and constructs 
 - Yarn workspaces compatible
 
-:warning: This is experimental and subject to breaking changes.
+
 
 ## Quick Start
 
@@ -23,7 +50,14 @@ npx cdkdx create lib my-construct
 cd my-construct
 ```
 
-## App folder structure
+```sh
+npx cdkdx create jsii-lib my-jsii-construct
+cd my-jsii-construct
+```
+
+## Folder structures
+
+### App
 
 ```
 my-app
@@ -31,6 +65,8 @@ my-app
 ├── node_modules
 ├── package.json
 ├── .gitignore
+├── tsconfig.json
+├── tsconfig.eslint.json
 ├── cdk.json
 └── src
     ├── __tests__
@@ -53,7 +89,7 @@ my-app
 }
 ```
 
-## Lib folder structure
+### Lib
 
 ```
 my-construct
@@ -61,6 +97,8 @@ my-construct
 ├── node_modules
 ├── package.json
 ├── .gitignore
+├── tsconfig.json
+├── tsconfig.eslint.json
 └── src
     ├── __tests__
     ├── lambdas
@@ -115,7 +153,19 @@ new Function(this, 'Lambda1', {
 });
 ```
 
-## Displaying Lint Output in the Editor
+## Optimizations
+
+### Moment.js
+If you use [Moment.js](https://momentjs.com/), only the English locale is available by default. To add a specific Moment.js locale to your bundle, you need to import it explicitly.
+
+```typescript
+import moment from 'moment';
+import 'moment/locale/fr';
+```
+
+## Customization
+
+### Displaying Lint Output in the Editor
 
 You would need to install an ESLint plugin for your editor first. Then, add a file called `.eslintrc.json` to the project root:
 
@@ -150,7 +200,7 @@ Rebuilds on any change
 
 ### `cdkdx lint`
 ```shell
-Run eslint with prettier
+Run eslint with prettier and custom cdk rules
 
 Usage:
 
@@ -187,7 +237,7 @@ Run jest test runner
   $ cdkdx test
 
 Run jest test runner in watch mode
-  $ cdkdx test -w
+  $ cdkdx test --watch
 ```
 
 ### `cdkdx docgen`

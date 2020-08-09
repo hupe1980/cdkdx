@@ -1,22 +1,67 @@
+import type { PackageJson } from 'type-fest';
+import * as path from 'path';
 import * as fs from 'fs-extra';
-import { Cli, Command } from 'clipanion';
+import { Cli } from 'clipanion';
 
+import { CommandContext } from './base-command';
 import * as commands from './commands';
-import { resolveOwn } from './utils';
+import { Logger } from './logger';
 
-const { name, version } = fs.readJSONSync(resolveOwn('package.json'));
+/**
+ * Register commands in `commands/`
+ * @param cli the Clipanion instance.
+ */
+function registerCommands(cli: Cli<CommandContext>) {
+  Object.values(commands).forEach((command) => cli.register(command));
+}
 
-const cli = new Cli({
-  binaryLabel: name,
-  binaryName: name,
-  binaryVersion: version,
-});
+async function main() {
+  const cwd = process.cwd();
 
-cli.register(Command.Entries.Help);
-cli.register(Command.Entries.Version);
+  const { name, version } = (await fs.readJSON(
+    path.join(cwd, 'package.json'),
+  )) as PackageJson;
 
-Object.values(commands).forEach((command) => cli.register(command));
+  async function run(): Promise<void> {
+    const cli = new Cli<CommandContext>({
+      binaryLabel: name,
+      binaryName: name,
+      binaryVersion: version,
+    });
 
-cli.runExit(process.argv.slice(2), {
-  ...Cli.defaultContext,
-});
+    registerCommands(cli);
+
+    try {
+      await exec(cli);
+    } catch (error) {
+      process.stdout.write(cli.error(error));
+      process.exitCode = 1;
+    }
+  }
+
+  async function exec(cli: Cli<CommandContext>): Promise<void> {
+    const command = cli.process(process.argv.slice(2));
+
+    const logger = new Logger({
+      stdout: process.stdout,
+      stderr: process.stderr,
+    });
+
+    cli.runExit(command, {
+      stdin: process.stdin,
+      stdout: process.stdout,
+      stderr: process.stderr,
+      cwd,
+      version: version as string,
+      log: logger.log,
+      done: logger.done,
+    });
+  }
+
+  return run().catch((error) => {
+    process.stdout.write(error.stack || error.message);
+    process.exitCode = 1;
+  });
+}
+
+main();
