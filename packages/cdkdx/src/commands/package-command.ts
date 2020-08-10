@@ -12,7 +12,7 @@ export class PackageCommand extends BaseProjectCommand {
   @Command.Path('package')
   async execute(): Promise<number> {
     if (this.projectInfo.private) {
-      this.context.stdout.write('⚠ No packaging for private modules.\n\n');
+      this.context.logger.warn('No packaging for private modules.\n');
       return 0;
     }
 

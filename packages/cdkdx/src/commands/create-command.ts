@@ -48,19 +48,32 @@ export class CreateCommand extends BaseCommand {
 
     this.context.logger.done(`Dependencies installed.\n`);
 
+    if (!(await template.isInGitRepository())) {
+      this.context.logger.info('Initializing a new git repository.\n');
+
+      try {
+        await template.initializeGitRepository();
+        this.context.logger.done(`Git repository initialized.\n`);
+      } catch (e) {
+        this.context.logger.warn(
+          'Unable to initialize git repository for your project.\n',
+        );
+      }
+    }
+
     timer.end();
 
     this.context.logger.done(`Project created in ${timer.display()}.\n`);
 
-    this.context.logger.info(`${chalk.green(
-      'Awesome!',
-    )} You are now ready to start coding. 
+    this.context.logger.info(
+      `${chalk.green('Awesome!')} You are now ready to start coding.\n`,
+    );
 
-All you have to do is change the directory:
-    ${chalk.bold.cyan(`cd ${this.name}`)}
-  
-Happy hacking!
-    `);
+    this.context.logger.info(
+      `Just change the directory: ${chalk.bold.cyan(`cd ${this.name}`)}\n`,
+    );
+
+    this.context.logger.info('Happy hacking!\n');
 
     return 0;
   }

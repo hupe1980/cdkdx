@@ -92,6 +92,33 @@ export class Template {
     });
   }
 
+  public async isInGitRepository(): Promise<boolean> {
+    try {
+      await execa('git', ['rev-parse', '--is-inside-work-tree'], {
+        cwd: this.project.targetPath,
+        stdio: 'ignore',
+      });
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  public async initializeGitRepository(): Promise<void> {
+    await execa('git', ['init'], {
+      cwd: this.project.targetPath,
+      stdio: 'ignore',
+    });
+    await execa('git', ['add', '.'], {
+      cwd: this.project.targetPath,
+      stdio: 'ignore',
+    });
+    await execa('git', ['commit', '-m="Initial commit"'], {
+      cwd: this.project.targetPath,
+      stdio: 'ignore',
+    });
+  }
+
   private async getInstallCommand(): Promise<{
     command: 'yarn' | 'npm';
     args: string[];
@@ -103,16 +130,4 @@ export class Template {
       return { command: 'npm', args: ['i'] };
     }
   }
-
-  // private async isInGitRepository(targetPath: string): Promise<boolean> {
-  //   try {
-  //     await execa('git', ['rev-parse', '--is-inside-work-tree'], {
-  //       cwd: targetPath,
-  //       stdio: 'ignore',
-  //     });
-  //     return true;
-  //   } catch (e) {
-  //     return false;
-  //   }
-  // }
 }
