@@ -9,7 +9,6 @@ import { Directory } from './directory';
 import { JsonFile } from './json-file';
 
 const DEFAULT_JSII_MIN_NODE = '10.17.0';
-const TEMPLATES_PATH = path.join(__dirname, '..', '..', 'templates');
 
 export interface ProjectOptions {
   readonly targetPath: string;
@@ -46,7 +45,7 @@ export class Project extends Construct {
   private readonly manifest: Record<string, unknown>;
   private readonly templateContext: Record<string, unknown>;
 
-  constructor(public readonly type: string, options: ProjectOptions) {
+  constructor(options: ProjectOptions) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     super(undefined as any, 'cdkdx');
 
@@ -127,8 +126,7 @@ export class Project extends Construct {
   }
 
   public addFiles(files: string[], fromPath?: string): void {
-    const templatePath =
-      fromPath ?? path.join(TEMPLATES_PATH, this.type, this.template);
+    const templatePath = fromPath ?? this.template;
 
     files.forEach((file) => {
       const sourceFile = path.join(templatePath, file);

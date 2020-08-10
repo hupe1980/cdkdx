@@ -1,12 +1,10 @@
 import { expect as expectCDK, haveResource } from '@aws-cdk/assert';
-import { App, Stack } from '@aws-cdk/core';
+import { Stack } from '@aws-cdk/core';
 import { ${pascalCase(name)} } from '../${name}';
 
 test('default setup', () => {
   // GIVEN
-  const app = new App();
-  
-  const stack = new Stack(app, 'TestStack');
+  const stack = new Stack();
   
   // WHEN
   new ${pascalCase(name)}(stack, '${pascalCase(name)}');

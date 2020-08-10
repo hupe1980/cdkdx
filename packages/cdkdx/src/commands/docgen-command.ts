@@ -22,7 +22,7 @@ export class DocgenCommand extends BaseProjectCommand {
   }
 
   private getDocgen(): Docgen {
-    if (this.projectInfo.jsii) {
+    if (this.projectInfo.isJsii) {
       return new JsiiDocgen();
     }
     return new TscDocgen();

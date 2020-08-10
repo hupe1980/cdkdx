@@ -1,12 +1,12 @@
 import { Command, BaseContext } from 'clipanion';
 
 import { ProjectInfo } from './project-info';
+import { Logger } from './logger';
 
 export interface CommandContext extends BaseContext {
   cwd: string;
   version: string;
-  log: (message: string) => void;
-  done: (message: string) => void;
+  logger: Logger;
 }
 
 export abstract class BaseCommand extends Command<CommandContext> {}

@@ -4,12 +4,13 @@ import { JsonFile } from './json-file';
 
 export class AppProject extends Project {
   constructor(options: ProjectOptions) {
-    super('app', options);
+    super(options);
 
     this.addScripts({
       build: 'cdkdx build',
       test: 'cdkdx test',
       lint: 'cdkdx lint',
+      docgen: 'cdkdx docgen',
       cdk: 'cdk',
     });
 

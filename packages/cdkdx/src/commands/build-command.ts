@@ -1,8 +1,9 @@
 import * as fs from 'fs-extra';
 import { Command } from 'clipanion';
 
-import { Compiler, JsiiCompiler, TscCompiler } from '../compiler';
 import { BaseProjectCommand } from '../base-command';
+import { Compiler, JsiiCompiler, TscCompiler } from '../compiler';
+import { Timer } from '../timer';
 
 export class BuildCommand extends BaseProjectCommand {
   static usage = Command.Usage({
@@ -25,6 +26,8 @@ export class BuildCommand extends BaseProjectCommand {
 
   @Command.Path('build')
   async execute(): Promise<number> {
+    const timer = new Timer();
+
     const bundleCommand = ['bundle'];
 
     if (this.watch) {
@@ -49,13 +52,17 @@ export class BuildCommand extends BaseProjectCommand {
       projectInfo: this.projectInfo,
     });
 
-    this.context.done(`Contruct ${this.projectInfo.name} created.\n`);
+    timer.end();
+
+    this.context.logger.done(
+      `Project ${this.projectInfo.name} compiled in ${timer.display()}.\n`,
+    );
 
     return 0;
   }
 
   private getCompiler(): Compiler {
-    if (this.projectInfo.jsii) {
+    if (this.projectInfo.isJsii) {
       return new JsiiCompiler();
     }
     return new TscCompiler();

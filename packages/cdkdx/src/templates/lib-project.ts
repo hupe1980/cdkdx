@@ -3,7 +3,7 @@ import { Project, ProjectOptions } from './project';
 
 export class LibProject extends Project {
   constructor(options: ProjectOptions) {
-    super('lib', options);
+    super(options);
 
     this.addScripts({
       build: 'cdkdx build',

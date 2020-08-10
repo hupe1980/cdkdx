@@ -20,7 +20,7 @@ export class PackageCommand extends BaseProjectCommand {
 
     await fs.remove(outdir);
 
-    if (this.projectInfo.jsii) {
+    if (this.projectInfo.isJsii) {
       const command = require.resolve('jsii-pacmak/bin/jsii-pacmak');
       await execa(command, ['--outdir', outdir, '--no-npmignore']);
     } else {
@@ -32,8 +32,8 @@ export class PackageCommand extends BaseProjectCommand {
       await fs.move(tarball, path.join(target, path.basename(tarball)));
     }
 
-    this.context.log(''); //empty line
-    this.context.done(`${this.projectInfo.name} packed.\n`);
+    this.context.logger.log(''); //empty line
+    this.context.logger.done(`${this.projectInfo.name} packed.\n`);
 
     return 0;
   }

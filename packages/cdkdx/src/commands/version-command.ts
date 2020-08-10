@@ -5,6 +5,6 @@ export class VersionCommand extends BaseCommand {
   @Command.Path(`--version`)
   @Command.Path(`-v`)
   async execute(): Promise<void> {
-    this.context.log(this.cli.binaryVersion ?? `<unknown>`);
+    this.context.logger.log(this.cli.binaryVersion ?? `<unknown>`);
   }
 }

@@ -22,6 +22,11 @@ async function main() {
     path.join(cwd, 'package.json'),
   )) as PackageJson;
 
+  const logger = new Logger({
+    stdout: process.stdout,
+    stderr: process.stderr,
+  });
+
   async function run(): Promise<void> {
     const cli = new Cli<CommandContext>({
       binaryLabel: name,
@@ -42,19 +47,13 @@ async function main() {
   async function exec(cli: Cli<CommandContext>): Promise<void> {
     const command = cli.process(process.argv.slice(2));
 
-    const logger = new Logger({
-      stdout: process.stdout,
-      stderr: process.stderr,
-    });
-
     cli.runExit(command, {
       stdin: process.stdin,
       stdout: process.stdout,
       stderr: process.stderr,
       cwd,
       version: version as string,
-      log: logger.log,
-      done: logger.done,
+      logger,
     });
   }
 

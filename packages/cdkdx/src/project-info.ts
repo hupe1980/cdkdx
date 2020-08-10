@@ -9,8 +9,8 @@ export type PackageJson = TypeFestPackageJson & {
 export class ProjectInfo {
   public readonly name: string;
   public readonly private: boolean;
-  public readonly jsii: boolean;
-  public readonly externals: string[] | undefined;
+  public readonly isJsii: boolean;
+  public readonly externals: PackageJson['externals'];
   public readonly peerDependencies: PackageJson['peerDependencies'];
   public readonly dependencies: PackageJson['dependencies'];
   public readonly devDependencies: PackageJson['devDependencies'];
@@ -38,7 +38,7 @@ export class ProjectInfo {
 
     this.name = this.pkgJson.name;
     this.private = this.pkgJson.private ?? false;
-    this.jsii = this.pkgJson.jsii !== undefined;
+    this.isJsii = this.pkgJson.jsii !== undefined;
     this.externals = this.pkgJson.externals;
     this.peerDependencies = this.pkgJson.peerDependencies;
     this.dependencies = this.pkgJson.dependencies;
