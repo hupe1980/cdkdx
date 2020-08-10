@@ -19,7 +19,7 @@ async function main() {
   const cwd = process.cwd();
 
   const { name, version } = (await fs.readJSON(
-    path.join(cwd, 'package.json'),
+    path.join(__dirname, '..', 'package.json'),
   )) as PackageJson;
 
   const logger = new Logger({
