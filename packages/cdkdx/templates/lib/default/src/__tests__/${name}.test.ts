@@ -5,10 +5,10 @@ import { ${pascalCase(name)} } from '../${name}';
 test('default setup', () => {
   // GIVEN
   const stack = new Stack();
-  
+
   // WHEN
   new ${pascalCase(name)}(stack, '${pascalCase(name)}');
-  
+
   // THEN
   expectCDK(stack).to(haveResource('AWS::Lambda::Function'));
 });
