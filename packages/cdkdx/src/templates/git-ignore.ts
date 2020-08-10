@@ -9,17 +9,19 @@ export class GitIgnore extends FileBase {
     super(project, '.gitignore');
   }
 
+  public excludesFromString(gitignore: string): void {
+    gitignore.split('\n').forEach((line) => this.exclude(line));
+  }
+
   public exclude(...patterns: string[]): void {
     this.excludes.push(...patterns);
   }
 
   public include(...patterns: string[]): void {
-    this.includes.push(...patterns);
+    this.includes.push(...patterns.map((inc) => `!${inc}`));
   }
 
   protected get data(): string {
-    return [...this.excludes, ...this.includes.map((inc) => `!${inc}`)].join(
-      '\n',
-    );
+    return [...this.excludes, ...this.includes].join('\n');
   }
 }

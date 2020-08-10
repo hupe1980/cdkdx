@@ -38,5 +38,7 @@ export class JsiiLibProject extends LibProject {
         pinnedDevDependency: false,
       },
     );
+
+    this.gitignore.exclude('.jsii');
   }
 }

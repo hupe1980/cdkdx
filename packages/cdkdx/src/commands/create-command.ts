@@ -46,6 +46,8 @@ export class CreateCommand extends BaseCommand {
 
     await template.installDependencies();
 
+    this.context.logger.log(``);
+
     this.context.logger.done(`Dependencies installed.\n`);
 
     if (!(await template.isInGitRepository())) {

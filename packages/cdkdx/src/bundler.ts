@@ -12,7 +12,7 @@ const SHARED_FOLDER = 'shared';
 
 export class Lambdas {
   public readonly entries: Record<string, string> = {};
-  public readonly warnings: string[] = [];
+  public readonly warnings = new Array<string>();
 
   constructor(srcPath: string) {
     if (fs.existsSync(srcPath)) {

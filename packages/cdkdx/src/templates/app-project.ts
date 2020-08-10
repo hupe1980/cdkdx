@@ -32,6 +32,8 @@ export class AppProject extends Project {
       },
     });
 
+    this.gitignore.exclude('cdk.out', 'cdk.context.json');
+
     this.addFiles([
       'README.md',
       'src/${name}-app.ts',

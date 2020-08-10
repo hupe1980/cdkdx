@@ -37,6 +37,8 @@ export class LibProject extends Project {
       cdkdx: options.dependencyVersions['cdkdx'],
     });
 
+    this.gitignore.exclude('dist');
+
     this.addFiles([
       'README.md',
       'src/index.ts',
