@@ -5,7 +5,12 @@ export class JsiiLibProject extends LibProject {
   constructor(options: ProjectOptions) {
     super(options);
 
+    this.addScripts({
+      ['release:pypi']: 'cdkdx release pypi',
+    });
+
     this.addFields({
+      files: ['lib', '.jsii'],
       jsii: {
         outdir: 'dist',
         tsc: {
@@ -24,5 +29,14 @@ export class JsiiLibProject extends LibProject {
         },
       },
     });
+
+    this.addPeerDependencies(
+      {
+        constructs: options.dependencyVersions['constructs'],
+      },
+      {
+        pinnedDevDependency: false,
+      },
+    );
   }
 }

@@ -7,6 +7,7 @@ import { Semver } from '../semver';
 import { TemplateFile } from './template-file';
 import { Directory } from './directory';
 import { JsonFile } from './json-file';
+import { GitIgnore } from './git-ignore';
 
 const DEFAULT_JSII_MIN_NODE = '10.17.0';
 
@@ -37,6 +38,7 @@ export class Project extends Construct {
   public readonly minNodeVersion: string;
   public readonly outDir: string;
   public readonly srcDir: string;
+  public readonly gitIgnore: GitIgnore;
 
   private readonly scripts: Record<string, string> = {};
   private readonly peerDependencies: Record<string, string> = {};
@@ -60,11 +62,16 @@ export class Project extends Construct {
     this.manifest = {
       name: options.name,
       version: '0.1.0',
+      description: 'TODO: Add your description here',
       license: 'MIT',
-      author: options.author,
+      author: {
+        name: options.author,
+        url: `https://github.com/${options.author}`,
+      },
       engines: { node: `>= ${this.minNodeVersion}` },
       main: undefined,
       types: undefined,
+      files: undefined,
       jsii: undefined,
       scripts: this.scripts,
       peerDependencies: this.peerDependencies,
@@ -77,6 +84,18 @@ export class Project extends Construct {
 
     new JsonFile(this, 'package.json', {
       obj: this.manifest,
+    });
+
+    this.gitIgnore = new GitIgnore(this);
+    this.gitIgnore.exclude('.DS_Store');
+
+    this.addScripts({
+      build: 'cdkdx build',
+      watch: 'cdkdx build -w',
+      test: 'cdkdx test',
+      lint: 'cdkdx lint',
+      ['upgrade:cdk']: 'cdkdx upgrade-cdk',
+      docgen: 'cdkdx docgen',
     });
 
     this.templateContext = {

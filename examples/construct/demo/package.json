@@ -1,0 +1,66 @@
+{
+  "name": "demo",
+  "version": "0.1.0",
+  "description": "TODO: Add your description here",
+  "license": "MIT",
+  "author": {
+    "name": "hupe1980",
+    "url": "https://github.com/hupe1980"
+  },
+  "engines": {
+    "node": ">= 10.17.0"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib",
+    ".jsii"
+  ],
+  "jsii": {
+    "outdir": "dist",
+    "tsc": {
+      "outDir": "lib",
+      "rootDir": "src"
+    },
+    "excludeTypescript": [
+      "src/lambdas",
+      "src/**/__tests__"
+    ],
+    "targets": {
+      "python": {
+        "distName": "demo",
+        "module": "demo"
+      }
+    }
+  },
+  "scripts": {
+    "build": "cdkdx build",
+    "watch": "cdkdx build -w",
+    "test": "cdkdx test",
+    "lint": "cdkdx lint",
+    "upgrade:cdk": "cdkdx upgrade-cdk",
+    "docgen": "cdkdx docgen",
+    "package": "cdkdx package",
+    "release:npm": "cdkdx release npm",
+    "release:pypi": "cdkdx release pypi"
+  },
+  "peerDependencies": {
+    "@aws-cdk/aws-lambda": "^1.57.0",
+    "@aws-cdk/core": "^1.57.0",
+    "constructs": "^3.0.4"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-lambda": "^1.57.0",
+    "@aws-cdk/core": "^1.57.0"
+  },
+  "devDependencies": {
+    "@aws-cdk/assert": "^1.57.0",
+    "@types/node": "^10.17.0",
+    "cdkdx": "^0.2.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "cdk"
+    ]
+  }
+}

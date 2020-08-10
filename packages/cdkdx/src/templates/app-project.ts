@@ -7,10 +7,6 @@ export class AppProject extends Project {
     super(options);
 
     this.addScripts({
-      build: 'cdkdx build',
-      test: 'cdkdx test',
-      lint: 'cdkdx lint',
-      docgen: 'cdkdx docgen',
       cdk: 'cdk',
     });
 

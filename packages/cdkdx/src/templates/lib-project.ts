@@ -6,16 +6,14 @@ export class LibProject extends Project {
     super(options);
 
     this.addScripts({
-      build: 'cdkdx build',
-      test: 'cdkdx test',
-      lint: 'cdkdx lint',
-      docgen: 'cdkdx docgen',
       package: 'cdkdx package',
+      ['release:npm']: 'cdkdx release npm',
     });
 
     this.addFields({
       main: `${this.outDir}/index.js`,
       types: `${this.outDir}/index.d.ts`,
+      files: ['lib'],
     });
 
     this.addPeerDependencies(

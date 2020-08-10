@@ -8,6 +8,12 @@ export interface LoggerProps {
 export class Logger {
   constructor(private readonly props: LoggerProps) {}
 
+  public info(message: string): void {
+    this.props.stdout.write(
+      `${chalk.bgWhite.black(' INFO ')} ${chalk.white(message)}\n`,
+    );
+  }
+
   public done(message: string): void {
     this.props.stdout.write(
       `${chalk.bgGreen.black(' DONE ')} ${chalk.green(message)}\n`,

@@ -32,9 +32,14 @@ export class Template {
 
     const cdkVersion = await latestVersion('@aws-cdk/core');
 
+    const constructsVersion = await latestVersion('constructs');
+
     const sourceMapSupportVersion = await latestVersion('source-map-support');
 
     const author = await Template.getAuthor();
+
+    // jsii-lib uses the same template as lib
+    const templateType = props.type === 'jsii-lib' ? 'lib' : props.type;
 
     const project = ((options: ProjectOptions): Project => {
       switch (props.type) {
@@ -49,11 +54,12 @@ export class Template {
       }
     })({
       name: props.name,
-      template: path.join(TEMPLATES_PATH, props.type, 'default'),
+      template: path.join(TEMPLATES_PATH, templateType, 'default'),
       author,
       dependencyVersions: {
         cdkdx: Semver.caret(props.version),
         '@aws-cdk/core': Semver.caret(cdkVersion),
+        constructs: Semver.caret(constructsVersion),
         'source-map-support': Semver.caret(sourceMapSupportVersion),
       },
       targetPath,

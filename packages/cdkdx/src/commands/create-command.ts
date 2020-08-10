@@ -3,6 +3,7 @@ import { Command } from 'clipanion';
 
 import { BaseCommand } from '../base-command';
 import { Template } from '../template';
+import { Timer } from '../timer';
 
 export class CreateCommand extends BaseCommand {
   static usage = Command.Usage({
@@ -25,6 +26,8 @@ export class CreateCommand extends BaseCommand {
 
   @Command.Path('create')
   async execute(): Promise<number> {
+    const timer = new Timer();
+
     const template = await Template.newInstance({
       cwd: this.context.cwd,
       version: this.context.version,
@@ -34,21 +37,29 @@ export class CreateCommand extends BaseCommand {
 
     template.createProject();
 
-    this.context.logger.log(
-      `Installing dependencies: ${template.getDependencyNames().join(',')}`,
+    this.context.logger.info(
+      `Installing dependencies:\n${template
+        .getDependencyNames()
+        .map((dep) => chalk.bold.cyan(dep))
+        .join('\n')}\n`,
     );
 
     await template.installDependencies();
 
     this.context.logger.done(`Dependencies installed.\n`);
 
-    this.context.logger.log(`
-      ${chalk.green('Awesome!')} You can now start coding. 
-      
-      You just have to change the directory:
-          ${chalk.bold.cyan(`cd ${this.name}`)}
-        
-      Happy hacking!
+    timer.end();
+
+    this.context.logger.done(`Project created in ${timer.display()}.\n`);
+
+    this.context.logger.info(`${chalk.green(
+      'Awesome!',
+    )} You are now ready to start coding. 
+
+All you have to do is change the directory:
+    ${chalk.bold.cyan(`cd ${this.name}`)}
+  
+Happy hacking!
     `);
 
     return 0;
