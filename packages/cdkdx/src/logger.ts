@@ -26,6 +26,12 @@ export class Logger {
     );
   }
 
+  public fail(message: string): void {
+    this.props.stderr.write(
+      `${chalk.bgRed.black(' FAIL ')} ${chalk.red(message)}\n`,
+    );
+  }
+
   public log(message: string): void {
     this.props.stdout.write(`${message}\n`);
   }
