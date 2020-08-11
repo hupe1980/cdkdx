@@ -30,7 +30,7 @@
 
 ## Features
 
-- Tsc and jsii compiler support
+- [Tsc](https://github.com/microsoft/TypeScript) and [jsii](https://github.com/aws/jsii) compiler support
 - Pre-configured linter with custom cdk eslint rules
 - Jest test runner setup
 - Bundles your lambda functions with webpack
@@ -302,6 +302,28 @@ It is usually specified in the cdk.json file:
 ```
 
 ### `cdkdx create`
+```shell
+Create a new, empty CDK project from a template
+
+Usage:
+
+$ cdkdx create 
+
+Details:
+
+This command will create a new, empty CDK project from a template.
+
+Examples:
+
+Create a cdk app
+  $ npx cdkdx create app my-app
+
+Create a cdk lib
+  $ npx cdkdx create lib my-lib
+
+Create a jsii cdk lib
+  $ npx cdkdx create jsii-lib my-lib
+```
 
 ## Example
 
