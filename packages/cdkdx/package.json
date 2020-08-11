@@ -25,7 +25,8 @@
   "files": [
     "bin",
     "lib",
-    "templates"
+    "templates",
+    "!.DS_Store"
   ],
   "engines": {
     "node": ">=10"
