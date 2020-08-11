@@ -4,13 +4,15 @@ import * as fs from 'fs-extra';
 
 export type PackageJson = TypeFestPackageJson & {
   externals?: string[];
+  nodeModules?: string[];
 };
 
 export class ProjectInfo {
   public readonly name: string;
   public readonly private: boolean;
   public readonly isJsii: boolean;
-  public readonly externals: PackageJson['externals'];
+  public readonly externals: string[];
+  public readonly nodeModules: string[];
   public readonly peerDependencies: PackageJson['peerDependencies'];
   public readonly dependencies: PackageJson['dependencies'];
   public readonly devDependencies: PackageJson['devDependencies'];
@@ -39,7 +41,10 @@ export class ProjectInfo {
     this.name = this.pkgJson.name;
     this.private = this.pkgJson.private ?? false;
     this.isJsii = this.pkgJson.jsii !== undefined;
-    this.externals = this.pkgJson.externals;
+
+    this.externals = this.pkgJson.externals ?? [];
+    this.nodeModules = this.pkgJson.nodeModules ?? [];
+
     this.peerDependencies = this.pkgJson.peerDependencies;
     this.dependencies = this.pkgJson.dependencies;
     this.devDependencies = this.pkgJson.devDependencies;

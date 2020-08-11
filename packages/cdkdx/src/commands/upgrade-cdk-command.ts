@@ -7,8 +7,10 @@ import { BaseProjectCommand } from '../base-command';
 
 export class UpgradeCdkCommand extends BaseProjectCommand {
   static usage = Command.Usage({
-    description: 'Upgrade aws cdk',
-    details: ``,
+    description: 'Upgrade aws cdk to the latest version',
+    details: `
+            This command will upgrade the aws dependencies in the package.json to the latest version.
+        `,
   });
 
   @Command.Boolean('--dry-run')
@@ -51,6 +53,8 @@ export class UpgradeCdkCommand extends BaseProjectCommand {
 
     if (!this.dryRun) {
       await this.projectInfo.syncPkgJson();
+
+      this.context.logger.done(`Cdk versions upgraded to ${versionSpec}.\n`);
     }
 
     return 0;

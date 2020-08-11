@@ -20,13 +20,17 @@
     "watch": "rimraf lib && tsc -w",
     "test": "jest"
   },
+  "peerDependencies": {
+    "@typescript-eslint/eslint-plugin": "^3.8.0"
+  },
   "dependencies": {
-    "@typescript-eslint/experimental-utils": "^3.8.0",
+    "@typescript-eslint/experimental-utils": "3.8.0",
     "read-pkg-up": "^7.0.1"
   },
   "devDependencies": {
     "@types/jest": "^26.0.9",
-    "jest": "^26.2.2",
+    "@typescript-eslint/eslint-plugin": "^3.8.0",
+    "jest": "^26.3.0",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.1.4",
     "typescript": "^3.9.7"

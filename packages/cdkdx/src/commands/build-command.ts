@@ -9,7 +9,7 @@ export class BuildCommand extends BaseProjectCommand {
   static usage = Command.Usage({
     description: 'Build the project',
     details: `
-            This command will bundle the lambdas and build the project.
+            This command bundles the lambdas and builds the project.
         `,
     examples: [
       ['Build the project', 'cdkdx build'],

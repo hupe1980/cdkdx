@@ -14,6 +14,7 @@
   - [Moment.js](#moment.js)
 - [Customization](#customization) 
   - [Displaying Lint Output in the Editor](#displaying-lint-output-in-the-editor)
+  - [Colored output during execution with lerna run](#colored-output-during-execution-with-lerna-run)
 - [API Reference](#api-reference)
   - [`cdkdx build`](#cdkdx-build)
   - [`cdkdx lint`](#cdkdx-lint)
@@ -129,11 +130,24 @@ import type { Handler } from 'aws-lambda';
 // package.json
 
 {
-    "name": "construct",
-    ...
-    "externals": [
-        "aws-sdk"
-    ]
+  "name": "construct",
+  ...
+  "externals": [
+    "aws-sdk"
+  ]
+}
+```
+- Use the `nodeModules` section to specify a list of modules that should not be bundled but instead included in the node_modules folder of the Lambda package.
+
+```json
+// package.json
+
+{
+  "name": "construct",
+  ...
+  "nodeModules": [
+    "express"
+  ]
 }
 ```
 - Cross lambda code should be placed in the `<root>/src/lambdas/shared` folder
@@ -172,6 +186,14 @@ You would need to install an ESLint plugin for your editor first. Then, add a fi
 ```json
 {
   "extends": "cdk"
+}
+```
+
+### Colored output during execution with lerna run
+```json
+// package.json
+"scripts": {
+    "build": "FORCE_COLOR=1 lerna run build"
 }
 ```
 
@@ -259,6 +281,25 @@ $ cdkdx upgrade-cdk [--dry-run] [--mode #0] [--version #0] [--skip-dependencies]
 ```
 
 ### `cdkdx node`
+```shell
+Execute cdk apps
+
+Usage:
+
+$ cdkdx node <script>
+
+Details:
+
+This command bundles the lambdas, compiles the app and adds support for .env files to the cdk app.
+It is usually specified in the cdk.json file:
+
+// cdk.json
+{
+  "app": "cdkdx node src/your-app.ts",
+  "context": ...
+}
+
+```
 
 ### `cdkdx create`
 

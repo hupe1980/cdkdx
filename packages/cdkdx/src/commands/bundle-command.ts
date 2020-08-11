@@ -18,11 +18,14 @@ export class BundleCommand extends BaseProjectCommand {
     const lambdas = new Lambdas(this.projectInfo.lambdasSrcPath);
 
     lambdas.warnings.forEach((warning) => {
-      this.context.logger.warn(`No ${warning} found!\n`);
+      this.context.logger.warn(`File ${warning} not found!\n`);
     });
 
     // Return 0 if no lambdas were found
-    if (!lambdas.hasEntries()) return 0;
+    if (!lambdas.hasEntries()) {
+      this.context.logger.info('No lambdas found for bundling.');
+      return 0;
+    }
 
     const tsConfig = TsConfig.fromLambdaTemplate({
       include: ['**/*.ts'],

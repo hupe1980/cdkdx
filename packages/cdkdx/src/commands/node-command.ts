@@ -7,6 +7,24 @@ import { TsConfig } from '../ts-config';
 import { BaseProjectCommand } from '../base-command';
 
 export class NodeCommand extends BaseProjectCommand {
+  static usage = Command.Usage({
+    description: 'Execute cdk apps',
+    details: `
+      This command bundles the lambdas, compiles the app and adds support for .env files to the cdk app.
+      It is usually specified in the cdk.json file:
+      
+      // cdk.json
+
+      {
+
+        "app": "cdkdx node src/your-app.ts",
+
+        "context": ...
+        
+      }
+    `,
+  });
+
   @Command.String({ required: true })
   public script!: string;
 
@@ -29,7 +47,7 @@ export class NodeCommand extends BaseProjectCommand {
     const command = require.resolve('ts-node/dist/bin');
     const args = [this.script];
 
-    config();
+    config(); //.env
 
     await execa(command, args, {
       stdio: ['ignore', 'inherit', 'inherit'],

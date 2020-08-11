@@ -7,6 +7,7 @@ import SizePlugin from 'size-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 
 import { ProjectInfo } from './project-info';
+import { NodeModulesPlugin } from './plugins';
 
 const SHARED_FOLDER = 'shared';
 
@@ -54,6 +55,15 @@ export class Bundler {
   private readonly compiler: webpack.Compiler;
 
   constructor(props: BundlerProps) {
+    const compilerOptions = {
+      importsNotUsedAsValues: 'preserve',
+      noEmit: false,
+      declaration: false,
+      inlineSourceMap: false,
+      sourceMap: true,
+      composite: false,
+    };
+
     const config: webpack.Configuration = {
       target: 'node',
       mode: 'production',
@@ -86,14 +96,7 @@ export class Bundler {
               options: {
                 configFile: props.tsConfigFile,
                 transpileOnly: true,
-                compilerOptions: {
-                  importsNotUsedAsValues: 'preserve',
-                  noEmit: false,
-                  declaration: false,
-                  inlineSourceMap: false,
-                  sourceMap: true,
-                  composite: false,
-                },
+                compilerOptions,
               },
             },
           },
@@ -120,19 +123,16 @@ export class Bundler {
             enabled: true,
             configFile: props.tsConfigFile,
             configOverwrite: {
-              compilerOptions: {
-                importsNotUsedAsValues: 'preserve',
-                noEmit: false,
-                declaration: false,
-                inlineSourceMap: false,
-                sourceMap: true,
-                composite: false,
-              },
+              compilerOptions,
             },
           },
         }),
         new FriendlyErrorsWebpackPlugin({
           clearConsole: false,
+        }),
+        new NodeModulesPlugin({
+          outputPath: props.projectInfo.lambdasOutPath,
+          nodeModules: props.projectInfo.nodeModules,
         }),
       ],
       output: {
@@ -140,7 +140,10 @@ export class Bundler {
         filename: '[name]/index.js',
         libraryTarget: 'commonjs2',
       },
-      externals: props.projectInfo.externals,
+      externals: [
+        ...props.projectInfo.externals,
+        ...props.projectInfo.nodeModules,
+      ],
     };
 
     this.compiler = webpack(config);

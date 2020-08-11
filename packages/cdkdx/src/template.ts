@@ -3,6 +3,7 @@ import * as fs from 'fs-extra';
 import execa from 'execa';
 import latestVersion from 'latest-version';
 import { Semver } from './semver';
+import { PackageManager } from './package-manager';
 import {
   Project,
   ProjectOptions,
@@ -84,9 +85,9 @@ export class Template {
   }
 
   public async installDependencies(): Promise<void> {
-    const { command, args } = await this.getInstallCommand();
+    const packageManager = new PackageManager();
 
-    await execa(command, args, {
+    await packageManager.install({
       cwd: this.project.targetPath,
       stdio: ['ignore', 'inherit', 'inherit'],
     });
@@ -117,17 +118,5 @@ export class Template {
       cwd: this.project.targetPath,
       stdio: 'ignore',
     });
-  }
-
-  private async getInstallCommand(): Promise<{
-    command: 'yarn' | 'npm';
-    args: string[];
-  }> {
-    try {
-      await execa('yarn', ['--version']);
-      return { command: 'yarn', args: [] };
-    } catch (_e) {
-      return { command: 'npm', args: ['i'] };
-    }
   }
 }

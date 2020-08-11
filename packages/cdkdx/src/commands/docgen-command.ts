@@ -1,6 +1,7 @@
 import { Command } from 'clipanion';
 
 import { Docgen, TscDocgen, JsiiDocgen } from '../docgen';
+import { Timer } from '../timer';
 import { BaseProjectCommand } from '../base-command';
 
 export class DocgenCommand extends BaseProjectCommand {
@@ -11,12 +12,18 @@ export class DocgenCommand extends BaseProjectCommand {
 
   @Command.Path('docgen')
   async execute(): Promise<number> {
+    const timer = new Timer();
+
     const docgen = this.getDocgen();
 
     await docgen.generate({
       projectPath: this.context.cwd,
       typescriptExcludes: this.projectInfo.typescriptExcludes,
     });
+
+    timer.end();
+
+    this.context.logger.done(`Docs created in ${timer.display()}.\n`);
 
     return 0;
   }
