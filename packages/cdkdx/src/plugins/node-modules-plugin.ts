@@ -6,17 +6,16 @@ import { PackageJson } from 'type-fest';
 
 import { PackageManager } from '../package-manager';
 
-const NAME = 'NodeModulesPlugin';
-
-export interface PluginOptions {
-  outputPath: string;
+export interface NodeModulesPluginOptions {
   nodeModules: string[];
 }
 
 export class NodeModulesPlugin {
+  public static readonly NAME = 'NodeModulesPlugin';
+
   private nodeModules: Record<string, PackageJson> = {};
 
-  constructor(private readonly options: PluginOptions) {}
+  constructor(private readonly options: NodeModulesPluginOptions) {}
 
   apply(compiler: webpack.Compiler): void {
     if (this.options.nodeModules.length === 0) return;
@@ -57,6 +56,7 @@ export class NodeModulesPlugin {
           //init
           this.nodeModules[name] = {
             name,
+            private: true,
             dependencies: {},
           };
         }
@@ -68,43 +68,45 @@ export class NodeModulesPlugin {
       }
     };
 
-    const hook = (
-      compilation: webpack.compilation.Compilation,
-    ): Promise<void> => {
-      return new Promise((resolve, _reject) => {
-        compilation.chunks.forEach((chunk) => {
-          for (const module of chunk.modulesIterable) {
-            processModule(chunk.name, module);
-          }
+    compiler.hooks.emit.tapPromise(
+      NodeModulesPlugin.NAME,
+      (compilation: webpack.compilation.Compilation): Promise<void> => {
+        return new Promise((resolve, _reject) => {
+          compilation.chunks.forEach((chunk) => {
+            for (const module of chunk.modulesIterable) {
+              processModule(chunk.name, module);
+            }
+          });
+
+          Object.keys(this.nodeModules).forEach((key) => {
+            const json = JSON.stringify(this.nodeModules[key]);
+
+            compilation.assets[`${key}/package.json`] = {
+              source: function () {
+                return json;
+              },
+              size: function () {
+                return json.length;
+              },
+            };
+          });
+
+          resolve();
         });
+      },
+    );
 
-        Object.keys(this.nodeModules).forEach((key) => {
-          const json = JSON.stringify(this.nodeModules[key]);
-
-          compilation.assets[`${key}/package.json`] = {
-            source: function () {
-              return json;
-            },
-            size: function () {
-              return json.length;
-            },
-          };
-        });
-
-        resolve();
-      });
-    };
-
-    compiler.hooks.emit.tapPromise(NAME, hook);
-
-    compiler.hooks.afterEmit.tapPromise(NAME, () => {
+    compiler.hooks.afterEmit.tapPromise(NodeModulesPlugin.NAME, () => {
       const packageManager = new PackageManager();
+
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const outputPath = compiler.options.output!.path as string;
 
       return new Promise((resolve, reject) => {
         Promise.all(
           Object.keys(this.nodeModules).map((key) =>
             packageManager.install({
-              cwd: path.join(this.options.outputPath, key),
+              cwd: path.join(outputPath, key),
               noLockfile: true,
             }),
           ),

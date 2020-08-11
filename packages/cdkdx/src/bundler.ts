@@ -131,9 +131,9 @@ export class Bundler {
           clearConsole: false,
         }),
         new NodeModulesPlugin({
-          outputPath: props.projectInfo.lambdasOutPath,
           nodeModules: props.projectInfo.nodeModules,
         }),
+        //new LambdaFileSizePlugin({}),
       ],
       output: {
         path: props.projectInfo.lambdasOutPath,

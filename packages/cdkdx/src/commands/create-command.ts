@@ -4,6 +4,7 @@ import { Command } from 'clipanion';
 import { BaseCommand } from '../base-command';
 import { Template } from '../template';
 import { Timer } from '../timer';
+import { GitRepository } from '../git-repository';
 
 export class CreateCommand extends BaseCommand {
   static usage = Command.Usage({
@@ -50,17 +51,20 @@ export class CreateCommand extends BaseCommand {
 
     this.context.logger.done(`Dependencies installed.\n`);
 
-    if (!(await template.isInGitRepository())) {
-      this.context.logger.info('Initializing a new git repository.\n');
+    try {
+      const gitRepository = new GitRepository(template.getTargetPath());
 
-      try {
-        await template.initializeGitRepository();
+      if (!(await gitRepository.isInGitRepository())) {
+        this.context.logger.info('Initializing a new git repository.\n');
+
+        await gitRepository.initializeGitRepository();
+
         this.context.logger.done(`Git repository initialized.\n`);
-      } catch (e) {
-        this.context.logger.warn(
-          'Unable to initialize git repository for your project.\n',
-        );
       }
+    } catch (e) {
+      this.context.logger.warn(
+        'Unable to initialize git repository for your project.\n',
+      );
     }
 
     timer.end();
