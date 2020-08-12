@@ -2,8 +2,6 @@
 
 > Zero-config CLI for [aws cdk](https://github.com/awslabs/aws-cdk) development
 
-:warning: This is experimental and subject to breaking changes.
-
 - [Features](#features)
 - [Quick Start](#quick-start)
 - [Folder structures](#folder-structures)
