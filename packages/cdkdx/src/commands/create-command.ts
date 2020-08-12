@@ -38,6 +38,8 @@ export class CreateCommand extends BaseCommand {
 
     template.createProject();
 
+    this.context.logger.log(``);
+
     this.context.logger.info(
       `Installing dependencies:\n${template
         .getDependencyNames()
@@ -72,7 +74,7 @@ export class CreateCommand extends BaseCommand {
     this.context.logger.done(`Project created in ${timer.display()}.\n`);
 
     this.context.logger.info(
-      `${chalk.green('Awesome!')} You are now ready to start coding.\n`,
+      `${chalk.bold('Awesome!')} You are now ready to start coding.\n`,
     );
 
     this.context.logger.info(

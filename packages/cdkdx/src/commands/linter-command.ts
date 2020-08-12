@@ -65,7 +65,7 @@ export class LinterCommand extends BaseProjectCommand {
 
     const resultText = formatter.format(results);
 
-    this.context.stdout.write(resultText);
+    this.context.logger.log(resultText);
 
     const errorCount = results.reduce(
       (acc, { errorCount }) => acc + errorCount,

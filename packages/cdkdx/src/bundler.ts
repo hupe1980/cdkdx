@@ -1,5 +1,5 @@
 import path from 'path';
-import fs from 'fs';
+import fs from 'fs-extra';
 import webpack, { IgnorePlugin } from 'webpack';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
@@ -9,16 +9,16 @@ import TerserPlugin from 'terser-webpack-plugin';
 import { ProjectInfo } from './project-info';
 import { NodeModulesPlugin } from './plugins';
 
-const SHARED_FOLDER = 'shared';
-
 export class Lambdas {
+  public static readonly SHARED_FOLDER = 'shared';
+
   public readonly entries: Record<string, string> = {};
   public readonly warnings = new Array<string>();
 
   constructor(srcPath: string) {
     if (fs.existsSync(srcPath)) {
       fs.readdirSync(srcPath).forEach((name) => {
-        if (name === SHARED_FOLDER) return;
+        if (name === Lambdas.SHARED_FOLDER) return;
 
         const lambdaPath = path.join(srcPath, name);
 
@@ -127,13 +127,13 @@ export class Bundler {
             },
           },
         }),
-        new FriendlyErrorsWebpackPlugin({
-          clearConsole: false,
-        }),
         new NodeModulesPlugin({
           nodeModules: props.projectInfo.nodeModules,
         }),
         //new LambdaFileSizePlugin({}),
+        new FriendlyErrorsWebpackPlugin({
+          clearConsole: false,
+        }),
       ],
       output: {
         path: props.projectInfo.lambdasOutPath,

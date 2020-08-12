@@ -23,7 +23,8 @@ export class BundleCommand extends BaseProjectCommand {
 
     // Return 0 if no lambdas were found
     if (!lambdas.hasEntries()) {
-      this.context.logger.info('No lambdas found for bundling.');
+      this.context.logger.log(``);
+      this.context.logger.info('No lambdas found for bundling.\n');
       return 0;
     }
 

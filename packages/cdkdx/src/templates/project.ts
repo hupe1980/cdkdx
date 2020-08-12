@@ -59,10 +59,12 @@ export class Project extends Construct {
     this.srcDir = options.srcDir ?? 'src';
     this.outDir = options.outDir ?? 'lib';
 
+    const description = 'TODO: Add your description here';
+
     this.manifest = {
       name: options.name,
       version: '0.1.0',
-      description: 'TODO: Add your description here',
+      description,
       license: 'MIT',
       author: {
         name: options.author,
@@ -100,6 +102,7 @@ export class Project extends Construct {
 
     this.templateContext = {
       name: options.name,
+      description,
       camelCase: (str: string) => camelCase(str),
       pascalCase: (str: string) => camelCase(str, { pascalCase: true }),
     };
