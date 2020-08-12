@@ -13,15 +13,19 @@ export interface NodeModulesPluginOptions {
 export class NodeModulesPlugin {
   public static readonly NAME = 'NodeModulesPlugin';
 
-  private nodeModules: Record<string, PackageJson> = {};
+  private readonly packageJsonMap: Record<string, PackageJson>;
+  private readonly packageManager: PackageManager;
 
-  constructor(private readonly options: NodeModulesPluginOptions) {}
+  constructor(private readonly options: NodeModulesPluginOptions) {
+    this.packageJsonMap = {};
+    this.packageManager = new PackageManager();
+  }
 
   apply(compiler: webpack.Compiler): void {
     if (this.options.nodeModules.length === 0) return;
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const processModule = (name: string, module: any) => {
+    const processModule = async (name: string, module: any) => {
       const portableId: string = module.portableId
         ? module.portableId
         : module.identifier();
@@ -48,21 +52,19 @@ export class NodeModulesPlugin {
             : undefined,
         );
 
-        const { version } = fs.readJSONSync(modulePackageFile) as PackageJson;
+        const { version } = (await fs.readJSON(
+          modulePackageFile,
+        )) as PackageJson;
 
         if (!version) throw new Error('Package.json without version');
 
-        if (!this.nodeModules[name]) {
-          //init
-          this.nodeModules[name] = {
-            name,
-            private: true,
-            dependencies: {},
-          };
-        }
-
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        this.nodeModules[name]['dependencies']![moduleName] = version;
+        this.packageJsonMap[name] = {
+          name,
+          private: true,
+          dependencies: {
+            [moduleName]: version,
+          },
+        };
       } catch (e) {
         throw new Error(`Error while processing nodeModules: ${e.message}`);
       }
@@ -70,50 +72,45 @@ export class NodeModulesPlugin {
 
     compiler.hooks.emit.tapPromise(
       NodeModulesPlugin.NAME,
-      (compilation: webpack.compilation.Compilation): Promise<void> => {
-        return new Promise((resolve, _reject) => {
-          compilation.chunks.forEach((chunk) => {
-            for (const module of chunk.modulesIterable) {
-              processModule(chunk.name, module);
-            }
-          });
+      async (compilation: webpack.compilation.Compilation): Promise<void> => {
+        await Promise.all(
+          compilation.chunks.map((chunk) =>
+            Promise.all(
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              (chunk.modulesIterable as Array<any>).map((module) =>
+                processModule(chunk.name, module),
+              ),
+            ),
+          ),
+        );
 
-          Object.keys(this.nodeModules).forEach((key) => {
-            const json = JSON.stringify(this.nodeModules[key]);
+        Object.keys(this.packageJsonMap).forEach((key) => {
+          const json = JSON.stringify(this.packageJsonMap[key]);
 
-            compilation.assets[`${key}/package.json`] = {
-              source: function () {
-                return json;
-              },
-              size: function () {
-                return json.length;
-              },
-            };
-          });
-
-          resolve();
+          compilation.assets[`${key}/package.json`] = {
+            source: function () {
+              return json;
+            },
+            size: function () {
+              return json.length;
+            },
+          };
         });
       },
     );
 
-    compiler.hooks.afterEmit.tapPromise(NodeModulesPlugin.NAME, () => {
-      const packageManager = new PackageManager();
-
+    compiler.hooks.afterEmit.tapPromise(NodeModulesPlugin.NAME, async () => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       const outputPath = compiler.options.output!.path as string;
 
-      return new Promise((resolve, reject) => {
-        Promise.all(
-          Object.keys(this.nodeModules).map((key) =>
-            packageManager.install({
-              cwd: path.join(outputPath, key),
-              noLockfile: true,
-            }),
-          ),
-        )
-          .then(() => resolve())
-          .catch((e) => reject(e));
-      });
+      await Promise.all(
+        Object.keys(this.packageJsonMap).map((key) =>
+          this.packageManager.install({
+            cwd: path.join(outputPath, key),
+            noLockfile: true,
+          }),
+        ),
+      );
     });
   }
 }
