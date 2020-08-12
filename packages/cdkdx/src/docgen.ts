@@ -1,12 +1,17 @@
 import * as path from 'path';
-import * as fs from 'fs';
+import * as fs from 'fs-extra';
+import * as os from 'os';
 import { renderSinglePageModule } from 'jsii-docgen';
 import { Application } from 'typedoc';
 import { ScriptTarget, ModuleKind } from 'typescript';
+import concatMd from 'concat-md';
+
+import { Logger } from './logger';
 
 export interface GenerateOptions {
   projectPath: string;
   typescriptExcludes?: string[];
+  logger: Logger;
 }
 
 export interface Docgen {
@@ -25,6 +30,25 @@ export class JsiiDocgen implements Docgen {
 
 export class TscDocgen implements Docgen {
   public async generate(options: GenerateOptions): Promise<void> {
+    const realTempDir = await fs.realpath(os.tmpdir());
+
+    const tempOutDir = await fs.mkdtemp(path.join(realTempDir, 'cdkdx-'));
+
+    await this.runTypedoc(tempOutDir, options);
+
+    const api = await concatMd(tempOutDir, {
+      fileNameAsTitle: true,
+    });
+
+    await fs.writeFile('API.md', api, {
+      encoding: 'utf8',
+    });
+  }
+
+  private async runTypedoc(
+    outDir: string,
+    options: GenerateOptions,
+  ): Promise<void> {
     return new Promise((resolve, reject) => {
       const app = new Application();
 
@@ -39,12 +63,18 @@ export class TscDocgen implements Docgen {
         theme: 'markdown',
         plugin: ['typedoc-plugin-markdown'],
         exclude: options.typescriptExcludes,
+        logger: (message: string, level: number) => {
+          if (level === 3) {
+            //log only errors
+            options.logger.fail(`${message}\n`);
+          }
+        },
       });
 
       if (
         app.generateDocs(
           app.expandInputFiles([path.join(options.projectPath, 'src')]),
-          'docs',
+          outDir,
         )
       ) {
         return resolve();

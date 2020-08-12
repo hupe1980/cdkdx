@@ -16,13 +16,17 @@ export class DocgenCommand extends BaseProjectCommand {
 
     const docgen = this.getDocgen();
 
+    this.context.logger.log(``);
+
     await docgen.generate({
       projectPath: this.context.cwd,
       typescriptExcludes: this.projectInfo.typescriptExcludes,
+      logger: this.context.logger,
     });
 
     timer.end();
 
+    this.context.logger.log(``);
     this.context.logger.done(`Docs created in ${timer.display()}.\n`);
 
     return 0;

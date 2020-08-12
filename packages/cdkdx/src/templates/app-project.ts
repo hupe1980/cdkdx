@@ -35,6 +35,7 @@ export class AppProject extends Project {
     this.gitignore.exclude('cdk.out', 'cdk.context.json');
 
     this.addFiles([
+      'API.md',
       'README.md',
       'src/${name}-app.ts',
       'src/${name}-stack.ts',

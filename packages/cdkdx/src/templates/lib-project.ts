@@ -40,6 +40,7 @@ export class LibProject extends Project {
     this.gitignore.exclude('dist');
 
     this.addFiles([
+      'API.md',
       'README.md',
       'src/index.ts',
       'src/${name}.ts',

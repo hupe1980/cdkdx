@@ -36,8 +36,7 @@
 - Bundles your lambda functions with webpack
 - Typechecking for lambdas and constructs 
 - Yarn workspaces compatible
-
-
+- Generates docs for your project
 
 ## Quick Start
 
@@ -62,6 +61,7 @@ cd my-jsii-construct
 
 ```
 my-app
+├── API.md
 ├── README.md
 ├── node_modules
 ├── package.json
@@ -94,6 +94,7 @@ my-app
 
 ```
 my-construct
+├── API.md
 ├── README.md
 ├── node_modules
 ├── package.json

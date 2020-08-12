@@ -9,7 +9,7 @@
     "watch": "cdkdx build -w",
     "test": "cdkdx test",
     "lint": "cdkdx lint",
-    "bundle": "cdkdx bundle",
+    "docgen": "cdkdx docgen",
     "package": "cdkdx package",
     "cdkdx": "cdkdx"
   },
