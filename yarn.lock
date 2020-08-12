@@ -6996,10 +6996,10 @@ jsesc@^2.5.1:
   resolved "https://registry.yarnpkg.com/jsesc/-/jsesc-2.5.2.tgz#80564d2e483dacf6e8ef209650a67df3f0c283a4"
   integrity sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==
 
-jsii-docgen@^1.4.14:
-  version "1.4.14"
-  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-1.4.14.tgz#59003afea057259c4678cfc45321570b26d938a4"
-  integrity sha512-m4qoIjyyUNlIoTbJX4O5IS6Kksw1BCm4SJN//4o55ukSbzVXB3nAlUi6CUuXS6W8RhMT37gmfS0ineeaEPlosw==
+jsii-docgen@^1.4.16:
+  version "1.4.16"
+  resolved "https://registry.yarnpkg.com/jsii-docgen/-/jsii-docgen-1.4.16.tgz#29baa0bef0c9418e0ba947f1352f1f0b76d58b55"
+  integrity sha512-RZKg5jlpgA8XAeObJ3/X4czw1rccfpj0LI1HTA4eupGhr6vOprS0YsOlyRMKnQwPzk0UtDsgDLdePHavoo8d9g==
   dependencies:
     "@jsii/spec" "^1.9.0"
     fs-extra "^9.0.0"
