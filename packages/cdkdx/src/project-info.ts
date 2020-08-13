@@ -22,6 +22,7 @@ export class ProjectInfo {
   public readonly typescriptExcludes: string[];
 
   //paths
+  public readonly cdkdxConfigPath: string;
   public readonly distPath: string;
   public readonly libPath: string;
   public readonly lambdasSrcPath: string;
@@ -52,6 +53,7 @@ export class ProjectInfo {
     this.typescriptIncludes = ['src'];
     this.typescriptExcludes = ['src/lambdas', 'src/**/__tests__'];
 
+    this.cdkdxConfigPath = this.resolve('cdkdx.config.js');
     this.distPath = this.resolve('dist');
     this.libPath = this.resolve('lib');
     this.lambdasSrcPath = this.resolve('src/lambdas');

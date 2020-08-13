@@ -13,6 +13,7 @@
 - [Customization](#customization) 
   - [Displaying Lint Output in the Editor](#displaying-lint-output-in-the-editor)
   - [Colored output during execution with lerna run](#colored-output-during-execution-with-lerna-run)
+  - [Extending webpack config](#extending-webpack-config)
 - [API Reference](#api-reference)
   - [`cdkdx build`](#cdkdx-build)
   - [`cdkdx lint`](#cdkdx-lint)
@@ -61,6 +62,7 @@ cd my-jsii-construct
 my-app
 ├── API.md
 ├── README.md
+├── LICENCE
 ├── node_modules
 ├── package.json
 ├── .gitignore
@@ -94,6 +96,7 @@ my-app
 my-construct
 ├── API.md
 ├── README.md
+├── LICENCE
 ├── node_modules
 ├── package.json
 ├── .gitignore
@@ -195,6 +198,21 @@ You would need to install an ESLint plugin for your editor first. Then, add a fi
     "build": "FORCE_COLOR=1 lerna run build"
 }
 ```
+
+### Extending webpack config
+To extend the configuration, create a cdkdx.config.js file at the root of your project und use the webpack field:
+
+```javascript
+// cdkdx.config.js
+
+module.exports = {
+  webpack: (config) => config
+}
+```
+
+Make sure to preserve the following config options:
+- entry
+- output
 
 ## API Reference
 

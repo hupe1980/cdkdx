@@ -7,6 +7,7 @@ import SizePlugin from 'size-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 
 import { ProjectInfo } from './project-info';
+import { CdkdxConfig } from './cdkdx-config';
 import { NodeModulesPlugin } from './plugins';
 
 export class Lambdas {
@@ -64,7 +65,9 @@ export class Bundler {
       composite: false,
     };
 
-    const config: webpack.Configuration = {
+    const cdkdxConfig = new CdkdxConfig(props.projectInfo);
+
+    const config: webpack.Configuration = cdkdxConfig.webpack({
       target: 'node',
       mode: 'production',
       devtool: 'source-map',
@@ -144,7 +147,7 @@ export class Bundler {
         ...props.projectInfo.externals,
         ...props.projectInfo.nodeModules,
       ],
-    };
+    });
 
     this.compiler = webpack(config);
   }

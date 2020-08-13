@@ -12,15 +12,12 @@ export class LambdaFileSizePlugin {
   constructor(private readonly options: LambdaFileSizePluginOptions) {}
 
   apply(compiler: webpack.Compiler): void {
-    const hook = (
-      compilation: webpack.compilation.Compilation,
-    ): Promise<void> => {
-      return new Promise((resolve, _reject) => {
-        this.outpuzSizes(compilation.assets).then(() => resolve());
-      });
-    };
-
-    compiler.hooks.afterEmit.tapPromise(LambdaFileSizePlugin.NAME, hook);
+    compiler.hooks.afterEmit.tapPromise(
+      LambdaFileSizePlugin.NAME,
+      async (compilation: webpack.compilation.Compilation): Promise<void> => {
+        await this.outpuzSizes(compilation.assets);
+      },
+    );
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
