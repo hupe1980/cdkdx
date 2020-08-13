@@ -109,6 +109,8 @@ export class Project extends Construct {
     this.templateContext = {
       name: options.name,
       description,
+      author: options.author,
+      year: new Date().getFullYear(),
       camelCase: (str: string) => camelCase(str),
       pascalCase: (str: string) => camelCase(str, { pascalCase: true }),
     };

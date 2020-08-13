@@ -37,6 +37,7 @@ export class AppProject extends Project {
     this.addFiles([
       'API.md',
       'README.md',
+      'LICENCE',
       'src/${name}-app.ts',
       'src/${name}-stack.ts',
       'src/lambdas',

@@ -42,6 +42,7 @@ export class LibProject extends Project {
     this.addFiles([
       'API.md',
       'README.md',
+      'LICENCE',
       'src/index.ts',
       'src/${name}.ts',
       'src/__tests__/${name}.test.ts',
