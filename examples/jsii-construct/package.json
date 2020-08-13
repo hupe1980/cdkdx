@@ -38,24 +38,24 @@
     }
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.57.0",
+    "@aws-cdk/assert": "^1.58.0",
     "@types/node": "12.12.50",
     "axios": "^0.19.2",
     "cdkdx": "^0.5.1"
   },
   "peerDependencies": {
-    "@aws-cdk/aws-lambda": "^1.57.0",
-    "@aws-cdk/aws-sns": "^1.57.0",
-    "@aws-cdk/aws-sns-subscriptions": "^1.57.0",
-    "@aws-cdk/aws-sqs": "^1.57.0",
-    "@aws-cdk/core": "^1.57.0",
+    "@aws-cdk/aws-lambda": "^1.58.0",
+    "@aws-cdk/aws-sns": "^1.58.0",
+    "@aws-cdk/aws-sns-subscriptions": "^1.58.0",
+    "@aws-cdk/aws-sqs": "^1.58.0",
+    "@aws-cdk/core": "^1.58.0",
     "constructs": "^3.0.2"
   },
   "dependencies": {
-    "@aws-cdk/aws-lambda": "^1.57.0",
-    "@aws-cdk/aws-sns": "^1.57.0",
-    "@aws-cdk/aws-sns-subscriptions": "^1.57.0",
-    "@aws-cdk/aws-sqs": "^1.57.0",
-    "@aws-cdk/core": "^1.57.0"
+    "@aws-cdk/aws-lambda": "^1.58.0",
+    "@aws-cdk/aws-sns": "^1.58.0",
+    "@aws-cdk/aws-sns-subscriptions": "^1.58.0",
+    "@aws-cdk/aws-sqs": "^1.58.0",
+    "@aws-cdk/core": "^1.58.0"
   }
 }
