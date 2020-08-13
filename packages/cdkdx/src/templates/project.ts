@@ -70,6 +70,12 @@ export class Project extends Construct {
         name: options.author,
         url: `https://github.com/${options.author}`,
       },
+      repository: {
+        type: 'git',
+        url: `https://github.com/${options.author}/${options.name}.git`,
+      },
+      homepage: `https://github.com/${options.author}/${options.name}`,
+      keywords: ['cdk'],
       engines: { node: `>= ${this.minNodeVersion}` },
       main: undefined,
       types: undefined,
