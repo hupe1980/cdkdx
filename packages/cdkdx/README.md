@@ -289,6 +289,27 @@ $ cdkdx docgen
 ### `cdkdx bump`
 
 ### `cdkdx release`
+```shell
+Release the project
+
+Usage:
+
+$ cdkdx release <type>
+
+Details:
+
+This command releases the project to npm, pypi or both.
+
+It is checked whether the package version is not yet registered. If the version is not in the registry, it will be released. Otherwise the process will be ignored.
+
+Examples:
+
+Release to npm
+  $ cdkdx release npm
+
+Release to pypi
+  $ cdkdx release pypi
+```
 
 ### `cdkdx upgrade-cdk`
 ```shell
