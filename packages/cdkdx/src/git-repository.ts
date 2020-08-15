@@ -24,13 +24,28 @@ export class GitRepository {
       cwd: this.cwd,
       stdio: 'ignore',
     });
+
     await execa('git', ['add', '.'], {
       cwd: this.cwd,
       stdio: 'ignore',
     });
+
     await execa('git', ['commit', '-m="Initial commit"'], {
       cwd: this.cwd,
       stdio: 'ignore',
     });
+  }
+
+  public async getCurrentBranch(): Promise<string> {
+    const { stdout: currentBranch } = await execa(
+      'git',
+      ['rev-parse', '--abbrev-ref', 'HEAD'],
+      {
+        cwd: this.cwd,
+        stdio: 'ignore',
+      },
+    );
+
+    return currentBranch;
   }
 }
