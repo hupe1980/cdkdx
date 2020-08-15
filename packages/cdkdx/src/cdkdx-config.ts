@@ -3,13 +3,13 @@ import { Configuration } from 'webpack';
 import { ProjectInfo } from './project-info';
 
 export interface ConfigFile {
-  webpack: (config: Configuration) => Configuration;
+  webpack: (config: Configuration, projectInfo: ProjectInfo) => Configuration;
 }
 
 export class CdkdxConfig {
   private readonly configFile?: ConfigFile;
 
-  constructor(projectInfo: ProjectInfo) {
+  constructor(private readonly projectInfo: ProjectInfo) {
     if (fs.existsSync(projectInfo.cdkdxConfigPath)) {
       // eslint-disable-next-line @typescript-eslint/no-require-imports
       this.configFile = require(projectInfo.cdkdxConfigPath);
@@ -17,6 +17,8 @@ export class CdkdxConfig {
   }
 
   public webpack(config: Configuration): Configuration {
-    return this.configFile?.webpack ? this.configFile.webpack(config) : config;
+    return this.configFile?.webpack
+      ? this.configFile.webpack(config, this.projectInfo)
+      : config;
   }
 }

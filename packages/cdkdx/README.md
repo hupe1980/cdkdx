@@ -206,7 +206,7 @@ To extend the configuration, create a cdkdx.config.js file at the root of your p
 // cdkdx.config.js
 
 module.exports = {
-  webpack: (config) => config
+  webpack: (config, projectInfo) => config
 }
 ```
 
