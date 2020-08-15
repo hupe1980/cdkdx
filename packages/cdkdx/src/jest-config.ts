@@ -27,7 +27,7 @@ export = {
       },
     },
     {
-      displayName: 'lambdas',
+      displayName: 'lambda',
       rootDir: process.cwd(),
       transform: {
         '^.+\\.ts$': require.resolve('ts-jest/dist'),
