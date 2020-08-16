@@ -24,12 +24,12 @@ export class ReleaseCommand extends BaseProjectCommand {
 
   @Command.Path('release')
   async execute(): Promise<number> {
-    const timer = new Timer();
-
     if (this.projectInfo.private) {
       this.context.logger.warn('No releasing for private modules.\n');
       return 0;
     }
+
+    const timer = new Timer();
 
     await this.cli.run(['package']);
 
@@ -61,6 +61,7 @@ export class ReleaseCommand extends BaseProjectCommand {
 
     timer.end();
 
+    this.context.logger.log(``);
     this.context.logger.done(
       `Project ${this.projectInfo.name} released in ${timer.display()}.\n`,
     );

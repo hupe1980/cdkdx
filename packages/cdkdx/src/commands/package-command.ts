@@ -4,6 +4,7 @@ import { Command } from 'clipanion';
 import execa from 'execa';
 
 import { BaseProjectCommand } from '../base-command';
+import { Timer } from '../timer';
 
 export class PackageCommand extends BaseProjectCommand {
   @Command.String('-o, --outdir')
@@ -15,6 +16,8 @@ export class PackageCommand extends BaseProjectCommand {
       this.context.logger.warn('No packaging for private modules.\n');
       return 0;
     }
+
+    const timer = new Timer();
 
     const outdir = this.outDir ?? this.projectInfo.distPath;
 
@@ -32,8 +35,12 @@ export class PackageCommand extends BaseProjectCommand {
       await fs.move(tarball, path.join(target, path.basename(tarball)));
     }
 
+    timer.end();
+
     this.context.logger.log(''); //empty line
-    this.context.logger.done(`${this.projectInfo.name} packed.\n`);
+    this.context.logger.done(
+      `${this.projectInfo.name} packed in ${timer.display()}.\n`,
+    );
 
     return 0;
   }
