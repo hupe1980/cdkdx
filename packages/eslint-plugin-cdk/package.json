@@ -24,12 +24,12 @@
     "@typescript-eslint/eslint-plugin": "^3.9.0"
   },
   "dependencies": {
-    "@typescript-eslint/experimental-utils": "^3.9.0",
+    "@typescript-eslint/experimental-utils": "^3.9.1",
     "read-pkg-up": "^7.0.1"
   },
   "devDependencies": {
     "@types/jest": "^26.0.10",
-    "@typescript-eslint/eslint-plugin": "^3.9.0",
+    "@typescript-eslint/eslint-plugin": "^3.9.1",
     "jest": "^26.4.0",
     "rimraf": "^3.0.2",
     "ts-jest": "^26.2.0",
