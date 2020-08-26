@@ -23,6 +23,7 @@ module.exports = {
     ecmaVersion: '2018',
     sourceType: 'module',
     project: 'tsconfig.eslint.json',
+    warnOnUnsupportedTypeScriptVersion: true,
   },
   plugins: ['@typescript-eslint', 'cdk', 'import', 'jest', 'prettier'],
   ignorePatterns: ['*.js', '*.d.ts', 'node_modules'],

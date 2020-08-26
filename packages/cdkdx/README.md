@@ -30,8 +30,8 @@
 ## Features
 
 - [Tsc](https://github.com/microsoft/TypeScript) and [jsii](https://github.com/aws/jsii) compiler support
-- Pre-configured linter with custom cdk eslint rules
-- Jest test runner setup
+- Pre-configured linter with [custom cdk eslint rules](https://github.com/hupe1980/cdkdx/blob/master/packages/eslint-config-cdk)
+- Jest test runner setup for testing lambdas and constructs
 - Bundles your lambda functions with webpack
 - Typechecking for lambdas and constructs 
 - Yarn workspaces compatible

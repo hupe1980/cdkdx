@@ -18,6 +18,7 @@
     "watch": "cdkdx build -w",
     "test": "cdkdx test",
     "lint": "cdkdx lint",
+    "docgen": "cdkdx docgen",
     "package": "cdkdx package",
     "cdkdx": "cdkdx"
   },
@@ -40,7 +41,7 @@
   "devDependencies": {
     "@aws-cdk/assert": "^1.60.0",
     "@types/node": "12.12.50",
-    "axios": "^0.19.2",
+    "axios": "^0.20.0",
     "cdkdx": "^0.5.9"
   },
   "peerDependencies": {
