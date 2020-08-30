@@ -8,6 +8,7 @@ test('done', () => {
   const logger = new Logger({
     stderr: process.stderr,
     stdout: process.stdout,
+    disableColors: true,
   });
 
   logger.done('foo');

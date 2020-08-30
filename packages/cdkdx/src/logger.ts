@@ -3,32 +3,39 @@ import chalk from 'chalk';
 export interface LoggerProps {
   stdout: NodeJS.WriteStream;
   stderr: NodeJS.WriteStream;
+  disableColors?: boolean;
 }
 
 export class Logger {
-  constructor(private readonly props: LoggerProps) {}
+  private ctx: chalk.Chalk;
+
+  constructor(private readonly props: LoggerProps) {
+    this.ctx = new chalk.Instance({
+      level: props.disableColors ? 0 : undefined,
+    });
+  }
 
   public info(message: string): void {
     this.props.stdout.write(
-      `${chalk.bgWhite.black(' INFO ')} ${chalk.white(message)}\n`,
+      `${this.ctx.bgWhite.black(' INFO ')} ${this.ctx.white(message)}\n`,
     );
   }
 
   public done(message: string): void {
     this.props.stdout.write(
-      `${chalk.bgGreen.black(' DONE ')} ${chalk.green(message)}\n`,
+      `${this.ctx.bgGreen.black(' DONE ')} ${this.ctx.green(message)}\n`,
     );
   }
 
   public warn(message: string): void {
     this.props.stdout.write(
-      `${chalk.bgYellow.black(' WARN ')} ${chalk.yellow(message)}\n`,
+      `${this.ctx.bgYellow.black(' WARN ')} ${this.ctx.yellow(message)}\n`,
     );
   }
 
   public fail(message: string): void {
     this.props.stderr.write(
-      `${chalk.bgRed.black(' FAIL ')} ${chalk.red(message)}\n`,
+      `${this.ctx.bgRed.black(' FAIL ')} ${this.ctx.red(message)}\n`,
     );
   }
 
