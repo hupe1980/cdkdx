@@ -1,4 +1,8 @@
-import { TSESTree, ASTUtils } from '@typescript-eslint/experimental-utils';
+import {
+  TSESTree,
+  ASTUtils,
+  AST_NODE_TYPES,
+} from '@typescript-eslint/experimental-utils';
 
 import { createRule, hasConstructSuperClass } from '../utils';
 
@@ -64,7 +68,7 @@ export default createRule<Options, MessageIds>({
           return;
         }
 
-        if (ASTUtils.isMemberOrOptionalMemberExpression(node.object)) {
+        if (node.object.type === AST_NODE_TYPES.MemberExpression) {
           if (
             hasName(node.object.object, 'lambda') &&
             hasName(node.object.property, 'Runtime')
