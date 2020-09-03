@@ -1,7 +1,7 @@
 {
   "name": "eslint-plugin-cdk",
   "description": "ESLint rules for aws cdk",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "license": "MIT",
   "main": "lib/index.js",
   "repository": {
