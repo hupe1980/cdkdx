@@ -1,9 +1,9 @@
 import * as path from 'path';
 import * as fs from 'fs-extra';
-import execa from 'execa';
 import latestVersion from 'latest-version';
 import { Semver } from './semver';
 import { PackageManager } from './package-manager';
+import { GitRepository } from './git-repository';
 import {
   Project,
   ProjectOptions,
@@ -37,7 +37,7 @@ export class Template {
 
     const sourceMapSupportVersion = await latestVersion('source-map-support');
 
-    const author = await Template.getAuthor();
+    const author = await Template.getAuthor(props.cwd);
 
     // jsii-lib uses the same template as lib
     const templateType = props.type === 'jsii-lib' ? 'lib' : props.type;
@@ -69,9 +69,17 @@ export class Template {
     return new Template(project);
   }
 
-  private static async getAuthor(): Promise<string> {
-    const { stdout } = await execa('git', ['config', '--global', 'user.name']);
-    return stdout.trim() || 'TODO_ADD_AUTHOR';
+  private static async getAuthor(cwd: string): Promise<string> {
+    let author = 'TODO_ADD_AUTHOR';
+
+    try {
+      const git = new GitRepository(cwd);
+      author = await git.getAuthor();
+    } catch (e) {
+      //nope;
+    }
+
+    return author;
   }
 
   private constructor(private readonly project: Project) {}

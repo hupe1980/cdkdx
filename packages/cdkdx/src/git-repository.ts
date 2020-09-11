@@ -42,10 +42,21 @@ export class GitRepository {
       ['rev-parse', '--abbrev-ref', 'HEAD'],
       {
         cwd: this.cwd,
-        stdio: 'ignore',
       },
     );
 
     return currentBranch;
+  }
+
+  public async getAuthor(): Promise<string> {
+    const { stdout: author } = await execa(
+      'git',
+      ['config', '--global', 'user.name'],
+      {
+        cwd: this.cwd,
+      },
+    );
+
+    return author.trim();
   }
 }
