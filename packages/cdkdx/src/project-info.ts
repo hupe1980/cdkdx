@@ -5,6 +5,7 @@ import * as fs from 'fs-extra';
 export type PackageJson = TypeFestPackageJson & {
   externals?: string[];
   nodeModules?: string[];
+  jsii?: Record<string, unknown>;
 };
 
 export class ProjectInfo {
