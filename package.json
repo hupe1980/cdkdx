@@ -7,7 +7,9 @@
     "prepare": "yarn build",
     "build": "cross-env FORCE_COLOR=1 lerna run build",
     "watch": "cross-env FORCE_COLOR=1 lerna run watch",
-    "test": "lerna run test",
+    "test:unit": "lerna run test",
+    "test:tsc-integration": "cd examples/construct && yarn build && yarn docgen && yarn test && yarn lint",
+    "test:jsii-integration": "cd examples/jsii-construct && yarn build && yarn docgen && yarn test && yarn lint",
     "lint": "eslint '*/**/*.ts' --report-unused-disable-directives",
     "lint:fix": "eslint '*/**/*.ts' --fix"
   },

@@ -22,7 +22,11 @@ jobs:
         run: yarn install --frozen-lockfile
       - name: Linting
         run: yarn lint
-      - name: Testing
-        run: yarn test
+      - name: UnitTesting
+        run: yarn test:unit
+      - name: TscIntegrationTesting
+        run: yarn test:tsc-integration
+      - name: JsiiIntegrationTesting  
+        run: yarn test:jsii-integration
       - name: Anti-tamper check
         run: git diff --exit-code
