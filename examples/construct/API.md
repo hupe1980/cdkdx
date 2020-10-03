@@ -1,6 +1,8 @@
 # README
 
-[construct](#readme)
+**[construct](#readme)**
+
+> Globals
 
 # construct
 
@@ -16,7 +18,9 @@
 
 # Example
 
-[construct](#readme) › [Example](#example)
+**[construct](#readme)**
+
+> [Globals](#readme) / Example
 
 # Class: Example
 
@@ -39,67 +43,67 @@
 
 ### Properties
 
-* [node](#readonly-node)
-* [queueArn](#readonly-queuearn)
+* [node](#node)
+* [queueArn](#queuearn)
 
 ### Methods
 
-* [onPrepare](#protected-onprepare)
-* [onSynthesize](#protected-onsynthesize)
-* [onValidate](#protected-onvalidate)
-* [prepare](#protected-prepare)
-* [synthesize](#protected-synthesize)
+* [onPrepare](#onprepare)
+* [onSynthesize](#onsynthesize)
+* [onValidate](#onvalidate)
+* [prepare](#prepare)
+* [synthesize](#synthesize)
 * [toString](#tostring)
-* [validate](#protected-validate)
-* [isConstruct](#static-isconstruct)
+* [validate](#validate)
+* [isConstruct](#isconstruct)
 
 ## Constructors
 
-###  constructor
+### constructor
 
-\+ **new Example**(`scope`: Construct, `id`: string, `props`: [ExampleProps](#exampleprops)): *[Example](#example)*
+\+ **new Example**(`scope`: Construct, `id`: string, `props`: [ExampleProps](#exampleprops)): [Example](#example)
 
 *Overrides void*
 
-**Parameters:**
+#### Parameters:
 
-Name | Type | Default |
+Name | Type | Default value |
 ------ | ------ | ------ |
 `scope` | Construct | - |
 `id` | string | - |
 `props` | [ExampleProps](#exampleprops) | {} |
 
-**Returns:** *[Example](#example)*
+**Returns:** [Example](#example)
 
 ## Properties
 
-### `Readonly` node
+### node
 
-• **node**: *ConstructNode*
+• `Readonly` **node**: ConstructNode
 
-*Inherited from [Example](#example).[node](#readonly-node)*
+*Inherited from [Example](#example).[node](#node)*
 
 The construct tree node associated with this construct.
 
 ___
 
-### `Readonly` queueArn
+### queueArn
 
-• **queueArn**: *string*
+• `Readonly` **queueArn**: string
 
 **`returns`** the ARN of the SQS queue
 
 ## Methods
 
-### `Protected` onPrepare
+### onPrepare
 
-▸ **onPrepare**(): *void*
+▸ `Protected`**onPrepare**(): void
 
-*Inherited from [Example](#example).[onPrepare](#protected-onprepare)*
+*Inherited from [Example](#example).[onPrepare](#onprepare)*
 
 *Overrides void*
 
-Perform final modifications before synthesis
+Perform final modifications before synthesis.
 
 This method can be implemented by derived constructs in order to perform
 final changes before synthesis. prepare() will be called after child
@@ -108,15 +112,15 @@ constructs have been prepared.
 This is an advanced framework feature. Only use this if you
 understand the implications.
 
-**Returns:** *void*
+**Returns:** void
 
 ___
 
-### `Protected` onSynthesize
+### onSynthesize
 
-▸ **onSynthesize**(`session`: ISynthesisSession): *void*
+▸ `Protected`**onSynthesize**(`session`: ISynthesisSession): void
 
-*Inherited from [Example](#example).[onSynthesize](#protected-onsynthesize)*
+*Inherited from [Example](#example).[onSynthesize](#onsynthesize)*
 
 *Overrides void*
 
@@ -125,21 +129,21 @@ Allows this construct to emit artifacts into the cloud assembly during synthesis
 This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
 as they participate in synthesizing the cloud assembly.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
 `session` | ISynthesisSession | The synthesis session.  |
 
-**Returns:** *void*
+**Returns:** void
 
 ___
 
-### `Protected` onValidate
+### onValidate
 
-▸ **onValidate**(): *string[]*
+▸ `Protected`**onValidate**(): string[]
 
-*Inherited from [Example](#example).[onValidate](#protected-onvalidate)*
+*Inherited from [Example](#example).[onValidate](#onvalidate)*
 
 *Overrides void*
 
@@ -148,19 +152,19 @@ Validate the current construct.
 This method can be implemented by derived constructs in order to perform
 validation logic. It is called on all constructs before synthesis.
 
-**Returns:** *string[]*
+**Returns:** string[]
 
 An array of validation error messages, or an empty array if the construct is valid.
 
 ___
 
-### `Protected` prepare
+### prepare
 
-▸ **prepare**(): *void*
+▸ `Protected`**prepare**(): void
 
-*Inherited from [Example](#example).[prepare](#protected-prepare)*
+*Inherited from [Example](#example).[prepare](#prepare)*
 
-Perform final modifications before synthesis
+Perform final modifications before synthesis.
 
 This method can be implemented by derived constructs in order to perform
 final changes before synthesis. prepare() will be called after child
@@ -169,79 +173,81 @@ constructs have been prepared.
 This is an advanced framework feature. Only use this if you
 understand the implications.
 
-**Returns:** *void*
+**Returns:** void
 
 ___
 
-### `Protected` synthesize
+### synthesize
 
-▸ **synthesize**(`session`: ISynthesisSession): *void*
+▸ `Protected`**synthesize**(`session`: ISynthesisSession): void
 
-*Inherited from [Example](#example).[synthesize](#protected-synthesize)*
+*Inherited from [Example](#example).[synthesize](#synthesize)*
 
 Allows this construct to emit artifacts into the cloud assembly during synthesis.
 
 This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
 as they participate in synthesizing the cloud assembly.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
 `session` | ISynthesisSession | The synthesis session.  |
 
-**Returns:** *void*
+**Returns:** void
 
 ___
 
-###  toString
+### toString
 
-▸ **toString**(): *string*
+▸ **toString**(): string
 
 *Inherited from [Example](#example).[toString](#tostring)*
 
 Returns a string representation of this construct.
 
-**Returns:** *string*
+**Returns:** string
 
 ___
 
-### `Protected` validate
+### validate
 
-▸ **validate**(): *string[]*
+▸ `Protected`**validate**(): string[]
 
-*Inherited from [Example](#example).[validate](#protected-validate)*
+*Inherited from [Example](#example).[validate](#validate)*
 
 Validate the current construct.
 
 This method can be implemented by derived constructs in order to perform
 validation logic. It is called on all constructs before synthesis.
 
-**Returns:** *string[]*
+**Returns:** string[]
 
 An array of validation error messages, or an empty array if the construct is valid.
 
 ___
 
-### `Static` isConstruct
+### isConstruct
 
-▸ **isConstruct**(`x`: any): *x is Construct*
+▸ `Static`**isConstruct**(`x`: any): x is Construct
 
-*Inherited from [Example](#example).[isConstruct](#static-isconstruct)*
+*Inherited from [Example](#example).[isConstruct](#isconstruct)*
 
-Return whether the given object is a Construct
+Return whether the given object is a Construct.
 
-**Parameters:**
+#### Parameters:
 
 Name | Type |
 ------ | ------ |
 `x` | any |
 
-**Returns:** *x is Construct*
+**Returns:** x is Construct
 
 # Exampleprops
 
-[construct](#readme) › [ExampleProps](#exampleprops)
+**[construct](#readme)**
+
+> [Globals](#readme) / ExampleProps
 
 # Interface: ExampleProps
 
@@ -253,13 +259,13 @@ Name | Type |
 
 ### Properties
 
-* [visibilityTimeout](#optional-visibilitytimeout)
+* [visibilityTimeout](#visibilitytimeout)
 
 ## Properties
 
-### `Optional` visibilityTimeout
+### visibilityTimeout
 
-• **visibilityTimeout**? : *Duration*
+• `Optional` **visibilityTimeout**: Duration
 
 The visibility timeout to be configured on the SQS Queue, in seconds.
 
