@@ -67,7 +67,7 @@
     "jest-watch-select-projects": "^2.0.0",
     "jest-watch-typeahead": "^0.6.1",
     "jsii": "^1.13.0",
-    "jsii-docgen": "^1.4.44",
+    "jsii-docgen": "^1.4.45",
     "jsii-pacmak": "^1.13.0",
     "jsii-release": "^0.1.10",
     "latest-version": "^5.1.0",
@@ -79,7 +79,7 @@
     "ts-loader": "^8.0.4",
     "ts-node": "^9.0.0",
     "typedoc": "^0.19.2",
-    "typedoc-plugin-markdown": "^3.0.3",
+    "typedoc-plugin-markdown": "^3.0.5",
     "typescript": "^4.0.3",
     "v8-compile-cache": "^2.1.1",
     "webpack": "^4.44.2"
