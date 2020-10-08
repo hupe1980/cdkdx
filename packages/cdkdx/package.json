@@ -45,7 +45,7 @@
     "chalk": "^4.1.0",
     "clipanion": "^2.6.2",
     "concat-md": "^0.3.5",
-    "constructs": "^3.0.8",
+    "constructs": "^3.0.10",
     "dotenv": "^8.2.0",
     "eslint": "^7.10.0",
     "eslint-config-cdk": "^0.6.13",
@@ -67,7 +67,7 @@
     "jest-watch-select-projects": "^2.0.0",
     "jest-watch-typeahead": "^0.6.1",
     "jsii": "^1.13.0",
-    "jsii-docgen": "^1.4.50",
+    "jsii-docgen": "^1.4.51",
     "jsii-pacmak": "^1.13.0",
     "jsii-release": "^0.1.10",
     "latest-version": "^5.1.0",
@@ -85,7 +85,7 @@
     "webpack": "^4.44.2"
   },
   "devDependencies": {
-    "@types/eslint": "^7.2.3",
+    "@types/eslint": "^7.2.4",
     "@types/friendly-errors-webpack-plugin": "^0.1.2",
     "@types/fs-extra": "^9.0.1",
     "@types/terser-webpack-plugin": "^4.2.0",
