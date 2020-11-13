@@ -61,7 +61,7 @@
 
 ### constructor
 
-\+ **new Example**(`scope`: Construct, `id`: string, `props`: [ExampleProps](#exampleprops)): [Example](#example)
+\+ **new Example**(`scope`: Construct, `id`: string, `props?`: [ExampleProps](#exampleprops)): [Example](#example)
 
 *Overrides void*
 
