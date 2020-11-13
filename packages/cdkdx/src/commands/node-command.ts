@@ -52,6 +52,7 @@ export class NodeCommand extends BaseProjectCommand {
     await execa(command, args, {
       stdio: ['ignore', 'inherit', 'inherit'],
       env: {
+        LAMBDAS: this.projectInfo.lambdasOutPath,
         ...process.env,
       },
     });
