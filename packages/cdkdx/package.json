@@ -37,7 +37,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@types/aws-lambda": "^8.10.63",
+    "@types/aws-lambda": "^8.10.64",
     "@types/jest": "^26.0.14",
     "@typescript-eslint/eslint-plugin": "^4.4.0",
     "@typescript-eslint/parser": "^4.4.0",
@@ -45,7 +45,7 @@
     "chalk": "^4.1.0",
     "clipanion": "^2.6.2",
     "concat-md": "^0.3.5",
-    "constructs": "^3.0.10",
+    "constructs": "^3.2.27",
     "dotenv": "^8.2.0",
     "eslint": "^7.10.0",
     "eslint-config-cdk": "^0.6.13",
