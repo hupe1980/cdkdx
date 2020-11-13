@@ -22,7 +22,7 @@ export = {
       testRunner: require.resolve('jest-circus/runner'),
       globals: {
         'ts-jest': {
-          tsConfig: TsConfig.fromJsiiTemplate().getCompilerOptions(),
+          tsconfig: TsConfig.fromJsiiTemplate().getCompilerOptions(),
         },
       },
     },
@@ -39,7 +39,7 @@ export = {
       testRunner: require.resolve('jest-circus/runner'),
       globals: {
         'ts-jest': {
-          tsConfig: TsConfig.fromLambdaTemplate().getCompilerOptions(),
+          tsconfig: TsConfig.fromLambdaTemplate().getCompilerOptions(),
         },
       },
     },
