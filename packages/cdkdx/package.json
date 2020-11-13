@@ -41,7 +41,7 @@
     "@types/jest": "^26.0.14",
     "@typescript-eslint/eslint-plugin": "^4.4.0",
     "@typescript-eslint/parser": "^4.4.0",
-    "camelcase": "^6.0.0",
+    "camelcase": "^6.2.0",
     "chalk": "^4.1.0",
     "clipanion": "^2.6.2",
     "concat-md": "^0.3.5",
@@ -55,7 +55,7 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jest": "^24.1.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "execa": "^4.0.3",
+    "execa": "^4.1.0",
     "fork-ts-checker-webpack-plugin": "^5.2.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "fs-extra": "^9.0.1",
@@ -81,17 +81,17 @@
     "typedoc": "^0.19.2",
     "typedoc-plugin-markdown": "^3.0.7",
     "typescript": "^4.0.3",
-    "v8-compile-cache": "^2.1.1",
+    "v8-compile-cache": "^2.2.0",
     "webpack": "^4.44.2"
   },
   "devDependencies": {
     "@types/eslint": "^7.2.4",
     "@types/friendly-errors-webpack-plugin": "^0.1.2",
-    "@types/fs-extra": "^9.0.1",
+    "@types/fs-extra": "^9.0.4",
     "@types/terser-webpack-plugin": "^4.2.0",
     "@types/webpack": "^4.41.22",
     "rimraf": "^3.0.2",
-    "type-fest": "^0.17.0"
+    "type-fest": "^0.18.1"
   },
   "gitHead": "ebefdf223a55e2e57ede5e72c9942e89b35b5a24"
 }
