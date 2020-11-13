@@ -9,7 +9,7 @@ export class ReleaseCommand extends BaseProjectCommand {
   static usage = Command.Usage({
     description: 'Release the project',
     details: `
-      This command releases the project to npm, pypi or both.
+      This command releases the project to npm or pypi.
 
       It is checked whether the package version is not yet registered. If the version is not in the registry, it will be released. Otherwise the process will be ignored.
     `,
@@ -20,7 +20,7 @@ export class ReleaseCommand extends BaseProjectCommand {
   });
 
   @Command.String({ required: true })
-  public type!: 'all' | 'npm' | 'pypi';
+  public type!: 'npm' | 'pypi';
 
   @Command.Path('release')
   async execute(): Promise<number> {
@@ -31,29 +31,36 @@ export class ReleaseCommand extends BaseProjectCommand {
 
     const timer = new Timer();
 
-    await this.cli.run(['package']);
-
     const [command, args] = ((): [string, string[]] => {
       switch (this.type) {
         case 'npm':
+          if (!process.env.NPM_TOKEN) {
+            throw new Error('NPM_TOKEN is required');
+          }
+
           return [
             require.resolve('jsii-release/bin/jsii-release-npm'),
             [path.join(this.projectInfo.distPath, 'js')],
           ];
         case 'pypi':
+          if (!process.env.TWINE_USERNAME) {
+            process.env.TWINE_USERNAME = '__token__';
+          }
+
+          if (!process.env.TWINE_PASSWORD) {
+            throw new Error('TWINE_PASSWORD is required');
+          }
+
           return [
             require.resolve('jsii-release/bin/jsii-release-pypi'),
             [path.join(this.projectInfo.distPath, 'python')],
-          ];
-        case 'all':
-          return [
-            require.resolve('jsii-release/bin/jsii-release'),
-            [this.projectInfo.distPath],
           ];
         default:
           throw new Error(`Invalid release type: ${this.type}`);
       }
     })();
+
+    await this.cli.run(['package']);
 
     await execa(command, args, {
       stdio: ['ignore', 'inherit', 'inherit'],
