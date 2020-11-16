@@ -22,6 +22,7 @@ export class TestCommand extends BaseProjectCommand {
   @Command.Path('test')
   async execute(): Promise<number> {
     process.env.NODE_ENV = 'test';
+    process.env.LAMBDAS = this.projectInfo.lambdasSrcPath;
 
     const argv: string[] = [];
 
