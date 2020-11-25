@@ -45,7 +45,7 @@
     "chalk": "^4.1.0",
     "clipanion": "^2.6.2",
     "concat-md": "^0.3.5",
-    "constructs": "^3.2.38",
+    "constructs": "^3.2.42",
     "dotenv": "^8.2.0",
     "eslint": "^7.14.0",
     "eslint-config-cdk": "^0.7.0",
@@ -66,9 +66,9 @@
     "jest-transform-stub": "^2.0.0",
     "jest-watch-select-projects": "^2.0.0",
     "jest-watch-typeahead": "^0.6.1",
-    "jsii": "^1.14.1",
-    "jsii-docgen": "^1.4.94",
-    "jsii-pacmak": "^1.14.1",
+    "jsii": "^1.15.0",
+    "jsii-docgen": "^1.4.98",
+    "jsii-pacmak": "^1.15.0",
     "jsii-release": "^0.2.3",
     "latest-version": "^5.1.0",
     "prettier": "^2.2.0",
@@ -91,7 +91,7 @@
     "@types/terser-webpack-plugin": "^4.2.0",
     "@types/webpack": "^4.41.25",
     "rimraf": "^3.0.2",
-    "type-fest": "^0.19.0"
+    "type-fest": "^0.20.1"
   },
   "gitHead": "ebefdf223a55e2e57ede5e72c9942e89b35b5a24"
 }
