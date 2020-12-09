@@ -85,6 +85,8 @@ Name | Type | Default value |
 
 The construct tree node associated with this construct.
 
+**`stability`** stable
+
 ___
 
 ### queueArn
@@ -112,6 +114,8 @@ constructs have been prepared.
 This is an advanced framework feature. Only use this if you
 understand the implications.
 
+**`stability`** stable
+
 **Returns:** void
 
 ___
@@ -129,11 +133,13 @@ Allows this construct to emit artifacts into the cloud assembly during synthesis
 This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
 as they participate in synthesizing the cloud assembly.
 
+**`stability`** stable
+
 #### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`session` | ISynthesisSession | The synthesis session.  |
+`session` | ISynthesisSession | The synthesis session. |
 
 **Returns:** void
 
@@ -151,6 +157,8 @@ Validate the current construct.
 
 This method can be implemented by derived constructs in order to perform
 validation logic. It is called on all constructs before synthesis.
+
+**`stability`** stable
 
 **Returns:** string[]
 
@@ -173,6 +181,8 @@ constructs have been prepared.
 This is an advanced framework feature. Only use this if you
 understand the implications.
 
+**`stability`** stable
+
 **Returns:** void
 
 ___
@@ -188,11 +198,13 @@ Allows this construct to emit artifacts into the cloud assembly during synthesis
 This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
 as they participate in synthesizing the cloud assembly.
 
+**`stability`** stable
+
 #### Parameters:
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`session` | ISynthesisSession | The synthesis session.  |
+`session` | ISynthesisSession | The synthesis session. |
 
 **Returns:** void
 
@@ -221,6 +233,8 @@ Validate the current construct.
 This method can be implemented by derived constructs in order to perform
 validation logic. It is called on all constructs before synthesis.
 
+**`stability`** stable
+
 **Returns:** string[]
 
 An array of validation error messages, or an empty array if the construct is valid.
@@ -234,6 +248,8 @@ ___
 *Inherited from [Example](#example).[isConstruct](#isconstruct)*
 
 Return whether the given object is a Construct.
+
+**`stability`** stable
 
 #### Parameters:
 

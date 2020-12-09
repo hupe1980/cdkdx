@@ -24,7 +24,7 @@
     "prettier": ">=2.0.5"
   },
   "devDependencies": {
-    "jsii": "^1.15.0"
+    "jsii": "^1.16.0"
   },
   "gitHead": "ebefdf223a55e2e57ede5e72c9942e89b35b5a24"
 }
