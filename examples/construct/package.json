@@ -14,7 +14,7 @@
     "cdkdx": "cdkdx"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.79.0",
+    "@aws-cdk/assert": "^1.80.0",
     "@types/node": "12.12.50",
     "axios": "^0.21.0",
     "cdkdx": "^0.7.11"
@@ -23,11 +23,11 @@
     "@aws-cdk/core": "^1.57.0"
   },
   "dependencies": {
-    "@aws-cdk/aws-lambda": "^1.79.0",
-    "@aws-cdk/aws-sns": "^1.79.0",
-    "@aws-cdk/aws-sns-subscriptions": "^1.79.0",
-    "@aws-cdk/aws-sqs": "^1.79.0",
-    "@aws-cdk/core": "^1.79.0"
+    "@aws-cdk/aws-lambda": "^1.80.0",
+    "@aws-cdk/aws-sns": "^1.80.0",
+    "@aws-cdk/aws-sns-subscriptions": "^1.80.0",
+    "@aws-cdk/aws-sqs": "^1.80.0",
+    "@aws-cdk/core": "^1.80.0"
   },
   "gitHead": "c9a66a2cd9732cacf54f79f0c5052693d157704d"
 }
