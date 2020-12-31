@@ -2,8 +2,7 @@ import * as path from 'path';
 import * as fs from 'fs-extra';
 import * as os from 'os';
 import { renderSinglePageModule } from 'jsii-docgen';
-import { Application } from 'typedoc';
-import { ScriptTarget, ModuleKind } from 'typescript';
+import { Application, TSConfigReader } from 'typedoc';
 import concatMd from 'concat-md';
 
 import { Logger } from './logger';
@@ -49,38 +48,32 @@ export class TscDocgen implements Docgen {
     outDir: string,
     options: GenerateOptions,
   ): Promise<void> {
-    return new Promise((resolve, reject) => {
-      const app = new Application();
+    const app = new Application();
+    app.options.addReader(new TSConfigReader());
 
-      app.bootstrap({
-        module: ModuleKind.CommonJS,
-        target: ScriptTarget.ES2018,
-        entryPoint: 'index',
-        disableSources: true,
-        excludeNotExported: true,
-        readme: 'none',
-        mode: 'file',
-        theme: 'markdown',
-        plugin: ['typedoc-plugin-markdown'],
-        exclude: options.typescriptExcludes,
-        logger: (message: string, level: number) => {
-          if (level === 3) {
-            //log only errors
-            options.logger.fail(`${message}\n`);
-          }
-        },
-      });
-
-      if (
-        app.generateDocs(
-          app.expandInputFiles([path.join(options.projectPath, 'src')]),
-          outDir,
-        )
-      ) {
-        return resolve();
-      }
-
-      return reject(new Error('Docgen execution failed.'));
+    app.bootstrap({
+      entryPoints: [path.join(options.projectPath, 'src', 'index.ts')],
+      //entryPoints: ['src/index.ts'],
+      disableSources: true,
+      readme: 'none',
+      theme: 'markdown',
+      plugin: ['typedoc-plugin-markdown'],
+      exclude: options.typescriptExcludes,
+      logger: (message: string, level: number) => {
+        if (level === 3) {
+          //log only errors
+          options.logger.fail(`${message}\n`);
+        }
+      },
     });
+
+    const project = app.convert();
+
+    if (project) {
+      await app.generateDocs(project, outDir);
+      return;
+    }
+
+    throw new Error('Docgen execution failed.');
   }
 }

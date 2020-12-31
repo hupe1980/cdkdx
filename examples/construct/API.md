@@ -1,8 +1,6 @@
 # README
 
-**[construct](#readme)**
-
-> Globals
+construct
 
 # construct
 
@@ -18,22 +16,15 @@
 
 # Example
 
-**[construct](#readme)**
-
-> [Globals](#readme) / Example
+[construct](#readme) / Example
 
 # Class: Example
 
 ## Hierarchy
 
-* Construct
+* *Construct*
 
   ↳ **Example**
-
-## Implements
-
-* IConstruct
-* IConstruct
 
 ## Index
 
@@ -61,27 +52,23 @@
 
 ### constructor
 
-\+ **new Example**(`scope`: Construct, `id`: string, `props?`: [ExampleProps](#exampleprops)): [Example](#example)
-
-*Overrides void*
+\+ **new Example**(`scope`: *Construct*, `id`: *string*, `props?`: [*ExampleProps*](#exampleprops)): [*Example*](#example)
 
 #### Parameters:
 
 Name | Type | Default value |
 ------ | ------ | ------ |
-`scope` | Construct | - |
-`id` | string | - |
-`props` | [ExampleProps](#exampleprops) | {} |
+`scope` | *Construct* | - |
+`id` | *string* | - |
+`props` | [*ExampleProps*](#exampleprops) | ... |
 
-**Returns:** [Example](#example)
+**Returns:** [*Example*](#example)
 
 ## Properties
 
 ### node
 
 • `Readonly` **node**: ConstructNode
-
-*Inherited from [Example](#example).[node](#node)*
 
 The construct tree node associated with this construct.
 
@@ -91,7 +78,7 @@ ___
 
 ### queueArn
 
-• `Readonly` **queueArn**: string
+• `Readonly` **queueArn**: *string*
 
 **`returns`** the ARN of the SQS queue
 
@@ -99,11 +86,7 @@ ___
 
 ### onPrepare
 
-▸ `Protected`**onPrepare**(): void
-
-*Inherited from [Example](#example).[onPrepare](#onprepare)*
-
-*Overrides void*
+▸ `Protected`**onPrepare**(): *void*
 
 Perform final modifications before synthesis.
 
@@ -116,17 +99,13 @@ understand the implications.
 
 **`stability`** stable
 
-**Returns:** void
+**Returns:** *void*
 
 ___
 
 ### onSynthesize
 
-▸ `Protected`**onSynthesize**(`session`: ISynthesisSession): void
-
-*Inherited from [Example](#example).[onSynthesize](#onsynthesize)*
-
-*Overrides void*
+▸ `Protected`**onSynthesize**(`session`: ISynthesisSession): *void*
 
 Allows this construct to emit artifacts into the cloud assembly during synthesis.
 
@@ -139,19 +118,15 @@ as they participate in synthesizing the cloud assembly.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`session` | ISynthesisSession | The synthesis session. |
+`session` | ISynthesisSession | The synthesis session.   |
 
-**Returns:** void
+**Returns:** *void*
 
 ___
 
 ### onValidate
 
-▸ `Protected`**onValidate**(): string[]
-
-*Inherited from [Example](#example).[onValidate](#onvalidate)*
-
-*Overrides void*
+▸ `Protected`**onValidate**(): *string*[]
 
 Validate the current construct.
 
@@ -160,7 +135,7 @@ validation logic. It is called on all constructs before synthesis.
 
 **`stability`** stable
 
-**Returns:** string[]
+**Returns:** *string*[]
 
 An array of validation error messages, or an empty array if the construct is valid.
 
@@ -168,9 +143,7 @@ ___
 
 ### prepare
 
-▸ `Protected`**prepare**(): void
-
-*Inherited from [Example](#example).[prepare](#prepare)*
+▸ `Protected`**prepare**(): *void*
 
 Perform final modifications before synthesis.
 
@@ -183,15 +156,13 @@ understand the implications.
 
 **`stability`** stable
 
-**Returns:** void
+**Returns:** *void*
 
 ___
 
 ### synthesize
 
-▸ `Protected`**synthesize**(`session`: ISynthesisSession): void
-
-*Inherited from [Example](#example).[synthesize](#synthesize)*
+▸ `Protected`**synthesize**(`session`: ISynthesisSession): *void*
 
 Allows this construct to emit artifacts into the cloud assembly during synthesis.
 
@@ -204,29 +175,25 @@ as they participate in synthesizing the cloud assembly.
 
 Name | Type | Description |
 ------ | ------ | ------ |
-`session` | ISynthesisSession | The synthesis session. |
+`session` | ISynthesisSession | The synthesis session.   |
 
-**Returns:** void
+**Returns:** *void*
 
 ___
 
 ### toString
 
-▸ **toString**(): string
-
-*Inherited from [Example](#example).[toString](#tostring)*
+▸ **toString**(): *string*
 
 Returns a string representation of this construct.
 
-**Returns:** string
+**Returns:** *string*
 
 ___
 
 ### validate
 
-▸ `Protected`**validate**(): string[]
-
-*Inherited from [Example](#example).[validate](#validate)*
+▸ `Protected`**validate**(): *string*[]
 
 Validate the current construct.
 
@@ -235,7 +202,7 @@ validation logic. It is called on all constructs before synthesis.
 
 **`stability`** stable
 
-**Returns:** string[]
+**Returns:** *string*[]
 
 An array of validation error messages, or an empty array if the construct is valid.
 
@@ -243,9 +210,7 @@ ___
 
 ### isConstruct
 
-▸ `Static`**isConstruct**(`x`: any): x is Construct
-
-*Inherited from [Example](#example).[isConstruct](#isconstruct)*
+▸ `Static`**isConstruct**(`x`: *any*): x is Construct<\>
 
 Return whether the given object is a Construct.
 
@@ -255,15 +220,13 @@ Return whether the given object is a Construct.
 
 Name | Type |
 ------ | ------ |
-`x` | any |
+`x` | *any* |
 
-**Returns:** x is Construct
+**Returns:** x is Construct<\>
 
 # Exampleprops
 
-**[construct](#readme)**
-
-> [Globals](#readme) / ExampleProps
+[construct](#readme) / ExampleProps
 
 # Interface: ExampleProps
 
