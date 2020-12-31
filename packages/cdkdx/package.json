@@ -39,8 +39,8 @@
   "dependencies": {
     "@types/aws-lambda": "^8.10.67",
     "@types/jest": "^26.0.19",
-    "@typescript-eslint/eslint-plugin": "^4.10.0",
-    "@typescript-eslint/parser": "^4.10.0",
+    "@typescript-eslint/eslint-plugin": "^4.11.1",
+    "@typescript-eslint/parser": "^4.11.1",
     "camelcase": "^6.2.0",
     "chalk": "^4.1.0",
     "clipanion": "^2.6.2",
