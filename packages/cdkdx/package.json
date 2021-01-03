@@ -47,7 +47,7 @@
     "concat-md": "^0.3.5",
     "constructs": "^3.2.90",
     "dotenv": "^8.2.0",
-    "eslint": "^7.16.0",
+    "eslint": "^7.17.0",
     "eslint-config-cdk": "^0.7.8",
     "eslint-config-prettier": "^7.1.0",
     "eslint-import-resolver-typescript": "^2.3.0",
