@@ -68,7 +68,7 @@ Name | Type | Default value |
 
 ### node
 
-• `Readonly` **node**: ConstructNode
+• `Readonly` **node**: *ConstructNode*
 
 The construct tree node associated with this construct.
 
@@ -244,7 +244,7 @@ Name | Type |
 
 ### visibilityTimeout
 
-• `Optional` **visibilityTimeout**: Duration
+• `Optional` **visibilityTimeout**: *undefined* \| *Duration*
 
 The visibility timeout to be configured on the SQS Queue, in seconds.
 
