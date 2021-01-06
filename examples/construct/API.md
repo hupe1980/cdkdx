@@ -210,7 +210,7 @@ ___
 
 ### isConstruct
 
-▸ `Static`**isConstruct**(`x`: *any*): x is Construct<\>
+▸ `Static`**isConstruct**(`x`: *any*): x is Construct
 
 Return whether the given object is a Construct.
 
@@ -222,7 +222,7 @@ Name | Type |
 ------ | ------ |
 `x` | *any* |
 
-**Returns:** x is Construct<\>
+**Returns:** x is Construct
 
 # Exampleprops
 
