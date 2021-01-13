@@ -4,15 +4,15 @@ construct
 
 # construct
 
-## Index
+## Table of contents
 
 ### Classes
 
-* [Example](#example)
+- [Example](#example)
 
 ### Interfaces
 
-* [ExampleProps](#exampleprops)
+- [ExampleProps](#exampleprops)
 
 # Example
 
@@ -26,27 +26,27 @@ construct
 
   ↳ **Example**
 
-## Index
+## Table of contents
 
 ### Constructors
 
-* [constructor](#constructor)
+- [constructor](#constructor)
 
 ### Properties
 
-* [node](#node)
-* [queueArn](#queuearn)
+- [node](#node)
+- [queueArn](#queuearn)
 
 ### Methods
 
-* [onPrepare](#onprepare)
-* [onSynthesize](#onsynthesize)
-* [onValidate](#onvalidate)
-* [prepare](#prepare)
-* [synthesize](#synthesize)
-* [toString](#tostring)
-* [validate](#validate)
-* [isConstruct](#isconstruct)
+- [onPrepare](#onprepare)
+- [onSynthesize](#onsynthesize)
+- [onValidate](#onvalidate)
+- [prepare](#prepare)
+- [synthesize](#synthesize)
+- [toString](#tostring)
+- [validate](#validate)
+- [isConstruct](#isconstruct)
 
 ## Constructors
 
@@ -234,11 +234,11 @@ Name | Type |
 
 * **ExampleProps**
 
-## Index
+## Table of contents
 
 ### Properties
 
-* [visibilityTimeout](#visibilitytimeout)
+- [visibilityTimeout](#visibilitytimeout)
 
 ## Properties
 
