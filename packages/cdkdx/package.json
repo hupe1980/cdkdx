@@ -45,7 +45,7 @@
     "chalk": "^4.1.0",
     "clipanion": "^2.6.2",
     "concat-md": "^0.3.5",
-    "constructs": "^3.3.27",
+    "constructs": "^3.3.37",
     "dotenv": "^8.2.0",
     "eslint": "^7.20.0",
     "eslint-config-cdk": "^0.7.22",
@@ -66,9 +66,9 @@
     "jest-transform-stub": "^2.0.0",
     "jest-watch-select-projects": "^2.0.0",
     "jest-watch-typeahead": "^0.6.1",
-    "jsii": "^1.21.0",
-    "jsii-docgen": "^1.8.46",
-    "jsii-pacmak": "^1.21.0",
+    "jsii": "^1.22.0",
+    "jsii-docgen": "^1.8.51",
+    "jsii-pacmak": "^1.22.0",
     "jsii-release": "^0.2.18",
     "latest-version": "^5.1.0",
     "prettier": "^2.2.1",
@@ -78,7 +78,7 @@
     "ts-jest": "^26.5.1",
     "ts-loader": "^8.0.17",
     "ts-node": "^9.1.1",
-    "typedoc": "^0.20.25",
+    "typedoc": "^0.20.28",
     "typedoc-plugin-markdown": "^3.5.0",
     "typescript": "^4.1.5",
     "v8-compile-cache": "^2.2.0",
@@ -91,7 +91,7 @@
     "@types/terser-webpack-plugin": "^4.2.0",
     "@types/webpack": "^4.41.26",
     "rimraf": "^3.0.2",
-    "type-fest": "^0.21.1"
+    "type-fest": "^0.21.2"
   },
   "gitHead": "ebefdf223a55e2e57ede5e72c9942e89b35b5a24"
 }
