@@ -1,7 +1,7 @@
 {
   "name": "cdkdx",
   "description": "Zero-config CLI for aws cdk development",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "license": "MIT",
   "keywords": [
     "aws",
@@ -51,7 +51,7 @@
     "eslint-config-cdk": "^0.8.1",
     "eslint-config-prettier": "^8.1.0",
     "eslint-import-resolver-typescript": "^2.4.0",
-    "eslint-plugin-cdk": "^0.8.1",
+    "eslint-plugin-cdk": "^0.8.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jest": "^24.2.1",
     "eslint-plugin-prettier": "^3.3.1",
