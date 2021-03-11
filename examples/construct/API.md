@@ -240,7 +240,7 @@ Name | Type |
 
 ### visibilityTimeout
 
-• `Optional` **visibilityTimeout**: *undefined* \| *Duration*
+• `Optional` **visibilityTimeout**: *Duration*
 
 The visibility timeout to be configured on the SQS Queue, in seconds.
 
