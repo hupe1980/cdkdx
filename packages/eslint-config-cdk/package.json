@@ -1,7 +1,7 @@
 {
   "name": "eslint-config-cdk",
   "description": "ESLint configuration used by cdkdx",
-  "version": "0.8.1",
+  "version": "0.8.3",
   "license": "MIT",
   "repository": {
     "type": "git",
