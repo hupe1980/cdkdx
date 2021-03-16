@@ -64,6 +64,8 @@ Name | Type |
 
 **Returns:** [*Example*](#example)
 
+Overrides: void
+
 ## Properties
 
 ### node
@@ -73,6 +75,8 @@ Name | Type |
 The construct tree node associated with this construct.
 
 **`stability`** stable
+
+Inherited from: void
 
 ___
 
@@ -101,6 +105,8 @@ understand the implications.
 
 **Returns:** *void*
 
+Inherited from: void
+
 ___
 
 ### onSynthesize
@@ -122,6 +128,8 @@ Name | Type | Description |
 
 **Returns:** *void*
 
+Inherited from: void
+
 ___
 
 ### onValidate
@@ -138,6 +146,8 @@ validation logic. It is called on all constructs before synthesis.
 **Returns:** *string*[]
 
 An array of validation error messages, or an empty array if the construct is valid.
+
+Inherited from: void
 
 ___
 
@@ -157,6 +167,8 @@ understand the implications.
 **`stability`** stable
 
 **Returns:** *void*
+
+Inherited from: void
 
 ___
 
@@ -179,6 +191,8 @@ Name | Type | Description |
 
 **Returns:** *void*
 
+Inherited from: void
+
 ___
 
 ### toString
@@ -188,6 +202,8 @@ ___
 Returns a string representation of this construct.
 
 **Returns:** *string*
+
+Inherited from: void
 
 ___
 
@@ -206,6 +222,8 @@ validation logic. It is called on all constructs before synthesis.
 
 An array of validation error messages, or an empty array if the construct is valid.
 
+Inherited from: void
+
 ___
 
 ### isConstruct
@@ -223,6 +241,8 @@ Name | Type |
 `x` | *any* |
 
 **Returns:** x is Construct
+
+Inherited from: void
 
 # Exampleprops
 
