@@ -201,6 +201,8 @@ ___
 
 Returns a string representation of this construct.
 
+**`stability`** stable
+
 **Returns:** *string*
 
 Inherited from: void
