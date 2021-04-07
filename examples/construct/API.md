@@ -56,15 +56,15 @@ construct
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`scope` | *Construct* |
-`id` | *string* |
-`props` | [*ExampleProps*](#exampleprops) |
+Name | Type | Default value |
+:------ | :------ | :------ |
+`scope` | *Construct* | - |
+`id` | *string* | - |
+`props` | [*ExampleProps*](#exampleprops) | {} |
 
 **Returns:** [*Example*](#example)
 
-Overrides: void
+Overrides: Construct.constructor
 
 ## Properties
 
@@ -76,7 +76,7 @@ The construct tree node associated with this construct.
 
 **`stability`** stable
 
-Inherited from: void
+Inherited from: Construct.node
 
 ___
 
@@ -105,7 +105,7 @@ understand the implications.
 
 **Returns:** *void*
 
-Inherited from: void
+Inherited from: Construct.onPrepare
 
 ___
 
@@ -128,7 +128,7 @@ Name | Type | Description |
 
 **Returns:** *void*
 
-Inherited from: void
+Inherited from: Construct.onSynthesize
 
 ___
 
@@ -147,7 +147,7 @@ validation logic. It is called on all constructs before synthesis.
 
 An array of validation error messages, or an empty array if the construct is valid.
 
-Inherited from: void
+Inherited from: Construct.onValidate
 
 ___
 
@@ -168,7 +168,7 @@ understand the implications.
 
 **Returns:** *void*
 
-Inherited from: void
+Inherited from: Construct.prepare
 
 ___
 
@@ -191,7 +191,7 @@ Name | Type | Description |
 
 **Returns:** *void*
 
-Inherited from: void
+Inherited from: Construct.synthesize
 
 ___
 
@@ -205,7 +205,7 @@ Returns a string representation of this construct.
 
 **Returns:** *string*
 
-Inherited from: void
+Inherited from: Construct.toString
 
 ___
 
@@ -224,7 +224,7 @@ validation logic. It is called on all constructs before synthesis.
 
 An array of validation error messages, or an empty array if the construct is valid.
 
-Inherited from: void
+Inherited from: Construct.validate
 
 ___
 
@@ -244,7 +244,7 @@ Name | Type |
 
 **Returns:** x is Construct
 
-Inherited from: void
+Inherited from: Construct.isConstruct
 
 # Exampleprops
 
