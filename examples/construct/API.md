@@ -56,11 +56,11 @@ construct
 
 #### Parameters:
 
-Name | Type | Default value |
-:------ | :------ | :------ |
-`scope` | *Construct* | - |
-`id` | *string* | - |
-`props` | [*ExampleProps*](#exampleprops) | {} |
+| Name | Type | Default value |
+| :------ | :------ | :------ |
+| `scope` | *Construct* | - |
+| `id` | *string* | - |
+| `props` | [*ExampleProps*](#exampleprops) | {} |
 
 **Returns:** [*Example*](#example)
 
@@ -122,9 +122,9 @@ as they participate in synthesizing the cloud assembly.
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`session` | ISynthesisSession | The synthesis session.   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `session` | ISynthesisSession | The synthesis session. |
 
 **Returns:** *void*
 
@@ -185,9 +185,9 @@ as they participate in synthesizing the cloud assembly.
 
 #### Parameters:
 
-Name | Type | Description |
-:------ | :------ | :------ |
-`session` | ISynthesisSession | The synthesis session.   |
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `session` | ISynthesisSession | The synthesis session. |
 
 **Returns:** *void*
 
@@ -238,9 +238,9 @@ Return whether the given object is a Construct.
 
 #### Parameters:
 
-Name | Type |
-:------ | :------ |
-`x` | *any* |
+| Name | Type |
+| :------ | :------ |
+| `x` | *any* |
 
 **Returns:** x is Construct
 
