@@ -22,7 +22,7 @@ construct
 
 ## Hierarchy
 
-* *Construct*
+- *Construct*
 
   ↳ **Example**
 
@@ -54,7 +54,7 @@ construct
 
 \+ **new Example**(`scope`: *Construct*, `id`: *string*, `props?`: [*ExampleProps*](#exampleprops)): [*Example*](#example)
 
-#### Parameters:
+#### Parameters
 
 | Name | Type | Default value |
 | :------ | :------ | :------ |
@@ -90,7 +90,7 @@ ___
 
 ### onPrepare
 
-▸ `Protected`**onPrepare**(): *void*
+▸ `Protected` **onPrepare**(): *void*
 
 Perform final modifications before synthesis.
 
@@ -111,7 +111,7 @@ ___
 
 ### onSynthesize
 
-▸ `Protected`**onSynthesize**(`session`: ISynthesisSession): *void*
+▸ `Protected` **onSynthesize**(`session`: ISynthesisSession): *void*
 
 Allows this construct to emit artifacts into the cloud assembly during synthesis.
 
@@ -120,7 +120,7 @@ as they participate in synthesizing the cloud assembly.
 
 **`stability`** stable
 
-#### Parameters:
+#### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
@@ -134,7 +134,7 @@ ___
 
 ### onValidate
 
-▸ `Protected`**onValidate**(): *string*[]
+▸ `Protected` **onValidate**(): *string*[]
 
 Validate the current construct.
 
@@ -153,7 +153,7 @@ ___
 
 ### prepare
 
-▸ `Protected`**prepare**(): *void*
+▸ `Protected` **prepare**(): *void*
 
 Perform final modifications before synthesis.
 
@@ -174,7 +174,7 @@ ___
 
 ### synthesize
 
-▸ `Protected`**synthesize**(`session`: ISynthesisSession): *void*
+▸ `Protected` **synthesize**(`session`: ISynthesisSession): *void*
 
 Allows this construct to emit artifacts into the cloud assembly during synthesis.
 
@@ -183,7 +183,7 @@ as they participate in synthesizing the cloud assembly.
 
 **`stability`** stable
 
-#### Parameters:
+#### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
@@ -211,7 +211,7 @@ ___
 
 ### validate
 
-▸ `Protected`**validate**(): *string*[]
+▸ `Protected` **validate**(): *string*[]
 
 Validate the current construct.
 
@@ -230,13 +230,13 @@ ___
 
 ### isConstruct
 
-▸ `Static`**isConstruct**(`x`: *any*): x is Construct
+▸ `Static` **isConstruct**(`x`: *any*): x is Construct
 
 Return whether the given object is a Construct.
 
 **`stability`** stable
 
-#### Parameters:
+#### Parameters
 
 | Name | Type |
 | :------ | :------ |
