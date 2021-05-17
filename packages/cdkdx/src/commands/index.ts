@@ -4,6 +4,7 @@ export * from './bundle-command';
 export * from './create-command';
 export * from './docgen-command';
 export * from './help-command';
+export * from './layer-command';
 export * from './linter-command';
 export * from './node-command';
 export * from './package-command';

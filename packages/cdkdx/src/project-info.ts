@@ -28,6 +28,8 @@ export class ProjectInfo {
   public readonly libPath: string;
   public readonly lambdasSrcPath: string;
   public readonly lambdasOutPath: string;
+  public readonly layersSrcPath: string;
+  public readonly layersOutPath: string;
 
   private pkgJson: PackageJson;
 
@@ -59,6 +61,8 @@ export class ProjectInfo {
     this.libPath = this.resolve('lib');
     this.lambdasSrcPath = this.resolve('src/lambdas');
     this.lambdasOutPath = this.resolve('lib/lambdas');
+    this.layersSrcPath = this.resolve('src/layers');
+    this.layersOutPath = this.resolve('lib/layers');
   }
 
   get workspaces(): string[] | undefined {

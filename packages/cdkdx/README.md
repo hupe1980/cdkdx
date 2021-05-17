@@ -8,6 +8,7 @@
   - [App](#app)
   - [Lib](#lib)
 - [Lambda development](#lambda-development)
+- [Lambda Layer support](#lambda-layer-support)
 - [Optimizations](#optimizations)
   - [Moment.js](#moment.js)
 - [Customization](#customization) 
@@ -36,6 +37,7 @@
 - Typechecking for lambdas and constructs 
 - Yarn workspaces compatible
 - Generates docs for your project
+- Lambda layer support
 
 ## Quick Start
 
@@ -79,6 +81,11 @@ my-app
     │   ├── lambda2
     │   │   └── index.ts
     │   └── shared
+    ├── layers
+    │   └── demo
+    │   │   ├── .dockerignore
+    │   │   ├── layer.zip //dummy
+    │   │   └── Dockerfile
     ├── my-app.ts
     └── my-stack.ts
 ```
@@ -112,6 +119,11 @@ my-construct
     │   ├── lambda2
     │   │   └── index.ts
     │   └── shared
+    ├── layers
+    │   └── demo
+    │   │   ├── .dockerignore
+    │   │   ├── layer.zip //dummy
+    │   │   └── Dockerfile
     ├── index.ts
     └── my-construct.ts
 ```
@@ -169,6 +181,43 @@ new Function(this, 'Lambda1', {
 });
 ```
 
+## Lambda Layer support
+
+- Create a separate folder for each layer
+- The folder must contain a Dockerfile
+- Add a dummy layer.zip file to prevent test cases from aborting 
+- Docker muss be installed!
+
+```typescript
+import * as crypto from 'crypto';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as lambda from '@aws-cdk/aws-lambda';
+import { Construct } from '@aws-cdk/core';
+
+/**
+ * A demo Lambda layer.
+ */
+export class DemoLayer extends lambda.LayerVersion {
+  constructor(scope: Construct, id: string) {
+    super(scope, id, {
+      code: lambda.Code.fromAsset(path.join(__dirname, 'layers', 'demo', 'layer.zip'), {
+        // we hash the Dockerfile (it contains the tools versions) because hashing the zip is non-deterministic
+        assetHash: hashFile(path.join(__dirname, 'layers', 'demo', 'Dockerfile')),
+      }),
+      description: '/opt/demo',
+    });
+  }
+}
+
+function hashFile(fileName: string) {
+  return crypto
+    .createHash('sha256')
+    .update(fs.readFileSync(fileName))
+    .digest('hex');
+}
+```
+
 ## Optimizations
 
 ### Moment.js
@@ -222,11 +271,11 @@ Build the project
 
 Usage:
 
-$ cdkdx build [-w] [--watch] [--minify-lambdas]
+$ cdkdx build [-w] [--watch] [--minify-lambdas] [--ignore-layers]
 
 Details:
 
-This command will bundle the lambdas and build the project.
+This command will bundle the lambdas, build the layers and build the project.
 
 Examples:
 

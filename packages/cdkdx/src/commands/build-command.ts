@@ -24,6 +24,9 @@ export class BuildCommand extends BaseProjectCommand {
   @Command.Boolean('--minify-lambdas')
   public minifyLambdas = false;
 
+  @Command.Boolean('--ignore-layers')
+  public ignoreLayers = false;
+
   @Command.Path('build')
   async execute(): Promise<number> {
     const timer = new Timer();
@@ -43,6 +46,12 @@ export class BuildCommand extends BaseProjectCommand {
     const bundleExitCode = await this.cli.run(bundleCommand);
 
     if (bundleExitCode !== 0) return bundleExitCode;
+
+    if (!this.ignoreLayers) {
+      const layerExitCode = await this.cli.run(['layer']);
+
+      if (layerExitCode !== 0) return layerExitCode;
+    }
 
     const compiler = this.getCompiler();
 

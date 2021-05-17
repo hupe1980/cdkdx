@@ -53,6 +53,7 @@ export class NodeCommand extends BaseProjectCommand {
       stdio: ['ignore', 'inherit', 'inherit'],
       env: {
         LAMBDAS: this.projectInfo.lambdasOutPath,
+        LAYERS: this.projectInfo.lambdasOutPath,
         ...process.env,
       },
     });
