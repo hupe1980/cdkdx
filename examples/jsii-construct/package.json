@@ -10,7 +10,7 @@
     "url": "git+https://github.com/hupe1980/cdk-build-tools",
     "directory": "example/jsii-construct"
   },
-  "version": "0.8.9",
+  "version": "1.0.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
@@ -42,7 +42,7 @@
     "@aws-cdk/assert": "^1.98.0",
     "@types/node": "12.12.50",
     "axios": "^0.21.1",
-    "cdkdx": "^0.8.9"
+    "cdkdx": "^1.0.0"
   },
   "peerDependencies": {
     "@aws-cdk/aws-lambda": "^1.98.0",
