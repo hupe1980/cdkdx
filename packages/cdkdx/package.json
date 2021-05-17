@@ -29,7 +29,7 @@
     "!.DS_Store"
   ],
   "engines": {
-    "node": ">=10"
+    "node": ">=12"
   },
   "scripts": {
     "build": "rimraf lib && tsc",
