@@ -45,7 +45,6 @@ export class TestCommand extends BaseProjectCommand {
           testMatch: ['<rootDir>/**/*.(spec|test).ts'],
           testPathIgnorePatterns: ['/src/lambdas/'],
           testEnvironment: 'node',
-          testRunner: require.resolve('jest-circus/runner'),
           globals: {
             'ts-jest': {
               tsconfig: TsConfig.fromJsiiTemplate().getCompilerOptions(),
@@ -62,7 +61,6 @@ export class TestCommand extends BaseProjectCommand {
           moduleFileExtensions: ['ts', 'js', 'json', 'html'],
           testMatch: ['<rootDir>/**/src/lambdas/**/*.(spec|test).ts'],
           testEnvironment: 'node',
-          testRunner: require.resolve('jest-circus/runner'),
           globals: {
             'ts-jest': {
               tsconfig: TsConfig.fromLambdaTemplate().getCompilerOptions(),
