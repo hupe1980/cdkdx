@@ -1,9 +1,9 @@
-import * as path from 'path';
 import { Command } from 'clipanion';
 import * as jest from 'jest';
+import tsjPreset from 'ts-jest/presets';
 
 import { BaseProjectCommand } from '../base-command';
-
+import { TsConfig } from '../ts-config';
 export class TestCommand extends BaseProjectCommand {
   static usage = Command.Usage({
     description: 'Run jest test runner',
@@ -26,13 +26,53 @@ export class TestCommand extends BaseProjectCommand {
 
     const argv: string[] = [];
 
-    const jestConfigFile = require.resolve(
-      path.join(__dirname, '..', 'jest-config'),
-    );
+    const jestConfig = {
+      collectCoverageFrom: ['src/**/*.ts', '!src/**/*.(spec|test).ts'],
+      watchPlugins: [
+        require.resolve('jest-watch-typeahead/filename'),
+        require.resolve('jest-watch-typeahead/testname'),
+        require.resolve('jest-watch-select-projects'),
+      ],
+      projects: [
+        {
+          displayName: 'cdk',
+          rootDir: this.context.cwd,
+          transform: {
+            ...tsjPreset.defaults.transform,
+            '.+\\.(css|html)$': require.resolve('jest-transform-stub'),
+          },
+          moduleFileExtensions: ['ts', 'js', 'json', 'html'],
+          testMatch: ['<rootDir>/**/*.(spec|test).ts'],
+          testPathIgnorePatterns: ['/src/lambdas/'],
+          testEnvironment: 'node',
+          testRunner: require.resolve('jest-circus/runner'),
+          globals: {
+            'ts-jest': {
+              tsconfig: TsConfig.fromJsiiTemplate().getCompilerOptions(),
+            },
+          },
+        },
+        {
+          displayName: 'lambda',
+          rootDir: this.context.cwd,
+          transform: {
+            ...tsjPreset.defaults.transform,
+            '.+\\.(css|html)$': require.resolve('jest-transform-stub'),
+          },
+          moduleFileExtensions: ['ts', 'js', 'json', 'html'],
+          testMatch: ['<rootDir>/**/src/lambdas/**/*.(spec|test).ts'],
+          testEnvironment: 'node',
+          testRunner: require.resolve('jest-circus/runner'),
+          globals: {
+            'ts-jest': {
+              tsconfig: TsConfig.fromLambdaTemplate().getCompilerOptions(),
+            },
+          },
+        },
+      ],
+    };
 
-    // https://github.com/facebook/jest/issues/7415
-    //argv.push('--config', JSON.stringify(jestConfig));
-    argv.push('--config', jestConfigFile);
+    argv.push('--config', JSON.stringify(jestConfig));
 
     argv.push(...this.jestArgv);
 
