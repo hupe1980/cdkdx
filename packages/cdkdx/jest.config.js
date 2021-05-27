@@ -7,9 +7,7 @@ module.exports = {
     },
   },
   testEnvironment: 'node',
-  transform: {
-    '^.+\\.ts$': require.resolve('ts-jest/dist'),
-  },
+  preset: "ts-jest",
   moduleFileExtensions: ['ts', 'js'],
   collectCoverageFrom: ['src/**/*.ts', '!src/**/*.(spec|test).ts'],
   testMatch: ['<rootDir>/**/*.(spec|test).ts'],

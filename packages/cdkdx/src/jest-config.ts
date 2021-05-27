@@ -1,4 +1,5 @@
 import { TsConfig } from './ts-config';
+import tsjPreset from 'ts-jest/presets';
 
 export = {
   collectCoverageFrom: ['src/**/*.ts', '!src/**/*.(spec|test).ts'],
@@ -12,7 +13,7 @@ export = {
       displayName: 'cdk',
       rootDir: process.cwd(),
       transform: {
-        '^.+\\.ts$': require.resolve('ts-jest/dist'),
+        ...tsjPreset.defaults.transform,
         '.+\\.(css|html)$': require.resolve('jest-transform-stub'),
       },
       moduleFileExtensions: ['ts', 'js', 'json', 'html'],
@@ -30,7 +31,7 @@ export = {
       displayName: 'lambda',
       rootDir: process.cwd(),
       transform: {
-        '^.+\\.ts$': require.resolve('ts-jest/dist'),
+        ...tsjPreset.defaults.transform,
         '.+\\.(css|html)$': require.resolve('jest-transform-stub'),
       },
       moduleFileExtensions: ['ts', 'js', 'json', 'html'],
