@@ -37,7 +37,7 @@ export class Docker {
   constructor(
     private readonly cwd: string,
     private readonly tag: string,
-    private readonly assetName = 'lambda.zip',
+    private readonly assetName = 'layer.zip',
   ) {
     execa.sync('docker', ['version'], {
       stdio: 'ignore',
