@@ -2,6 +2,7 @@ import * as fs from 'fs-extra';
 import { TsConfigJson } from 'type-fest';
 
 export interface TsConfigProps {
+  compilerOptions?: Partial<TsConfigJson.CompilerOptions>;
   outDir?: string;
   exclude?: string[];
   include?: string[];
@@ -32,6 +33,7 @@ export class TsConfig {
         stripInternal: true,
         target: 'ES2018',
         outDir: props?.outDir,
+        ...props?.compilerOptions,
       },
       exclude: props?.exclude,
       include: props?.include,
@@ -64,6 +66,7 @@ export class TsConfig {
         stripInternal: true,
         target: 'ES2018',
         outDir: props?.outDir,
+        ...props?.compilerOptions,
       },
       exclude: props?.exclude,
       include: props?.include,

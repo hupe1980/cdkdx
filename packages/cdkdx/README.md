@@ -15,6 +15,7 @@
   - [Displaying Lint Output in the Editor](#displaying-lint-output-in-the-editor)
   - [Colored output during execution with lerna run](#colored-output-during-execution-with-lerna-run)
   - [Extending webpack config](#extending-webpack-config)
+  - [Extending Typescript config](#extending-typescript-config)
 - [API Reference](#api-reference)
   - [`cdkdx build`](#cdkdx-build)
   - [`cdkdx lint`](#cdkdx-lint)
@@ -256,6 +257,22 @@ To extend the configuration, create a cdkdx.config.js file at the root of your p
 
 module.exports = {
   webpack: (config, projectInfo) => config
+}
+```
+
+### Extending Typescript config
+To extend the typescript configuration, create a cdkdx.config.js config file as described above. 
+Use the lambdaTsConfig field, which gives you a partial configuration object (and project info as second argument).
+```javascript
+module.exports = {
+    lambdaTsConfig: (config, projectInfo) => {
+        config.compilerOptions = {
+            experimentalDecorators: true,
+            emitDecoratorMetadata: true
+        }
+
+        return config;
+    } 
 }
 ```
 

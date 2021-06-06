@@ -1,9 +1,14 @@
 import * as fs from 'fs-extra';
 import { Configuration } from 'webpack';
 import { ProjectInfo } from './project-info';
+import { TsConfigProps } from './ts-config';
 
 export interface ConfigFile {
   webpack: (config: Configuration, projectInfo: ProjectInfo) => Configuration;
+  lambdaTsConfig: (
+    config: TsConfigProps,
+    projectInfo: ProjectInfo,
+  ) => TsConfigProps;
 }
 
 export class CdkdxConfig {
@@ -19,6 +24,12 @@ export class CdkdxConfig {
   public webpack(config: Configuration): Configuration {
     return this.configFile?.webpack
       ? this.configFile.webpack(config, this.projectInfo)
+      : config;
+  }
+
+  public lambdaTsConfig(config: TsConfigProps): TsConfigProps {
+    return this.configFile?.lambdaTsConfig
+      ? this.configFile.lambdaTsConfig(config, this.projectInfo)
       : config;
   }
 }
