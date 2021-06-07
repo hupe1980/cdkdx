@@ -4,6 +4,7 @@ import { Command } from 'clipanion';
 import { TsConfig } from '../ts-config';
 import { BaseProjectCommand } from '../base-command';
 import { Bundler, Lambdas } from '../bundler';
+import { CdkdxConfig } from '../cdkdx-config';
 
 export class BundleCommand extends BaseProjectCommand {
   @Command.Boolean('--watch')
@@ -28,10 +29,14 @@ export class BundleCommand extends BaseProjectCommand {
       return 0;
     }
 
-    const tsConfig = TsConfig.fromLambdaTemplate({
-      include: ['**/*.ts'],
-      exclude: ['**/__tests__/*'],
-    });
+    const cdkdxConfig = new CdkdxConfig(this.projectInfo);
+
+    const tsConfig = TsConfig.fromLambdaTemplate(
+      cdkdxConfig.lambdaTsConfig({
+        include: ['**/*.ts'],
+        exclude: ['**/__tests__/*'],
+      }),
+    );
 
     const tsConfigFile = path.join(
       this.projectInfo.lambdasSrcPath,
