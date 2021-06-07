@@ -259,6 +259,9 @@ module.exports = {
   webpack: (config, projectInfo) => config
 }
 ```
+Make sure to preserve the following config options:
+- entry
+- output
 
 ### Extending Typescript config
 To extend the typescript configuration, create a cdkdx.config.js config file as described above. 
@@ -275,11 +278,6 @@ module.exports = {
     } 
 }
 ```
-
-Make sure to preserve the following config options:
-- entry
-- output
-
 ## API Reference
 
 ### `cdkdx build`
