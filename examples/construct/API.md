@@ -8,14 +8,14 @@ construct
 
 ### Classes
 
-- [DemoLayer](#demolayer)
+- [DemoLayer](#demo-layer)
 - [Example](#example)
 
 ### Interfaces
 
-- [ExampleProps](#exampleprops)
+- [ExampleProps](#example-props)
 
-# Demolayer
+# Demo Layer
 
 [construct](#readme) / DemoLayer
 
@@ -25,9 +25,9 @@ A demo Lambda layer.
 
 ## Hierarchy
 
-- *LayerVersion*
+- `LayerVersion`
 
-  ↳ **DemoLayer**
+  ↳ **`DemoLayer`**
 
 ## Table of contents
 
@@ -67,36 +67,38 @@ A demo Lambda layer.
 
 ### constructor
 
-\+ **new DemoLayer**(`scope`: *Construct*, `id`: *string*): [*DemoLayer*](#demolayer)
+• **new DemoLayer**(`scope`, `id`)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `scope` | *Construct* |
-| `id` | *string* |
+| `scope` | `Construct` |
+| `id` | `string` |
 
-**Returns:** [*DemoLayer*](#demolayer)
+#### Overrides
 
-Overrides: lambda.LayerVersion.constructor
+lambda.LayerVersion.constructor
 
 ## Properties
 
 ### compatibleRuntimes
 
-• `Optional` `Readonly` **compatibleRuntimes**: *Runtime*[]
+• `Optional` `Readonly` **compatibleRuntimes**: `Runtime`[]
 
 The runtimes compatible with this Layer.
 
 **`stability`** stable
 
-Inherited from: lambda.LayerVersion.compatibleRuntimes
+#### Inherited from
+
+lambda.LayerVersion.compatibleRuntimes
 
 ___
 
 ### env
 
-• `Readonly` **env**: ResourceEnvironment
+• `Readonly` **env**: `ResourceEnvironment`
 
 The environment this resource belongs to.
 
@@ -109,37 +111,43 @@ that might be different than the stack they were imported into.
 
 **`stability`** stable
 
-Inherited from: lambda.LayerVersion.env
+#### Inherited from
+
+lambda.LayerVersion.env
 
 ___
 
 ### layerVersionArn
 
-• `Readonly` **layerVersionArn**: *string*
+• `Readonly` **layerVersionArn**: `string`
 
 The ARN of the Lambda Layer version that this Layer defines.
 
 **`stability`** stable
 
-Inherited from: lambda.LayerVersion.layerVersionArn
+#### Inherited from
+
+lambda.LayerVersion.layerVersionArn
 
 ___
 
 ### node
 
-• `Readonly` **node**: *ConstructNode*
+• `Readonly` **node**: `ConstructNode`
 
 The construct tree node associated with this construct.
 
 **`stability`** stable
 
-Inherited from: lambda.LayerVersion.node
+#### Inherited from
+
+lambda.LayerVersion.node
 
 ___
 
 ### physicalName
 
-• `Protected` `Readonly` **physicalName**: *string*
+• `Protected` `Readonly` **physicalName**: `string`
 
 Returns a string-encoded token that resolves to the physical name that should be passed to the CloudFormation resource.
 
@@ -151,25 +159,29 @@ This value will resolve to one of the following:
 
 **`stability`** stable
 
-Inherited from: lambda.LayerVersion.physicalName
+#### Inherited from
+
+lambda.LayerVersion.physicalName
 
 ___
 
 ### stack
 
-• `Readonly` **stack**: *Stack*
+• `Readonly` **stack**: `Stack`
 
 The stack in which this resource is defined.
 
 **`stability`** stable
 
-Inherited from: lambda.LayerVersion.stack
+#### Inherited from
+
+lambda.LayerVersion.stack
 
 ## Methods
 
 ### addPermission
 
-▸ **addPermission**(`id`: *string*, `permission`: LayerVersionPermission): *void*
+▸ **addPermission**(`id`, `permission`): `void`
 
 Add permission for this layer version to specific entities.
 
@@ -186,18 +198,22 @@ permission on the layer version.
 
 | Name | Type |
 | :------ | :------ |
-| `id` | *string* |
-| `permission` | LayerVersionPermission |
+| `id` | `string` |
+| `permission` | `LayerVersionPermission` |
 
-**Returns:** *void*
+#### Returns
 
-Inherited from: lambda.LayerVersion.addPermission
+`void`
+
+#### Inherited from
+
+lambda.LayerVersion.addPermission
 
 ___
 
 ### applyRemovalPolicy
 
-▸ **applyRemovalPolicy**(`policy`: RemovalPolicy): *void*
+▸ **applyRemovalPolicy**(`policy`): `void`
 
 Apply the given removal policy to this resource.
 
@@ -215,29 +231,37 @@ account for data recovery and cleanup later (`RemovalPolicy.RETAIN`).
 
 | Name | Type |
 | :------ | :------ |
-| `policy` | RemovalPolicy |
+| `policy` | `RemovalPolicy` |
 
-**Returns:** *void*
+#### Returns
 
-Inherited from: lambda.LayerVersion.applyRemovalPolicy
+`void`
+
+#### Inherited from
+
+lambda.LayerVersion.applyRemovalPolicy
 
 ___
 
 ### generatePhysicalName
 
-▸ `Protected` **generatePhysicalName**(): *string*
+▸ `Protected` **generatePhysicalName**(): `string`
 
 **`stability`** stable
 
-**Returns:** *string*
+#### Returns
 
-Inherited from: lambda.LayerVersion.generatePhysicalName
+`string`
+
+#### Inherited from
+
+lambda.LayerVersion.generatePhysicalName
 
 ___
 
 ### getResourceArnAttribute
 
-▸ `Protected` **getResourceArnAttribute**(`arnAttr`: *string*, `arnComponents`: ArnComponents): *string*
+▸ `Protected` **getResourceArnAttribute**(`arnAttr`, `arnComponents`): `string`
 
 Returns an environment-sensitive token that should be used for the resource's "ARN" attribute (e.g. `bucket.bucketArn`).
 
@@ -252,18 +276,22 @@ a concrete ARN with the resource's physical name. Make sure to reference
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `arnAttr` | *string* | The CFN attribute which resolves to the ARN of the resource. |
-| `arnComponents` | ArnComponents | The format of the ARN of this resource. |
+| `arnAttr` | `string` | The CFN attribute which resolves to the ARN of the resource. |
+| `arnComponents` | `ArnComponents` | The format of the ARN of this resource. |
 
-**Returns:** *string*
+#### Returns
 
-Inherited from: lambda.LayerVersion.getResourceArnAttribute
+`string`
+
+#### Inherited from
+
+lambda.LayerVersion.getResourceArnAttribute
 
 ___
 
 ### getResourceNameAttribute
 
-▸ `Protected` **getResourceNameAttribute**(`nameAttr`: *string*): *string*
+▸ `Protected` **getResourceNameAttribute**(`nameAttr`): `string`
 
 Returns an environment-sensitive token that should be used for the resource's "name" attribute (e.g. `bucket.bucketName`).
 
@@ -277,17 +305,21 @@ which will be a concrete name.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `nameAttr` | *string* | The CFN attribute which resolves to the resource's name. |
+| `nameAttr` | `string` | The CFN attribute which resolves to the resource's name. |
 
-**Returns:** *string*
+#### Returns
 
-Inherited from: lambda.LayerVersion.getResourceNameAttribute
+`string`
+
+#### Inherited from
+
+lambda.LayerVersion.getResourceNameAttribute
 
 ___
 
 ### onPrepare
 
-▸ `Protected` **onPrepare**(): *void*
+▸ `Protected` **onPrepare**(): `void`
 
 Perform final modifications before synthesis.
 
@@ -300,15 +332,19 @@ understand the implications.
 
 **`stability`** stable
 
-**Returns:** *void*
+#### Returns
 
-Inherited from: lambda.LayerVersion.onPrepare
+`void`
+
+#### Inherited from
+
+lambda.LayerVersion.onPrepare
 
 ___
 
 ### onSynthesize
 
-▸ `Protected` **onSynthesize**(`session`: ISynthesisSession): *void*
+▸ `Protected` **onSynthesize**(`session`): `void`
 
 Allows this construct to emit artifacts into the cloud assembly during synthesis.
 
@@ -321,17 +357,21 @@ as they participate in synthesizing the cloud assembly.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `session` | ISynthesisSession | The synthesis session. |
+| `session` | `ISynthesisSession` | The synthesis session. |
 
-**Returns:** *void*
+#### Returns
 
-Inherited from: lambda.LayerVersion.onSynthesize
+`void`
+
+#### Inherited from
+
+lambda.LayerVersion.onSynthesize
 
 ___
 
 ### onValidate
 
-▸ `Protected` **onValidate**(): *string*[]
+▸ `Protected` **onValidate**(): `string`[]
 
 Validate the current construct.
 
@@ -340,17 +380,21 @@ validation logic. It is called on all constructs before synthesis.
 
 **`stability`** stable
 
-**Returns:** *string*[]
+#### Returns
+
+`string`[]
 
 An array of validation error messages, or an empty array if the construct is valid.
 
-Inherited from: lambda.LayerVersion.onValidate
+#### Inherited from
+
+lambda.LayerVersion.onValidate
 
 ___
 
 ### prepare
 
-▸ `Protected` **prepare**(): *void*
+▸ `Protected` **prepare**(): `void`
 
 Perform final modifications before synthesis.
 
@@ -363,15 +407,19 @@ understand the implications.
 
 **`stability`** stable
 
-**Returns:** *void*
+#### Returns
 
-Inherited from: lambda.LayerVersion.prepare
+`void`
+
+#### Inherited from
+
+lambda.LayerVersion.prepare
 
 ___
 
 ### synthesize
 
-▸ `Protected` **synthesize**(`session`: ISynthesisSession): *void*
+▸ `Protected` **synthesize**(`session`): `void`
 
 Allows this construct to emit artifacts into the cloud assembly during synthesis.
 
@@ -384,31 +432,39 @@ as they participate in synthesizing the cloud assembly.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `session` | ISynthesisSession | The synthesis session. |
+| `session` | `ISynthesisSession` | The synthesis session. |
 
-**Returns:** *void*
+#### Returns
 
-Inherited from: lambda.LayerVersion.synthesize
+`void`
+
+#### Inherited from
+
+lambda.LayerVersion.synthesize
 
 ___
 
 ### toString
 
-▸ **toString**(): *string*
+▸ **toString**(): `string`
 
 Returns a string representation of this construct.
 
 **`stability`** stable
 
-**Returns:** *string*
+#### Returns
 
-Inherited from: lambda.LayerVersion.toString
+`string`
+
+#### Inherited from
+
+lambda.LayerVersion.toString
 
 ___
 
 ### validate
 
-▸ `Protected` **validate**(): *string*[]
+▸ `Protected` **validate**(): `string`[]
 
 Validate the current construct.
 
@@ -417,17 +473,21 @@ validation logic. It is called on all constructs before synthesis.
 
 **`stability`** stable
 
-**Returns:** *string*[]
+#### Returns
+
+`string`[]
 
 An array of validation error messages, or an empty array if the construct is valid.
 
-Inherited from: lambda.LayerVersion.validate
+#### Inherited from
+
+lambda.LayerVersion.validate
 
 ___
 
 ### fromLayerVersionArn
 
-▸ `Static` **fromLayerVersionArn**(`scope`: *Construct*, `id`: *string*, `layerVersionArn`: *string*): ILayerVersion
+▸ `Static` **fromLayerVersionArn**(`scope`, `id`, `layerVersionArn`): `ILayerVersion`
 
 Imports a layer version by ARN.
 
@@ -439,19 +499,23 @@ Assumes it is compatible with all Lambda runtimes.
 
 | Name | Type |
 | :------ | :------ |
-| `scope` | *Construct* |
-| `id` | *string* |
-| `layerVersionArn` | *string* |
+| `scope` | `Construct` |
+| `id` | `string` |
+| `layerVersionArn` | `string` |
 
-**Returns:** ILayerVersion
+#### Returns
 
-Inherited from: lambda.LayerVersion.fromLayerVersionArn
+`ILayerVersion`
+
+#### Inherited from
+
+lambda.LayerVersion.fromLayerVersionArn
 
 ___
 
 ### fromLayerVersionAttributes
 
-▸ `Static` **fromLayerVersionAttributes**(`scope`: *Construct*, `id`: *string*, `attrs`: LayerVersionAttributes): ILayerVersion
+▸ `Static` **fromLayerVersionAttributes**(`scope`, `id`, `attrs`): `ILayerVersion`
 
 Imports a Layer that has been defined externally.
 
@@ -461,19 +525,23 @@ Imports a Layer that has been defined externally.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `scope` | *Construct* | the parent Construct that will use the imported layer. |
-| `id` | *string* | the id of the imported layer in the construct tree. |
-| `attrs` | LayerVersionAttributes | the properties of the imported layer. |
+| `scope` | `Construct` | the parent Construct that will use the imported layer. |
+| `id` | `string` | the id of the imported layer in the construct tree. |
+| `attrs` | `LayerVersionAttributes` | the properties of the imported layer. |
 
-**Returns:** ILayerVersion
+#### Returns
 
-Inherited from: lambda.LayerVersion.fromLayerVersionAttributes
+`ILayerVersion`
+
+#### Inherited from
+
+lambda.LayerVersion.fromLayerVersionAttributes
 
 ___
 
 ### isConstruct
 
-▸ `Static` **isConstruct**(`x`: *any*): x is Construct
+▸ `Static` **isConstruct**(`x`): x is Construct
 
 Return whether the given object is a Construct.
 
@@ -483,17 +551,21 @@ Return whether the given object is a Construct.
 
 | Name | Type |
 | :------ | :------ |
-| `x` | *any* |
+| `x` | `any` |
 
-**Returns:** x is Construct
+#### Returns
 
-Inherited from: lambda.LayerVersion.isConstruct
+x is Construct
+
+#### Inherited from
+
+lambda.LayerVersion.isConstruct
 
 ___
 
 ### isResource
 
-▸ `Static` **isResource**(`construct`: IConstruct): construct is CfnResource
+▸ `Static` **isResource**(`construct`): construct is CfnResource
 
 Check whether the given construct is a Resource.
 
@@ -503,11 +575,15 @@ Check whether the given construct is a Resource.
 
 | Name | Type |
 | :------ | :------ |
-| `construct` | IConstruct |
+| `construct` | `IConstruct` |
 
-**Returns:** construct is CfnResource
+#### Returns
 
-Inherited from: lambda.LayerVersion.isResource
+construct is CfnResource
+
+#### Inherited from
+
+lambda.LayerVersion.isResource
 
 # Example
 
@@ -517,9 +593,9 @@ Inherited from: lambda.LayerVersion.isResource
 
 ## Hierarchy
 
-- *Construct*
+- `Construct`
 
-  ↳ **Example**
+  ↳ **`Example`**
 
 ## Table of contents
 
@@ -547,37 +623,39 @@ Inherited from: lambda.LayerVersion.isResource
 
 ### constructor
 
-\+ **new Example**(`scope`: *Construct*, `id`: *string*, `props?`: [*ExampleProps*](#exampleprops)): [*Example*](#example)
+• **new Example**(`scope`, `id`, `props?`)
 
 #### Parameters
 
-| Name | Type | Default value |
-| :------ | :------ | :------ |
-| `scope` | *Construct* | - |
-| `id` | *string* | - |
-| `props` | [*ExampleProps*](#exampleprops) | {} |
+| Name | Type |
+| :------ | :------ |
+| `scope` | `Construct` |
+| `id` | `string` |
+| `props` | [`ExampleProps`](#example-props) |
 
-**Returns:** [*Example*](#example)
+#### Overrides
 
-Overrides: Construct.constructor
+Construct.constructor
 
 ## Properties
 
 ### node
 
-• `Readonly` **node**: *ConstructNode*
+• `Readonly` **node**: `ConstructNode`
 
 The construct tree node associated with this construct.
 
 **`stability`** stable
 
-Inherited from: Construct.node
+#### Inherited from
+
+Construct.node
 
 ___
 
 ### queueArn
 
-• `Readonly` **queueArn**: *string*
+• `Readonly` **queueArn**: `string`
 
 **`returns`** the ARN of the SQS queue
 
@@ -585,7 +663,7 @@ ___
 
 ### onPrepare
 
-▸ `Protected` **onPrepare**(): *void*
+▸ `Protected` **onPrepare**(): `void`
 
 Perform final modifications before synthesis.
 
@@ -598,15 +676,19 @@ understand the implications.
 
 **`stability`** stable
 
-**Returns:** *void*
+#### Returns
 
-Inherited from: Construct.onPrepare
+`void`
+
+#### Inherited from
+
+Construct.onPrepare
 
 ___
 
 ### onSynthesize
 
-▸ `Protected` **onSynthesize**(`session`: ISynthesisSession): *void*
+▸ `Protected` **onSynthesize**(`session`): `void`
 
 Allows this construct to emit artifacts into the cloud assembly during synthesis.
 
@@ -619,17 +701,21 @@ as they participate in synthesizing the cloud assembly.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `session` | ISynthesisSession | The synthesis session. |
+| `session` | `ISynthesisSession` | The synthesis session. |
 
-**Returns:** *void*
+#### Returns
 
-Inherited from: Construct.onSynthesize
+`void`
+
+#### Inherited from
+
+Construct.onSynthesize
 
 ___
 
 ### onValidate
 
-▸ `Protected` **onValidate**(): *string*[]
+▸ `Protected` **onValidate**(): `string`[]
 
 Validate the current construct.
 
@@ -638,17 +724,21 @@ validation logic. It is called on all constructs before synthesis.
 
 **`stability`** stable
 
-**Returns:** *string*[]
+#### Returns
+
+`string`[]
 
 An array of validation error messages, or an empty array if the construct is valid.
 
-Inherited from: Construct.onValidate
+#### Inherited from
+
+Construct.onValidate
 
 ___
 
 ### prepare
 
-▸ `Protected` **prepare**(): *void*
+▸ `Protected` **prepare**(): `void`
 
 Perform final modifications before synthesis.
 
@@ -661,15 +751,19 @@ understand the implications.
 
 **`stability`** stable
 
-**Returns:** *void*
+#### Returns
 
-Inherited from: Construct.prepare
+`void`
+
+#### Inherited from
+
+Construct.prepare
 
 ___
 
 ### synthesize
 
-▸ `Protected` **synthesize**(`session`: ISynthesisSession): *void*
+▸ `Protected` **synthesize**(`session`): `void`
 
 Allows this construct to emit artifacts into the cloud assembly during synthesis.
 
@@ -682,31 +776,39 @@ as they participate in synthesizing the cloud assembly.
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `session` | ISynthesisSession | The synthesis session. |
+| `session` | `ISynthesisSession` | The synthesis session. |
 
-**Returns:** *void*
+#### Returns
 
-Inherited from: Construct.synthesize
+`void`
+
+#### Inherited from
+
+Construct.synthesize
 
 ___
 
 ### toString
 
-▸ **toString**(): *string*
+▸ **toString**(): `string`
 
 Returns a string representation of this construct.
 
 **`stability`** stable
 
-**Returns:** *string*
+#### Returns
 
-Inherited from: Construct.toString
+`string`
+
+#### Inherited from
+
+Construct.toString
 
 ___
 
 ### validate
 
-▸ `Protected` **validate**(): *string*[]
+▸ `Protected` **validate**(): `string`[]
 
 Validate the current construct.
 
@@ -715,17 +817,21 @@ validation logic. It is called on all constructs before synthesis.
 
 **`stability`** stable
 
-**Returns:** *string*[]
+#### Returns
+
+`string`[]
 
 An array of validation error messages, or an empty array if the construct is valid.
 
-Inherited from: Construct.validate
+#### Inherited from
+
+Construct.validate
 
 ___
 
 ### isConstruct
 
-▸ `Static` **isConstruct**(`x`: *any*): x is Construct
+▸ `Static` **isConstruct**(`x`): x is Construct
 
 Return whether the given object is a Construct.
 
@@ -735,13 +841,17 @@ Return whether the given object is a Construct.
 
 | Name | Type |
 | :------ | :------ |
-| `x` | *any* |
+| `x` | `any` |
 
-**Returns:** x is Construct
+#### Returns
 
-Inherited from: Construct.isConstruct
+x is Construct
 
-# Exampleprops
+#### Inherited from
+
+Construct.isConstruct
+
+# Example Props
 
 [construct](#readme) / ExampleProps
 
@@ -757,7 +867,7 @@ Inherited from: Construct.isConstruct
 
 ### visibilityTimeout
 
-• `Optional` **visibilityTimeout**: *Duration*
+• `Optional` **visibilityTimeout**: `Duration`
 
 The visibility timeout to be configured on the SQS Queue, in seconds.
 

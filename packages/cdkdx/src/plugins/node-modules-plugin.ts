@@ -65,7 +65,8 @@ export class NodeModulesPlugin {
             [moduleName]: version,
           },
         };
-      } catch (e) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (e: any) {
         throw new Error(`Error while processing nodeModules: ${e.message}`);
       }
     };
