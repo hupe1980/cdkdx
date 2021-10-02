@@ -14,20 +14,20 @@
     "cdkdx": "cdkdx"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.124.0",
+    "@aws-cdk/assert": "^1.125.0",
     "@types/node": "12.12.50",
-    "axios": "^0.21.4",
+    "axios": "^0.22.0",
     "cdkdx": "^1.2.0"
   },
   "peerDependencies": {
     "@aws-cdk/core": "^1.57.0"
   },
   "dependencies": {
-    "@aws-cdk/aws-lambda": "^1.124.0",
-    "@aws-cdk/aws-sns": "^1.124.0",
-    "@aws-cdk/aws-sns-subscriptions": "^1.124.0",
-    "@aws-cdk/aws-sqs": "^1.124.0",
-    "@aws-cdk/core": "^1.124.0"
+    "@aws-cdk/aws-lambda": "^1.125.0",
+    "@aws-cdk/aws-sns": "^1.125.0",
+    "@aws-cdk/aws-sns-subscriptions": "^1.125.0",
+    "@aws-cdk/aws-sqs": "^1.125.0",
+    "@aws-cdk/core": "^1.125.0"
   },
   "gitHead": "c9a66a2cd9732cacf54f79f0c5052693d157704d"
 }
