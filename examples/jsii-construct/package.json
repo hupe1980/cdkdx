@@ -45,11 +45,11 @@
     "cdkdx": "^1.2.0"
   },
   "peerDependencies": {
-    "@aws-cdk/aws-lambda": "^1.124.0",
-    "@aws-cdk/aws-sns": "^1.124.0",
-    "@aws-cdk/aws-sns-subscriptions": "^1.124.0",
-    "@aws-cdk/aws-sqs": "^1.124.0",
-    "@aws-cdk/core": "^1.124.0",
+    "@aws-cdk/aws-lambda": "^1.125.0",
+    "@aws-cdk/aws-sns": "^1.125.0",
+    "@aws-cdk/aws-sns-subscriptions": "^1.125.0",
+    "@aws-cdk/aws-sqs": "^1.125.0",
+    "@aws-cdk/core": "^1.125.0",
     "constructs": "^3.0.2"
   },
   "dependencies": {
