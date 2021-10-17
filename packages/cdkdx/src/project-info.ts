@@ -12,6 +12,7 @@ export class ProjectInfo {
   public readonly name: string;
   public readonly private: boolean;
   public readonly isJsii: boolean;
+  public readonly isConstructLib: boolean;
   public readonly externals: string[];
   public readonly nodeModules: string[];
   public readonly peerDependencies: PackageJson['peerDependencies'];
@@ -45,6 +46,7 @@ export class ProjectInfo {
     this.name = this.pkgJson.name;
     this.private = this.pkgJson.private ?? false;
     this.isJsii = this.pkgJson.jsii !== undefined;
+    this.isConstructLib = !fs.existsSync(this.resolve('cdk.json'));
 
     this.externals = this.pkgJson.externals ?? [];
     this.nodeModules = this.pkgJson.nodeModules ?? [];

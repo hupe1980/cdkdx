@@ -1,0 +1,39 @@
+{
+  "name": "app",
+  "private": true,
+  "license": "MIT",
+  "author": {
+    "name": "hupe1980"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hupe1980/cdkdx.git",
+    "directory": "example/app"
+  },
+  "version": "1.3.0",
+  "keywords": [
+    "cdk"
+  ],
+  "engines": {
+    "node": ">= 12.22.0"
+  },
+  "scripts": {
+    "build": "cdkdx build",
+    "watch": "cdkdx build -w",
+    "test": "cdkdx test",
+    "lint": "cdkdx lint",
+    "upgrade:cdk": "cdkdx upgrade-cdk",
+    "docgen": "cdkdx docgen",
+    "cdk": "cdk"
+  },
+  "dependencies": {
+    "@aws-cdk/core": "^1.128.0",
+    "source-map-support": "^0.5.20"
+  },
+  "devDependencies": {
+    "@aws-cdk/assert": "^1.128.0",
+    "@types/node": "12.12.50",
+    "aws-cdk": "^1.128.0",
+    "cdkdx": "^1.3.0"
+  }
+}

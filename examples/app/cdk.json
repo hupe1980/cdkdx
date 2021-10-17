@@ -1,0 +1,7 @@
+{
+  "app": "cdkdx node src/app-app.ts",
+  "context": {
+    "@aws-cdk/core:enableStackNameDuplicates": "true",
+    "aws-cdk:enableDiffNoFail": "true"
+  }
+}

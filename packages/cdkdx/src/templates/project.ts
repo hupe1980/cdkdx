@@ -9,7 +9,7 @@ import { Directory } from './directory';
 import { JsonFile } from './json-file';
 import { GitIgnore } from './git-ignore';
 
-const DEFAULT_JSII_MIN_NODE = '10.17.0';
+const DEFAULT_JSII_MIN_NODE = '12.22.0';
 
 export interface ProjectOptions {
   readonly targetPath: string;

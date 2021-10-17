@@ -12,6 +12,11 @@ export class DocgenCommand extends BaseProjectCommand {
 
   @Command.Path('docgen')
   async execute(): Promise<number> {
+    if (!this.projectInfo.isConstructLib) {
+      this.context.logger.warn('No docgen for apps.\n');
+      return 0;
+    }
+
     const timer = new Timer();
 
     const docgen = this.getDocgen();

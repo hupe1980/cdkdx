@@ -5,6 +5,7 @@ import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 import SizePlugin from 'size-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
+import LicensePlugin from 'webpack-license-plugin';
 
 import { ProjectInfo } from './project-info';
 import { CdkdxConfig } from './cdkdx-config';
@@ -148,6 +149,12 @@ export class Bundler {
         ...props.projectInfo.nodeModules,
       ],
     });
+
+    if (props.projectInfo.isConstructLib) {
+      config.plugins?.push(
+        new LicensePlugin({ outputFilename: 'thirdPartyNotice.json' }),
+      );
+    }
 
     this.compiler = webpack(config);
   }
