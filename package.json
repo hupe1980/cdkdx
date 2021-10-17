@@ -10,7 +10,7 @@
     "test:unit": "lerna run test",
     "test:tsc-integration": "cd examples/construct && yarn build && yarn docgen && yarn test && yarn lint",
     "test:jsii-integration": "cd examples/jsii-construct && yarn build && yarn docgen && yarn test && yarn lint",
-    "test:app": "cd examples/app && yarn build && yarn docgen && yarn test && yarn lint && yarn cdk synth",
+    "test:app-integration": "cd examples/app && yarn build && yarn docgen && yarn test && yarn lint && yarn cdk synth",
     "lint": "eslint '*/**/*.ts' --report-unused-disable-directives",
     "lint:fix": "eslint '*/**/*.ts' --fix"
   },

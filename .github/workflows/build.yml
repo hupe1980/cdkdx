@@ -29,6 +29,6 @@ jobs:
       - name: JsiiIntegrationTesting  
         run: yarn test:jsii-integration
       - name: AppIntegrationTesting  
-        run: yarn test:app
+        run: yarn test:app-integration
       - name: Anti-tamper check
         run: git diff --exit-code

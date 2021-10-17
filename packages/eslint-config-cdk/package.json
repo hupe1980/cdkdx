@@ -18,13 +18,13 @@
     "eslint-import-resolver-typescript": ">=2.4.0",
     "eslint-plugin-cdk": ">=0.7.22",
     "eslint-plugin-import": ">=2.22.0",
-    "eslint-plugin-jest": ">=24.1.5",
+    "eslint-plugin-jest": ">=25.2.2",
     "eslint-plugin-prettier": ">=3.3.1",
     "jsii": ">=1.22.0",
     "prettier": ">=2.2.1"
   },
   "devDependencies": {
-    "jsii": "^1.35.0"
+    "jsii": "^1.39.0"
   },
   "gitHead": "ebefdf223a55e2e57ede5e72c9942e89b35b5a24"
 }

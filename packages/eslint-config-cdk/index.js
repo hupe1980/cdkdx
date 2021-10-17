@@ -15,7 +15,7 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended', 
-    'plugin:@typescript-eslint/recommended-requiring-type-checking', 
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'prettier'
   ],
   parserOptions: {
@@ -150,8 +150,7 @@ module.exports = {
     'jest/no-test-prefixes': 'error',
 
     //Jest Style
-    'jest/prefer-to-be-null': 'error',
-    'jest/prefer-to-be-undefined': 'error',
+    'jest/prefer-to-be': 'error',
     'jest/prefer-to-contain': 'error',
     'jest/prefer-to-have-length': 'error',
     
