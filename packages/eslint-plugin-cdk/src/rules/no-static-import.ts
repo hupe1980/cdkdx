@@ -6,7 +6,6 @@ export default createRule({
   meta: {
     docs: {
       description: 'Enforce cdk guidelines',
-      category: 'Best Practices',
       recommended: 'error',
     },
     messages: {

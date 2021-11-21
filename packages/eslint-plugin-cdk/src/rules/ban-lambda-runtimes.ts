@@ -14,7 +14,6 @@ export default createRule<Options, MessageIds>({
   meta: {
     docs: {
       description: 'Bans specific lambda runtimes from being used',
-      category: 'Best Practices',
       recommended: 'error',
     },
     messages: {
@@ -40,10 +39,14 @@ export default createRule<Options, MessageIds>({
 
     if (bannedRuntimes.length === 0) return {};
 
-    const hasName = (node: TSESTree.Expression, name: string): boolean =>
-      ASTUtils.isIdentifier(node) && node.name === name;
+    const hasName = (
+      node: TSESTree.Expression | TSESTree.PrivateIdentifier,
+      name: string,
+    ): boolean => ASTUtils.isIdentifier(node) && node.name === name;
 
-    const checkRuntime = (node: TSESTree.Expression): void => {
+    const checkRuntime = (
+      node: TSESTree.Expression | TSESTree.PrivateIdentifier,
+    ): void => {
       if (ASTUtils.isIdentifier(node)) {
         const runtime = node.name;
 

@@ -41,7 +41,7 @@
   "devDependencies": {
     "@aws-cdk/assert": "^1.128.0",
     "@types/node": "12.12.50",
-    "axios": "^0.23.0",
+    "axios": "^0.24.0",
     "cdkdx": "^1.4.0"
   },
   "peerDependencies": {

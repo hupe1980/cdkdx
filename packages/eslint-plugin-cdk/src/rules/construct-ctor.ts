@@ -16,7 +16,6 @@ export default createRule({
   meta: {
     docs: {
       description: 'Ensure a uniform construct constructors signature',
-      category: 'Best Practices',
       recommended: 'error',
     },
     messages: {

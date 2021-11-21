@@ -15,7 +15,6 @@ export default createRule<Options, MessageIds>({
   meta: {
     docs: {
       description: 'Bans specific words from being used',
-      category: 'Best Practices',
       recommended: 'error',
     },
     messages: {

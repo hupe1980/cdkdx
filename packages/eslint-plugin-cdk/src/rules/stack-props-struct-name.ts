@@ -9,7 +9,6 @@ export default createRule({
   meta: {
     docs: {
       description: 'Ensure a uniform stack constructors signature',
-      category: 'Best Practices',
       recommended: 'error',
     },
     messages: {

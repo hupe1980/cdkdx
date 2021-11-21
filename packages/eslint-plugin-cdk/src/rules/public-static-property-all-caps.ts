@@ -11,7 +11,6 @@ export default createRule({
     docs: {
       description:
         'Enforces all static properties must be named using ALL_CAPS',
-      category: 'Best Practices',
       recommended: 'error',
     },
     messages: {
@@ -23,7 +22,7 @@ export default createRule({
   defaultOptions: [],
   create(context) {
     return {
-      ClassProperty(node: TSESTree.ClassProperty): void {
+      PropertyDefinition(node: TSESTree.PropertyDefinition): void {
         if (
           !node.static ||
           !node.readonly ||

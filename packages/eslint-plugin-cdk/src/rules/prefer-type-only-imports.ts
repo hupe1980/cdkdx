@@ -9,7 +9,6 @@ export default createRule<Options, MessageIds>({
   meta: {
     docs: {
       description: 'Enforce type only imports',
-      category: 'Best Practices',
       recommended: 'error',
     },
     messages: {

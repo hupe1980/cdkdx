@@ -9,7 +9,6 @@ export default createRule<Options, MessageIds>({
   meta: {
     docs: {
       description: 'Enforces all linted files to match a certain pattern',
-      category: 'Best Practices',
       recommended: 'error',
     },
     messages: {
