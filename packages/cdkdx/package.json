@@ -66,7 +66,6 @@
     "jest-watch-select-projects": "^2.0.0",
     "jest-watch-typeahead": "^1.0.0",
     "jsii": "^1.46.0",
-    "jsii-docgen": "^1.8.67",
     "jsii-pacmak": "^1.46.0",
     "jsii-release": "^0.2.152",
     "latest-version": "^5.1.0",

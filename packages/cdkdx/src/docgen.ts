@@ -1,7 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs-extra';
 import * as os from 'os';
-import { renderSinglePageModule } from 'jsii-docgen';
 import { Application, TSConfigReader } from 'typedoc';
 import concatMd from 'concat-md';
 
@@ -15,16 +14,6 @@ export interface GenerateOptions {
 
 export interface Docgen {
   generate: (options: GenerateOptions) => Promise<void>;
-}
-
-export class JsiiDocgen implements Docgen {
-  public async generate(options: GenerateOptions): Promise<void> {
-    if (!fs.existsSync(path.join(options.projectPath, '.jsii'))) {
-      throw new Error('File .jsii is missing! Please run cdkdx build first.');
-    }
-
-    await renderSinglePageModule(options.projectPath, 'API.md');
-  }
 }
 
 export class TscDocgen implements Docgen {

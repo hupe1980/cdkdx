@@ -1,6 +1,6 @@
 import { Command } from 'clipanion';
 
-import { Docgen, TscDocgen, JsiiDocgen } from '../docgen';
+import { Docgen, TscDocgen } from '../docgen';
 import { Timer } from '../timer';
 import { BaseProjectCommand } from '../base-command';
 
@@ -38,9 +38,6 @@ export class DocgenCommand extends BaseProjectCommand {
   }
 
   private getDocgen(): Docgen {
-    if (this.projectInfo.isJsii) {
-      return new JsiiDocgen();
-    }
     return new TscDocgen();
   }
 }
