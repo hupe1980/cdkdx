@@ -1,7 +1,7 @@
 import path from 'path';
 import { createRule } from '../utils';
 
-export type Options = [{ pattern: string }];
+export type Options = [{ pattern: string; ignoredFiles: string[] }];
 export type MessageIds = 'namingConvention';
 
 export default createRule<Options, MessageIds>({
@@ -13,13 +13,16 @@ export default createRule<Options, MessageIds>({
     },
     messages: {
       namingConvention:
-        'Filename {{ name }} does not match the naming convention.',
+        'Filename {{ name }} does not match the file name pattern ^([a-z][a-z0-9]*)(-[a-z0-9]+)*(.spec|.test)?.ts$',
     },
     schema: [
       {
         properties: {
           pattern: {
             type: 'string',
+          },
+          ignoredFiles: {
+            type: 'array',
           },
         },
         additionalProperties: false,
@@ -28,7 +31,10 @@ export default createRule<Options, MessageIds>({
     type: 'problem',
   },
   defaultOptions: [
-    { pattern: '^([a-z][a-z0-9]*)(-[a-z0-9]+)*(.spec|.test)?.ts$' },
+    {
+      pattern: '^([a-z][a-z0-9]*)(-[a-z0-9]+)*(.spec|.test)?.ts$',
+      ignoredFiles: ['index.ts', 'jest.config.ts', 'jest.config.js'],
+    },
   ],
   create(context, optionsWithDefaults) {
     const filename = context.getFilename();
@@ -37,7 +43,7 @@ export default createRule<Options, MessageIds>({
       Program(node): void {
         const { base } = path.parse(filename);
 
-        if (base === 'index.ts') return;
+        if (optionsWithDefaults[0].ignoredFiles.includes(base)) return;
 
         const regExp = new RegExp(optionsWithDefaults[0].pattern);
 

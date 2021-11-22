@@ -11,6 +11,10 @@ ruleTester.run('filename-match-regex', rule, {
   valid: [
     {
       code,
+      filename: 'index.ts',
+    },
+    {
+      code,
       filename: 'test.ts',
     },
     {
@@ -20,6 +24,14 @@ ruleTester.run('filename-match-regex', rule, {
     {
       code,
       filename: 'foo-bar.test.ts',
+    },
+    {
+      code,
+      filename: 'jest.config.ts',
+    },
+    {
+      code,
+      filename: 'jest.config.js',
     },
   ],
   invalid: [

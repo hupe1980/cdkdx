@@ -9,6 +9,7 @@ yarn add -D eslint-plugin-cdk
 ```
 
 ## Usage
+
 Add `cdk` to the plugins section of your `.eslintrc` configuration file. You
 can omit the `eslint-plugin-` prefix:
 
@@ -32,6 +33,7 @@ Then configure the rules you want to use under the rules section.
           "NODEJS_6_10",
           "NODEJS_8_10",
           "NODEJS_10_X",
+          "NODEJS_12_X",
           "DOTNET_CORE_1",
           "DOTNET_CORE_2",
         ]
@@ -61,6 +63,7 @@ Then configure the rules you want to use under the rules section.
 ```
 
 ## Rules
+
 | Rule | Description |
 | -----| ----------- |
 | ban-lambda-runtimes | |
@@ -74,6 +77,7 @@ Then configure the rules you want to use under the rules section.
 | stack-props-struct-name ||
 
 ## Example
+
 See a more complete real world [example](https://github.com/hupe1980/cdkdx/tree/master/packages/eslint-config-cdk)
 
 ## License
