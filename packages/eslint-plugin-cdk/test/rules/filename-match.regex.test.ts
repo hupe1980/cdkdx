@@ -33,6 +33,16 @@ ruleTester.run('filename-match-regex', rule, {
       code,
       filename: 'jest.config.js',
     },
+    {
+      code,  
+      filename: 'xyz.xyz',
+      options: [
+        {
+          pattern: '^([a-z][a-z0-9]*)(-[a-z0-9]+)*(.spec|.test)?.ts$',
+          ignoredFiles: ['xyz.xyz'],
+        }
+      ],
+    },
   ],
   invalid: [
     {
