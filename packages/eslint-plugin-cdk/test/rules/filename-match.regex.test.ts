@@ -15,6 +15,10 @@ ruleTester.run('filename-match-regex', rule, {
     },
     {
       code,
+      filename: 'index.tsx',
+    },
+    {
+      code,
       filename: 'test.ts',
     },
     {
