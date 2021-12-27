@@ -33,10 +33,18 @@ export class LinterCommand extends BaseProjectCommand {
       'tsconfig.eslint.json',
     );
 
+    let include: string[] = [];
+    if (this.projectInfo.workspaces) {
+      this.projectInfo.workspaces.forEach((ws) => {
+        include.push(`${ws}/src/**/*.ts`);
+        include.push(`${ws}/src/**/*.tsx`);
+      });
+    } else {
+      include = ['src/**/*.ts', 'src/**/*.tsx'];
+    }
+
     const tsConfig = TsConfig.fromJsiiTemplate({
-      include: this.projectInfo.workspaces?.map(
-        (ws) => `${ws}/src/**/*.ts`,
-      ) ?? ['src/**/*.ts'],
+      include,
     });
 
     await tsConfig.writeJson(eslintTypeScriptConfigPath, {
@@ -55,7 +63,7 @@ export class LinterCommand extends BaseProjectCommand {
         : 'error',
     });
 
-    const results = await eslint.lintFiles(['*/**/*.ts']);
+    const results = await eslint.lintFiles(['*/**/*.{ts,tsx}']);
 
     if (this.fix) {
       await ESLint.outputFixes(results);
