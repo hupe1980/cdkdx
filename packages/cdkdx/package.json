@@ -11,6 +11,7 @@
     "test",
     "bundle",
     "lambda",
+    "react",
     "typescript",
     "jsii"
   ],
