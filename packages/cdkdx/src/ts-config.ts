@@ -65,6 +65,7 @@ export class TsConfig {
         strictPropertyInitialization: true,
         stripInternal: true,
         target: 'ES2018',
+        jsx: 'react',
         outDir: props?.outDir,
         ...props?.compilerOptions,
       },

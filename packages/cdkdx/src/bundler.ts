@@ -26,12 +26,18 @@ export class Lambdas {
 
         if (!fs.statSync(lambdaPath).isDirectory()) return;
 
-        const entry = path.join(lambdaPath, 'index.ts');
+        let entry = path.join(lambdaPath, 'index.ts');
 
         if (fs.existsSync(entry)) {
           this.entries[name] = entry;
         } else {
-          this.warnings.push(entry);
+          entry = path.join(lambdaPath, 'index.tsx');
+
+          if (fs.existsSync(entry)) {
+            this.entries[name] = entry;
+          } else {
+            this.warnings.push(entry);
+          }
         }
       });
     }
@@ -87,12 +93,12 @@ export class Bundler {
         ...props.lambdas.entries,
       },
       resolve: {
-        extensions: ['.ts', '.js'],
+        extensions: ['.ts', '.tsx', '.js'],
       },
       module: {
         rules: [
           {
-            test: /\.ts$/,
+            test: /\.tsx?$/,
             include: props.projectInfo.lambdasSrcPath,
             exclude: /node_modules/,
             use: {

@@ -32,7 +32,7 @@ export default createRule<Options, MessageIds>({
   },
   defaultOptions: [
     {
-      pattern: '^([a-z][a-z0-9]*)(-[a-z0-9]+)*(.spec|.test)?.ts$',
+      pattern: '^([a-z][a-z0-9]*)(-[a-z0-9]+)*(.spec|.test)?.tsx?$',
       ignoredFiles: ['index.ts', 'jest.config.ts', 'jest.config.js'],
     },
   ],

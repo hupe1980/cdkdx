@@ -33,7 +33,7 @@ export class BundleCommand extends BaseProjectCommand {
 
     const tsConfig = TsConfig.fromLambdaTemplate(
       cdkdxConfig.lambdaTsConfig({
-        include: ['**/*.ts'],
+        include: ['**/*.ts', '**/*.tsx'],
         exclude: ['**/__tests__/*'],
       }),
     );
