@@ -37,6 +37,7 @@ Object {
   "esModuleInterop": true,
   "experimentalDecorators": true,
   "inlineSources": true,
+  "jsx": "react",
   "lib": Array [
     "es2018",
   ],

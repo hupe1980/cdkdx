@@ -23,12 +23,14 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "stripInternal": true,
-    "target": "ES2018"
+    "target": "ES2018",
+    "jsx": "react"
   },
   "exclude": [
     "**/__tests__/*"
   ],
   "include": [
-    "**/*.ts"
+    "**/*.ts",
+    "**/*.tsx"
   ]
 }

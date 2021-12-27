@@ -1,0 +1,45 @@
+{
+  "name": "react",
+  "private": true,
+  "license": "MIT",
+  "author": {
+    "name": "hupe1980"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hupe1980/cdkdx.git",
+    "directory": "example/app"
+  },
+  "version": "1.5.4",
+  "keywords": [
+    "cdk"
+  ],
+  "engines": {
+    "node": ">= 12.22.0"
+  },
+  "scripts": {
+    "build": "cdkdx build",
+    "watch": "cdkdx build -w",
+    "test": "cdkdx test",
+    "lint": "cdkdx lint",
+    "upgrade:cdk": "cdkdx upgrade-cdk",
+    "docgen": "cdkdx docgen",
+    "cdk": "cdk"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-apigateway": "^1.137.0",
+    "@aws-cdk/aws-lambda": "^1.137.0",
+    "@aws-cdk/core": "^1.137.0",
+    "source-map-support": "^0.5.20"
+  },
+  "devDependencies": {
+    "@aws-cdk/assert": "^1.128.0",
+    "@types/node": "12.12.50",
+    "@types/react": "^17.0.20",
+    "@types/react-dom": "^17.0.9",
+    "aws-cdk": "^1.128.0",
+    "cdkdx": "^1.5.4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}

@@ -39,6 +39,7 @@
 - Yarn workspaces compatible
 - Generates docs for your project
 - Lambda layer support
+- [React SSR support](examples/react)) 
 
 ## Quick Start
 
