@@ -10,7 +10,7 @@
     "url": "https://github.com/hupe1980/cdkdx.git",
     "directory": "example/react"
   },
-  "version": "1.5.4",
+  "version": "1.6.0",
   "keywords": [
     "cdk"
   ],
@@ -38,7 +38,7 @@
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
     "aws-cdk": "^1.128.0",
-    "cdkdx": "^1.5.4",
+    "cdkdx": "^1.6.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   }
