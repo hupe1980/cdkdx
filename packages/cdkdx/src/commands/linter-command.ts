@@ -71,7 +71,7 @@ export class LinterCommand extends BaseProjectCommand {
 
     const formatter = await eslint.loadFormatter('stylish');
 
-    const resultText = formatter.format(results);
+    const resultText = await formatter.format(results);
 
     this.context.logger.log(resultText);
 
