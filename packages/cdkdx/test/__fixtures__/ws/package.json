@@ -1,0 +1,7 @@
+{
+    "name": "ws",
+    "workspaces": [
+        "p3",
+        "packages/*"
+    ]
+}

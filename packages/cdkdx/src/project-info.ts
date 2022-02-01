@@ -1,6 +1,7 @@
 import type { PackageJson as TypeFestPackageJson } from 'type-fest';
 import * as path from 'path';
 import * as fs from 'fs-extra';
+import globby from 'globby';
 
 export type PackageJson = TypeFestPackageJson & {
   externals?: string[];
@@ -25,6 +26,8 @@ export class ProjectInfo {
 
   //paths
   public readonly cdkdxConfigPath: string;
+  public readonly root: string;
+  public readonly srcPath: string;
   public readonly distPath: string;
   public readonly libPath: string;
   public readonly lambdasSrcPath: string;
@@ -59,6 +62,8 @@ export class ProjectInfo {
     this.typescriptExcludes = ['src/lambdas', 'src/**/__tests__'];
 
     this.cdkdxConfigPath = this.resolve('cdkdx.config.js');
+    this.root = this.resolve('.');
+    this.srcPath = this.resolve('src');
     this.distPath = this.resolve('dist');
     this.libPath = this.resolve('lib');
     this.lambdasSrcPath = this.resolve('src/lambdas');
@@ -75,10 +80,36 @@ export class ProjectInfo {
       : this.pkgJson.workspaces.packages;
   }
 
+  public async getWorkspaceProjectInfos(): Promise<ProjectInfo[] | undefined> {
+    if (!this.workspaces) return;
+    const infos: ProjectInfo[] = [];
+
+    for (const ws of this.workspaces) {
+      const pattern = `${this.cwd}/${ws}`;
+      if (pattern.indexOf('*') === -1) {
+        infos.push(new ProjectInfo(pattern));
+      } else {
+        const paths = await globby(pattern, {
+          onlyDirectories: true,
+        });
+
+        paths.forEach((path) => {
+          infos.push(new ProjectInfo(path));
+        });
+      }
+    }
+
+    return infos;
+  }
+
   public async syncPkgJson(): Promise<void> {
     await fs.writeJSON(this.resolve('package.json'), this.pkgJson, {
       spaces: 2,
     });
+  }
+
+  public async hasLambdaSrc(): Promise<boolean> {
+    return fs.pathExists(this.lambdasSrcPath);
   }
 
   private resolve(relativePath: string): string {

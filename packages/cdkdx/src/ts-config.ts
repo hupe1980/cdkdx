@@ -1,5 +1,5 @@
 import * as fs from 'fs-extra';
-import { TsConfigJson } from 'type-fest';
+import type { TsConfigJson } from 'type-fest';
 
 export interface TsConfigProps {
   compilerOptions?: Partial<TsConfigJson.CompilerOptions>;

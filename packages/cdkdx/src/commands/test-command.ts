@@ -3,6 +3,7 @@ import * as jest from 'jest';
 import tsjPreset from 'ts-jest/presets';
 
 import { BaseProjectCommand } from '../base-command';
+import { ProjectInfo } from '../project-info';
 import { TsConfig } from '../ts-config';
 export class TestCommand extends BaseProjectCommand {
   static usage = Command.Usage({
@@ -26,6 +27,29 @@ export class TestCommand extends BaseProjectCommand {
 
     const argv: string[] = [];
 
+    const projects: Record<string, unknown>[] = [];
+
+    if (this.projectInfo.workspaces) {
+      const infos = await this.projectInfo.getWorkspaceProjectInfos();
+
+      // TODO Remove isolatedModules? See https://github.com/kulshekhar/ts-jest/issues/1967
+      if (infos) {
+        for (const info of infos) {
+          projects.push(this.createCdkProjectConfig(info, true));
+
+          if (await info.hasLambdaSrc()) {
+            projects.push(this.createLambdaProjectConfig(info, true));
+          }
+        }
+      }
+    } else {
+      projects.push(this.createCdkProjectConfig(this.projectInfo));
+
+      if (await this.projectInfo.hasLambdaSrc()) {
+        projects.push(this.createLambdaProjectConfig(this.projectInfo));
+      }
+    }
+
     const jestConfig = {
       collectCoverageFrom: ['src/**/*.ts', '!src/**/*.(spec|test).ts'],
       watchPlugins: [
@@ -33,41 +57,7 @@ export class TestCommand extends BaseProjectCommand {
         require.resolve('jest-watch-typeahead/testname'),
         require.resolve('jest-watch-select-projects'),
       ],
-      projects: [
-        {
-          displayName: 'cdk',
-          rootDir: this.context.cwd,
-          transform: {
-            ...tsjPreset.defaults.transform,
-            '.+\\.(css|html)$': require.resolve('jest-transform-stub'),
-          },
-          moduleFileExtensions: ['ts', 'js', 'json', 'html'],
-          testMatch: ['<rootDir>/**/*.(spec|test).ts'],
-          testPathIgnorePatterns: ['/src/lambdas/'],
-          testEnvironment: 'node',
-          globals: {
-            'ts-jest': {
-              tsconfig: TsConfig.fromJsiiTemplate().getCompilerOptions(),
-            },
-          },
-        },
-        {
-          displayName: 'lambda',
-          rootDir: this.context.cwd,
-          transform: {
-            ...tsjPreset.defaults.transform,
-            '.+\\.(css|html)$': require.resolve('jest-transform-stub'),
-          },
-          moduleFileExtensions: ['ts', 'js', 'json', 'html'],
-          testMatch: ['<rootDir>/**/src/lambdas/**/*.(spec|test).ts'],
-          testEnvironment: 'node',
-          globals: {
-            'ts-jest': {
-              tsconfig: TsConfig.fromLambdaTemplate().getCompilerOptions(),
-            },
-          },
-        },
-      ],
+      projects,
     };
 
     argv.push('--config', JSON.stringify(jestConfig));
@@ -77,5 +67,49 @@ export class TestCommand extends BaseProjectCommand {
     await jest.run(argv);
 
     return 0;
+  }
+
+  private createCdkProjectConfig(info: ProjectInfo, isolatedModules = false) {
+    return {
+      displayName: { name: `${info.name} [cdk]`, color: 'white' },
+      rootDir: info.root,
+      transform: {
+        ...tsjPreset.defaults.transform,
+        '.+\\.(css|html)$': require.resolve('jest-transform-stub'),
+      },
+      moduleFileExtensions: ['ts', 'js', 'json', 'html'],
+      testMatch: [`/**/*.(spec|test).ts`],
+      testPathIgnorePatterns: [info.lambdasSrcPath],
+      testEnvironment: 'node',
+      globals: {
+        'ts-jest': {
+          tsconfig: TsConfig.fromJsiiTemplate().getCompilerOptions(),
+          isolatedModules,
+        },
+      },
+    };
+  }
+
+  private createLambdaProjectConfig(
+    info: ProjectInfo,
+    isolatedModules = false,
+  ) {
+    return {
+      displayName: { name: `${info.name} [lambda]`, color: 'white' },
+      rootDir: info.lambdasSrcPath,
+      transform: {
+        ...tsjPreset.defaults.transform,
+        '.+\\.(css|html)$': require.resolve('jest-transform-stub'),
+      },
+      moduleFileExtensions: ['ts', 'js', 'json', 'html'],
+      testMatch: [`/**/*.(spec|test).ts`],
+      testEnvironment: 'node',
+      globals: {
+        'ts-jest': {
+          tsconfig: TsConfig.fromLambdaTemplate().getCompilerOptions(),
+          isolatedModules,
+        },
+      },
+    };
   }
 }
