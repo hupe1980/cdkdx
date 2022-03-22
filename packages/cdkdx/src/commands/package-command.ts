@@ -25,7 +25,7 @@ export class PackageCommand extends BaseProjectCommand {
 
     if (this.projectInfo.isJsii) {
       const command = require.resolve('jsii-pacmak/bin/jsii-pacmak');
-      await execa(command, ['--outdir', outdir, '--no-npmignore']);
+      await execa(command, ['--outdir', outdir]);
     } else {
       const { stdout } = await execa('npm', ['pack']);
       const tarball = stdout.trim();
