@@ -39,24 +39,13 @@
     }
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.128.0",
+    "@aws-cdk/assert": "^2",
     "@types/node": "12.12.50",
     "axios": "^0.24.0",
     "cdkdx": "^1.7.0"
   },
-  "peerDependencies": {
-    "@aws-cdk/aws-lambda": "^1.125.0",
-    "@aws-cdk/aws-sns": "^1.125.0",
-    "@aws-cdk/aws-sns-subscriptions": "^1.125.0",
-    "@aws-cdk/aws-sqs": "^1.125.0",
-    "@aws-cdk/core": "^1.125.0",
-    "constructs": "^3.0.2"
-  },
   "dependencies": {
-    "@aws-cdk/aws-lambda": "^1.128.0",
-    "@aws-cdk/aws-sns": "^1.128.0",
-    "@aws-cdk/aws-sns-subscriptions": "^1.128.0",
-    "@aws-cdk/aws-sqs": "^1.128.0",
-    "@aws-cdk/core": "^1.128.0"
+    "aws-cdk-lib": "^2.17.0",
+    "constructs": "^10.0.91"
   }
 }

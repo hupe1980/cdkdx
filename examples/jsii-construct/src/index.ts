@@ -1,9 +1,10 @@
 import * as path from 'path';
-import { Code, Function, Runtime } from '@aws-cdk/aws-lambda';
-import * as sns from '@aws-cdk/aws-sns';
-import * as subs from '@aws-cdk/aws-sns-subscriptions';
-import * as sqs from '@aws-cdk/aws-sqs';
-import * as cdk from '@aws-cdk/core';
+import { Code, Function, Runtime } from 'aws-cdk-lib/aws-lambda';
+import * as sns from 'aws-cdk-lib/aws-sns';
+import * as subs from 'aws-cdk-lib/aws-sns-subscriptions';
+import * as sqs from 'aws-cdk-lib/aws-sqs';
+import * as cdk from 'aws-cdk-lib/core';
+import { Construct } from 'constructs';
 
 export interface ExampleProps {
   /**
@@ -14,11 +15,11 @@ export interface ExampleProps {
   readonly visibilityTimeout?: cdk.Duration;
 }
 
-export class Example extends cdk.Construct {
+export class Example extends Construct {
   /** @returns the ARN of the SQS queue */
   public readonly queueArn: string;
 
-  constructor(scope: cdk.Construct, id: string, props: ExampleProps = {}) {
+  constructor(scope: Construct, id: string, props: ExampleProps = {}) {
     super(scope, id);
 
     const queue = new sqs.Queue(this, 'ExampleQueue', {

@@ -1,6 +1,6 @@
 import * as path from 'path';
-import { Code, Function, Runtime } from '@aws-cdk/aws-lambda';
-import { Construct } from '@aws-cdk/core';
+import { Code, Function, Runtime } from 'aws-cdk-lib/aws-lambda';
+import { Construct } from 'constructs';
 
 export interface ${pascalCase(name)}Props {
   readonly environment?: Record<string, string>;

@@ -67,9 +67,6 @@
     "jest-transform-stub": "^2.0.0",
     "jest-watch-select-projects": "^2.0.0",
     "jest-watch-typeahead": "^1.0.0",
-    "jsii": "^1.46.0",
-    "jsii-pacmak": "^1.46.0",
-    "jsii-release": "^0.2.152",
     "latest-version": "^5.1.0",
     "prettier": "^2.4.1",
     "size-plugin": "^3.0.0",
@@ -91,8 +88,16 @@
     "@types/fs-extra": "9.0.13",
     "@types/terser-webpack-plugin": "^4.2.0",
     "@types/webpack": "^4.41.26",
+    "jsii": "1.55.1",
+    "jsii-pacmak": "1.55.1",
+    "jsii-release": "0.2.298",
     "rimraf": "^3.0.2",
     "type-fest": "^2.3.4"
+  },
+  "peerDependencies": {
+    "jsii": "^1.55.1",
+    "jsii-pacmak": "^1.55.1",
+    "jsii-release": "^0.2.298"
   },
   "gitHead": "ebefdf223a55e2e57ede5e72c9942e89b35b5a24"
 }

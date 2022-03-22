@@ -1,7 +1,8 @@
 import * as path from 'path';
-import { LambdaRestApi } from '@aws-cdk/aws-apigateway';
-import { Code, Function, Runtime } from '@aws-cdk/aws-lambda';
-import { Construct, Stack, StackProps } from '@aws-cdk/core';
+import { LambdaRestApi } from 'aws-cdk-lib/aws-apigateway';
+import { Code, Function, Runtime } from 'aws-cdk-lib/aws-lambda';
+import { Stack, StackProps } from 'aws-cdk-lib/core';
+import { Construct } from 'constructs';
 
 export class ReactStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
