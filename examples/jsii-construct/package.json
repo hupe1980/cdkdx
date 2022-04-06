@@ -10,7 +10,7 @@
     "url": "git+https://github.com/hupe1980/cdkdx",
     "directory": "example/jsii-construct"
   },
-  "version": "1.7.0",
+  "version": "1.7.1",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
