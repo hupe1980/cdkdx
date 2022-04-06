@@ -74,8 +74,6 @@ cdk.Construct.constructor
 
 The construct tree node associated with this construct.
 
-**`stability`** stable
-
 #### Inherited from
 
 cdk.Construct.node
@@ -94,7 +92,7 @@ ___
 
 ▸ `Protected` **onPrepare**(): `void`
 
-Perform final modifications before synthesis.
+Perform final modifications before synthesis
 
 This method can be implemented by derived constructs in order to perform
 final changes before synthesis. prepare() will be called after child
@@ -102,8 +100,6 @@ constructs have been prepared.
 
 This is an advanced framework feature. Only use this if you
 understand the implications.
-
-**`stability`** stable
 
 #### Returns
 
@@ -123,8 +119,6 @@ Allows this construct to emit artifacts into the cloud assembly during synthesis
 
 This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
 as they participate in synthesizing the cloud assembly.
-
-**`stability`** stable
 
 #### Parameters
 
@@ -151,8 +145,6 @@ Validate the current construct.
 This method can be implemented by derived constructs in order to perform
 validation logic. It is called on all constructs before synthesis.
 
-**`stability`** stable
-
 #### Returns
 
 `string`[]
@@ -169,7 +161,7 @@ ___
 
 ▸ `Protected` **prepare**(): `void`
 
-Perform final modifications before synthesis.
+Perform final modifications before synthesis
 
 This method can be implemented by derived constructs in order to perform
 final changes before synthesis. prepare() will be called after child
@@ -177,8 +169,6 @@ constructs have been prepared.
 
 This is an advanced framework feature. Only use this if you
 understand the implications.
-
-**`stability`** stable
 
 #### Returns
 
@@ -198,8 +188,6 @@ Allows this construct to emit artifacts into the cloud assembly during synthesis
 
 This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
 as they participate in synthesizing the cloud assembly.
-
-**`stability`** stable
 
 #### Parameters
 
@@ -223,8 +211,6 @@ ___
 
 Returns a string representation of this construct.
 
-**`stability`** stable
-
 #### Returns
 
 `string`
@@ -244,8 +230,6 @@ Validate the current construct.
 This method can be implemented by derived constructs in order to perform
 validation logic. It is called on all constructs before synthesis.
 
-**`stability`** stable
-
 #### Returns
 
 `string`[]
@@ -262,9 +246,7 @@ ___
 
 ▸ `Static` **isConstruct**(`x`): x is Construct
 
-Return whether the given object is a Construct.
-
-**`stability`** stable
+Return whether the given object is a Construct
 
 #### Parameters
 
