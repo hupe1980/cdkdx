@@ -10,7 +10,7 @@
     "url": "https://github.com/hupe1980/cdkdx.git",
     "directory": "example/app"
   },
-  "version": "1.7.0",
+  "version": "1.8.0",
   "keywords": [
     "cdk"
   ],
@@ -34,6 +34,6 @@
     "@aws-cdk/assert": "^1.159.0",
     "@types/node": "12.12.50",
     "aws-cdk": "^1.159.0",
-    "cdkdx": "^1.7.0"
+    "cdkdx": "^1.8.0"
   }
 }
