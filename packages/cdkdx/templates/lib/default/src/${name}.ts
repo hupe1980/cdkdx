@@ -11,7 +11,7 @@ export class ${pascalCase(name)} extends Construct {
     super(scope, id);
 
     new Function(this, 'DemoFunction', {
-      runtime: Runtime.NODEJS_12_X,
+      runtime: Runtime.NODEJS_14_X,
       handler: 'index.handler',
       code: Code.fromAsset(path.join(__dirname, 'lambdas', 'demo')),
       environment: props.environment,

@@ -8,7 +8,7 @@ export class ReactStack extends Stack {
     super(scope, id, props);
 
     const ssrFunction = new Function(this, 'Test1Function', {
-      runtime: Runtime.NODEJS_12_X,
+      runtime: Runtime.NODEJS_14_X,
       handler: 'index.handler',
       code: Code.fromAsset(path.join(process.env.LAMBDAS as string, 'web')),
     });

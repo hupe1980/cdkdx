@@ -32,13 +32,13 @@ export class Example extends cdk.Construct {
     this.queueArn = queue.queueArn;
 
     new Function(this, 'Test1Function', {
-      runtime: Runtime.NODEJS_12_X,
+      runtime: Runtime.NODEJS_14_X,
       handler: 'index.handler',
       code: Code.fromAsset(path.join(__dirname, 'lambdas', 'test1')),
     });
 
     new Function(this, 'Test2Function', {
-      runtime: Runtime.NODEJS_12_X,
+      runtime: Runtime.NODEJS_14_X,
       handler: 'index.handler',
       code: Code.fromAsset(path.join(__dirname, 'lambdas', 'test2')),
     });

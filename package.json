@@ -18,6 +18,9 @@
     "packages/*",
     "examples/*"
   ],
+  "resolutions": {
+    "@types/prettier": "2.6.0"
+  },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",

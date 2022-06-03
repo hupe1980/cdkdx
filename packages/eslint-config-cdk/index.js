@@ -64,15 +64,15 @@ module.exports = {
 
     '@typescript-eslint/member-ordering': ['error', {
       default: [
-        "public-static-field",
-        "public-static-method",
-        "protected-static-field",
-        "protected-static-method",
-        "private-static-field",
-        "private-static-method",
-        "field",
-        "constructor", // = ["public-constructor", "protected-constructor", "private-constructor"]
-        "method",
+       'public-static-field',
+       'public-static-method',
+       'protected-static-field',
+       'protected-static-method',
+       'private-static-field',
+       'private-static-method',
+       'field',
+       'constructor', // = ['public-constructor','protected-constructor','private-constructor']
+       'method',
       ]
     }],
 
@@ -80,13 +80,14 @@ module.exports = {
       'error', 
       { 
         bannedRuntimes: [
-          'NODEJS',
-          'NODEJS_4_3',
-          'NODEJS_6_10',
-          'NODEJS_8_10',
-          'NODEJS_10_X',
-          'DOTNET_CORE_1',
-          'DOTNET_CORE_2',
+         'NODEJS',
+         'NODEJS_4_3',
+         'NODEJS_6_10',
+         'NODEJS_8_10',
+         'NODEJS_10_X',
+         'NODEJS_12_X',
+         'DOTNET_CORE_1',
+         'DOTNET_CORE_2',
         ]
       }
     ],
@@ -120,7 +121,7 @@ module.exports = {
           '**/lambdas/**/**', // --> Lambdas
         ],
         optionalDependencies: false, // Disallow importing optional dependencies (those shouldn't be in use in the project)
-        peerDependencies: false, // Disallow importing peer dependencies (that aren't also direct dependencies)
+        peerDependencies: true,
       },
     ],
     'import/no-unresolved': ['error', { ignore: ['aws-lambda'] }],
