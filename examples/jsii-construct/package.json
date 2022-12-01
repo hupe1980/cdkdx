@@ -10,7 +10,7 @@
     "url": "git+https://github.com/hupe1980/cdkdx",
     "directory": "example/jsii-construct"
   },
-  "version": "1.8.0",
+  "version": "1.9.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
@@ -55,7 +55,7 @@
     "@aws-cdk/core": "1.181.1",
     "@types/node": "12.12.50",
     "axios": "^0.24.0",
-    "cdkdx": "^1.8.0",
+    "cdkdx": "^1.9.0",
     "constructs": "3.0.2"
   }
 }
