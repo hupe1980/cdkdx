@@ -27,13 +27,13 @@
     "cdk": "cdk"
   },
   "dependencies": {
-    "@aws-cdk/core": "^1.159.0",
+    "@aws-cdk/core": "^1.181.1",
     "source-map-support": "^0.5.20"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.159.0",
+    "@aws-cdk/assert": "^1.181.1",
     "@types/node": "12.12.50",
-    "aws-cdk": "^1.159.0",
+    "aws-cdk": "^1.181.1",
     "cdkdx": "^1.8.0"
   }
 }
