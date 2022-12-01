@@ -1,4 +1,4 @@
-import { expect as expectCDK, haveResource } from '@aws-cdk/assert';
+import { Template } from '@aws-cdk/assertions';
 import { App, Stack } from '@aws-cdk/core';
 import { DemoLayer } from '../demo-layer';
 
@@ -8,5 +8,6 @@ test('Layer', () => {
   // WHEN
   new DemoLayer(stack, 'MyLayerConstruct');
   // THEN
-  expectCDK(stack).to(haveResource('AWS::Lambda::LayerVersion'));
+  const template = Template.fromStack(stack);
+  template.hasResource('AWS::Lambda::LayerVersion', {});
 });

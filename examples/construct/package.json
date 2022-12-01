@@ -21,7 +21,7 @@
     "@aws-cdk/core": "^1.181.1"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.181.1",
+    "@aws-cdk/assertions": "1.181.1",
     "@aws-cdk/aws-lambda": "1.181.1",
     "@aws-cdk/aws-sns": "1.181.1",
     "@aws-cdk/aws-sns-subscriptions": "1.181.1",

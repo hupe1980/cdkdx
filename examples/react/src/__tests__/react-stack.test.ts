@@ -1,4 +1,4 @@
-import { expect as expectCDK, haveResource } from '@aws-cdk/assert';
+import { Template } from '@aws-cdk/assertions';
 import { App } from '@aws-cdk/core';
 import { ReactStack } from '../react-stack';
 
@@ -10,6 +10,7 @@ test('SSR Stack', () => {
   const stack = new ReactStack(app, 'ReactStack');
 
   // THEN
-  expectCDK(stack).to(haveResource('AWS::Lambda::Function'));
-  expectCDK(stack).to(haveResource('AWS::ApiGateway::Resource'));
+  const template = Template.fromStack(stack as any);
+  template.hasResource('AWS::Lambda::Function', {});
+  template.hasResource('AWS::ApiGateway::Resource', {});
 });

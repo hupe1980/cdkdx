@@ -1,21 +1,21 @@
-import { expect as expectCDK, haveResource } from '@aws-cdk/assert';
-import { App, Stack } from '@aws-cdk/core';
+import { Template } from '@aws-cdk/assertions';
+import { Stack } from '@aws-cdk/core';
 import { Example } from '../example';
 
 test('SQS Queue Created', () => {
-  const app = new App();
-  const stack = new Stack(app, 'TestStack');
+  const stack = new Stack();
   // WHEN
   new Example(stack, 'MyTestConstruct');
   // THEN
-  expectCDK(stack).to(haveResource('AWS::SQS::Queue'));
+  const template = Template.fromStack(stack);
+  template.hasResource('AWS::SQS::Queue', {});
 });
 
 test('SNS Topic Created!', () => {
-  const app = new App();
-  const stack = new Stack(app, 'TestStack');
+  const stack = new Stack();
   // WHEN
   new Example(stack, 'MyTestConstruct');
   // THEN
-  expectCDK(stack).to(haveResource('AWS::SNS::Topic'));
+  const template = Template.fromStack(stack);
+  template.hasResource('AWS::SNS::Topic', {});
 });

@@ -1,4 +1,4 @@
-import { expect as expectCDK, haveResource } from '@aws-cdk/assert';
+import { Template } from '@aws-cdk/assertions';
 import { App, Stack } from '@aws-cdk/core';
 import { Example } from '../index';
 
@@ -8,7 +8,8 @@ test('SQS Queue Created', () => {
   // WHEN
   new Example(stack, 'MyTestConstruct');
   // THEN
-  expectCDK(stack).to(haveResource('AWS::SQS::Queue'));
+  const template = Template.fromStack(stack);
+  template.hasResource('AWS::SQS::Queue', {});
 });
 
 test('SNS Topic Created', () => {
@@ -17,5 +18,6 @@ test('SNS Topic Created', () => {
   // WHEN
   new Example(stack, 'MyTestConstruct');
   // THEN
-  expectCDK(stack).to(haveResource('AWS::SNS::Topic'));
+  const template = Template.fromStack(stack);
+  template.hasResource('AWS::SNS::Topic', {});
 });

@@ -1,4 +1,4 @@
-import { expect as expectCDK, matchTemplate, MatchStyle } from '@aws-cdk/assert';
+import { Template } from '@aws-cdk/assertions';
 import { App } from '@aws-cdk/core';
 import { AppStack } from '../app-stack';
 
@@ -10,5 +10,6 @@ test('Empty Stack', () => {
   const stack = new AppStack(app, 'AppStack');
 
   // THEN
-  expectCDK(stack).to(matchTemplate({ Resources: {} }, MatchStyle.EXACT));
+  const template = Template.fromStack(stack);
+  template.templateMatches({});
 });

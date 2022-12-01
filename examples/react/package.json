@@ -33,7 +33,7 @@
     "source-map-support": "^0.5.20"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "^1.181.1",
+    "@aws-cdk/assertions": "1.181.1",
     "@types/node": "12.12.50",
     "@types/react": "^17.0.20",
     "@types/react-dom": "^17.0.9",
