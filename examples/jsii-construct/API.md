@@ -72,6 +72,8 @@ cdk.Construct.constructor
 
 • `Readonly` **node**: `ConstructNode`
 
+The construct tree node associated with this construct.
+
 #### Inherited from
 
 cdk.Construct.node
@@ -88,6 +90,15 @@ ___
 
 ▸ `Protected` **onPrepare**(): `void`
 
+Perform final modifications before synthesis
+
+This method can be implemented by derived constructs in order to perform
+final changes before synthesis. prepare() will be called after child
+constructs have been prepared.
+
+This is an advanced framework feature. Only use this if you
+understand the implications.
+
 #### Returns
 
 `void`
@@ -102,11 +113,16 @@ ___
 
 ▸ `Protected` **onSynthesize**(`session`): `void`
 
+Allows this construct to emit artifacts into the cloud assembly during synthesis.
+
+This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
+as they participate in synthesizing the cloud assembly.
+
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `session` | `ISynthesisSession` |  |
+| `session` | `ISynthesisSession` | The synthesis session. |
 
 #### Returns
 
@@ -122,9 +138,16 @@ ___
 
 ▸ `Protected` **onValidate**(): `string`[]
 
+Validate the current construct.
+
+This method can be implemented by derived constructs in order to perform
+validation logic. It is called on all constructs before synthesis.
+
 #### Returns
 
 `string`[]
+
+An array of validation error messages, or an empty array if the construct is valid.
 
 #### Inherited from
 
@@ -135,6 +158,15 @@ ___
 ### prepare
 
 ▸ `Protected` **prepare**(): `void`
+
+Perform final modifications before synthesis
+
+This method can be implemented by derived constructs in order to perform
+final changes before synthesis. prepare() will be called after child
+constructs have been prepared.
+
+This is an advanced framework feature. Only use this if you
+understand the implications.
 
 #### Returns
 
@@ -150,11 +182,16 @@ ___
 
 ▸ `Protected` **synthesize**(`session`): `void`
 
+Allows this construct to emit artifacts into the cloud assembly during synthesis.
+
+This method is usually implemented by framework-level constructs such as `Stack` and `Asset`
+as they participate in synthesizing the cloud assembly.
+
 #### Parameters
 
 | Name | Type | Description |
 | :------ | :------ | :------ |
-| `session` | `ISynthesisSession` |  |
+| `session` | `ISynthesisSession` | The synthesis session. |
 
 #### Returns
 
@@ -170,6 +207,8 @@ ___
 
 ▸ **toString**(): `string`
 
+Returns a string representation of this construct.
+
 #### Returns
 
 `string`
@@ -184,9 +223,16 @@ ___
 
 ▸ `Protected` **validate**(): `string`[]
 
+Validate the current construct.
+
+This method can be implemented by derived constructs in order to perform
+validation logic. It is called on all constructs before synthesis.
+
 #### Returns
 
 `string`[]
+
+An array of validation error messages, or an empty array if the construct is valid.
 
 #### Inherited from
 
@@ -197,6 +243,8 @@ ___
 ### isConstruct
 
 ▸ `Static` **isConstruct**(`x`): x is Construct
+
+Return whether the given object is a Construct
 
 #### Parameters
 
@@ -229,3 +277,9 @@ cdk.Construct.isConstruct
 ### visibilityTimeout
 
 • `Optional` `Readonly` **visibilityTimeout**: `Duration`
+
+The visibility timeout to be configured on the SQS Queue, in seconds.
+
+**`Default`**
+
+Duration.seconds(300)
