@@ -136,7 +136,15 @@ module.exports = {
     'jest/expect-expect': [
       'error',
       {
-        assertFunctionNames: ['expect', 'expectCDK'],
+        assertFunctionNames: [
+          'expect', 
+          'expectCDK', 
+          'template.templateMatches',
+          'template.resourceCountIs',
+          'template.hasResourceProperties',
+          'template.hasResource',
+          'template.hasOutput',
+        ],
       },
     ],
     'jest/consistent-test-it': [
